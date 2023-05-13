@@ -31,20 +31,13 @@ public class GameManager : Singleton<GameManager>
         if(loadInitSceneFromGameManager){StartCoroutine(SwitchSceneCoroutine(string.Empty, InitScene));}
         
         debugActions["restart"].performed += Debug_RestartLevel;
-        debugActions["cursorLock"].performed += Debug_LockCursor;
-        debugActions["cursorUnlock"].performed += Debug_UnlockCursor;
 
         if(isTesting) debugActions.Enable();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
     protected override void OnDestroy(){
         base.OnDestroy();
 
         debugActions["restart"].performed -= Debug_RestartLevel;
-        debugActions["cursorLock"].performed -= Debug_LockCursor;
-        debugActions["cursorUnlock"].performed -= Debug_UnlockCursor;
 
         if(debugActions.enabled)debugActions.Disable();
     }
@@ -83,10 +76,14 @@ public class GameManager : Singleton<GameManager>
         string currentLevel = SceneManager.GetActiveScene().name;
         StartCoroutine(RestartLevel(currentLevel));
     }
+    public void RestartLevel_DEBUG(){
+        string currentLevel = SceneManager.GetActiveScene().name;
+        StartCoroutine(RestartLevel(currentLevel, true));
+    }
 
 #region Scene Transition
-    IEnumerator RestartLevel(string level){
-        yield return FadeInScreen(3f);
+    IEnumerator RestartLevel(string level, bool isDebug = false){
+        if(isDebug) yield return FadeInScreen(3f);
         isSwitchingScene = true;
 
         //TO DO: do something before the last scene is unloaded. e.g: call event of saving 
@@ -157,14 +154,6 @@ public class GameManager : Singleton<GameManager>
             Debug.Log("Test Restart Level");
             RestartLevel();
         }
-    }
-    void Debug_LockCursor(InputAction.CallbackContext callback){
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-    void Debug_UnlockCursor(InputAction.CallbackContext callback){
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 #endregion
 }
