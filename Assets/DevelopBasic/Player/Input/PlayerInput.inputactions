@@ -4,30 +4,8 @@
         {
             "name": "Player",
             "id": "5c34f634-0753-4edb-a2f3-3fbeec24d9af",
-            "actions": [
-                {
-                    "name": "KeyPress",
-                    "type": "Value",
-                    "id": "41a1af81-7999-4dd9-bfce-cdfa0714e699",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "0e718ced-3d3d-4e7c-8332-bd31351155b0",
-                    "path": "<Keyboard>/anyKey",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "KeyPress",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
+            "actions": [],
+            "bindings": []
         },
         {
             "name": "UI",

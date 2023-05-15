@@ -6,11 +6,8 @@ using UnityEngine;
 //A basic C# Event System
 public static class EventHandler
 {
-    //This is a test event and it's calling function
-    public static event Action<float> E_OnTestEvent;
-    public static void Call_OnTestEvent(float data){
-        E_OnTestEvent?.Invoke(data);
-    }
+    public static Action<KeyCode> OnKeyPressed;
+    public static void Call_OnKeyPressed(KeyCode key){OnKeyPressed?.Invoke(key);}
 }
 
 //A More Strict Event System
