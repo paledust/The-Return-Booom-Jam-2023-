@@ -8,6 +8,8 @@ public static class EventHandler
 {
     public static Action<KeyCode> OnKeyPressed;
     public static void Call_OnKeyPressed(KeyCode key){OnKeyPressed?.Invoke(key);}
+    public static Action<MiniGameBasic> OnEndMiniGame;
+    public static void Call_OnEndMiniGame(MiniGameBasic miniGame){OnEndMiniGame?.Invoke(miniGame);}
 }
 
 //A More Strict Event System

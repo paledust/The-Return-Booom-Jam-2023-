@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class MiniGameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] private MiniGameBasic[] miniGames;
+    void OnEnable(){
+        miniGames[0].EnterMiniGame();
+        EventHandler.OnEndMiniGame += EndMiniGame;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void OnDisable(){
+        for(int i=0; i<miniGames.Length; i++){
+            if(miniGames[i].IsPlaying){
+                miniGames[i].ExitMiniGame();
+            }
+        }
+        EventHandler.OnEndMiniGame -= EndMiniGame;
+    }
+    void EndMiniGame(MiniGameBasic miniGame){
+        Debug.Log("End MiniGame");
+        miniGame.ExitMiniGame();
     }
 }
