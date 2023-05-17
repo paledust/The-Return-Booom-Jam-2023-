@@ -13,10 +13,10 @@ public abstract class MiniGameBasic : MonoBehaviour
     }
     public void ExitMiniGame(){
         CleanUp();
-        EventHandler.OnKeyPressed += OnKeyPressed;
+        EventHandler.OnKeyPressed -= OnKeyPressed;
         isPlaying = false;
     }
-    protected abstract void OnKeyPressed(KeyCode keyPressed);
+    protected abstract void OnKeyPressed(UnityEngine.InputSystem.Key keyPressed);
     protected virtual void Initialize(){}
     protected virtual void CleanUp(){}
 }

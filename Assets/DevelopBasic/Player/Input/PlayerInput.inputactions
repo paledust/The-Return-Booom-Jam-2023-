@@ -4,8 +4,30 @@
         {
             "name": "Player",
             "id": "5c34f634-0753-4edb-a2f3-3fbeec24d9af",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "KeyPress",
+                    "type": "PassThrough",
+                    "id": "3a51aa4b-cbaa-4588-8a99-044e58d97719",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a2a0c057-3d7c-4f8e-82ce-9a8635d5f048",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "KeyPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         },
         {
             "name": "UI",

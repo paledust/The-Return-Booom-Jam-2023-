@@ -1899,8 +1899,9 @@ MonoBehaviour:
   - {fileID: 1607952006}
   - {fileID: 2076006068}
   - {fileID: 2075372353}
-  torqueRange: {x: 3, y: 6}
-  torqueNoise: 1
+  torqueRange: {x: 0, y: 4}
+  forceRange: {x: 0, y: 12}
+  timeRange: {x: 10, y: 0.6}
 --- !u!1001 &1511384225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2601,7 +2602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ec280bbfbd0550743b1e477c9d48abdf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.31
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ec280bbfbd0550743b1e477c9d48abdf, type: 3}
       propertyPath: m_LocalPosition.z
