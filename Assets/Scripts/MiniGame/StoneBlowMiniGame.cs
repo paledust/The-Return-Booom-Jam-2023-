@@ -8,6 +8,8 @@ public class StoneBlowMiniGame : MiniGameBasic
     [SerializeField] private Vector2 torqueRange;
     [SerializeField] private Vector2 forceRange;
     [SerializeField] private Vector2 timeRange;
+[Header("Sand Particles")]
+    [SerializeField] private ParticleSystem sandParticles;
     private float totalCount;
     protected override void Initialize(){
         base.Initialize();
@@ -21,6 +23,7 @@ public class StoneBlowMiniGame : MiniGameBasic
         StartCoroutine(coroutineForceOnRock(debri, Mathf.Lerp(timeRange.x, timeRange.y, 1-stoneDebris.Count/(totalCount-1))));
 
         if(stoneDebris.Count == 0){
+            sandParticles.Play(true);
             EventHandler.Call_OnEndMiniGame(this);
         }
     }

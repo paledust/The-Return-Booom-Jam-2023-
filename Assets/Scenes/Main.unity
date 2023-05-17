@@ -1655,6 +1655,7 @@ Transform:
   - {fileID: 760540440}
   - {fileID: 1851174104}
   - {fileID: 85812491}
+  - {fileID: 1739624838}
   m_Father: {fileID: 59234648}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1902,6 +1903,7 @@ MonoBehaviour:
   torqueRange: {x: 0, y: 4}
   forceRange: {x: 0, y: 12}
   timeRange: {x: 10, y: 0.6}
+  sandParticles: {fileID: 0}
 --- !u!1001 &1511384225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2348,6 +2350,61 @@ ConstantForce:
   m_CorrespondingSourceObject: {fileID: 3206459600259325458, guid: a250e1b52dc428349a5bef1ccc1abfb9, type: 3}
   m_PrefabInstance: {fileID: 279250789}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1739624837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1739624838}
+  - component: {fileID: 1739624839}
+  m_Layer: 0
+  m_Name: StoneGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1739624838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739624837}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.076, z: -2.67}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1258822727}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1739624839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739624837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e013e2c93667ac94991662f9d05f86a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stonePrefabs:
+  - {fileID: 2358519744402589262, guid: 90ba76dab270f77418aed83b0bfebee6, type: 3}
+  spawnSize: 1.2652
+  spawnIntersection: 1
+  maxStoneCount: 50
+  spawnZone:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 10.81
+    height: 5.51
 --- !u!75 &1744042069 stripped
 ConstantForce:
   m_CorrespondingSourceObject: {fileID: 3206459600259325458, guid: a250e1b52dc428349a5bef1ccc1abfb9, type: 3}
