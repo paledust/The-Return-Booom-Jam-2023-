@@ -26,6 +26,7 @@ public class StoneDebrisGenerator : MonoBehaviour
         }
     }
     void Update(){
+    //Spawn Stones
         if(Time.time>stoneTime+spawnIntersection && !stopSpawn){
             stoneTime = Time.time;
             var stoneTrans = stoneDebris.Find(x=>!x.gameObject.activeSelf).transform;
@@ -36,10 +37,13 @@ public class StoneDebrisGenerator : MonoBehaviour
             stoneTrans.gameObject.SetActive(true);
             activeStone ++;
         }
+    //Detect if stones is out of boundry
         for(int i=0;i<maxStoneCount;i++){
             if(stoneDebris[i].transform.position.z>transform.position.z+spawnZone.height){
-                stoneDebris[i].gameObject.SetActive(false);
-                activeStone --;
+                if(stoneDebris[i].gameObject.activeSelf){
+                    stoneDebris[i].gameObject.SetActive(false);
+                    activeStone --;
+                }
             } 
         }
     }
@@ -47,6 +51,7 @@ public class StoneDebrisGenerator : MonoBehaviour
     IEnumerator coroutineStopStoneSpawn(){
         stopSpawn = true;
         while(activeStone>0){
+            Debug.Log("Wait");
             yield return null;
         }
         
