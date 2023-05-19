@@ -9,7 +9,7 @@
                     "name": "KeyPress",
                     "type": "PassThrough",
                     "id": "3a51aa4b-cbaa-4588-8a99-044e58d97719",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Key",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

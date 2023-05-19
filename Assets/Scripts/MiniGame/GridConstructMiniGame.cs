@@ -5,8 +5,10 @@ using UnityEngine.InputSystem;
 
 public class GridConstructMiniGame : MiniGameBasic
 {
+    [SerializeField] private ParticleSystem m_projectorParticles;
+    [SerializeField] private Projector m_projector;
     protected override void OnKeyPressed(Key keyPressed)
     {
-        throw new System.NotImplementedException();
+        m_projectorParticles.Play(true);
     }
 }

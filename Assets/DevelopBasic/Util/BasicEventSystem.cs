@@ -9,6 +9,12 @@ public static class EventHandler
 {
     public static Action<Key> OnKeyPressed;
     public static void Call_OnKeyPressed(Key key){OnKeyPressed?.Invoke(key);}
+    public static Action<Key> OnKeyReleased;
+    public static void Call_OnKeyReleased(Key key){OnKeyReleased?.Invoke(key);}
+    public static Action OnAnyKeyPressed;
+    public static void Call_OnAnyKeyPressed(){OnAnyKeyPressed?.Invoke();}
+    public static Action OnNoKeyPressed;
+    public static void Call_OnNoKeyPressed(){OnNoKeyPressed?.Invoke();}
     public static Action<MiniGameBasic> OnEndMiniGame;
     public static void Call_OnEndMiniGame(MiniGameBasic miniGame){OnEndMiniGame?.Invoke(miniGame);}
 }
