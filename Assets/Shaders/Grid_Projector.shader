@@ -201,10 +201,10 @@ Node;AmplifyShaderEditor.SimpleAddOpNode;117;-3386.432,199.9768;Inherit;False;2;
 Node;AmplifyShaderEditor.SmoothstepOpNode;115;-3218.278,22.80824;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.OneMinusNode;103;-3409.776,22.71416;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;104;-2986.813,24.54107;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RegisterLocalVarNode;107;-2843.768,20.748;Inherit;False;projectorRadius;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;116;-3679.11,135.3756;Inherit;False;Property;_FadeRadius;FadeRadius;8;0;Create;True;0;0;0;False;0;False;0;0.47;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.NegateNode;118;-3519.971,140.2145;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;106;-3678.426,217.9146;Inherit;False;Property;_FadeSmoothness;FadeSmoothness;7;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;106;-3678.426,217.9146;Inherit;False;Property;_FadeSmoothness;FadeSmoothness;7;0;Create;True;0;0;0;False;0;False;0;0.1;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;107;-2843.768,20.748;Inherit;False;projectorRadius;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;116;-3679.11,135.3756;Inherit;False;Property;_FadeRadius;FadeRadius;8;0;Create;True;0;0;0;True;0;False;0;-1;0;0;0;1;FLOAT;0
 WireConnection;80;0;10;0
 WireConnection;80;1;96;0
 WireConnection;80;2;74;0
@@ -262,7 +262,7 @@ WireConnection;115;1;118;0
 WireConnection;115;2;117;0
 WireConnection;103;0;101;0
 WireConnection;104;0;115;0
-WireConnection;107;0;104;0
 WireConnection;118;0;116;0
+WireConnection;107;0;104;0
 ASEEND*/
-//CHKSM=0122C21579C514E3C970210BC043076CDDC1ECEE
+//CHKSM=651F306AE0E1C98E97EC32E5C81B3F6FAFBAB83B
