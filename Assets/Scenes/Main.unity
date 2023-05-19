@@ -321,8 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   miniGames:
-  - {fileID: 1441109645}
   - {fileID: 629904091}
+  - {fileID: 1441109645}
   - {fileID: 2115247068}
 --- !u!1 &85812490
 GameObject:
@@ -1099,7 +1099,7 @@ GameObject:
   - component: {fileID: 629904090}
   - component: {fileID: 629904091}
   m_Layer: 0
-  m_Name: GridConstruct MiniGame
+  m_Name: 2 GridConstruct MiniGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1211,7 +1211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &687512016
 Transform:
   m_ObjectHideFlags: 0
@@ -2093,7 +2093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1258822727
 Transform:
   m_ObjectHideFlags: 0
@@ -2428,7 +2428,7 @@ GameObject:
   - component: {fileID: 1441109644}
   - component: {fileID: 1441109645}
   m_Layer: 0
-  m_Name: StoneBlow MiniGame
+  m_Name: 1 StoneBlow MiniGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3832,7 +3832,7 @@ GameObject:
   - component: {fileID: 2115247067}
   - component: {fileID: 2115247068}
   m_Layer: 0
-  m_Name: DetectSeed MiniGame
+  m_Name: 3 DetectSeed MiniGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

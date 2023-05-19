@@ -22,6 +22,8 @@ public class StoneBlowMiniGame : MiniGameBasic
         totalCount = stoneDebris.Count;
     }
     protected override void OnKeyPressed(UnityEngine.InputSystem.Key keyPressed){
+        base.OnKeyPressed(keyPressed);
+        
         float debrisProgress = 1-stoneDebris.Count/(totalCount-1);
 
         if(!stoneGenerator.gameObject.activeSelf) stoneGenerator.gameObject.SetActive(true);
