@@ -10,6 +10,7 @@ public class GridConstructMiniGame : MiniGameBasic
     [SerializeField, ShowOnly] private STAGE stage;
 [Header("Control")]
     [SerializeField] private float gridDelay = 1;
+    [SerializeField] private float typingWindow = 0.5f;
     [SerializeField] private Animation m_gridBuildAnime;
     [SerializeField] private ParticleSystem m_projectorParticles;
     [SerializeField] private Projector m_projector;
@@ -20,33 +21,36 @@ public class GridConstructMiniGame : MiniGameBasic
     [SerializeField] private PlayableDirector end_director;
     private int keyClipPlayed = 0;
     private string clipName = string.Empty;
-    private float gridChargeTime;
-    void Update(){
-        switch(stage){
-            case STAGE.Charging:
-                if(GameInputManager.Instance.HasKeyPressed){
-                    gridChargeTime += Time.deltaTime;
-                }
-                if(gridChargeTime >= gridDelay){
-                    stage = STAGE.Building;
-                    m_projectorParticles.Play(true);
-                }
-                break;
-            case STAGE.Building:
-                if(GameInputManager.Instance.HasKeyPressed){
-                    m_gridBuildAnime[clipName].speed = Mathf.Lerp(m_gridBuildAnime[clipName].speed, 0.4f, Time.deltaTime * 5);
-                }
-                else{
-                    m_gridBuildAnime[clipName].speed = Mathf.Lerp(m_gridBuildAnime[clipName].speed, -0.02f, Time.deltaTime * 5);
-                }
-                if(m_gridBuildAnime[clipName].normalizedTime >= 0.95f){
-                    EventHandler.Call_OnEndMiniGame(this);
-                    end_director.Play();
-                    this.enabled = false;
-                }
-                break;
-        }
-    }
+[Header("DEBUG")]
+    [SerializeField, ShowOnly] private float gridChargeTime;
+    [SerializeField, ShowOnly] private float typingTestTime;
+    [SerializeField, ShowOnly] private float isTyping;
+    // void Update(){
+    //     switch(stage){
+    //         case STAGE.Charging:
+    //             if(GameInputManager.Instance.HasKeyPressed){
+    //                 gridChargeTime += Time.deltaTime;
+    //             }
+    //             if(gridChargeTime >= gridDelay){
+    //                 stage = STAGE.Building;
+    //                 m_projectorParticles.Play(true);
+    //             }
+    //             break;
+    //         case STAGE.Building:
+    //             if(GameInputManager.Instance.HasKeyPressed){
+    //                 m_gridBuildAnime[clipName].speed = Mathf.Lerp(m_gridBuildAnime[clipName].speed, 0.4f, Time.deltaTime * 5);
+    //             }
+    //             else{
+    //                 m_gridBuildAnime[clipName].speed = Mathf.Lerp(m_gridBuildAnime[clipName].speed, -0.02f, Time.deltaTime * 5);
+    //             }
+    //             if(m_gridBuildAnime[clipName].normalizedTime >= 0.95f){
+    //                 EventHandler.Call_OnEndMiniGame(this);
+    //                 end_director.Play();
+    //                 this.enabled = false;
+    //             }
+    //             break;
+    //     }
+    // }
     protected override void Initialize()
     {
         base.Initialize();
@@ -59,7 +63,7 @@ public class GridConstructMiniGame : MiniGameBasic
     {
         base.CleanUp();
 
-        m_projectorParticles.Stop(true);
+        if(m_projectorParticles!=null)m_projectorParticles.Stop(true);
     }
     protected override void OnAnyKeyPress()
     {
@@ -86,6 +90,24 @@ public class GridConstructMiniGame : MiniGameBasic
         if(keyClipPlayed>=keyClips.Length){
             keyClipPlayed = 0;
             Service.Shuffle<AudioClip>(ref keyClips);
+        }
+
+        switch(stage){
+            case STAGE.Charging:
+                gridChargeTime += Time.deltaTime;
+                if(gridChargeTime >= gridDelay){
+                    stage = STAGE.Building;
+                    m_projectorParticles.Play(true);
+                }
+                break;
+            case STAGE.Building:
+                m_gridBuildAnime[clipName].normalizedTime += 0.4f*Time.deltaTime;
+                if(m_gridBuildAnime[clipName].normalizedTime >= 0.95f){
+                    EventHandler.Call_OnEndMiniGame(this);
+                    end_director.Play();
+                    this.enabled = false;
+                }
+                break;
         }
     }
 }

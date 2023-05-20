@@ -10,6 +10,7 @@ public class MiniGameManager : MonoBehaviour
     private int currentIndex = 0;
     void OnEnable(){
     #if UNITY_EDITOR
+        currentIndex = startMiniGame;
         miniGames[startMiniGame].EnterMiniGame();
     #else
         miniGames[0].EnterMiniGame();

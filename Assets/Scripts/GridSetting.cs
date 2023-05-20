@@ -11,7 +11,7 @@ public class GridSetting : MonoBehaviour
     private Material m_mat;
     private Material original_mat;
     private string FadeRadius_Name = "_FadeRadius";
-    void OnEnable(){
+    void OnEnable(){ 
         original_mat = gridProjector.material;
         if(m_mat == null) {
             m_mat = new Material(original_mat);

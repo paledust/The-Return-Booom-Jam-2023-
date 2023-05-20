@@ -1,3 +1,5 @@
+// Upgrade NOTE: upgraded instancing buffer 'AmplifyShadersGrid_Projector' to new syntax.
+
 // Made with Amplify Shader Editor v1.9.1.5
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "AmplifyShaders/Grid_Projector"
@@ -75,7 +77,6 @@ Shader "AmplifyShaders/Grid_Projector"
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
-			uniform float4 _Color;
 			uniform sampler2D _MainTex;
 			float4x4 unity_Projector;
 			uniform float _GltichRange;
@@ -83,8 +84,13 @@ Shader "AmplifyShaders/Grid_Projector"
 			uniform float _glitchFreq;
 			uniform float _glitchSpeed;
 			uniform float _glitchWidth;
-			uniform float _FadeRadius;
 			uniform float _FadeSmoothness;
+			UNITY_INSTANCING_BUFFER_START(AmplifyShadersGrid_Projector)
+				UNITY_DEFINE_INSTANCED_PROP(float4, _Color)
+#define _Color_arr AmplifyShadersGrid_Projector
+				UNITY_DEFINE_INSTANCED_PROP(float, _FadeRadius)
+#define _FadeRadius_arr AmplifyShadersGrid_Projector
+			UNITY_INSTANCING_BUFFER_END(AmplifyShadersGrid_Projector)
 
 			
 			v2f vert ( appdata v )
@@ -121,6 +127,7 @@ Shader "AmplifyShaders/Grid_Projector"
 				#ifdef ASE_NEEDS_FRAG_WORLD_POSITION
 				float3 WorldPosition = i.worldPos;
 				#endif
+				float4 _Color_Instance = UNITY_ACCESS_INSTANCED_PROP(_Color_arr, _Color);
 				float4 temp_output_4_0 = mul( unity_Projector, i.ase_texcoord1 );
 				float2 temp_output_10_0 = ( (temp_output_4_0).xy / (temp_output_4_0).w );
 				float2 break67 = temp_output_10_0;
@@ -132,9 +139,10 @@ Shader "AmplifyShaders/Grid_Projector"
 				float mulTime70 = _Time.y * _glitchSpeed;
 				float2 lerpResult80 = lerp( temp_output_10_0 , appendResult96 , step( (sin( ( ( break67.y * _glitchFreq ) + mulTime70 ) )*0.5 + 0.5) , _glitchWidth ));
 				float2 glitchedProjectorUV11 = lerpResult80;
-				float4 break109 = ( _Color * tex2D( _MainTex, glitchedProjectorUV11 ) );
+				float4 break109 = ( _Color_Instance * tex2D( _MainTex, glitchedProjectorUV11 ) );
+				float _FadeRadius_Instance = UNITY_ACCESS_INSTANCED_PROP(_FadeRadius_arr, _FadeRadius);
 				float2 projectorUV99 = temp_output_10_0;
-				float smoothstepResult115 = smoothstep( -_FadeRadius , ( -_FadeRadius + _FadeSmoothness ) , ( 1.0 - distance( projectorUV99 , float2( 0.5,0.5 ) ) ));
+				float smoothstepResult115 = smoothstep( -_FadeRadius_Instance , ( -_FadeRadius_Instance + _FadeSmoothness ) , ( 1.0 - distance( projectorUV99 , float2( 0.5,0.5 ) ) ));
 				float projectorRadius107 = saturate( smoothstepResult115 );
 				float4 appendResult110 = (float4(break109.r , break109.g , break109.b , ( break109.a * projectorRadius107 )));
 				
@@ -197,14 +205,14 @@ Node;AmplifyShaderEditor.SmoothstepOpNode;115;-3218.278,22.80824;Inherit;True;3;
 Node;AmplifyShaderEditor.OneMinusNode;103;-3409.776,22.71416;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;104;-2986.813,24.54107;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.NegateNode;118;-3519.971,140.2145;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;106;-3678.426,217.9146;Inherit;False;Property;_FadeSmoothness;FadeSmoothness;7;0;Create;True;0;0;0;False;0;False;0;0.1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;107;-2843.768,20.748;Inherit;False;projectorRadius;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;116;-3679.11,135.3756;Inherit;False;Property;_FadeRadius;FadeRadius;8;0;Create;True;0;0;0;True;0;False;0;20;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;13;-2987.592,559.554;Inherit;False;Property;_Color;Color;0;1;[HDR];Create;True;0;0;0;False;0;False;1,1,1,1;0,6.462745,11.98431,0.868844;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.GetLocalVarNode;15;-3306.365,768.8909;Inherit;False;11;glitchedProjectorUV;1;0;OBJECT;;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;99;-3165.618,-1114.475;Inherit;False;projectorUV;-1;True;1;0;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.GetLocalVarNode;100;-3782.637,18.06287;Inherit;False;99;projectorUV;1;0;OBJECT;;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;12;-1979.133,722.0254;Float;False;True;-1;2;ASEMaterialInspector;100;5;AmplifyShaders/Grid_Projector;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;True;8;5;False;;1;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;True;True;1;False;;True;3;False;;True;True;-1;False;;-1;False;;True;1;RenderType=Transparent=RenderType;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;0;1;True;False;;False;0
+Node;AmplifyShaderEditor.ColorNode;13;-2987.592,559.554;Inherit;False;InstancedProperty;_Color;Color;0;1;[HDR];Create;True;0;0;0;False;0;False;1,1,1,1;0,6.462745,11.98431,0.3568628;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.RangedFloatNode;116;-3679.11,135.3756;Inherit;False;InstancedProperty;_FadeRadius;FadeRadius;8;0;Create;True;0;0;0;True;0;False;0;-1;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;106;-3678.426,217.9146;Inherit;False;Property;_FadeSmoothness;FadeSmoothness;7;0;Create;True;0;0;0;False;0;False;0;0.1;0;0;0;1;FLOAT;0
 WireConnection;80;0;10;0
 WireConnection;80;1;96;0
 WireConnection;80;2;74;0
@@ -265,4 +273,4 @@ WireConnection;107;0;104;0
 WireConnection;99;0;10;0
 WireConnection;12;0;110;0
 ASEEND*/
-//CHKSM=0372E0DCCB8537DCD3A1997DE26008D40B7AC8B6
+//CHKSM=6DAEB8FB487E1D8BA54068462B5BAD50DBA5161B
