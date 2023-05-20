@@ -7,7 +7,6 @@ using UnityEngine.Playables;
 public class GridConstructMiniGame : MiniGameBasic
 {
     private enum STAGE{Charging, Building}
-    [SerializeField, ShowOnly] private STAGE stage;
 [Header("Control")]
     [SerializeField] private float gridDelay = 1;
     [SerializeField] private float typingWindow = 0.5f;
@@ -21,10 +20,11 @@ public class GridConstructMiniGame : MiniGameBasic
     [SerializeField] private PlayableDirector end_director;
     private int keyClipPlayed = 0;
     private string clipName = string.Empty;
-[Header("DEBUG")]
-    [SerializeField, ShowOnly] private float gridChargeTime;
-    [SerializeField, ShowOnly] private float typingTestTime;
-    [SerializeField, ShowOnly] private bool isTyping;
+[Header("Information")]
+    [SerializeField, ShowOnly] private STAGE stage = STAGE.Charging;
+    [SerializeField, ShowOnly] private float gridChargeTime = 0;
+    [SerializeField, ShowOnly] private float typingTestTime = 0;
+    [SerializeField, ShowOnly] private bool isTyping = false;
     void Update(){
     //Typing Test
         if(isTyping){
@@ -63,6 +63,11 @@ public class GridConstructMiniGame : MiniGameBasic
     {
         base.Initialize();
 
+        stage = STAGE.Charging;
+        gridChargeTime = 0;
+        typingTestTime = 0;
+        isTyping = false;
+        
         clipName = m_gridBuildAnime.clip.name;
         m_gridBuildAnime[clipName].speed = 0;
         m_gridBuildAnime.Play();
