@@ -1,0 +1,24 @@
+NoteMarker
+{
+    width:18px;
+    height:18px;
+    background-image:resource("Assets/Scripts/Timeline/Marker/Editor/Icon/notepad_collapse.png");
+}
+NoteMarker:checked
+{
+    background-image:resource("Assets/Scripts/Timeline/Marker/Editor/Icon/notepad_normal.png");
+}
+NoteMarker:hover:focus:checked
+{
+    background-image:resource("Assets/Scripts/Timeline/Marker/Editor/Icon/notepad_highlight.png");
+}
+
+NextMiniGameMarker{
+    width:18px;
+    height:18px;
+    background-image:resource("Assets/Scripts/Timeline/Marker/Editor/Icon/SkipPoint.png");       
+}
+NextMiniGameMarker:hover:focus:checked
+{
+    background-image:resource("Assets/Scripts/Timeline/Marker/Editor/Icon/SkipPoint_highlight.png");
+}

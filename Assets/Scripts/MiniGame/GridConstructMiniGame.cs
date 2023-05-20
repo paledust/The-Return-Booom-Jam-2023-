@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class GridConstructMiniGame : MiniGameBasic
 {
@@ -15,6 +16,8 @@ public class GridConstructMiniGame : MiniGameBasic
 [Header("Audio Source")]
     [SerializeField] private AudioSource sfx_audio;
     [SerializeField] private AudioClip[] keyClips;
+[Header("End MiniGame")]
+    [SerializeField] private PlayableDirector end_director;
     private int keyClipPlayed = 0;
     private string clipName = string.Empty;
     private float gridChargeTime;
@@ -38,6 +41,7 @@ public class GridConstructMiniGame : MiniGameBasic
                 }
                 if(m_gridBuildAnime[clipName].normalizedTime >= 0.95f){
                     EventHandler.Call_OnEndMiniGame(this);
+                    end_director.Play();
                     this.enabled = false;
                 }
                 break;

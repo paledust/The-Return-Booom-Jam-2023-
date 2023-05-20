@@ -5,6 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class GridSetting : MonoBehaviour
 {
+    [SerializeField, ColorUsage(true, true)] private Color gridColor;
     [SerializeField] private Projector gridProjector;
     [SerializeField] private float projectRadius = -1;
     private Material m_mat;
@@ -25,5 +26,6 @@ public class GridSetting : MonoBehaviour
     void Update(){
         if(m_mat==null || gridProjector==null) return;
         m_mat.SetFloat(FadeRadius_Name, projectRadius);
+        m_mat.color = gridColor;
     }
 }

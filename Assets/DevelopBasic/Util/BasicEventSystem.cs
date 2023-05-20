@@ -17,6 +17,8 @@ public static class EventHandler
     public static void Call_OnNoKeyPressed(){OnNoKeyPressed?.Invoke();}
     public static Action<MiniGameBasic> OnEndMiniGame;
     public static void Call_OnEndMiniGame(MiniGameBasic miniGame){OnEndMiniGame?.Invoke(miniGame);}
+    public static Action OnNextMiniGame;
+    public static void Call_OnNextMiniGame(){OnNextMiniGame?.Invoke();}
 }
 
 //A More Strict Event System

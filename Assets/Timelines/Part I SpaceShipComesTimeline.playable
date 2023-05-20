@@ -25,6 +25,7 @@ MonoBehaviour:
     m_Objects:
     - {fileID: -723024315604208804}
     - {fileID: -3957362831610697297}
+    - {fileID: 5782014154095828798}
 --- !u!114 &-6116796252960801218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,6 +226,21 @@ MonoBehaviour:
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+--- !u!114 &5782014154095828798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c177094487706344eabf25549f41e5f4, type: 3}
+  m_Name: NextMiniGame Marker
+  m_EditorClassIdentifier: 
+  m_Time: 21.383333333333333
+  retroactive: 0
+  emitOnce: 0
 --- !u!74 &5826941238400744467
 AnimationClip:
   m_ObjectHideFlags: 0
