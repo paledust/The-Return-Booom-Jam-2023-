@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7457456146042448973}
   - component: {fileID: 7457456146042448960}
+  - component: {fileID: 6392200892530161365}
   m_Layer: 0
   m_Name: Projector Square 00
   m_TagString: Untagged
@@ -51,3 +52,17 @@ Projector:
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 62
+--- !u!114 &6392200892530161365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7457456146042448972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19222a265b2dde4989a1de90a43d69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  m_projector: {fileID: 7457456146042448960}

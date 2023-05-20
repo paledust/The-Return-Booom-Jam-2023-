@@ -7,15 +7,13 @@ public class GridSetting : MonoBehaviour
 {
     [SerializeField, ColorUsage(true, true)] private Color gridColor;
     [SerializeField] private Projector gridProjector;
+    [SerializeField] private Material original_mat;
     [SerializeField] private float projectRadius = -1;
     private Material m_mat;
-    private Material original_mat;
     private string FadeRadius_Name = "_FadeRadius";
     void OnEnable(){ 
-        original_mat = gridProjector.material;
         if(m_mat == null) {
-            m_mat = new Material(original_mat);
-            m_mat.name += "_Instance";
+            m_mat = Instantiate(original_mat);
         }
         gridProjector.material = m_mat;
     }
@@ -24,7 +22,7 @@ public class GridSetting : MonoBehaviour
         DestroyImmediate(m_mat);
     }
     void Update(){
-        if(m_mat==null || gridProjector==null) return;
+        if(m_mat==null || gridProjector==null || original_mat==null) return;
         m_mat.SetFloat(FadeRadius_Name, projectRadius);
         m_mat.color = gridColor;
     }
