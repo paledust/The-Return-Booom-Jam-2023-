@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-public class GameInputManager : MonoBehaviour
+public class GameInputManager : Singleton<GameInputManager>
 {
-    private KeyControl akey;
     [SerializeField, ShowOnly] private int pressedKeyCount = 0;
+    public bool HasKeyPressed{get{return pressedKeyCount>0;}}
     void Update(){
         foreach(KeyControl key in Keyboard.current.allKeys){
             if(key.wasPressedThisFrame) {
