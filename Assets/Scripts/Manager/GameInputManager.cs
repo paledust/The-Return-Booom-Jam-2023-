@@ -7,7 +7,6 @@ using UnityEngine.InputSystem.Controls;
 public class GameInputManager : Singleton<GameInputManager>
 {
     [SerializeField, ShowOnly] private int pressedKeyCount = 0;
-    public bool HasKeyPressed{get{return pressedKeyCount>0;}}
     void Update(){
         foreach(KeyControl key in Keyboard.current.allKeys){
             if(key.wasPressedThisFrame) {

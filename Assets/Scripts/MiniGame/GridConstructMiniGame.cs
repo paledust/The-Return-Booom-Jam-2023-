@@ -24,33 +24,41 @@ public class GridConstructMiniGame : MiniGameBasic
 [Header("DEBUG")]
     [SerializeField, ShowOnly] private float gridChargeTime;
     [SerializeField, ShowOnly] private float typingTestTime;
-    [SerializeField, ShowOnly] private float isTyping;
-    // void Update(){
-    //     switch(stage){
-    //         case STAGE.Charging:
-    //             if(GameInputManager.Instance.HasKeyPressed){
-    //                 gridChargeTime += Time.deltaTime;
-    //             }
-    //             if(gridChargeTime >= gridDelay){
-    //                 stage = STAGE.Building;
-    //                 m_projectorParticles.Play(true);
-    //             }
-    //             break;
-    //         case STAGE.Building:
-    //             if(GameInputManager.Instance.HasKeyPressed){
-    //                 m_gridBuildAnime[clipName].speed = Mathf.Lerp(m_gridBuildAnime[clipName].speed, 0.4f, Time.deltaTime * 5);
-    //             }
-    //             else{
-    //                 m_gridBuildAnime[clipName].speed = Mathf.Lerp(m_gridBuildAnime[clipName].speed, -0.02f, Time.deltaTime * 5);
-    //             }
-    //             if(m_gridBuildAnime[clipName].normalizedTime >= 0.95f){
-    //                 EventHandler.Call_OnEndMiniGame(this);
-    //                 end_director.Play();
-    //                 this.enabled = false;
-    //             }
-    //             break;
-    //     }
-    // }
+    [SerializeField, ShowOnly] private bool isTyping;
+    void Update(){
+    //Typing Test
+        if(isTyping){
+            typingTestTime += Time.deltaTime;
+            if(typingTestTime>=typingWindow){
+                isTyping = false;
+            }
+        }
+
+        switch(stage){
+            case STAGE.Charging:
+                if(isTyping){
+                    gridChargeTime += Time.deltaTime;
+                }
+                if(gridChargeTime >= gridDelay){
+                    stage = STAGE.Building;
+                    m_projectorParticles.Play(true);
+                }
+                break;
+            case STAGE.Building:
+                if(isTyping){
+                    m_gridBuildAnime[clipName].speed = Mathf.Lerp(m_gridBuildAnime[clipName].speed, 0.4f, Time.deltaTime * 5);
+                }
+                else{
+                    m_gridBuildAnime[clipName].speed = Mathf.Lerp(m_gridBuildAnime[clipName].speed, -0.02f, Time.deltaTime * 5);
+                }
+                if(m_gridBuildAnime[clipName].normalizedTime >= 0.95f){
+                    EventHandler.Call_OnEndMiniGame(this);
+                    end_director.Play();
+                    this.enabled = false;
+                }
+                break;
+        }
+    }
     protected override void Initialize()
     {
         base.Initialize();
@@ -92,22 +100,7 @@ public class GridConstructMiniGame : MiniGameBasic
             Service.Shuffle<AudioClip>(ref keyClips);
         }
 
-        switch(stage){
-            case STAGE.Charging:
-                gridChargeTime += Time.deltaTime;
-                if(gridChargeTime >= gridDelay){
-                    stage = STAGE.Building;
-                    m_projectorParticles.Play(true);
-                }
-                break;
-            case STAGE.Building:
-                m_gridBuildAnime[clipName].normalizedTime += 0.4f*Time.deltaTime;
-                if(m_gridBuildAnime[clipName].normalizedTime >= 0.95f){
-                    EventHandler.Call_OnEndMiniGame(this);
-                    end_director.Play();
-                    this.enabled = false;
-                }
-                break;
-        }
+        isTyping = true;
+        typingTestTime = 0;
     }
 }
