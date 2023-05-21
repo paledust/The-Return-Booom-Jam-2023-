@@ -9,10 +9,6 @@ public class ScanSquareUnit : MonoBehaviour
     [SerializeField] private Projector m_projector;
     public bool Scanned{get{return state == SQUARE_STATE.Scanned;}}
     private DetectSeedMiniGame seedMiniGame;
-    private string charge_anime_name = "Square_Charging";
-    private string error_anime_name = "Square_Error";
-    private string scanned_anime_name = "Square_Scanned";
-    private string found_anime_name = "Square_Found";
     private Material projector_mat;
     public void Init(Material m_mat, DetectSeedMiniGame miniGame){
         seedMiniGame = miniGame;
@@ -35,6 +31,22 @@ public class ScanSquareUnit : MonoBehaviour
     public void AbortScan(){
         StopAllCoroutines();
         StartCoroutine(coroutineAbortScan());
+    }
+    public void TurnOffScan(){
+        StartCoroutine(coroutineTurnOffScan());
+    }
+    IEnumerator coroutineTurnOffScan(){
+        Color initColor, targetColor;
+        initColor = targetColor = m_projector.material.color;
+        targetColor.a = 0;
+
+        float duration = 0.5f;
+        for(float t=0; t<1; t+=Time.deltaTime/duration){
+            projector_mat.color = Color.Lerp(initColor, targetColor, EasingFunc.Easing.SmoothInOut(t));
+            yield return null;
+        }
+        projector_mat.color = targetColor;
+        m_projector.enabled = false;
     }
     IEnumerator coroutineStartScan(){
         state = SQUARE_STATE.Scanning;

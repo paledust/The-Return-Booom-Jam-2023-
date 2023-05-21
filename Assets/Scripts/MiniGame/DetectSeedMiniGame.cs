@@ -16,6 +16,7 @@ public class DetectSeedMiniGame : MiniGameBasic
 [Space(10)]
     [SerializeField] private Vector2Int targetUnit;
     [SerializeField] private ScanSquareUnit[] scanUnits;
+    private List<ScanSquareUnit> scannedUnit;
     private ScanSquareUnit[,] scanUnitMatrix;
     private const int ROLL = 4;
     private const int LINE = 10;
@@ -23,6 +24,7 @@ public class DetectSeedMiniGame : MiniGameBasic
     private bool acceptNewScan = true;
     protected override void Initialize(){
         base.Initialize();
+        scannedUnit = new List<ScanSquareUnit>();
         scanUnitMatrix = new ScanSquareUnit[LINE, ROLL];
 
         for(int y=0; y<ROLL; y++){
@@ -35,6 +37,7 @@ public class DetectSeedMiniGame : MiniGameBasic
     protected override void CleanUp(){
         base.CleanUp();
         scanUnitMatrix = null;
+        StartCoroutine(coroutineTurnOffAllScan());
     }
     protected override void OnKeyPressed(Key keyPressed){
         if(acceptNewScan){
@@ -58,10 +61,9 @@ public class DetectSeedMiniGame : MiniGameBasic
             acceptNewScan = true;
         }
     }
-    public void RefreshScan(){
-        acceptNewScan = true;
-    }
+    public void RefreshScan(){acceptNewScan = true;}
     public bool GetResult(ScanSquareUnit scanUnit){
+        scannedUnit.Add(scanUnit);
         for(int y=0; y<ROLL; y++){
             for(int x=0; x<LINE; x++){
                 if(scanUnit == scanUnitMatrix[x,y]){
@@ -73,5 +75,13 @@ public class DetectSeedMiniGame : MiniGameBasic
             }
         }
         return false;
+    }
+    IEnumerator coroutineTurnOffAllScan(){
+        yield return new WaitForSeconds(5f);
+        for(int i=0; i<scannedUnit.Count; i++){
+            scannedUnit[i].TurnOffScan();
+            yield return new WaitForSeconds(Random.Range(.4f,.6f));
+        }
+        scannedUnit.Clear();
     }
 }
