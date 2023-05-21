@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class DetectSeedMiniGame : MiniGameBasic
 {
@@ -16,6 +17,8 @@ public class DetectSeedMiniGame : MiniGameBasic
 [Space(10)]
     [SerializeField] private Vector2Int targetUnit;
     [SerializeField] private ScanSquareUnit[] scanUnits;
+[Header("Ending")]
+    [SerializeField] private PlayableDirector m_director;
     private List<ScanSquareUnit> scannedUnit;
     private ScanSquareUnit[,] scanUnitMatrix;
     private const int ROLL = 4;
@@ -36,7 +39,6 @@ public class DetectSeedMiniGame : MiniGameBasic
     }
     protected override void CleanUp(){
         base.CleanUp();
-        scanUnitMatrix = null;
         StartCoroutine(coroutineTurnOffAllScan());
     }
     protected override void OnKeyPressed(Key keyPressed){
@@ -77,11 +79,16 @@ public class DetectSeedMiniGame : MiniGameBasic
         return false;
     }
     IEnumerator coroutineTurnOffAllScan(){
+        scanUnitMatrix = null;
         yield return new WaitForSeconds(5f);
-        for(int i=0; i<scannedUnit.Count; i++){
+        for(int i=0; i<scannedUnit.Count-1; i++){
             scannedUnit[i].TurnOffScan();
             yield return new WaitForSeconds(Random.Range(.4f,.6f));
         }
+        yield return new WaitForSeconds(2f);
+        scannedUnit[scannedUnit.Count-1].TurnOffScan();
         scannedUnit.Clear();
+
+        m_director.Play();
     }
 }
