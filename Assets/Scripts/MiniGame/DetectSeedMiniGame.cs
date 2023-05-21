@@ -65,6 +65,9 @@ public class DetectSeedMiniGame : MiniGameBasic
         for(int y=0; y<ROLL; y++){
             for(int x=0; x<LINE; x++){
                 if(scanUnit == scanUnitMatrix[x,y]){
+                    if(x == targetUnit.x && y == targetUnit.y){
+                        EventHandler.Call_OnEndMiniGame(this);
+                    }
                     return x == targetUnit.x && y == targetUnit.y;
                 }
             }
