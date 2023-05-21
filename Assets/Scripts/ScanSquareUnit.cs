@@ -7,6 +7,7 @@ public class ScanSquareUnit : MonoBehaviour
     private enum SQUARE_STATE{Pending, Scanning, Error, Scanned}
     [SerializeField, ShowOnly] private SQUARE_STATE state = SQUARE_STATE.Pending;
     [SerializeField] private Projector m_projector;
+    public bool Scanned{get{return state == SQUARE_STATE.Scanned;}}
     private DetectSeedMiniGame seedMiniGame;
     private string charge_anime_name = "Square_Charging";
     private string error_anime_name = "Square_Error";
@@ -46,8 +47,8 @@ public class ScanSquareUnit : MonoBehaviour
             projector_mat.color = Color.Lerp(initColor, targetColor, 0.5f+0.5f*Mathf.Sin(t*Mathf.PI*freq));
             yield return null;
         }
-        seedMiniGame.CountOneScan();
-        StartCoroutine(coroutineShowScanResult(seedMiniGame.GetResult()));
+        seedMiniGame.RefreshScan();
+        StartCoroutine(coroutineShowScanResult(seedMiniGame.GetResult(this)));
     }
     IEnumerator coroutineShowScanResult(bool found){
         state = SQUARE_STATE.Scanned;

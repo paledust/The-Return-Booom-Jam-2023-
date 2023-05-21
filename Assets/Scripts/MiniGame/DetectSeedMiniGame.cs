@@ -14,13 +14,13 @@ public class DetectSeedMiniGame : MiniGameBasic
     [ColorUsage(true, true)] public Color BingoColor;
     [SerializeField] private Material scanMaterial;
 [Space(10)]
+    [SerializeField] private Vector2Int targetUnit;
     [SerializeField] private ScanSquareUnit[] scanUnits;
-    [SerializeField] private int FoundCount = 5;
     private ScanSquareUnit[,] scanUnitMatrix;
     private const int ROLL = 4;
     private const int LINE = 10;
-    private int pressedIndex = -1;
-    private int detectAmount = 0;
+    private Vector2Int pressedCoordinate;
+    private bool acceptNewScan = true;
     protected override void Initialize(){
         base.Initialize();
         scanUnitMatrix = new ScanSquareUnit[LINE, ROLL];
@@ -37,29 +37,38 @@ public class DetectSeedMiniGame : MiniGameBasic
         scanUnitMatrix = null;
     }
     protected override void OnKeyPressed(Key keyPressed){
-        if(pressedIndex == -1){
-            pressedIndex = Random.Range(0, scanUnitMatrix.Length);
-            scanUnits[pressedIndex].StartScan();
+        if(acceptNewScan){
+        //Get the coordinate by the key
+            Vector2Int coordinate = keyMatrix.GetCoordinateFromKey(keyPressed);
+        //if scanned already then don't do anything
+            if(scanUnitMatrix[coordinate.x, coordinate.y].Scanned) return;
+        //Press the key
+            pressedCoordinate = coordinate;
+            scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].StartScan();
+            acceptNewScan = false;
         }
         else{
-            scanUnits[pressedIndex].AbortScan();
-            pressedIndex = -1;       
+            scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].AbortScan();
+            acceptNewScan = true;       
         }
     }
     protected override void OnKeyReleased(Key keyReleased){
-        if(pressedIndex != -1){
-            scanUnits[pressedIndex].AbortScan();
-            pressedIndex = -1;
+        if(!acceptNewScan){
+            scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].AbortScan();
+            acceptNewScan = true;
         }
     }
-    public void CountOneScan(){
-        pressedIndex = -1;
-        detectAmount ++;
-        if(detectAmount>=FoundCount){
-            Debug.Log("Bingo!");
-        }
+    public void RefreshScan(){
+        acceptNewScan = true;
     }
-    public bool GetResult(){
-        return detectAmount>=FoundCount;
+    public bool GetResult(ScanSquareUnit scanUnit){
+        for(int y=0; y<ROLL; y++){
+            for(int x=0; x<LINE; x++){
+                if(scanUnit == scanUnitMatrix[x,y]){
+                    return x == targetUnit.x && y == targetUnit.y;
+                }
+            }
+        }
+        return false;
     }
 }
