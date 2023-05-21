@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ea0e87fdf1e4a44889061910f470b5, type: 3}
+  m_Name: Key Matrix_SO
+  m_EditorClassIdentifier: 
+  keydatas:
+  - key: 41
+    coordinate: {x: 0, y: 0}
+  - key: 42
+    coordinate: {x: 1, y: 0}
+  - key: 43
+    coordinate: {x: 2, y: 0}
+  - key: 44
+    coordinate: {x: 3, y: 0}
+  - key: 45
+    coordinate: {x: 4, y: 0}
+  - key: 46
+    coordinate: {x: 5, y: 0}
+  - key: 47
+    coordinate: {x: 6, y: 0}
+  - key: 48
+    coordinate: {x: 7, y: 0}
+  - key: 49
+    coordinate: {x: 8, y: 0}
+  - key: 50
+    coordinate: {x: 9, y: 0}
+  - key: 31
+    coordinate: {x: 0, y: 1}
+  - key: 37
+    coordinate: {x: 1, y: 1}
+  - key: 19
+    coordinate: {x: 2, y: 1}
+  - key: 32
+    coordinate: {x: 3, y: 1}
+  - key: 34
+    coordinate: {x: 4, y: 1}
+  - key: 39
+    coordinate: {x: 5, y: 1}
+  - key: 35
+    coordinate: {x: 6, y: 1}
+  - key: 23
+    coordinate: {x: 7, y: 1}
+  - key: 29
+    coordinate: {x: 8, y: 1}
+  - key: 30
+    coordinate: {x: 9, y: 1}
+  - key: 15
+    coordinate: {x: 0, y: 2}
+  - key: 33
+    coordinate: {x: 1, y: 2}
+  - key: 18
+    coordinate: {x: 2, y: 2}
+  - key: 20
+    coordinate: {x: 3, y: 2}
+  - key: 21
+    coordinate: {x: 4, y: 2}
+  - key: 22
+    coordinate: {x: 5, y: 2}
+  - key: 24
+    coordinate: {x: 6, y: 2}
+  - key: 25
+    coordinate: {x: 7, y: 2}
+  - key: 26
+    coordinate: {x: 8, y: 2}
+  - key: 6
+    coordinate: {x: 9, y: 2}
+  - key: 40
+    coordinate: {x: 0, y: 3}
+  - key: 38
+    coordinate: {x: 1, y: 3}
+  - key: 17
+    coordinate: {x: 2, y: 3}
+  - key: 36
+    coordinate: {x: 3, y: 3}
+  - key: 16
+    coordinate: {x: 4, y: 3}
+  - key: 28
+    coordinate: {x: 5, y: 3}
+  - key: 27
+    coordinate: {x: 6, y: 3}
+  - key: 7
+    coordinate: {x: 7, y: 3}
+  - key: 8
+    coordinate: {x: 8, y: 3}
+  - key: 9
+    coordinate: {x: 9, y: 3}

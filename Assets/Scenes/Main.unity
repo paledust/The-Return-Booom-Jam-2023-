@@ -318,7 +318,7 @@ MonoBehaviour:
   - {fileID: 1441109645}
   - {fileID: 629904091}
   - {fileID: 2115247068}
-  startMiniGame: 2
+  startMiniGame: 1
 --- !u!1 &61477996
 GameObject:
   m_ObjectHideFlags: 0
@@ -5128,7 +5128,7 @@ Projector:
   m_AspectRatio: 1
   m_Orthographic: 1
   m_OrthographicSize: 1
-  m_Material: {fileID: 2109604411}
+  m_Material: {fileID: 1977878962}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 62
@@ -9473,6 +9473,98 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7457456146042448973, guid: c2acd0963c443ca4eb5c3a88574259f9, type: 3}
   m_PrefabInstance: {fileID: 1976390011}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1977878962
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GridProject(Clone)
+  m_Shader: {fileID: 4800000, guid: af95c17fd20379344b63af67440f10a2, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: e057151dad8022c41adc44de8b274b72, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _FadeHardness: 0
+    - _FadeRadius: -1
+    - _FadeSmoothness: 0.1
+    - _GlitchPixel: 64
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _GltichRange: 0.015
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Pixel: 90
+    - _Radius: 50
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    - _glitchFreq: 0.56
+    - _glitchOffset: -0.8
+    - _glitchSpeed: 2
+    - _glitchWidth: 0.004
+    m_Colors:
+    - _Color: {r: 0, g: 6.462745, b: 11.984314, a: 0.35686275}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Vector1: {r: 1, g: 0.01, b: 0, a: 0}
+    - _glitchOffset: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
 --- !u!114 &1994807074 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6392200892530161365, guid: c2acd0963c443ca4eb5c3a88574259f9, type: 3}
@@ -9905,98 +9997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19222a265b2dde4989a1de90a43d69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &2109604411
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: GridProject(Clone)
-  m_Shader: {fileID: 4800000, guid: af95c17fd20379344b63af67440f10a2, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e057151dad8022c41adc44de8b274b72, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _FadeHardness: 0
-    - _FadeRadius: -1
-    - _FadeSmoothness: 0.1
-    - _GlitchPixel: 64
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _GltichRange: 0.015
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _Pixel: 90
-    - _Radius: 50
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    - __dirty: 0
-    - _glitchFreq: 0.56
-    - _glitchOffset: -0.8
-    - _glitchSpeed: 2
-    - _glitchWidth: 0.004
-    m_Colors:
-    - _Color: {r: 0, g: 6.462745, b: 11.984314, a: 0.35686275}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Vector1: {r: 1, g: 0.01, b: 0, a: 0}
-    - _glitchOffset: {r: 0, g: 0, b: 0, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1 &2115247066
 GameObject:
   m_ObjectHideFlags: 0
@@ -10041,6 +10041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da6a70f448f8cb447b1aab5823d75249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
   BlinkColor: {r: 0, g: 3.2313726, b: 5.992157, a: 0.6509804}
   ErrorColor: {r: 11.984314, g: 0, b: 0, a: 0.6509804}
   PassColor: {r: 5.992157, g: 4.392157, b: 0.72156864, a: 0.44705883}
@@ -10087,6 +10088,7 @@ MonoBehaviour:
   - {fileID: 1626406496}
   - {fileID: 1847787381}
   - {fileID: 1368773839}
+  FoundCount: 5
 --- !u!75 &2120187966 stripped
 ConstantForce:
   m_CorrespondingSourceObject: {fileID: 3206459600259325458, guid: a250e1b52dc428349a5bef1ccc1abfb9, type: 3}

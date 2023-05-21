@@ -40,12 +40,13 @@ public class ScanSquareUnit : MonoBehaviour
         Color targetColor = seedMiniGame.BlinkColor;
         Color initColor = targetColor;
         initColor.a = 0f;
-        float duration = 2.5f;
+        float duration = 2f;
         for(float t=0; t<1; t+=Time.deltaTime/duration){
             float freq = Mathf.Lerp(10f, 25f, EasingFunc.Easing.QuadEaseIn(t));
             projector_mat.color = Color.Lerp(initColor, targetColor, 0.5f+0.5f*Mathf.Sin(t*Mathf.PI*freq));
             yield return null;
         }
+        seedMiniGame.CountOneScan();
         StartCoroutine(coroutineShowScanResult(seedMiniGame.GetResult()));
     }
     IEnumerator coroutineShowScanResult(bool found){
@@ -67,9 +68,9 @@ public class ScanSquareUnit : MonoBehaviour
         Color targetColor = seedMiniGame.ErrorColor;
         Color initColor = targetColor;
         initColor.a = 0f;
-        float duration = 1f;
+        float duration = 0.75f;
         for(float t=0; t<1; t+=Time.deltaTime/duration){
-            projector_mat.color = Color.Lerp(initColor, targetColor, 0.5f+0.5f*Mathf.Sin(t*Mathf.PI*15f));
+            projector_mat.color = Color.Lerp(initColor, targetColor, 0.5f+0.5f*Mathf.Sin(t*Mathf.PI*10f));
             yield return null;
         }
         projector_mat.color = initColor;
