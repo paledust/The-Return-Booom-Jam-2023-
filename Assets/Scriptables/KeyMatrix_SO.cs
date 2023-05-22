@@ -7,7 +7,15 @@ using UnityEngine.InputSystem;
 public class KeyMatrix_SO : ScriptableObject
 {
     [SerializeField] private List<keyData> keydatas;
-    public Vector2Int GetCoordinateFromKey(Key key){return keydatas.Find(x=>x.key == key).coordinate;}
+    public Vector2Int GetCoordinateFromKey(Key key){
+        keyData data = keydatas.Find(x=>x.key == key);
+        if(data == null){
+            return new Vector2Int(Random.Range(0,Service.LINE), Random.Range(0,Service.ROLL));
+        }
+        else{
+            return keydatas.Find(x=>x.key == key).coordinate;
+        }
+    }
 }
 [System.Serializable]
 public class keyData{

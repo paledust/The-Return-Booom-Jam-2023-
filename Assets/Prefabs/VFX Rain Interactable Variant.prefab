@@ -51,9 +51,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6298898360249350433, guid: ae64add246a42e84d9dd3b6c363d315b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6298898360264778725, guid: ae64add246a42e84d9dd3b6c363d315b, type: 3}
       propertyPath: m_Name
-      value: VFX Rain Interactable
+      value: VFX Rain Interactable Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6828099476880541754, guid: ae64add246a42e84d9dd3b6c363d315b, type: 3}
       propertyPath: looping
@@ -85,6 +89,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6828099476880541754, guid: ae64add246a42e84d9dd3b6c363d315b, type: 3}
       propertyPath: ShapeModule.radius.value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828099476880541754, guid: ae64add246a42e84d9dd3b6c363d315b, type: 3}
+      propertyPath: CollisionModule.radiusScale
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6828099476880541754, guid: ae64add246a42e84d9dd3b6c363d315b, type: 3}

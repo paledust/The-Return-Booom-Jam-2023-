@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Service{
+    public const int ROLL = 4;
+    public const int LINE = 10;
 #region HelperFunction
     /// <summary>
     /// Return a list of all active and inactive objects of T type in loaded scenes.

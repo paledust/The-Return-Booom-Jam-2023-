@@ -21,8 +21,8 @@ public class DetectSeedMiniGame : MiniGameBasic
     [SerializeField] private PlayableDirector m_director;
     private List<ScanSquareUnit> scannedUnit;
     private ScanSquareUnit[,] scanUnitMatrix;
-    private const int ROLL = 4;
-    private const int LINE = 10;
+    private const int ROLL = Service.ROLL;
+    private const int LINE = Service.LINE;
     private Vector2Int pressedCoordinate;
     private bool acceptNewScan = true;
     protected override void Initialize(){
