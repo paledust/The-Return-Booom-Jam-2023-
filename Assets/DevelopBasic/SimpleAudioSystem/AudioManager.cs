@@ -30,6 +30,15 @@ namespace SimpleAudioSystem{
             if(ambience_loop.clip != null)
                 ambience_loop.Play();
         }
+        public void PlayAmbience(string audio_name, float volume){
+            current_ambience_name = audio_name;
+            if(audio_name == string.Empty) ambience_loop.Stop();
+
+            ambience_loop.clip = audioInfo.GetAMBClipByName(audio_name);
+            if(ambience_loop.clip != null)
+                ambience_loop.volume = volume;
+                ambience_loop.Play();
+        }
         public void PlaySoundEffect(AudioSource targetSource, string audio_name, float volumeScale){
             AudioClip clip = audioInfo.GetSFXClipByName(audio_name);
             if(clip!=null){
