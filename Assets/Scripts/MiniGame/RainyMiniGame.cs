@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 using SimpleAudioSystem;
 
@@ -22,10 +23,13 @@ public class RainyMiniGame : MiniGameBasic
     [SerializeField] private string amb_rain_small_name;
     [SerializeField] private string amb_rain_mid_name;
     [SerializeField] private string amb_rain_heavy_name;
-[Header("End")]
+[Header("Rain Loop")]
     [SerializeField] private ParticleSystem m_rain_loop;
     [SerializeField] private float rain_chargeSpeed = 1f;
     [SerializeField] private float rain_dieSpeed = 0.25f;
+[Header("End")]
+    [SerializeField] private PlayableDirector director;
+    [SerializeField] private float timeline_delay = 5;
     private Vector2[] dropPos;
     private ParticleSystem.EmissionModule emission;
 [Header("Info")]
@@ -65,6 +69,7 @@ public class RainyMiniGame : MiniGameBasic
         if(rain_amount >= 1){
             minimalRain_amount = 1;
             emission.rateOverTimeMultiplier = 500;
+            StartCoroutine(CoroutineDelayTimeline());
             EventHandler.Call_OnEndMiniGame(this);
         }
     }
@@ -120,6 +125,10 @@ public class RainyMiniGame : MiniGameBasic
             }
         }
         StartCoroutine(CoroutineBurstRainDrops(location));
+    }
+    IEnumerator CoroutineDelayTimeline(){
+        yield return new WaitForSeconds(timeline_delay);
+        director.Play();
     }
     IEnumerator CoroutineDelayAudio(AudioClip clip){
         yield return new WaitForSeconds(0.3f);
