@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 170282359440511082}
   - component: {fileID: 6828099476894405374}
   - component: {fileID: 5147870956610559906}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: VFX WaterMark
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}

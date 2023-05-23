@@ -62,6 +62,7 @@ public class GridConstructMiniGame : MiniGameBasic
     protected override void Initialize()
     {
         base.Initialize();
+        this.enabled = true;
 
         stage = STAGE.Charging;
         gridChargeTime = 0;
@@ -77,6 +78,7 @@ public class GridConstructMiniGame : MiniGameBasic
         base.CleanUp();
 
         if(m_projectorParticles!=null)m_projectorParticles.Stop(true);
+        this.enabled = false;
     }
     protected override void OnAnyKeyPress()
     {

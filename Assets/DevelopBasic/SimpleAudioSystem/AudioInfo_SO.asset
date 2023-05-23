@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: AudioInfo_SO
   m_EditorClassIdentifier: 
   bgm_info_list: []
-  amb_info_list: []
+  amb_info_list:
+  - audio_name: rain_small
+    audio_clip: {fileID: 8300000, guid: b3715d2978b0f7941ad2fc92d8ed5b4b, type: 3}
+  - audio_name: rain_mid
+    audio_clip: {fileID: 8300000, guid: 9b860a8a459cf3c46959f6afcd52c781, type: 3}
+  - audio_name: rain_heavy
+    audio_clip: {fileID: 8300000, guid: b318531b255a33446a0a1c0709e08d38, type: 3}
   sfx_info_list:
   - audio_name: sfx_bell
     audio_clip: {fileID: 8300000, guid: 2ee6aed874b061447874a094fe59dd05, type: 3}
