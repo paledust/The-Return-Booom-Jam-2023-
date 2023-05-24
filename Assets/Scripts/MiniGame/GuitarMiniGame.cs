@@ -6,12 +6,17 @@ using UnityEngine.InputSystem;
 public class GuitarMiniGame : MiniGameBasic
 {
     [SerializeField] private KeyMatrix_SO keyMatrix_SO;
+[Header("Audio")]
     [SerializeField] private AudioSource guitarSource;
     [SerializeField, Range(0,1)] private float volumeScale;
     [SerializeField] private AudioClip[] D_dim_clips;
     [SerializeField] private AudioClip[] D_maj_clips;
     [SerializeField] private AudioClip[] Dm_clips;
     [SerializeField] private AudioClip[] D_clips;
+[Header("Animation")]
+    [SerializeField] private Animator m_characterAnime;
+    [SerializeField] private float delayExit = 2f;
+    private string IsPlayingBool = "IsPlaying";
     private float coordStep = 0;
     protected override void OnKeyPressed(Key keyPressed)
     {
@@ -33,5 +38,22 @@ public class GuitarMiniGame : MiniGameBasic
                 guitarSource.PlayOneShot(D_clips[coordinate.x], volumeScale);
                 break;
         }
+    }
+    protected override void OnNoKeyPress()
+    {
+        base.OnNoKeyPress();
+
+        StartCoroutine(coroutineExitPlaying());
+    }
+    protected override void OnAnyKeyPress()
+    {
+        base.OnAnyKeyPress();
+        StopAllCoroutines();
+
+        m_characterAnime.SetBool(IsPlayingBool, true);
+    }
+    IEnumerator coroutineExitPlaying(){
+        yield return new WaitForSeconds(delayExit);
+        m_characterAnime.SetBool(IsPlayingBool, false);
     }
 }

@@ -321,7 +321,7 @@ MonoBehaviour:
   - {fileID: 524014819}
   - {fileID: 2081371520}
   - {fileID: 1031489252}
-  startMiniGame: 5
+  startMiniGame: 4
 --- !u!1 &61477996
 GameObject:
   m_ObjectHideFlags: 0
@@ -4589,6 +4589,7 @@ GameObject:
   - component: {fileID: 951420488}
   - component: {fileID: 951420490}
   - component: {fileID: 951420489}
+  - component: {fileID: 951420491}
   m_Layer: 0
   m_Name: Part V RainTillNight
   m_TagString: Untagged
@@ -4633,7 +4634,7 @@ PlayableDirector:
   - key: {fileID: 167779741447293026, guid: 0c5c36772eb4429418140e38b9f92fc2, type: 2}
     value: {fileID: 764802146}
   - key: {fileID: -4599162232680158480, guid: 0c5c36772eb4429418140e38b9f92fc2, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1447442024}
   - key: {fileID: -5471873571357026716, guid: 0c5c36772eb4429418140e38b9f92fc2, type: 2}
     value: {fileID: 1744226724}
   m_ExposedReferences:
@@ -4680,6 +4681,18 @@ MonoBehaviour:
             m_StringArgument: rain_heavy
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &951420491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951420486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b9e1e808c777424099b7c02cb6878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &982738766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5078,6 +5091,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 72c529b6e82fba6499159c22d6f8d0e2, type: 3}
   - {fileID: 8300000, guid: 7c43a7e946df02346a412b9d1425bcdf, type: 3}
   - {fileID: 8300000, guid: 3b0e7578291d9c14f86a355deffb0b06, type: 3}
+  m_characterAnime: {fileID: 2129558243}
+  delayExit: 2
 --- !u!1001 &1039247570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5552,7 +5567,7 @@ Projector:
   m_AspectRatio: 1
   m_Orthographic: 1
   m_OrthographicSize: 1
-  m_Material: {fileID: 1250451265}
+  m_Material: {fileID: 2127777632}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 62
@@ -5887,98 +5902,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19222a265b2dde4989a1de90a43d69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &1250451265
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: GridProject(Clone)
-  m_Shader: {fileID: 4800000, guid: af95c17fd20379344b63af67440f10a2, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e057151dad8022c41adc44de8b274b72, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _FadeHardness: 0
-    - _FadeRadius: -1
-    - _FadeSmoothness: 0.1
-    - _GlitchPixel: 64
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _GltichRange: 0.015
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _Pixel: 90
-    - _Radius: 50
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    - __dirty: 0
-    - _glitchFreq: 0.56
-    - _glitchOffset: -0.8
-    - _glitchSpeed: 2
-    - _glitchWidth: 0.004
-    m_Colors:
-    - _Color: {r: 0, g: 6.462745, b: 11.984314, a: 0.35686275}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Vector1: {r: 1, g: 0.01, b: 0, a: 0}
-    - _glitchOffset: {r: 0, g: 0, b: 0, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1 &1258822726
 GameObject:
   m_ObjectHideFlags: 0
@@ -6834,6 +6757,11 @@ MonoBehaviour:
   sandParticles: {fileID: 760540442}
   directorStartDelay: 3
   director: {fileID: 45571967}
+--- !u!1 &1447442024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7470048407999479928, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
+  m_PrefabInstance: {fileID: 2129558239}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1447557708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8895,7 +8823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1744226725
 Transform:
   m_ObjectHideFlags: 0
@@ -11199,6 +11127,98 @@ PlayableDirector:
     value: {fileID: 1173196308}
   m_ExposedReferences:
     m_References: []
+--- !u!21 &2127777632
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GridProject(Clone)
+  m_Shader: {fileID: 4800000, guid: af95c17fd20379344b63af67440f10a2, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: e057151dad8022c41adc44de8b274b72, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _FadeHardness: 0
+    - _FadeRadius: -1
+    - _FadeSmoothness: 0.1
+    - _GlitchPixel: 64
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _GltichRange: 0.015
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Pixel: 90
+    - _Radius: 50
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    - _glitchFreq: 0.56
+    - _glitchOffset: -0.8
+    - _glitchSpeed: 2
+    - _glitchWidth: 0.004
+    m_Colors:
+    - _Color: {r: 0, g: 6.462745, b: 11.984314, a: 0.35686275}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Vector1: {r: 1, g: 0.01, b: 0, a: 0}
+    - _glitchOffset: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
 --- !u!1001 &2129558239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11206,6 +11226,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1731575597}
     m_Modifications:
+    - target: {fileID: 6907626502661343284, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2336264
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907626502661343284, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.07418138
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907626502661343284, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9131556
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907626502661343284, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3256728
+      objectReference: {fileID: 0}
     - target: {fileID: 7470048407992234936, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
       propertyPath: m_Controller
       value: 
@@ -11213,6 +11249,10 @@ PrefabInstance:
     - target: {fileID: 7470048407999479928, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
       propertyPath: m_Name
       value: Characters
+      objectReference: {fileID: 0}
+    - target: {fileID: 7470048407999479928, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7470048407999978584, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
       propertyPath: m_RootOrder
@@ -11263,6 +11303,11 @@ PrefabInstance:
 --- !u!4 &2129558240 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7470048407999978584, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
+  m_PrefabInstance: {fileID: 2129558239}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2129558243 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7470048407992234936, guid: 1747e38baa305974c820f3d9220a56d7, type: 3}
   m_PrefabInstance: {fileID: 2129558239}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2132502983
