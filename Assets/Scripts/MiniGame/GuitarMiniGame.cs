@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.InputSystem;
 
 public class GuitarMiniGame : MiniGameBasic
@@ -16,11 +17,63 @@ public class GuitarMiniGame : MiniGameBasic
 [Header("Animation")]
     [SerializeField] private Animator m_characterAnime;
     [SerializeField] private float delayExit = 2f;
-    private string IsPlayingBool = "IsPlaying";
-    private float coordStep = 0;
+[Header("End")]
+    [SerializeField] private float duration = 15f;
+    [SerializeField] private float end_duration = 4f;
+    [SerializeField] private PlayableDirector m_director; 
+    private string playingGuitarBool = "IsPlaying";
+[Header("Information")]
+    [SerializeField, ShowOnly] private float playingTime;
+    [SerializeField, ShowOnly] private float playingDuration = 0;
+    [SerializeField, ShowOnly] private float afkDuration = 0;
+    [SerializeField, ShowOnly] private bool playingGuitar = false;
+    void Update(){
+    //Playing Time Check
+        if(playingTime > 0){
+            playingTime -= Time.deltaTime;
+            playingTime = Mathf.Max(0, playingTime);
+
+            if(playingTime == 0 && playingGuitar){
+                playingGuitar = false;
+                m_characterAnime.SetBool(playingGuitarBool, playingGuitar);
+            }
+        }
+    //Playing Guitar
+        if(playingGuitar){
+            if(playingDuration<duration) playingDuration += Time.deltaTime;
+        }
+        else{
+            if(playingDuration>=duration) afkDuration += Time.deltaTime;
+        }
+
+        if(afkDuration >= end_duration){
+            m_director.Play();
+            EventHandler.Call_OnEndMiniGame(this);
+        }
+    }
+    protected override void Initialize()
+    {
+        base.Initialize();
+        this.enabled = true;
+        
+        playingTime = 0;
+        playingDuration = 0;
+        playingGuitar = false;
+    }
+    protected override void CleanUp()
+    {
+        base.CleanUp();
+        this.enabled = false;
+    }
     protected override void OnKeyPressed(Key keyPressed)
     {
         base.OnKeyPressed(keyPressed);
+
+        playingTime = delayExit;
+        if(!playingGuitar){
+            playingGuitar = true;
+            m_characterAnime.SetBool(playingGuitarBool, playingGuitar);
+        }
 
         Vector2Int coordinate = keyMatrix_SO.GetCoordinateFromKey(keyPressed);
         coordinate.x = coordinate.x%7;
@@ -38,22 +91,5 @@ public class GuitarMiniGame : MiniGameBasic
                 guitarSource.PlayOneShot(D_clips[coordinate.x], volumeScale);
                 break;
         }
-    }
-    protected override void OnNoKeyPress()
-    {
-        base.OnNoKeyPress();
-
-        StartCoroutine(coroutineExitPlaying());
-    }
-    protected override void OnAnyKeyPress()
-    {
-        base.OnAnyKeyPress();
-        StopAllCoroutines();
-
-        m_characterAnime.SetBool(IsPlayingBool, true);
-    }
-    IEnumerator coroutineExitPlaying(){
-        yield return new WaitForSeconds(delayExit);
-        m_characterAnime.SetBool(IsPlayingBool, false);
     }
 }
