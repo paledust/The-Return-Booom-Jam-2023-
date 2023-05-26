@@ -3,7 +3,9 @@
         _TranslucentGain("Translucent Gain", Range(0,1)) = 0.5
         _Color("Color", Color) = (1,1,1,1)
         _Cutoff("Cut Off", Range(0,1)) = 0.5
-        _LeafTex ("Ground Texture", 2D) = "white" {}
+        _LeafTex ("Leaf Texture", 2D) = "white" {}
+
+        _GrassLay("Grass Lay", Vector) = (0,0,0,0)
 
         _DisplacementTexture("Displacement Texture", 2D) = "grey" {}
         _DisplacementFactor("Displacement Factor", Float) = 2
@@ -85,6 +87,7 @@
     sampler2D _WindDistortionMap;
     float4 _WindDistortionMap_ST;
     float4 _Color;
+    float4 _GrassLay;
 
     float _Cutoff;
 
@@ -175,13 +178,13 @@
         vTangent.z, vBinormal.z, vNormal.z
         );
 
-        float2 uv = pos.xz * _WindDistortionMap_ST.xy + _WindDistortionMap_ST.zw + _WindFrequency * _Time.y;
+        float2 uv = pos.xz * _WindDistortionMap_ST.xy + _WindDistortionMap_ST.zw - _WindFrequency * _Time.y;
 
-        float2 windSample = (tex2Dlod(_WindDistortionMap, float4(uv, 0, 0)).xy * 2 - 1) * _WindStrength;
+        float2 windSample = (tex2Dlod(_WindDistortionMap, float4(uv, 0, 0)).xz * 2 - 1) * _WindStrength + _GrassLay.xy;
         float3 wind = normalize(float3(windSample.x, windSample.y, 0));
 
         float3x3 windRotation = AngleAxis3x3(UNITY_PI * windSample, wind);
-        
+
         float4 dispLocation = float4((IN[0].world.xz - _DisplacementLocation.xz) / _DisplacementSize, 0, 0);
 
         //To counteract the Clamp functionality of Unity

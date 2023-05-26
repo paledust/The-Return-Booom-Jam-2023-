@@ -9,6 +9,7 @@ using SimpleAudioSystem;
 public class RainyMiniGame : MiniGameBasic
 {
     [SerializeField] private KeyMatrix_SO keyMatrix_Data;
+    [SerializeField] private Camera m_rt_cam;
     [SerializeField] private Rect rainArea;
 [Header("Particle Control")]
     [SerializeField] private ParticleSystem m_rainParticles;
@@ -78,6 +79,7 @@ public class RainyMiniGame : MiniGameBasic
         base.Initialize();
         this.enabled = true;
 
+        m_rt_cam.enabled = true;
         sfx_time = -sfx_step;
         Service.Shuffle<AudioClip>(ref rainDropClips);
 
@@ -97,6 +99,7 @@ public class RainyMiniGame : MiniGameBasic
         base.CleanUp();
 
         this.enabled = false;
+        m_rt_cam.enabled = false;
         dropPos = null;
     }
     protected override void OnNoKeyPress()
