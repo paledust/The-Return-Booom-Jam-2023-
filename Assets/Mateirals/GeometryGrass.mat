@@ -109,7 +109,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _Displacement: 0
-    - _DisplacementFactor: 1.2
+    - _DisplacementFactor: 1
     - _DisplacementWindAversion: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
@@ -141,7 +141,7 @@ Material:
     - _BottomColor: {r: 0.015686275, g: 0.29411766, b: 0.08627451, a: 1}
     - _Color: {r: 0.023300104, g: 0.16037738, b: 0.10289335, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GrassLay: {r: 0.32, g: 0.2, b: 0, a: 0}
+    - _GrassLay: {r: 0.38, g: 0.2, b: 0, a: 0}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
     - _TopColor: {r: 0, g: 1, b: 0.051671505, a: 1}

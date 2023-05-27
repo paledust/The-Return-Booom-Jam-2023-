@@ -8,6 +8,11 @@ public class MiniGameManager : MonoBehaviour
 [Header("Debug"), Space(10)]
     [SerializeField] private int startMiniGame;
     private int currentIndex = 0;
+    void Awake(){
+        for(int i=0; i<miniGames.Length; i++){
+            miniGames[i].enabled = false;
+        }
+    }
     void OnEnable(){
     #if UNITY_EDITOR
         currentIndex = startMiniGame;

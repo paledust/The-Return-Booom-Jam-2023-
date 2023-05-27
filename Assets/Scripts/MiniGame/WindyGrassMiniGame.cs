@@ -30,6 +30,7 @@ public class WindyGrassMiniGame : MiniGameBasic
         grassObject.SetActive(true);
         this.enabled = true;
 
+        RT_Camera.gameObject.SetActive(true);
         RT_Camera.enabled = true;
 
         spawnPos = new Vector2[ROLL*LINE];
@@ -43,6 +44,14 @@ public class WindyGrassMiniGame : MiniGameBasic
                 spawnPos[y*LINE+x] = new Vector2(x/(LINE-1.0f)*windArea.width, -y/(ROLL-1.0f)*windArea.height)+new Vector2(-0.5f*windArea.width,0.5f*windArea.height);
             }
         }
+    }
+    protected override void CleanUp()
+    {
+        base.CleanUp();
+
+        this.enabled = false;
+        spawnPos = null;
+        if(m_particle!=null)m_particle.Stop();
     }
     void Update(){
         if(startCounting && !timelinePlaying){
@@ -64,14 +73,7 @@ public class WindyGrassMiniGame : MiniGameBasic
             }
         }
     }
-    protected override void CleanUp()
-    {
-        base.CleanUp();
 
-        this.enabled = false;
-        spawnPos = null;
-        StartCoroutine(coroutineEndWindParticle());
-    }
     protected override void OnKeyPressed(Key keyPressed)
     {
         base.OnKeyPressed(keyPressed);
@@ -90,21 +92,14 @@ public class WindyGrassMiniGame : MiniGameBasic
         Vector2Int coordinate = keyMatrix_SO.GetCoordinateFromKey(keyReleased);
         spawnTrigger[coordinate.y*LINE+coordinate.x] = false;
     }
+    public void EndWindyGrassMiniGame(){
+        EventHandler.Call_OnEndMiniGame(this);
+    }
     void OnDrawGizmosSelected(){
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color  = new Color(0,1,0,0.2f);
         Vector3 center= new Vector3(windArea.xMin, 0, windArea.yMin);
         Vector3 size= new Vector3(windArea.size.x, 0, windArea.size.y);
         Gizmos.DrawCube(center, size);
-    }
-    public void EndWindyGrassMiniGame(){
-        EventHandler.Call_OnEndMiniGame(this);
-    }
-    IEnumerator coroutineEndWindParticle(){
-        if(m_particle!=null)m_particle.Stop();
-        while(m_particle.particleCount>0){
-            yield return null;
-        }
-        RT_Camera.enabled = false;
     }
 }
