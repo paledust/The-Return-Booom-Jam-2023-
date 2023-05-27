@@ -130,8 +130,8 @@ MonoBehaviour:
   transitionDuration: 0.5
   loadInitSceneFromGameManager: 0
   InitScene: Main
-  isDemo: 1
-  isTesting: 1
+  isDemo: 0
+  isTesting: 0
   demoText: {fileID: 6073298263620526879}
   debugActions:
     m_Name: Debug Actions

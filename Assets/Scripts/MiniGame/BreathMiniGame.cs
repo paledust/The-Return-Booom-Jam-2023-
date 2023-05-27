@@ -27,6 +27,7 @@ public class BreathMiniGame : MiniGameBasic
     [SerializeField, ShowOnly] private BREATH_STATE breathState = BREATH_STATE.Idle;
 [Header("Timeline")]
     [SerializeField] private PlayableDirector m_director;
+    [SerializeField] private PlayableDirector m_endDirector;
     [SerializeField] private float directorPlayFOV = 50;
     private float breathTimer = 0;
     private float camZoomSpeed = 0;
@@ -58,6 +59,10 @@ public class BreathMiniGame : MiniGameBasic
         breathState = BREATH_STATE.BreathingOut;
         sfx_audio.Stop();
         breathTimer = 0;
+        var mainModule = fog_particle.main;
+        Color startColor = mainModule.startColor.color;
+        startColor.a *= 0.75f;
+        mainModule.startColor = startColor;
         StopAllCoroutines();
         StartCoroutine(coroutineBreathOut());
         StartCoroutine(coroutineChangeCamAndPP(false));
@@ -65,6 +70,7 @@ public class BreathMiniGame : MiniGameBasic
     void breathIn(){
         breathState = BREATH_STATE.BreathingIn;
         sfx_audio.PlayOneShot(breathInClips[breathIndex], breathInVolumeScale);
+        StopAllCoroutines();
         StartCoroutine(coroutineChangeCamAndPP(true));
     }
     protected override void Initialize()
@@ -119,6 +125,8 @@ public class BreathMiniGame : MiniGameBasic
     }
     IEnumerator coroutineEndGame(){
         yield return coroutineChangeCamAndPP(false);
+        fog_particle.Stop();
+        m_endDirector.Play();
         this.enabled = false;
     }
 }
