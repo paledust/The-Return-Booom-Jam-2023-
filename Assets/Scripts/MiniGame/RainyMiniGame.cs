@@ -99,7 +99,7 @@ public class RainyMiniGame : MiniGameBasic
         base.CleanUp();
 
         this.enabled = false;
-        m_rt_cam.enabled = false;
+        if(m_rt_cam!=null)m_rt_cam.enabled = false;
         dropPos = null;
     }
     protected override void OnNoKeyPress()

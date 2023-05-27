@@ -24,11 +24,6 @@ public class MiniGameManager : MonoBehaviour
         EventHandler.OnNextMiniGame += NextMiniGame;
     }
     void OnDisable(){
-        for(int i=0; i<miniGames.Length; i++){
-            if(miniGames[i].IsPlaying){
-                miniGames[i].ExitMiniGame();
-            }
-        }
         EventHandler.OnEndMiniGame  -= EndMiniGame;
         EventHandler.OnNextMiniGame -= NextMiniGame;
     }

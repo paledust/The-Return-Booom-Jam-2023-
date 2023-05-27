@@ -11,12 +11,16 @@ public class FireFlyMiniGame : MiniGameBasic
     [SerializeField] private ParticleSystem grass_particle;
     [SerializeField] private KeyMatrix_SO keyMatrix_SO;
     [SerializeField] private Rect windArea;
+[Header("Audio")]
+    [SerializeField] private AudioSource sfxAudio;
+    [SerializeField] private AudioClip[] grassClips;
 [Header("Camera Render")]
     [SerializeField] private Camera RT_Camera;
     private Vector2[] spawnPos;
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
     private float interaction_timer = 0;
+    private int grassClipIndex = 0;
     protected override void Initialize()
     {
         base.Initialize();
@@ -52,12 +56,12 @@ public class FireFlyMiniGame : MiniGameBasic
         grass_particle.transform.position = location;
         grass_particle.Play();
 
-        // ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
-
-        // emitParams.position = location;
-        // emitParams.applyShapeToPosition = true;
-
-        // firefly_particle.Emit(emitParams, 4);
+        sfxAudio.PlayOneShot(grassClips[grassClipIndex]);
+        grassClipIndex ++;
+        if(grassClipIndex>=grassClips.Length){
+            Service.Shuffle<AudioClip>(ref grassClips);
+            grassClipIndex = 0;
+        }
     }
     public void EndFireflyMiniGame(){
         EventHandler.Call_OnEndMiniGame(this);

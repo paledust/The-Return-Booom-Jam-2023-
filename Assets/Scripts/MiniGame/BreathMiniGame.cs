@@ -45,6 +45,7 @@ public class BreathMiniGame : MiniGameBasic
         }
         if(vc_cam.m_Lens.FieldOfView < directorPlayFOV && !directorPlayed){
             directorPlayed = true;
+            fog_particle.Stop();
             m_director.Play();
         }
 
@@ -125,7 +126,6 @@ public class BreathMiniGame : MiniGameBasic
     }
     IEnumerator coroutineEndGame(){
         yield return coroutineChangeCamAndPP(false);
-        fog_particle.Stop();
         m_endDirector.Play();
         this.enabled = false;
     }

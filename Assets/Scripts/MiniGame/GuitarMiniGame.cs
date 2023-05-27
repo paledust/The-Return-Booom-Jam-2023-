@@ -70,6 +70,7 @@ public class GuitarMiniGame : MiniGameBasic
         base.OnKeyPressed(keyPressed);
 
         playingTime = delayExit;
+        afkDuration = 0;
         if(!playingGuitar){
             playingGuitar = true;
             m_characterAnime.SetBool(playingGuitarBool, playingGuitar);

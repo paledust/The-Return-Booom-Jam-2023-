@@ -10,6 +10,10 @@ public class WindyGrassMiniGame : MiniGameBasic
     [SerializeField] private GameObject grassObject;
     [SerializeField] private KeyMatrix_SO keyMatrix_SO;
     [SerializeField] private Rect windArea;
+[Header("Audio")]
+    [SerializeField] private AudioSource windyGrassAudio;
+    [SerializeField] private AudioClip windyGrassClip;
+    [SerializeField] private float maxVolume;
 [Header("Interaction End")]
     [SerializeField] private PlayableDirector m_director;
     [SerializeField] private float startTimelineDuration = 3;
@@ -39,6 +43,10 @@ public class WindyGrassMiniGame : MiniGameBasic
         emitParams.applyShapeToPosition = true;
         startCounting = false;
 
+        windyGrassAudio.clip = windyGrassClip;
+        windyGrassAudio.volume = 0;
+        windyGrassAudio.Play();
+
         for(int y=0; y<ROLL; y++){
             for(int x=0;x<LINE;x++){
                 spawnPos[y*LINE+x] = new Vector2(x/(LINE-1.0f)*windArea.width, -y/(ROLL-1.0f)*windArea.height)+new Vector2(-0.5f*windArea.width,0.5f*windArea.height);
@@ -52,6 +60,7 @@ public class WindyGrassMiniGame : MiniGameBasic
         this.enabled = false;
         spawnPos = null;
         if(m_particle!=null)m_particle.Stop();
+        StartCoroutine(coroutineFadeAudio(false));
     }
     void Update(){
         if(startCounting && !timelinePlaying){
@@ -92,8 +101,33 @@ public class WindyGrassMiniGame : MiniGameBasic
         Vector2Int coordinate = keyMatrix_SO.GetCoordinateFromKey(keyReleased);
         spawnTrigger[coordinate.y*LINE+coordinate.x] = false;
     }
+    protected override void OnAnyKeyPress()
+    {
+        base.OnAnyKeyPress();
+
+        StopAllCoroutines();
+        StartCoroutine(coroutineFadeAudio(true));
+    }
+    protected override void OnNoKeyPress()
+    {
+        base.OnNoKeyPress();
+
+        StopAllCoroutines();
+        StartCoroutine(coroutineFadeAudio(false));
+    }
     public void EndWindyGrassMiniGame(){
         EventHandler.Call_OnEndMiniGame(this);
+    }
+    IEnumerator coroutineFadeAudio(bool isFadeIn){
+        float initVolume = windyGrassAudio.volume;
+        float targetVolume = isFadeIn?maxVolume:0;
+        float speed = isFadeIn?2f:0.5f;
+
+        for(float t=0; t<1; t+=Time.deltaTime*speed){
+            windyGrassAudio.volume = Mathf.Lerp(initVolume, targetVolume, EasingFunc.Easing.SmoothInOut(t));
+            yield return null;
+        }
+        windyGrassAudio.volume = targetVolume;
     }
     void OnDrawGizmosSelected(){
         Gizmos.matrix = transform.localToWorldMatrix;

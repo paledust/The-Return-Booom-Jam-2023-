@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetFrameRate: 60
   BlackScreenCanvasGroup: {fileID: 4562222128510109114}
-  transitionDuration: 0.5
+  transitionDuration: 2.5
   loadInitSceneFromGameManager: 0
   InitScene: Main
   isDemo: 0
