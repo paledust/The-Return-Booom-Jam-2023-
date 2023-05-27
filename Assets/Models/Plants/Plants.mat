@@ -8,11 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Plants
-  m_Shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
-  m_ValidKeywords:
+  m_Shader: {fileID: 4800000, guid: 5c05d96f0911cd240a1bc63bea62888b, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _NORMALMAP
   - _SPECGLOSSMAP
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -23,6 +23,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: a925ae196be3fb748a66b15eb26112a6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpTex:
         m_Texture: {fileID: 2800000, guid: a925ae196be3fb748a66b15eb26112a6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -58,16 +62,31 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RoughnessTex:
+        m_Texture: {fileID: 2800000, guid: d21d3231e18ef924b928f1b914e9bf10, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 2800000, guid: d21d3231e18ef924b928f1b914e9bf10, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WindTexture:
+        m_Texture: {fileID: 2800000, guid: 21541de87cf969c4a8e2e7d3b0205739, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
+    - _Bumpness: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Float0: 0
+    - _Float1: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -79,8 +98,12 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
+    - _WindStrength: 0.1
     - _ZWrite: 1
+    - __dirty: 0
     m_Colors:
     - _Color: {r: 0.4654218, g: 1, b: 0.40943396, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _WindSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _WindTiling: {r: 0.075, g: 0.075, b: 0.075, a: 0}
   m_BuildTextureStacks: []

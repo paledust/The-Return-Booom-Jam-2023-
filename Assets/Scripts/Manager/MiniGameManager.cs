@@ -41,4 +41,7 @@ public class MiniGameManager : MonoBehaviour
         if(currentIndex<miniGames.Length) miniGames[currentIndex].EnterMiniGame();
         else Debug.LogError("Excceed the index of MiniGame");
     }
+    public void EndGame(){
+        GameManager.Instance.EndGame();
+    }
 }

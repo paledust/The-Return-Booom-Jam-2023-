@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 //Please make sure "GameManager" is excuted before every custom script
 public class GameManager : Singleton<GameManager>
 {
-    public static Camera mainCamera;
     [SerializeField] private int targetFrameRate = 60;
 [Header("Scene Transition")]
     [SerializeField] private CanvasGroup BlackScreenCanvasGroup;
@@ -26,7 +25,6 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake(){
         base.Awake();
         Application.targetFrameRate = targetFrameRate;
-        mainCamera = Camera.main;
 
         if(loadInitSceneFromGameManager){StartCoroutine(SwitchSceneCoroutine(string.Empty, InitScene));}
         
