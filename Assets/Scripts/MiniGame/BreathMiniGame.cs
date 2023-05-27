@@ -61,7 +61,7 @@ public class BreathMiniGame : MiniGameBasic
         breathTimer = 0;
         var mainModule = fog_particle.main;
         Color startColor = mainModule.startColor.color;
-        startColor.a *= 0.75f;
+        startColor.a *= 0.5f;
         mainModule.startColor = startColor;
         StopAllCoroutines();
         StartCoroutine(coroutineBreathOut());

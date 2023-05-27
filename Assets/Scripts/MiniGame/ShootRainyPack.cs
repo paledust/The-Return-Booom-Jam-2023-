@@ -40,6 +40,7 @@ public class ShootRainyPack : MiniGameBasic
 
             if(fireCount>=maxFire){
                 EventHandler.Call_OnEndMiniGame(this);
+                EventHandler.Call_OnNextMiniGame();
             }
         }
     }
