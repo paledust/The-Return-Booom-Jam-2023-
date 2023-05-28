@@ -13,6 +13,9 @@ public class StoneBlowMiniGame : MiniGameBasic
 [Header("Other stone")]
     [SerializeField] private StoneDebrisGenerator stoneGenerator;
 [Header("Audio Source")]
+    [SerializeField] private AudioSource sfx_audio;
+    [SerializeField] private float volumeScale = 1;
+    [SerializeField] private AudioClip[] rockClips;
     [SerializeField] private AudioSource heli_loop;
     [SerializeField, Range(0,1)] private float maxVolume;
 [Header("End MiniGame")]
@@ -21,6 +24,7 @@ public class StoneBlowMiniGame : MiniGameBasic
     [SerializeField] private PlayableDirector director;
     private float totalCount;
     private float targetVolume = 0;
+    private int audioIndex = 0;
     void Update(){
         heli_loop.volume = Mathf.Lerp(heli_loop.volume, targetVolume, Time.deltaTime*5);
     }
@@ -51,6 +55,13 @@ public class StoneBlowMiniGame : MiniGameBasic
 
         stoneDebris.RemoveAt(index);
         StartCoroutine(coroutineForceOnRock(debri, Mathf.Lerp(timeRange.x, timeRange.y, debrisProgress)));
+
+        sfx_audio.PlayOneShot(rockClips[audioIndex], volumeScale);
+        audioIndex++;
+        if(audioIndex>=rockClips.Length){
+            audioIndex=0;
+            Service.Shuffle<AudioClip>(ref rockClips);
+        }
 
         if(stoneDebris.Count == 0){
             sandParticles.Play(true);

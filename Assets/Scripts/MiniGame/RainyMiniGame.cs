@@ -99,7 +99,6 @@ public class RainyMiniGame : MiniGameBasic
         base.CleanUp();
 
         this.enabled = false;
-        if(m_rt_cam!=null)m_rt_cam.enabled = false;
         dropPos = null;
     }
     protected override void OnNoKeyPress()
@@ -129,6 +128,7 @@ public class RainyMiniGame : MiniGameBasic
         }
         StartCoroutine(CoroutineBurstRainDrops(location));
     }
+    public void DisableRT_Cam()=>m_rt_cam.enabled = false;
     IEnumerator CoroutineDelayTimeline(){
         yield return new WaitForSeconds(timeline_delay);
         director.Play();

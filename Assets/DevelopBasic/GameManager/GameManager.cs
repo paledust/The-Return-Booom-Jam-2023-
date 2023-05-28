@@ -71,8 +71,9 @@ public class GameManager : Singleton<GameManager>
 #endregion
 
     public void EndGame(){
-        if(isDemo) demoText.gameObject.SetActive(true);
-        StartCoroutine(FadeInScreen(2));
+        if(isDemo) {demoText.gameObject.SetActive(true);}
+        string currentLevel = SceneManager.GetActiveScene().name;
+        StartCoroutine(EndGameCoroutine(currentLevel));
     }
     public void RestartLevel(){
         string currentLevel = SceneManager.GetActiveScene().name;
@@ -84,6 +85,14 @@ public class GameManager : Singleton<GameManager>
     }
 
 #region Scene Transition
+    IEnumerator EndGameCoroutine(string level){
+        yield return FadeInScreen(3f);
+        //TO DO:Save Game before unload the scene
+        yield return SceneManager.UnloadSceneAsync(level);
+        yield return new WaitForSeconds(1f);
+        Debug.Log("EndGame");
+        Application.Quit();
+    }
     IEnumerator RestartLevel(string level, bool isDebug = false){
         if(isDebug) yield return FadeInScreen(3f);
         isSwitchingScene = true;

@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000004, guid: 30821e27c9892774d883d7589ba35d9d, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -5229,7 +5229,7 @@ MonoBehaviour:
   - {fileID: 88450133}
   - {fileID: 741970483}
   - {fileID: 1707333698}
-  startMiniGame: 1
+  startMiniGame: 0
 --- !u!1 &61477996
 GameObject:
   m_ObjectHideFlags: 0
@@ -5889,7 +5889,7 @@ Transform:
   - {fileID: 615582020}
   - {fileID: 1330282838}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &178391129
 GameObject:
@@ -12354,7 +12354,7 @@ RectTransform:
   - {fileID: 506440247}
   - {fileID: 5755140}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -13145,53 +13145,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!1 &443108502
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 443108503}
-  - component: {fileID: 443108504}
-  m_Layer: 0
-  m_Name: Scene Set Up
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &443108503
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443108502}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08362979, y: 1.3316023, z: -1.1802835}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &443108504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443108502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a64be9d2404dfb04dbad49d32becf73b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startAmbientName: desert
-  transitionTime: 3
-  targetVolume: 0.5
 --- !u!1 &450064711
 GameObject:
   m_ObjectHideFlags: 0
@@ -18682,7 +18635,6 @@ MonoBehaviour:
   maxFire: 10
   spawnWidth: 5
   m_particle: {fileID: 2097992218830988969, guid: aa54838910bd6ac41a71839ef409d66f, type: 3}
-  spawnTrans: {fileID: 0}
   m_audio: {fileID: 1535485387}
   sfx_shoots:
   - {fileID: 8300000, guid: d7a45577584d11c488953a9caba5f950, type: 3}
@@ -18964,7 +18916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198748979371217952, guid: 1a365141225c22e49a7bb976869b22a8, type: 3}
       propertyPath: prewarm
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198748979371217952, guid: 1a365141225c22e49a7bb976869b22a8, type: 3}
       propertyPath: playOnAwake
@@ -20705,6 +20657,7 @@ GameObject:
   - component: {fileID: 764802147}
   - component: {fileID: 764802149}
   - component: {fileID: 764802150}
+  - component: {fileID: 764802151}
   m_Layer: 0
   m_Name: Spot Light Night 02
   m_TagString: Untagged
@@ -20803,6 +20756,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flickFreq: 10
   flickAmp: 0.13
+--- !u!95 &764802151
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764802146}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &777435748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22114,6 +22087,18 @@ MonoBehaviour:
             m_StringArgument: rain_heavy
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2081371520}
+          m_TargetAssemblyTypeName: RainyMiniGame, Assembly-CSharp
+          m_MethodName: DisableRT_Cam
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &951420491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22453,7 +22438,7 @@ Transform:
   - {fileID: 461287781}
   - {fileID: 916541443}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1031489250
 GameObject:
@@ -23017,7 +23002,7 @@ Projector:
   m_AspectRatio: 1
   m_Orthographic: 1
   m_OrthographicSize: 1
-  m_Material: {fileID: 2078522368}
+  m_Material: {fileID: 2132555919}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 62
@@ -24224,6 +24209,8 @@ PlayableDirector:
     value: {fileID: 779279440}
   - key: {fileID: -8096542840856009483, guid: 89008678dc0d5514fa2ef30438bb6770, type: 2}
     value: {fileID: 779279440}
+  - key: {fileID: 3808626782240966950, guid: 89008678dc0d5514fa2ef30438bb6770, type: 2}
+    value: {fileID: 779279440}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1345231005
@@ -24864,6 +24851,14 @@ MonoBehaviour:
   timeRange: {x: 10, y: 0.6}
   spawnIntersectionRange: {x: 2, y: 0.2}
   stoneGenerator: {fileID: 1739624839}
+  sfx_audio: {fileID: 1535485387}
+  volumeScale: 0.4
+  rockClips:
+  - {fileID: 8300000, guid: 947357fc28643df429c5431cde060462, type: 3}
+  - {fileID: 8300000, guid: 523f86ac01c14a846be9a5976dca6148, type: 3}
+  - {fileID: 8300000, guid: 4180d665121313d4d826b34a928b1c81, type: 3}
+  - {fileID: 8300000, guid: c469e62c3ff0ef84999c4d9f4b628571, type: 3}
+  - {fileID: 8300000, guid: 3f3181bb40c8e2f4dafe8e52a7a15c53, type: 3}
   heli_loop: {fileID: 778866297}
   maxVolume: 1
   sandParticles: {fileID: 760540442}
@@ -26950,7 +26945,7 @@ Transform:
   - {fileID: 391293966}
   - {fileID: 779279439}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1719654289
 PrefabInstance:
@@ -28073,7 +28068,7 @@ Transform:
   - {fileID: 1345231003}
   - {fileID: 1891464459}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1875672621 stripped
 MonoBehaviour:
@@ -28117,7 +28112,7 @@ Transform:
   - {fileID: 450064712}
   - {fileID: 1984582551}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1886663983
 PrefabInstance:
@@ -29409,7 +29404,7 @@ Transform:
   - {fileID: 741970482}
   - {fileID: 1707333697}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!75 &2031883695 stripped
 ConstantForce:
@@ -29627,98 +29622,6 @@ ConstantForce:
   m_CorrespondingSourceObject: {fileID: 3206459600259325458, guid: a250e1b52dc428349a5bef1ccc1abfb9, type: 3}
   m_PrefabInstance: {fileID: 2076006062}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &2078522368
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: GridProject(Clone)
-  m_Shader: {fileID: 4800000, guid: af95c17fd20379344b63af67440f10a2, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e057151dad8022c41adc44de8b274b72, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _FadeHardness: 0
-    - _FadeRadius: -1
-    - _FadeSmoothness: 0.1
-    - _GlitchPixel: 64
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _GltichRange: 0.015
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _Pixel: 90
-    - _Radius: 50
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    - __dirty: 0
-    - _glitchFreq: 0.56
-    - _glitchOffset: -0.8
-    - _glitchSpeed: 2
-    - _glitchWidth: 0.004
-    m_Colors:
-    - _Color: {r: 0, g: 6.462745, b: 11.984314, a: 0.35686275}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Vector1: {r: 1, g: 0.01, b: 0, a: 0}
-    - _glitchOffset: {r: 0, g: 0, b: 0, a: 0}
-  m_BuildTextureStacks: []
 --- !u!114 &2078944709 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6392200892530161365, guid: c2acd0963c443ca4eb5c3a88574259f9, type: 3}
@@ -29959,8 +29862,6 @@ PlayableDirector:
     value: {fileID: 1744226724}
   - key: {fileID: -2196643631366722449, guid: a8e7fd8aca9cb644f95cc5f48e4d15a1, type: 2}
     value: {fileID: 937227073}
-  - key: {fileID: -6067839633949237628, guid: a8e7fd8aca9cb644f95cc5f48e4d15a1, type: 2}
-    value: {fileID: 937227073}
   - key: {fileID: 7953913519173183873, guid: a8e7fd8aca9cb644f95cc5f48e4d15a1, type: 2}
     value: {fileID: 506440250}
   - key: {fileID: 6866046029068119336, guid: a8e7fd8aca9cb644f95cc5f48e4d15a1, type: 2}
@@ -29971,6 +29872,8 @@ PlayableDirector:
     value: {fileID: 436388961}
   - key: {fileID: 2287309819818078353, guid: a8e7fd8aca9cb644f95cc5f48e4d15a1, type: 2}
     value: {fileID: 615582019}
+  - key: {fileID: -6948349251394148417, guid: a8e7fd8aca9cb644f95cc5f48e4d15a1, type: 2}
+    value: {fileID: 779279440}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &2113796383
@@ -30541,6 +30444,98 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7457456146042448973, guid: c2acd0963c443ca4eb5c3a88574259f9, type: 3}
   m_PrefabInstance: {fileID: 2132502983}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &2132555919
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GridProject(Clone)
+  m_Shader: {fileID: 4800000, guid: af95c17fd20379344b63af67440f10a2, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: e057151dad8022c41adc44de8b274b72, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _FadeHardness: 0
+    - _FadeRadius: -1
+    - _FadeSmoothness: 0.1
+    - _GlitchPixel: 64
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _GltichRange: 0.015
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Pixel: 90
+    - _Radius: 50
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    - _glitchFreq: 0.56
+    - _glitchOffset: -0.8
+    - _glitchSpeed: 2
+    - _glitchWidth: 0.004
+    m_Colors:
+    - _Color: {r: 0, g: 6.462745, b: 11.984314, a: 0.35686275}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Vector1: {r: 1, g: 0.01, b: 0, a: 0}
+    - _glitchOffset: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
 --- !u!114 &2139055066 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6392200892530161365, guid: c2acd0963c443ca4eb5c3a88574259f9, type: 3}
