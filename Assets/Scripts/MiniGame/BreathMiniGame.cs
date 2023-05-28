@@ -14,6 +14,7 @@ public class BreathMiniGame : MiniGameBasic
 [Header("Camera")]
     [SerializeField] private CinemachineVirtualCamera vc_cam;
     [SerializeField] private float maxZoomInSpeed;
+    [SerializeField] private float minZoomInSpeed;
 [Header("Blur PP")]
     [SerializeField] private PostProcessVolume blur_pp;
     [SerializeField] private float maxBlurSpeed;
@@ -21,6 +22,7 @@ public class BreathMiniGame : MiniGameBasic
     [SerializeField] private float breathInVolumeScale = 0.2f;
     [SerializeField] private float breathOutVolumeScale = 1f;
     [SerializeField] private AudioSource sfx_audio;
+    [SerializeField] private AudioClip clockClip;
     [SerializeField] private AudioClip[] breathInClips;
     [SerializeField] private AudioClip[] breathOutClips;
 [Header("Control")]
@@ -29,33 +31,33 @@ public class BreathMiniGame : MiniGameBasic
     [SerializeField, ShowOnly] private BREATH_STATE breathState = BREATH_STATE.Idle;
     [SerializeField, ShowOnly] private INTERACTION_STAGE interStage = INTERACTION_STAGE.Blur;
 [Header("Timeline")]
-    [SerializeField] private PlayableDirector m_director;
     [SerializeField] private PlayableDirector m_endDirector;
     [SerializeField] private float directorPlayFOV = 50;
+    IEnumerator coroutineBreath;
+    IEnumerator coroutineCam;
     private float breathTimer = 0;
     private float camZoomSpeed = 0;
     private float ppFadeSpeed = 0;
     private int breathIndex = 0;
-    private bool directorPlayed = false;
+    private bool isEnding = false;
     void Update(){
         switch (interStage){
             case INTERACTION_STAGE.Blur:
                 blur_pp.weight -= ppFadeSpeed * Time.deltaTime;
                 blur_pp.weight = Mathf.Max(0, blur_pp.weight);
+                vc_cam.m_Lens.FieldOfView -= camZoomSpeed * Time.deltaTime;
+                if(blur_pp.weight == 0){
+                    interStage = INTERACTION_STAGE.Zoom;
+                }
                 break;
             case INTERACTION_STAGE.Zoom:
                 vc_cam.m_Lens.FieldOfView -= camZoomSpeed * Time.deltaTime;
+                if(vc_cam.m_Lens.FieldOfView<directorPlayFOV && !isEnding){
+                    isEnding = true;
+                    fog_particle.Stop();
+                    StartCoroutine(coroutineEndGame());
+                }
                 break;
-        }
-
-        // if(blur_pp.weight == 0){
-        //     EventHandler.Call_OnEndMiniGame(this);
-        //     StartCoroutine(coroutineEndGame());
-        // }
-        if(vc_cam.m_Lens.FieldOfView < directorPlayFOV && !directorPlayed){
-            directorPlayed = true;
-            fog_particle.Stop();
-            m_director.Play();
         }
 
         if(breathState == BREATH_STATE.BreathingIn){
@@ -71,23 +73,27 @@ public class BreathMiniGame : MiniGameBasic
         breathTimer = 0;
         var mainModule = fog_particle.main;
         Color startColor = mainModule.startColor.color;
-        startColor.a *= 0.5f;
+        startColor.a *= 0.75f;
         mainModule.startColor = startColor;
-        StopAllCoroutines();
-        StartCoroutine(coroutineBreathOut());
-        StartCoroutine(coroutineChangeCamAndPP(false));
+        if(coroutineBreath!=null) StopCoroutine(coroutineBreath);
+        StartCoroutine(coroutineBreath = coroutineBreathOut());
+
+        if(coroutineCam!=null) StopCoroutine(coroutineCam);
+        StartCoroutine(coroutineCam = coroutineChangeCamAndPP(false));
     }
     void breathIn(){
         breathState = BREATH_STATE.BreathingIn;
         sfx_audio.PlayOneShot(breathInClips[breathIndex], breathInVolumeScale);
-        StopAllCoroutines();
-        StartCoroutine(coroutineChangeCamAndPP(true));
+        if(coroutineCam!=null) StopCoroutine(coroutineCam);
+        StartCoroutine(coroutineCam = coroutineChangeCamAndPP(true));
     }
     protected override void Initialize()
     {
         base.Initialize();
 
         this.enabled = true;
+        fog_particle.gameObject.SetActive(true);
+        fog_particle.Play();
         camZoomSpeed = 0;
         ppFadeSpeed  = 0;
         blur_pp.weight = 0.5f;
@@ -122,7 +128,8 @@ public class BreathMiniGame : MiniGameBasic
         initCamSpeed = isFadeIn?0:camZoomSpeed;
         initPPSpeed  = isFadeIn?0:ppFadeSpeed;
 
-        targetCamSpeed = isFadeIn?maxZoomInSpeed:0;
+        float zoomInSpeed = (interStage==INTERACTION_STAGE.Blur)?minZoomInSpeed:maxZoomInSpeed;
+        targetCamSpeed = isFadeIn?zoomInSpeed:0;
         targetPPSpeed  = isFadeIn?maxBlurSpeed:0;
 
         for(float t=0; t<1; t+=Time.deltaTime*speed){
@@ -134,6 +141,11 @@ public class BreathMiniGame : MiniGameBasic
         ppFadeSpeed = targetPPSpeed;
     }
     IEnumerator coroutineEndGame(){
+        var tempAudio = Instantiate(sfx_audio);
+        tempAudio.PlayOneShot(clockClip);
+        yield return new WaitForSeconds(clockClip.length);
+        Destroy(tempAudio);
+        EventHandler.Call_OnEndMiniGame(this);
         yield return coroutineChangeCamAndPP(false);
         m_endDirector.Play();
         this.enabled = false;
