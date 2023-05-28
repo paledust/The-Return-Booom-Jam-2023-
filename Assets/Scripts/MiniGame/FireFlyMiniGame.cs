@@ -19,7 +19,6 @@ public class FireFlyMiniGame : MiniGameBasic
     private Vector2[] spawnPos;
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
-    private float interaction_timer = 0;
     private int grassClipIndex = 0;
     protected override void Initialize()
     {

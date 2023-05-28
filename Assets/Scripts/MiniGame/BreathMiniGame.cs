@@ -9,6 +9,7 @@ using UnityEngine.Rendering.PostProcessing;
 public class BreathMiniGame : MiniGameBasic
 {
     private enum BREATH_STATE{Idle, BreathingIn, BreathingOut}
+    private enum INTERACTION_STAGE{Blur, Zoom}
     [SerializeField] private ParticleSystem fog_particle;
 [Header("Camera")]
     [SerializeField] private CinemachineVirtualCamera vc_cam;
@@ -24,7 +25,9 @@ public class BreathMiniGame : MiniGameBasic
     [SerializeField] private AudioClip[] breathOutClips;
 [Header("Control")]
     [SerializeField] private float maxHoldTime = 2f;
+[Header("Info")]
     [SerializeField, ShowOnly] private BREATH_STATE breathState = BREATH_STATE.Idle;
+    [SerializeField, ShowOnly] private INTERACTION_STAGE interStage = INTERACTION_STAGE.Blur;
 [Header("Timeline")]
     [SerializeField] private PlayableDirector m_director;
     [SerializeField] private PlayableDirector m_endDirector;
@@ -35,14 +38,20 @@ public class BreathMiniGame : MiniGameBasic
     private int breathIndex = 0;
     private bool directorPlayed = false;
     void Update(){
-        vc_cam.m_Lens.FieldOfView -= camZoomSpeed * Time.deltaTime;
-        blur_pp.weight -= ppFadeSpeed * Time.deltaTime;
-        blur_pp.weight = Mathf.Max(0, blur_pp.weight);
-
-        if(blur_pp.weight == 0){
-            EventHandler.Call_OnEndMiniGame(this);
-            StartCoroutine(coroutineEndGame());
+        switch (interStage){
+            case INTERACTION_STAGE.Blur:
+                blur_pp.weight -= ppFadeSpeed * Time.deltaTime;
+                blur_pp.weight = Mathf.Max(0, blur_pp.weight);
+                break;
+            case INTERACTION_STAGE.Zoom:
+                vc_cam.m_Lens.FieldOfView -= camZoomSpeed * Time.deltaTime;
+                break;
         }
+
+        // if(blur_pp.weight == 0){
+        //     EventHandler.Call_OnEndMiniGame(this);
+        //     StartCoroutine(coroutineEndGame());
+        // }
         if(vc_cam.m_Lens.FieldOfView < directorPlayFOV && !directorPlayed){
             directorPlayed = true;
             fog_particle.Stop();
@@ -81,7 +90,7 @@ public class BreathMiniGame : MiniGameBasic
         this.enabled = true;
         camZoomSpeed = 0;
         ppFadeSpeed  = 0;
-        blur_pp.weight = 1;
+        blur_pp.weight = 0.5f;
     }
 
     protected override void OnKeyPressed(Key keyPressed)
