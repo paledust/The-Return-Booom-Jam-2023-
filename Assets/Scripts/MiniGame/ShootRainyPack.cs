@@ -7,12 +7,11 @@ public class ShootRainyPack : MiniGameBasic
 {
 [Header("Control")]
     [SerializeField] private Vector2 fireExplodeTime;
-    [SerializeField] private float fireCoolDown=3.5f;
+    [SerializeField] private float fireCoolDown=3.4f;
     [SerializeField] private int maxFire = 5;
 [Header("Particles")]
     [SerializeField] private float spawnWidth = 5;
     [SerializeField] private GameObject m_particle;
-    [SerializeField] private Transform spawnTrans;
 [Header("Gun Audio")]
     [SerializeField] private AudioSource m_audio;
     [SerializeField] private AudioClip[] sfx_shoots;

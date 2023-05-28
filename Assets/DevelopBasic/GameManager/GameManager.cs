@@ -26,8 +26,12 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         Application.targetFrameRate = targetFrameRate;
 
+    #if UNITY_EDITOR
         if(loadInitSceneFromGameManager){StartCoroutine(SwitchSceneCoroutine(string.Empty, InitScene));}
-        
+    #else
+        StartCoroutine(SwitchSceneCoroutine(string.Empty, InitScene));
+    #endif
+    
         debugActions["restart"].performed += Debug_RestartLevel;
 
         if(isTesting) debugActions.Enable();

@@ -51,7 +51,6 @@ public class StoneDebrisGenerator : MonoBehaviour
     IEnumerator coroutineStopStoneSpawn(){
         stopSpawn = true;
         while(activeStone>0){
-            Debug.Log("Wait");
             yield return null;
         }
         

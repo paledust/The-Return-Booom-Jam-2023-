@@ -16,6 +16,7 @@ public class GameInputManager : Singleton<GameInputManager>
             }
             if(key.wasReleasedThisFrame) {
                 pressedKeyCount --;
+                pressedKeyCount = Mathf.Max(0, pressedKeyCount);
                 if(pressedKeyCount==0) EventHandler.Call_OnNoKeyPressed();
                 EventHandler.Call_OnKeyReleased(key.keyCode);
             }

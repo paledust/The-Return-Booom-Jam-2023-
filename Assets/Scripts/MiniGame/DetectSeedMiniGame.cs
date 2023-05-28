@@ -14,6 +14,12 @@ public class DetectSeedMiniGame : MiniGameBasic
     [ColorUsage(true, true)] public Color PassColor;
     [ColorUsage(true, true)] public Color BingoColor;
     [SerializeField] private Material scanMaterial;
+[Header("Audio")]
+    [SerializeField] private AudioSource sfx_audio;
+    [SerializeField] private AudioClip scanningClip;
+    [SerializeField] private AudioClip errorClip;
+    [SerializeField] private AudioClip scannedClip;
+    [SerializeField] private AudioClip bingoClip;
 [Space(10)]
     [SerializeField] private Vector2Int targetUnit;
     [SerializeField] private ScanSquareUnit[] scanUnits;
@@ -48,11 +54,14 @@ public class DetectSeedMiniGame : MiniGameBasic
         //if scanned already then don't do anything
             if(scanUnitMatrix[coordinate.x, coordinate.y].Scanned) return;
         //Press the key
+            sfx_audio.PlayOneShot(scanningClip);
             pressedCoordinate = coordinate;
             scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].StartScan();
             acceptNewScan = false;
         }
         else{
+            sfx_audio.Stop();
+            sfx_audio.PlayOneShot(errorClip);
             scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].AbortScan();
             acceptNewScan = true;       
         }
@@ -60,6 +69,8 @@ public class DetectSeedMiniGame : MiniGameBasic
     protected override void OnKeyReleased(Key keyReleased){
         if(!acceptNewScan){
             scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].AbortScan();
+            sfx_audio.Stop();
+            sfx_audio.PlayOneShot(errorClip);
             acceptNewScan = true;
         }
     }
@@ -70,7 +81,11 @@ public class DetectSeedMiniGame : MiniGameBasic
             for(int x=0; x<LINE; x++){
                 if(scanUnit == scanUnitMatrix[x,y]){
                     if(x == targetUnit.x && y == targetUnit.y){
+                        sfx_audio.PlayOneShot(bingoClip);
                         EventHandler.Call_OnEndMiniGame(this);
+                    }
+                    else{
+                        sfx_audio.PlayOneShot(scannedClip);
                     }
                     return x == targetUnit.x && y == targetUnit.y;
                 }
@@ -80,7 +95,7 @@ public class DetectSeedMiniGame : MiniGameBasic
     }
     IEnumerator coroutineTurnOffAllScan(){
         scanUnitMatrix = null;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2.5f);
         for(int i=0; i<scannedUnit.Count-1; i++){
             scannedUnit[i].TurnOffScan();
             yield return new WaitForSeconds(Random.Range(.4f,.6f));

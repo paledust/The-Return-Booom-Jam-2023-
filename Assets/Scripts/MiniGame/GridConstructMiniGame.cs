@@ -16,6 +16,8 @@ public class GridConstructMiniGame : MiniGameBasic
 [Header("Audio Source")]
     [SerializeField] private AudioSource sfx_audio;
     [SerializeField] private AudioClip[] keyClips;
+    [SerializeField] private AudioSource pc_loop;
+    [SerializeField] private AudioSource scan_loop;
 [Header("End MiniGame")]
     [SerializeField] private PlayableDirector end_director;
     private int keyClipPlayed = 0;
@@ -42,14 +44,17 @@ public class GridConstructMiniGame : MiniGameBasic
                 if(gridChargeTime >= gridDelay){
                     stage = STAGE.Building;
                     m_projectorParticles.Play(true);
+                    scan_loop.Play();
                 }
                 break;
             case STAGE.Building:
                 if(isTyping){
                     m_gridBuildAnime[clipName].speed = Mathf.Lerp(m_gridBuildAnime[clipName].speed, 0.4f, Time.deltaTime * 5);
+                    scan_loop.volume = Mathf.Lerp(scan_loop.volume, 1f, Time.deltaTime * 5);
                 }
                 else{
                     m_gridBuildAnime[clipName].speed = Mathf.Lerp(m_gridBuildAnime[clipName].speed, -0.02f, Time.deltaTime * 5);
+                    scan_loop.volume = Mathf.Lerp(scan_loop.volume, 0f, Time.deltaTime * 5);
                 }
                 if(m_gridBuildAnime[clipName].normalizedTime >= 0.95f){
                     EventHandler.Call_OnEndMiniGame(this);
@@ -72,12 +77,16 @@ public class GridConstructMiniGame : MiniGameBasic
         clipName = m_gridBuildAnime.clip.name;
         m_gridBuildAnime[clipName].speed = 0;
         m_gridBuildAnime.Play();
+
+        pc_loop.Play();
+        StartCoroutine(coroutineFadePCLoop(true));
     }
     protected override void CleanUp()
     {
         base.CleanUp();
 
         if(m_projectorParticles!=null)m_projectorParticles.Stop(true);
+        scan_loop.Stop();
         this.enabled = false;
     }
     protected override void OnAnyKeyPress()
@@ -109,5 +118,16 @@ public class GridConstructMiniGame : MiniGameBasic
 
         isTyping = true;
         typingTestTime = 0;
+    }
+    public void FadeOutPCLoop()=>StartCoroutine(coroutineFadePCLoop(false));
+    IEnumerator coroutineFadePCLoop(bool isFadeIn){
+        float initVolume = pc_loop.volume;
+        float targetVolume = isFadeIn?0.5f:0;
+        for(float t=0; t<1; t+=Time.deltaTime*0.5f){
+            pc_loop.volume = Mathf.Lerp(initVolume, targetVolume, EasingFunc.Easing.SmoothInOut(t));
+            yield return null;
+        }
+        pc_loop.volume = targetVolume;
+        if(!isFadeIn) pc_loop.Stop();
     }
 }
