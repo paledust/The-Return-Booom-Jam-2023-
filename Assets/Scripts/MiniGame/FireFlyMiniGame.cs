@@ -55,7 +55,7 @@ public class FireFlyMiniGame : MiniGameBasic
         grass_particle.transform.position = location;
         grass_particle.Play();
 
-        sfxAudio.PlayOneShot(grassClips[grassClipIndex]);
+        sfxAudio.PlayOneShot(grassClips[grassClipIndex],0.1f);
         grassClipIndex ++;
         if(grassClipIndex>=grassClips.Length){
             Service.Shuffle<AudioClip>(ref grassClips);
