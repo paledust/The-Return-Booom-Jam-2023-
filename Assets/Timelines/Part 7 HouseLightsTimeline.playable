@@ -2706,6 +2706,24 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events: []
+--- !u!114 &2955764022133121608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ca0797398925214da0fe550963943ae, type: 3}
+  m_Name: AmbientFade Marker
+  m_EditorClassIdentifier: 
+  m_Time: 37.86796
+  ambientName: 
+  volume: 0
+  transitionTime: 4
+  retroactive: 0
+  emitOnce: 0
 --- !u!114 &3344901461425115727
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3113,6 +3131,7 @@ MonoBehaviour:
     - {fileID: 8385771813223417362}
     - {fileID: -2446986474406250834}
     - {fileID: 3344901461425115727}
+    - {fileID: 2955764022133121608}
 --- !u!114 &6037196986623432504
 MonoBehaviour:
   m_ObjectHideFlags: 1
