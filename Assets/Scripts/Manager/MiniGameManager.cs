@@ -28,7 +28,6 @@ public class MiniGameManager : MonoBehaviour
         EventHandler.OnNextMiniGame -= NextMiniGame;
     }
     void EndMiniGame(MiniGameBasic miniGame){
-        Debug.Log("End MiniGame");
         miniGame.ExitMiniGame();
     }
     void NextMiniGame(){
