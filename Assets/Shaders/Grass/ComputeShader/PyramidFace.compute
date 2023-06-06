@@ -1,0 +1,68 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel Main
+
+#include "NMGPyramidComputeHelpers.hlsl"
+//Vertex on source mesh
+struct SourceVertex{
+    float3 positionOS; //Position in object space
+    float2 uv; 
+};
+//vertex on generated mesh
+struct DrawVertex{
+    float3 positionWS; //Position in world space
+    float2 uv;
+};
+//Draw mesh triangle
+struct DrawTriangle{
+    float3 normalWS; //Normal in world space
+    DrawVertex vertices[3];
+};
+
+StructuredBuffer<SourceVertex> _SourceVertices;
+StructuredBuffer<int> _SourceTriangles;
+AppendStructuredBuffer<DrawTriangle> _DrawTriangles;
+
+int _NumSourceTriangles;
+float _PyramidHeight;
+float4x4 _ObjectToWorld;
+
+DrawVertex TransformToWorldSpace(SourceVertex v){
+    DrawVertex o;
+    o.positionWS = mul(_ObjectToWorld, float4(v.positionOS, 1)).xyz;
+    o.uv = v.uv;
+    return o;
+}
+
+void SetUpAndOutputTriangle(DrawVertex a, DrawVertex b, DrawVertex c){
+    float3 normalWS = GetNormalFromTriangle(a.positionWS, b.positionWS, c.positionWS);
+
+    DrawTriangle tri;
+    tri.normalWS = normalWS;
+    tri.vertices[0] = a;
+    tri.vertices[1] = b;
+    tri.vertices[2] = c;
+
+    _DrawTriangles.Append(tri);
+}
+
+[numthreads(128,1,1)]
+void Main (uint3 id : SV_DispatchThreadID){
+    if((int)id.x > _NumSourceTriangles){
+        return;
+    }
+
+    int triStart = id.x * 3;
+    DrawVertex inputs[3];
+    inputs[0] = TransformToWorldSpace(_SourceVertices[_SourceTriangles[triStart]]);
+    inputs[1] = TransformToWorldSpace(_SourceVertices[_SourceTriangles[triStart + 1]]);
+    inputs[2] = TransformToWorldSpace(_SourceVertices[_SourceTriangles[triStart + 2]]);
+
+    DrawVertex center;
+    float3 triNormal = GetNormalFromTriangle(inputs[0].positionWS,inputs[1].positionWS,inputs[2].positionWS);
+    center.positionWS= GetTriangleCenter(inputs[0].positionWS,inputs[1].positionWS,inputs[2].positionWS);
+    center.uv = GetTriangleCenter(inputs[0].uv,inputs[1].uv,inputs[2].uv);
+
+    SetUpAndOutputTriangle(inputs[0], inputs[1], center);
+    SetUpAndOutputTriangle(inputs[1], inputs[2], center);
+    SetUpAndOutputTriangle(inputs[2], inputs[0], center);
+}
