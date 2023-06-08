@@ -23526,11 +23526,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1204405696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7312021b49f36d34baa416fcf0cf3a47, type: 3}
+  m_Script: {fileID: 11500000, guid: 091f261ba3cc6024d9a9e4892499ea34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sourceMesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
-  pyramidCS: {fileID: 7200000, guid: 3f65fc5d7f35a1b4d84a29fc1889b076, type: 3}
+  bladeGrassCS: {fileID: 7200000, guid: 4e4f35c4f271d974c823ff3dbfa71358, type: 3}
   material: {fileID: 2100000, guid: 9b0f959eadab0f34896422a24c544ecb, type: 2}
   pyramidHeight: 1
 --- !u!114 &1209713643 stripped

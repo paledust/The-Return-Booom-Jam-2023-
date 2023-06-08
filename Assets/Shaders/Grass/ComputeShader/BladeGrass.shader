@@ -1,8 +1,9 @@
-Shader "Custom/PyramidFaceCompute"
+Shader "Custom/BladeGrassCompute"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _Color("Base Color", Color) = (1,1,1,1)
+        _TipColor("Tip Color", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -23,8 +24,7 @@ Shader "Custom/PyramidFaceCompute"
             #include "UnityCG.cginc"
             #include "AutoLight.cginc"
             #include "UnityLightingCommon.cginc"
-            #include "PyramidFace.hlsl"
-
+            #include "BladeGrass.hlsl"
 
             ENDCG
         }
