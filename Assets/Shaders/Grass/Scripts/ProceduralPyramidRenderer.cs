@@ -119,4 +119,8 @@ public class ProceduralPyramidRenderer : MonoBehaviour
 
         return new Bounds() {center = center, extents = extents};
     }
+    void OnDrawGizmosSelected(){
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawWireMesh(sourceMesh);
+    }
 }
