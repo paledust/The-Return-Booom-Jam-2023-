@@ -8,6 +8,7 @@ public class ProceduralPyramidRenderer : MonoBehaviour
     [StructLayout(LayoutKind.Sequential)]
     private struct SourceVertex{
         public Vector3 position;
+        public Vector3 normal;
         public Vector2 uv;
     };
     [SerializeField] private Mesh sourceMesh;
@@ -27,7 +28,7 @@ public class ProceduralPyramidRenderer : MonoBehaviour
 
     private Bounds localBounds;
 
-    private const int SOURCE_VERT_STRIDE = sizeof(float)*(3+2);
+    private const int SOURCE_VERT_STRIDE = sizeof(float)*(3+3+2);
     private const int SOURCE_TRI_STRIDE = sizeof(int);
     private const int DRAW_STRIDE = sizeof(float)*(3+(3+2)*3);
     private const int ARGS_STRIDE = sizeof(int) * 4;
@@ -36,6 +37,7 @@ public class ProceduralPyramidRenderer : MonoBehaviour
         initialized = true;
 
         Vector3[] positions = sourceMesh.vertices;
+        Vector3[] normals = sourceMesh.normals;
         Vector2[] uvs = sourceMesh.uv;
         int[] tris = sourceMesh.triangles;
 
@@ -43,6 +45,7 @@ public class ProceduralPyramidRenderer : MonoBehaviour
         for(int i=0; i<vertices.Length; i++){
             vertices[i] = new SourceVertex(){
                 position = positions[i],
+                normal = normals[i],
                 uv = uvs[i],
             };
         }
