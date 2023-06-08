@@ -91,10 +91,6 @@ public class ProceduralPyramidRenderer : MonoBehaviour
         ComputeBuffer.CopyCount(drawBuffer, argsBuffer, 0);
 
         pyramidCS.Dispatch(idTriCountToVertCountKernel, 1, 1, 1);
-        // int[] array = new int[4];
-        // argsBuffer.GetData(array);
-        // Debug.Log(drawBuffer.count);
-
 
         Graphics.DrawProceduralIndirect(material, bounds, MeshTopology.Triangles, argsBuffer, 
                                         0, null, null, UnityEngine.Rendering.ShadowCastingMode.On, true, gameObject.layer);
