@@ -2,8 +2,7 @@
 #pragma kernel Main
 #pragma kernel TriCountToVertCount
 
-#include "NMGGrassBladeComputeHelpers.hlsl"
-#include "UnityCG.cginc"
+#include "NMGPyramidFaceComputeHelpers.hlsl"
 //Vertex on source mesh
 struct SourceVertex{
     float3 positionOS; //Position in object space
@@ -13,12 +12,12 @@ struct SourceVertex{
 //vertex on generated mesh
 struct DrawVertex{
     float3 positionWS; //Position in world space
+    float3 normalWS;
     float2 uv;
 };
 //Draw mesh triangle
 struct DrawTriangle{
     float3 normalWS; //Normal in world space
-    // float3 test;
     DrawVertex vertices[3];
 };
 
@@ -26,15 +25,14 @@ StructuredBuffer<SourceVertex> _SourceVertices;
 StructuredBuffer<int> _SourceTriangles;
 AppendStructuredBuffer<DrawTriangle> _DrawTriangles;
 
-CBUFFER_START(Params)
-    int _NumSourceTriangles;
-    float _PyramidHeight;
-    float4x4 _ObjectToWorld;
-CBUFFER_END
+int _NumSourceTriangles;
+float _PyramidHeight;
+float4x4 _ObjectToWorld;
 
 DrawVertex TransformToWorldSpace(SourceVertex v){
     DrawVertex o;
     o.positionWS = mul(_ObjectToWorld, float4(v.positionOS, 1)).xyz;
+    o.normalWS = v.normalOS;
     o.uv = v.uv;
     return o;
 }
@@ -44,7 +42,6 @@ void SetUpAndOutputTriangle(DrawVertex a, DrawVertex b, DrawVertex c){
 
     DrawTriangle tri;
     tri.normalWS = normalWS;
-    // tri.test = normalWS;
     tri.vertices[0] = a;
     tri.vertices[1] = b;
     tri.vertices[2] = c;
@@ -52,7 +49,7 @@ void SetUpAndOutputTriangle(DrawVertex a, DrawVertex b, DrawVertex c){
     _DrawTriangles.Append(tri);
 }
 
-[numthreads(256,1,1)]
+[numthreads(128,1,1)]
 void Main (uint3 id : SV_DispatchThreadID){
     if((int)id.x >= _NumSourceTriangles){
         return;
@@ -66,6 +63,7 @@ void Main (uint3 id : SV_DispatchThreadID){
 
     DrawVertex center;
     float3 triNormal = GetNormalFromTriangle(inputs[0].positionWS, inputs[1].positionWS, inputs[2].positionWS);
+    center.normalWS  = GetTriangleCenter(inputs[0].normalWS, inputs[1].normalWS, inputs[2].normalWS);
     center.positionWS= GetTriangleCenter(inputs[0].positionWS, inputs[1].positionWS, inputs[2].positionWS)+triNormal*_PyramidHeight;
     center.uv = GetTriangleCenter(inputs[0].uv, inputs[1].uv, inputs[2].uv);
 

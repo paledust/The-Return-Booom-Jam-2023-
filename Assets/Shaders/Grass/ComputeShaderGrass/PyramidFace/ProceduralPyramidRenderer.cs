@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class ProceduralBladeGrassRenderer : MonoBehaviour
+public class ProceduralPyramidRenderer : MonoBehaviour
 {
     [StructLayout(LayoutKind.Sequential)]
-    private struct SourceVertex{public Vector3 position;};
+    private struct SourceVertex{
+        public Vector3 position;
+        public Vector3 normal;
+        public Vector2 uv;
+    };
     [SerializeField] private Mesh sourceMesh;
     [SerializeField] private ComputeShader bladeGrassCS;
     [SerializeField] private Material material;
@@ -17,29 +21,32 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
     private ComputeBuffer drawBuffer;
     private ComputeBuffer argsBuffer;
 
-    private int idBladeGrassKernel;
+    private int idPyramidKernel;
+    private int idTriCountToVertCountKernel;
 
     private int dispatchSize;
 
     private Bounds localBounds;
 
-    private const int SOURCE_VERT_STRIDE = sizeof(float)*3;
+    private const int SOURCE_VERT_STRIDE = sizeof(float)*(3+3+2);
     private const int SOURCE_TRI_STRIDE = sizeof(int);
-    private const int DRAW_STRIDE = sizeof(float)*(3+(3+1)*3);
+    private const int DRAW_STRIDE = sizeof(float)*(3+(3+3+2)*3);
     private const int ARGS_STRIDE = sizeof(int) * 4;
-
-    private int[] argsBufferReset = new int[] {0,1,0,0};
     void OnEnable(){
         if(initialized) this.enabled = false;
         initialized = true;
 
         Vector3[] positions = sourceMesh.vertices;
+        Vector3[] normals = sourceMesh.normals;
+        Vector2[] uvs = sourceMesh.uv;
         int[] tris = sourceMesh.triangles;
 
         SourceVertex[] vertices = new SourceVertex[positions.Length];
         for(int i=0; i<vertices.Length; i++){
             vertices[i] = new SourceVertex(){
                 position = positions[i],
+                normal = normals[i],
+                uv = uvs[i],
             };
         }
         int numTriangles = tris.Length/3;
@@ -52,47 +59,41 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
         drawBuffer.SetCounterValue(0); 
 
         argsBuffer = new ComputeBuffer(1, ARGS_STRIDE, ComputeBufferType.IndirectArguments);
-        argsBuffer.SetData(argsBufferReset);
+        argsBuffer.SetData(new int[]{0,1,0,0});
 
-        idBladeGrassKernel = bladeGrassCS.FindKernel("Main");
+        idPyramidKernel = bladeGrassCS.FindKernel("Main");
+        idTriCountToVertCountKernel = bladeGrassCS.FindKernel("TriCountToVertCount");
 
-        bladeGrassCS.SetBuffer(idBladeGrassKernel, "_SourceVertices", sourceVertexBuffer);
-        bladeGrassCS.SetBuffer(idBladeGrassKernel, "_SourceTriangles", sourceTriBuffer);
-        bladeGrassCS.SetBuffer(idBladeGrassKernel, "_DrawTriangles", drawBuffer);
-        bladeGrassCS.SetBuffer(idBladeGrassKernel, "_IndirectArgsBuffer", argsBuffer);
-
+        bladeGrassCS.SetBuffer(idPyramidKernel, "_SourceVertices", sourceVertexBuffer);
+        bladeGrassCS.SetBuffer(idPyramidKernel, "_SourceTriangles", sourceTriBuffer);
+        bladeGrassCS.SetBuffer(idPyramidKernel, "_DrawTriangles", drawBuffer);
         bladeGrassCS.SetInt("_NumSourceTriangles", numTriangles);
+
+        bladeGrassCS.SetBuffer(idTriCountToVertCountKernel, "_IndirectArgsBuffer", argsBuffer);
 
         material.SetBuffer("_DrawTriangles", drawBuffer);
 
-        bladeGrassCS.GetKernelThreadGroupSizes(idBladeGrassKernel, out uint threadGroupSize, out _, out _);
+        bladeGrassCS.GetKernelThreadGroupSizes(idPyramidKernel, out uint threadGroupSize, out _, out _);
         dispatchSize = Mathf.CeilToInt((float)numTriangles/threadGroupSize);
 
         localBounds = sourceMesh.bounds;
         localBounds.Expand(pyramidHeight);
     }
     void LateUpdate(){
-    #if UNITY_EDITOR
-        if(Application.isPlaying == false){
-            OnDisable();
-            OnEnable();
-        }
-    #endif
         drawBuffer.SetCounterValue(0);
-        argsBuffer.SetData(argsBufferReset);
 
         Bounds bounds = TransformBounds(localBounds);
 
-        bladeGrassCS.SetMatrix("_LocalToWorld", transform.localToWorldMatrix);
+        bladeGrassCS.SetMatrix("_ObjectToWorld", transform.localToWorldMatrix);
         bladeGrassCS.SetFloat("_PyramidHeight", pyramidHeight);
-        bladeGrassCS.Dispatch(idBladeGrassKernel, dispatchSize, 1, 1);
+        bladeGrassCS.Dispatch(idPyramidKernel, dispatchSize, 1, 1);
 
-        // int[] array = new int[4];
-        // argsBuffer.GetData(array);
-        // Debug.Log(array[0]);
+        ComputeBuffer.CopyCount(drawBuffer, argsBuffer, 0);
+
+        bladeGrassCS.Dispatch(idTriCountToVertCountKernel, 1, 1, 1);
 
         Graphics.DrawProceduralIndirect(material, bounds, MeshTopology.Triangles, argsBuffer, 
-                                        0, null, null, UnityEngine.Rendering.ShadowCastingMode.Off, true, gameObject.layer);
+                                        0, null, null, UnityEngine.Rendering.ShadowCastingMode.On, true, gameObject.layer);
     }
     void OnDisable(){
         if(initialized){

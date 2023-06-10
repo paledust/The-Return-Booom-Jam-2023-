@@ -1,0 +1,149 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel Main
+
+#include "NMGGrassBladeComputeHelpers.hlsl"
+#include "UnityCG.cginc"
+
+#define PI 3.1415926
+#define MAX_BLADE_SEGMENTS 5
+#define MAX_BLADE_POINTS MAX_BLADE_SEGMENTS*2+1
+
+//Vertex on source mesh
+struct SourceVertex{
+    float3 positionOS; //Position in object space
+};
+//vertex on generated mesh
+struct DrawVertex{
+    float3 positionWS; //Position in world space
+    float height;
+};
+//Draw mesh triangle
+struct DrawTriangle{
+    float3 normalWS; //Normal in world space
+    DrawVertex vertices[3];
+};
+struct IndirectArgs{
+    uint numVerticesPerInstance;
+    uint numInstances;
+    uint startVertexIndex;
+    uint startInstanceIndex;
+};
+
+RWStructuredBuffer<IndirectArgs> _IndirectArgsBuffer;
+StructuredBuffer<SourceVertex> _SourceVertices;
+StructuredBuffer<int> _SourceTriangles;
+AppendStructuredBuffer<DrawTriangle> _DrawTriangles;
+
+int _NumSourceTriangles;
+int _MaxBladeSegments;
+
+float _MaxBladeAngle;
+float _BladeCurvature;
+float _BladeHeight;
+float _BladeHeightVarriance;
+float _BladeWidth;
+float _BladeWidthVariance;
+
+Texture2D<float4> _WindNoiseTexture;
+SamplerState sampler_WindNoiseTexture;
+
+float2 _GrassLay;
+float _WindTimeMult;
+float _WindTexMult;
+float _WindPosMult;
+float _WindAmplitude;
+
+float4x4 _LocalToWorld;
+
+void GetCenterAndBasis(SourceVertex a, SourceVertex b, SourceVertex c, out float3 positionWS, out float3 normalWS, out float3x3 TsToWs){
+    float3 positionA_WS = mul(_LocalToWorld, float4(a.positionOS, 1)).xyz;
+    float3 positionB_WS = mul(_LocalToWorld, float4(b.positionOS, 1)).xyz;
+    float3 positionC_WS = mul(_LocalToWorld, float4(c.positionOS, 1)).xyz;
+
+    positionWS = GetTriangleCenter(positionA_WS, positionB_WS, positionC_WS);
+    GetTriangleNormalAndTSToWSMatrix(positionA_WS, positionB_WS, positionC_WS, normalWS, TsToWs);
+}
+
+float2 GetBladeDimensions(float3 positionWS){
+    float width, height;
+    width = randNegative1to1(positionWS, 0) * _BladeWidthVariance + _BladeWidth;
+    height = randNegative1to1(positionWS, 1) * _BladeHeightVarriance + _BladeHeight;
+    return float2(width, height);
+}
+
+float3 GetWindAxis(float3 positionWS, float3 normalWS){
+    float2 windUV = positionWS.xz * _WindPosMult + _Time.y * _WindTimeMult;
+    windUV = windUV * _WindTexMult;
+
+    float2 windNoise = _WindNoiseTexture.SampleLevel(sampler_WindNoiseTexture, windUV, 0).rb*2 - 1;
+    return cross(normalWS, float3(windNoise.x+_GrassLay.x, 0, windNoise.y+_GrassLay.y));
+}
+
+float3x3 FigureTransformationForHeight(float v, float3x3 twistMatrix, float3x3 TsToWs, float maxBend, float3 windAxis){
+    float3x3 bendMatrix = AngleAxis3x3(maxBend * pow(v, _BladeCurvature), float3(1,0,0));
+    float3x3 windMatrix = AngleAxis3x3(_WindAmplitude * v, windAxis);
+
+    return mul(windMatrix, mul(TsToWs, mul(twistMatrix, bendMatrix)));
+}
+
+DrawVertex SetupBladePoint(float3 anchorWS, float2 diemnsions, float3x3 TsToWs, float2 uv){
+    float3 offsetTS = float3(diemnsions.x*(uv.x-0.5f), 0, diemnsions.y*uv.y);
+    float3 offsetWS = mul(TsToWs, offsetTS);
+
+    float3 positionWS = anchorWS + offsetWS;
+
+    DrawVertex o = (DrawVertex)0;
+    o.positionWS = positionWS;
+    o.height = uv.y;
+    return o;
+}
+
+[numthreads(256,1,1)]
+void Main (uint3 id : SV_DispatchThreadID){
+    if((int)id.x >= _NumSourceTriangles) return;
+
+    int triStart = id.x * 3;
+
+    float3 positionWS, normalWS;
+    float3x3 TsToWs;
+    GetCenterAndBasis(
+        _SourceVertices[_SourceTriangles[triStart]],
+        _SourceVertices[_SourceTriangles[triStart+1]],
+        _SourceVertices[_SourceTriangles[triStart+2]],
+        positionWS, normalWS, TsToWs);
+    
+    float2 diemnsions = GetBladeDimensions(positionWS);
+
+    float3x3 twistMatrix = AngleAxis3x3(rand(positionWS, 2) * PI * 2, float3(0,0,1));
+
+    float maxBend = rand(positionWS, 3) * PI * 0.5f * _MaxBladeAngle;
+
+    float3 windAxis = GetWindAxis(positionWS, normalWS);
+
+    int numBladeSegments = min(MAX_BLADE_SEGMENTS, max(1, _MaxBladeSegments));
+    DrawVertex vertices[MAX_BLADE_POINTS];
+
+    for(int i=0; i<numBladeSegments; i++){
+        float v = i/(float)numBladeSegments;
+        float u = 0.5 - (1-v)*0.5;
+
+        float3x3 transform = FigureTransformationForHeight(v, twistMatrix, TsToWs, maxBend, windAxis);
+        
+        vertices[i*2] = SetupBladePoint(positionWS, diemnsions, transform, float2(u,v));
+        vertices[i*2+1] = SetupBladePoint(positionWS, diemnsions, transform, float2(1-u,v));
+    }
+    float3x3 transform = FigureTransformationForHeight(1, twistMatrix, TsToWs, maxBend, windAxis);
+    vertices[numBladeSegments*2] = SetupBladePoint(positionWS, diemnsions, transform, float2(0.5, 1));
+
+    int numTriangles = (numBladeSegments-1)*2+1;
+    for(int index=0; index<numTriangles; index++){
+        DrawTriangle tri = (DrawTriangle)0;
+        tri.normalWS = normalWS;
+        tri.vertices[0] = vertices[index];
+        tri.vertices[1] = vertices[index+1];
+        tri.vertices[2] = vertices[index+2];
+        _DrawTriangles.Append(tri);
+    }
+
+    InterlockedAdd(_IndirectArgsBuffer[0].numVerticesPerInstance, numTriangles*3);
+}
