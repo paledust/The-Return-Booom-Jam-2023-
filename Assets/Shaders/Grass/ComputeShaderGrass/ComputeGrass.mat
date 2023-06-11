@@ -125,6 +125,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _ShadowStrength: 0
     - _Shininess: 10
     - _Smoothness: 0.638
     - _SmoothnessTextureChannel: 0
@@ -132,7 +133,7 @@ Material:
     - _SrcBlend: 1
     - _Tess: 8.8
     - _TessellationUniform: 15
-    - _TranslucentGain: 1
+    - _TranslucentGain: 0.5
     - _UVSec: 0
     - _Width: 0.0174
     - _WindStrength: -0.1
@@ -146,5 +147,6 @@ Material:
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
     - _TipColor: {r: 0, g: 0, b: 0, a: 1}
     - _TopColor: {r: 0, g: 1, b: 0.051671505, a: 1}
+    - _TranslucentGain: {r: 0, g: 0, b: 0, a: 1}
     - _WindFrequency: {r: 0.06, g: 0.06, b: 0, a: 0}
   m_BuildTextureStacks: []

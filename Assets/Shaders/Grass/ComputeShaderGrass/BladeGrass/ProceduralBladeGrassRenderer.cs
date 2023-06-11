@@ -98,7 +98,7 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
     }
     void LateUpdate(){
     #if UNITY_EDITOR
-        if(Application.isPlaying == false){
+        if(!Application.isPlaying){
             OnDisable();
             OnEnable();
         }

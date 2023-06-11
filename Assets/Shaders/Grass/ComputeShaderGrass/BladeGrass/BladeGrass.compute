@@ -45,7 +45,9 @@ float _BladeWidth;
 float _BladeWidthVariance;
 
 Texture2D<float4> _WindNoiseTexture;
+Texture2D<float4> _DynamicTexture;
 SamplerState sampler_WindNoiseTexture;
+SamplerState sampler_DynamicTexture;
 
 float2 _GrassLay;
 float _WindTimeMult;
@@ -136,13 +138,16 @@ void Main (uint3 id : SV_DispatchThreadID){
     vertices[numBladeSegments*2] = SetupBladePoint(positionWS, diemnsions, transform, float2(0.5, 1));
 
     int numTriangles = (numBladeSegments-1)*2+1;
+    bool backFace = false;
     for(int index=0; index<numTriangles; index++){
         DrawTriangle tri = (DrawTriangle)0;
-        tri.normalWS = normalWS;
+        if(backFace) tri.normalWS = normalWS;
+        else tri.normalWS = -normalWS;
         tri.vertices[0] = vertices[index];
         tri.vertices[1] = vertices[index+1];
         tri.vertices[2] = vertices[index+2];
         _DrawTriangles.Append(tri);
+        backFace = !backFace;
     }
 
     InterlockedAdd(_IndirectArgsBuffer[0].numVerticesPerInstance, numTriangles*3);

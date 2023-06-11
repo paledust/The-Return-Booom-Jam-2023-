@@ -247,7 +247,7 @@
             #pragma hull hull
             #pragma domain domain
 
-            #pragma multi_compile_fwdbase 
+            #pragma multi_compile_fwdbase
             #pragma multi_compile _ VERTEXLIGHT_ON
 
             #pragma target 4.6
