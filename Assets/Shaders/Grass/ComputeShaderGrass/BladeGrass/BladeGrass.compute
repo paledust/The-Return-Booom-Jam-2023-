@@ -58,6 +58,10 @@ float _WindAmplitude;
 
 float4x4 _LocalToWorld;
 
+float _DisplacementSize;
+float3 _DisplacementLocation;
+
+
 void GetCenterAndBasis(SourceVertex a, SourceVertex b, SourceVertex c, out float3 positionWS, out float3 normalWS, out float3x3 TsToWs){
     float3 positionA_WS = mul(_LocalToWorld, float4(a.positionOS, 1)).xyz;
     float3 positionB_WS = mul(_LocalToWorld, float4(b.positionOS, 1)).xyz;
@@ -82,11 +86,23 @@ float3 GetWindAxis(float3 positionWS, float3 normalWS){
     return cross(normalWS, float3(windNoise.x+_GrassLay.x, 0, windNoise.y+_GrassLay.y));
 }
 
-float3x3 FigureTransformationForHeight(float v, float3x3 twistMatrix, float3x3 TsToWs, float maxBend, float3 windAxis){
+float2 GetDisplacementSample(float3 positionWS){
+    float2 dispLocation = (positionWS.xz - _DisplacementLocation.xz) / _DisplacementSize;
+    float2 dispMaskUv = max(saturate(dispLocation), saturate(1.0 - dispLocation));
+    float dispMask = floor(max(dispMaskUv.x, dispMaskUv.y));
+    float2 dispSample = _DynamicTexture.SampleLevel(sampler_DynamicTexture, dispLocation, 0).xz - float2(0.5,0.5);
+
+    return dispSample;
+}
+
+float3x3 FigureTransformationForHeight(float v, float3x3 twistMatrix, float3x3 TsToWs, float maxBend, float3 windAxis, float2 dispSample){
     float3x3 bendMatrix = AngleAxis3x3(maxBend * pow(v, _BladeCurvature), float3(1,0,0));
     float3x3 windMatrix = AngleAxis3x3(_WindAmplitude * v, windAxis);
 
-    return mul(windMatrix, mul(TsToWs, mul(twistMatrix, bendMatrix)));
+    float3 displacement = normalize(float3(dispSample.x, dispSample.y, 0));
+    float3x3 dispMatrix = AngleAxis3x3(float2(_WindDynamicFactor * abs(dispSample.x + dispSample.y), 0), displacement);
+
+    return mul(windMatrix, mul(dispMatrix, mul(TsToWs, mul(twistMatrix, bendMatrix))));
 }
 
 DrawVertex SetupBladePoint(float3 anchorWS, float2 diemnsions, float3x3 TsToWs, float2 uv){
@@ -123,6 +139,8 @@ void Main (uint3 id : SV_DispatchThreadID){
 
     float3 windAxis = GetWindAxis(positionWS, normalWS);
 
+    float2 dispSample = GetDisplacementSample(positionWS);
+
     int numBladeSegments = min(MAX_BLADE_SEGMENTS, max(1, _MaxBladeSegments));
     DrawVertex vertices[MAX_BLADE_POINTS];
 
@@ -130,12 +148,12 @@ void Main (uint3 id : SV_DispatchThreadID){
         float v = i/(float)numBladeSegments;
         float u = 0.5 - (1-v)*0.5;
 
-        float3x3 transform = FigureTransformationForHeight(v, twistMatrix, TsToWs, maxBend, windAxis);
+        float3x3 transform = FigureTransformationForHeight(v, twistMatrix, TsToWs, maxBend, windAxis, dispSample);
         
         vertices[i*2] = SetupBladePoint(positionWS, diemnsions, transform, float2(u,v));
         vertices[i*2+1] = SetupBladePoint(positionWS, diemnsions, transform, float2(1-u,v));
     }
-    float3x3 transform = FigureTransformationForHeight(1, twistMatrix, TsToWs, maxBend, windAxis);
+    float3x3 transform = FigureTransformationForHeight(1, twistMatrix, TsToWs, maxBend, windAxis, dispSample);
     vertices[numBladeSegments*2] = SetupBladePoint(positionWS, diemnsions, transform, float2(0.5, 1));
 
     int numTriangles = (numBladeSegments-1)*2+1;

@@ -315,7 +315,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -436,7 +436,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -489,8 +489,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.5019608, g: 0, b: 0.030361522, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      minColor: {r: 0.817, g: 0, b: 0.781, a: 1}
+      maxColor: {r: 0.95, g: 0, b: 0.75, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1589,9 +1589,9 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 9124
+        atime1: 13735
         atime2: 65535
-        atime3: 0
+        atime3: 65535
         atime4: 0
         atime5: 0
         atime6: 0
@@ -3004,7 +3004,7 @@ ParticleSystem:
     strengthY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3057,7 +3057,7 @@ ParticleSystem:
     strengthZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3107,7 +3107,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    separateAxes: 0
+    separateAxes: 1
     frequency: 1
     damping: 1
     octaves: 1
@@ -5229,7 +5229,7 @@ MonoBehaviour:
   - {fileID: 88450133}
   - {fileID: 741970483}
   - {fileID: 1707333698}
-  startMiniGame: 0
+  startMiniGame: 6
 --- !u!1 &61477996
 GameObject:
   m_ObjectHideFlags: 0
@@ -5923,7 +5923,7 @@ Transform:
   - {fileID: 293795672}
   - {fileID: 628020033}
   m_Father: {fileID: 1019453214}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &178391131
 Animator:
@@ -6020,7 +6020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010002477438, guid: 5ca4c580b3888314581688fa46fb142d, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4000010002477438, guid: 5ca4c580b3888314581688fa46fb142d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18926,7 +18926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4103333903944158, guid: 1a365141225c22e49a7bb976869b22a8, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4103333903944158, guid: 1a365141225c22e49a7bb976869b22a8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21658,7 +21658,7 @@ Transform:
   - {fileID: 764802147}
   - {fileID: 1274447176}
   m_Father: {fileID: 1019453214}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &879079346
 PrefabInstance:
@@ -21781,7 +21781,7 @@ Transform:
   - {fileID: 368205246}
   - {fileID: 145196652}
   m_Father: {fileID: 1019453214}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &916541442
 GameObject:
@@ -22718,16 +22718,16 @@ Transform:
   - {fileID: 1279438019}
   - {fileID: 1241793489}
   - {fileID: 436388962}
+  - {fileID: 1744226725}
   - {fileID: 181186479}
   - {fileID: 570982630}
-  - {fileID: 1744226725}
-  - {fileID: 1654217538}
   - {fileID: 904962388}
-  - {fileID: 1426431828}
+  - {fileID: 1654217538}
   - {fileID: 178391130}
+  - {fileID: 1426431828}
+  - {fileID: 870792550}
   - {fileID: 622440413}
   - {fileID: 7470048406829659164}
-  - {fileID: 870792550}
   - {fileID: 1258822727}
   - {fileID: 594815807}
   - {fileID: 687512016}
@@ -23544,10 +23544,12 @@ MonoBehaviour:
   windSettings:
     dynamicTexture: {fileID: 8400000, guid: 9820b512705efec43acfa88bca516f3c, type: 2}
     windTexture: {fileID: 2800000, guid: 21541de87cf969c4a8e2e7d3b0205739, type: 3}
+    windDynamicFactor: 1
     windTextureScale: 0.15
     windPeriod: 0.5
     windScale: 1
     windAmplitude: 0.5
+  wind_RT_Camera: {fileID: 436388964}
 --- !u!114 &1209713643 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6392200892530161365, guid: c2acd0963c443ca4eb5c3a88574259f9, type: 3}
@@ -29937,7 +29939,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9aa13d828683f4442adc097459d41115, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9aa13d828683f4442adc097459d41115, type: 3}
       propertyPath: m_LocalScale.x
@@ -37772,7 +37774,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1019453214}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 29.701, z: 0}
 --- !u!23 &1744226727
 MeshRenderer:
@@ -39521,7 +39523,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: eae70b6eaa91deb4986563754e9477a2, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eae70b6eaa91deb4986563754e9477a2, type: 3}
       propertyPath: m_LocalScale.x
@@ -39979,7 +39981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &2009443616
 Light:
   m_ObjectHideFlags: 0
@@ -41518,7 +41520,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5011154258004941814, guid: 3036dd4e7e35ed54da2f739974cc950d, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5011154258004941814, guid: 3036dd4e7e35ed54da2f739974cc950d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46486,7 +46488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3151051549568882975, guid: 67a4f5985c5fc7740b3cedd13b9486ec, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3151051549568882975, guid: 67a4f5985c5fc7740b3cedd13b9486ec, type: 3}
       propertyPath: m_LocalPosition.x

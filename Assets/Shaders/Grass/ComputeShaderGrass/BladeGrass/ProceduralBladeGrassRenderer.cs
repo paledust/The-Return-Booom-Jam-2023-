@@ -34,6 +34,7 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
 
     [SerializeField] private GrassSettings grassSettings = default;
     [SerializeField] private WindSettings windSettings = default;
+    [SerializeField] private Camera wind_RT_Camera;
     private bool initialized;
     private ComputeBuffer sourceVertexBuffer;
     private ComputeBuffer sourceTriBuffer;
@@ -127,6 +128,12 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
         bladeGrassCS.SetFloat("_WindAmplitude", windSettings.windAmplitude);
         bladeGrassCS.SetVector("_GrassLay", grassSettings.grassLay);
         bladeGrassCS.SetVector("_Time", new Vector4(0, Time.timeSinceLevelLoad, 0, 0));
+
+        Vector3 position = transform.position;
+        position.x -= wind_RT_Camera.orthographicSize;
+        position.z -= wind_RT_Camera.orthographicSize;
+        bladeGrassCS.SetVector("_DisplacementLocation", position);
+        bladeGrassCS.SetFloat("_DisplacementSize", wind_RT_Camera.orthographicSize * 2f);
         
         bladeGrassCS.Dispatch(idBladeGrassKernel, dispatchSize, 1, 1);
 
