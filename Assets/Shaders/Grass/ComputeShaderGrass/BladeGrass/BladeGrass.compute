@@ -50,6 +50,7 @@ SamplerState sampler_WindNoiseTexture;
 SamplerState sampler_DynamicTexture;
 
 float2 _GrassLay;
+float _WindDynamicFactor;
 float _WindTimeMult;
 float _WindTexMult;
 float _WindPosMult;

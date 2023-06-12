@@ -17,17 +17,23 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
         public float bladeHeightVariance = 0.1f;
         public float bladeWidth = 1;
         public float bladeWidthVariance = 0.1f;
+    }
+    [System.Serializable]
+    public class WindSettings{
+        public RenderTexture dynamicTexture = null;
         public Texture2D windTexture = null;
+        public float windDynamicFactor = 1;
         public float windTextureScale = 1;
         public float windPeriod = 1;
         public float windScale = 1;
-        public float windAmplitude = 0;
+        public float windAmplitude = 0;        
     }
     [SerializeField] private Mesh sourceMesh;
     [SerializeField] private ComputeShader bladeGrassCS;
     [SerializeField] private Material material;
 
     [SerializeField] private GrassSettings grassSettings = default;
+    [SerializeField] private WindSettings windSettings = default;
     private bool initialized;
     private ComputeBuffer sourceVertexBuffer;
     private ComputeBuffer sourceTriBuffer;
@@ -82,11 +88,8 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
         bladeGrassCS.SetBuffer(idBladeGrassKernel, "_IndirectArgsBuffer", argsBuffer);
 
         bladeGrassCS.SetInt("_NumSourceTriangles", numTriangles);
-        bladeGrassCS.SetTexture(idBladeGrassKernel, "_WindNoiseTexture", grassSettings.windTexture);
-        bladeGrassCS.SetFloat("_WindTimeMult", grassSettings.windPeriod);
-        bladeGrassCS.SetFloat("_WindTexMult", grassSettings.windTextureScale);
-        bladeGrassCS.SetFloat("_WindPosMult", grassSettings.windScale);
-        bladeGrassCS.SetFloat("_WindAmplitude", grassSettings.windAmplitude);
+        bladeGrassCS.SetTexture(idBladeGrassKernel, "_WindNoiseTexture", windSettings.windTexture);
+        bladeGrassCS.SetTexture(idBladeGrassKernel, "_DynamicTexture", windSettings.dynamicTexture);
 
         material.SetBuffer("_DrawTriangles", drawBuffer);
 
@@ -116,10 +119,12 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
         bladeGrassCS.SetFloat("_BladeHeightVarriance", grassSettings.bladeHeightVariance);
         bladeGrassCS.SetFloat("_BladeWidth", grassSettings.bladeWidth);
         bladeGrassCS.SetFloat("_BladeWidthVariance", grassSettings.bladeWidthVariance);
-        bladeGrassCS.SetFloat("_WindTimeMult", grassSettings.windPeriod);
-        bladeGrassCS.SetFloat("_WindTexMult", grassSettings.windTextureScale);
-        bladeGrassCS.SetFloat("_WindPosMult", grassSettings.windScale);
-        bladeGrassCS.SetFloat("_WindAmplitude", grassSettings.windAmplitude);
+
+        bladeGrassCS.SetFloat("_WindDynamicFactor", windSettings.windDynamicFactor);
+        bladeGrassCS.SetFloat("_WindTimeMult", windSettings.windPeriod);
+        bladeGrassCS.SetFloat("_WindTexMult", windSettings.windTextureScale);
+        bladeGrassCS.SetFloat("_WindPosMult", windSettings.windScale);
+        bladeGrassCS.SetFloat("_WindAmplitude", windSettings.windAmplitude);
         bladeGrassCS.SetVector("_GrassLay", grassSettings.grassLay);
         bladeGrassCS.SetVector("_Time", new Vector4(0, Time.timeSinceLevelLoad, 0, 0));
         

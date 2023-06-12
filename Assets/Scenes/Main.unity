@@ -23541,6 +23541,8 @@ MonoBehaviour:
     bladeHeightVariance: 0.1
     bladeWidth: 0.075
     bladeWidthVariance: 0.01
+  windSettings:
+    dynamicTexture: {fileID: 8400000, guid: 9820b512705efec43acfa88bca516f3c, type: 2}
     windTexture: {fileID: 2800000, guid: 21541de87cf969c4a8e2e7d3b0205739, type: 3}
     windTextureScale: 0.15
     windPeriod: 0.5
