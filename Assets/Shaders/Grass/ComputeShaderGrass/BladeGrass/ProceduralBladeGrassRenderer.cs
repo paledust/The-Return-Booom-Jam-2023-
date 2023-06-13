@@ -6,7 +6,7 @@ using UnityEngine;
 public class ProceduralBladeGrassRenderer : MonoBehaviour
 {
     [StructLayout(LayoutKind.Sequential)]
-    private struct SourceVertex{public Vector3 position;};
+    private struct SourceVertex{public Vector3 position;public Vector2 uv;};
     [System.Serializable]
     public class GrassSettings{
         public int maxSegments = 3;
@@ -17,6 +17,7 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
         public float bladeHeightVariance = 0.1f;
         public float bladeWidth = 1;
         public float bladeWidthVariance = 0.1f;
+        public Texture2D maskTexture = null;
     }
     [System.Serializable]
     public class WindSettings{
@@ -47,7 +48,7 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
 
     private Bounds localBounds;
 
-    private const int SOURCE_VERT_STRIDE = sizeof(float)*3;
+    private const int SOURCE_VERT_STRIDE = sizeof(float)*(3+2);
     private const int SOURCE_TRI_STRIDE = sizeof(int);
     private const int DRAW_STRIDE = sizeof(float)*(3+(3+1)*3);
     private const int ARGS_STRIDE = sizeof(int) * 4;
@@ -58,12 +59,14 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
         initialized = true;
 
         Vector3[] positions = sourceMesh.vertices;
+        Vector2[] uvs = sourceMesh.uv;
         int[] tris = sourceMesh.triangles;
 
         SourceVertex[] vertices = new SourceVertex[positions.Length];
         for(int i=0; i<vertices.Length; i++){
             vertices[i] = new SourceVertex(){
                 position = positions[i],
+                uv = uvs[i]
             };
         }
         int numTriangles = tris.Length/3;
@@ -89,6 +92,7 @@ public class ProceduralBladeGrassRenderer : MonoBehaviour
         bladeGrassCS.SetBuffer(idBladeGrassKernel, "_IndirectArgsBuffer", argsBuffer);
 
         bladeGrassCS.SetInt("_NumSourceTriangles", numTriangles);
+        bladeGrassCS.SetTexture(idBladeGrassKernel, "_GrassMaskTexture", grassSettings.maskTexture);
         bladeGrassCS.SetTexture(idBladeGrassKernel, "_WindNoiseTexture", windSettings.windTexture);
         bladeGrassCS.SetTexture(idBladeGrassKernel, "_DynamicTexture", windSettings.dynamicTexture);
 

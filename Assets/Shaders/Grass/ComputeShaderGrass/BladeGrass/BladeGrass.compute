@@ -11,6 +11,7 @@
 //Vertex on source mesh
 struct SourceVertex{
     float3 positionOS; //Position in object space
+    float2 uv;
 };
 //vertex on generated mesh
 struct DrawVertex{
@@ -44,8 +45,10 @@ float _BladeHeightVarriance;
 float _BladeWidth;
 float _BladeWidthVariance;
 
+Texture2D<float4> _GrassMaskTexture;
 Texture2D<float4> _WindNoiseTexture;
 Texture2D<float4> _DynamicTexture;
+SamplerState sampler_GrassMaskTexture;
 SamplerState sampler_WindNoiseTexture;
 SamplerState sampler_DynamicTexture;
 
@@ -62,11 +65,12 @@ float _DisplacementSize;
 float3 _DisplacementLocation;
 
 
-void GetCenterAndBasis(SourceVertex a, SourceVertex b, SourceVertex c, out float3 positionWS, out float3 normalWS, out float3x3 TsToWs){
+void GetCenterAndBasis(SourceVertex a, SourceVertex b, SourceVertex c, out float2 uv, out float3 positionWS, out float3 normalWS, out float3x3 TsToWs){
     float3 positionA_WS = mul(_LocalToWorld, float4(a.positionOS, 1)).xyz;
     float3 positionB_WS = mul(_LocalToWorld, float4(b.positionOS, 1)).xyz;
     float3 positionC_WS = mul(_LocalToWorld, float4(c.positionOS, 1)).xyz;
 
+    uv = (a.uv+b.uv+c.uv)/3.0;
     positionWS = GetTriangleCenter(positionA_WS, positionB_WS, positionC_WS);
     GetTriangleNormalAndTSToWSMatrix(positionA_WS, positionB_WS, positionC_WS, normalWS, TsToWs);
 }
@@ -123,14 +127,18 @@ void Main (uint3 id : SV_DispatchThreadID){
 
     int triStart = id.x * 3;
 
+    float2 uv;
     float3 positionWS, normalWS;
     float3x3 TsToWs;
     GetCenterAndBasis(
         _SourceVertices[_SourceTriangles[triStart]],
         _SourceVertices[_SourceTriangles[triStart+1]],
         _SourceVertices[_SourceTriangles[triStart+2]],
-        positionWS, normalWS, TsToWs);
+        uv, positionWS, normalWS, TsToWs);
     
+    float mask = _GrassMaskTexture.SampleLevel(sampler_GrassMaskTexture, uv, 0).x;
+    if(mask<0.5) return;
+
     float2 diemnsions = GetBladeDimensions(positionWS);
 
     float3x3 twistMatrix = AngleAxis3x3(rand(positionWS, 2) * PI * 2, float3(0,0,1));

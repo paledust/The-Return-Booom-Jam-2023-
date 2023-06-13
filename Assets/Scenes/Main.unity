@@ -23509,14 +23509,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204405696}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!114 &1204405700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23535,16 +23535,17 @@ MonoBehaviour:
   grassSettings:
     maxSegments: 5
     grassLay: {x: 2, y: -3}
-    maxBendAngle: 0.1
+    maxBendAngle: 0.07
     bladeCurvature: 1
-    bladeHeight: 0.3
+    bladeHeight: 0.2
     bladeHeightVariance: 0.1
-    bladeWidth: 0.075
-    bladeWidthVariance: 0.01
+    bladeWidth: 0.1
+    bladeWidthVariance: 0.05
+    maskTexture: {fileID: 2800000, guid: 0102250b4a0138546916afd519d2fa72, type: 3}
   windSettings:
     dynamicTexture: {fileID: 8400000, guid: 9820b512705efec43acfa88bca516f3c, type: 2}
     windTexture: {fileID: 2800000, guid: 21541de87cf969c4a8e2e7d3b0205739, type: 3}
-    windDynamicFactor: 1
+    windDynamicFactor: 2
     windTextureScale: 0.15
     windPeriod: 0.5
     windScale: 1
