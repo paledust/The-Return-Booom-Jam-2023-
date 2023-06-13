@@ -87,7 +87,7 @@ float3 GetWindAxis(float3 positionWS, float3 normalWS){
     windUV = windUV * _WindTexMult;
 
     float2 windNoise = _WindNoiseTexture.SampleLevel(sampler_WindNoiseTexture, windUV, 0).rb*2 - 1;
-    return cross(normalWS, float3(windNoise.x+_GrassLay.x, 0, windNoise.y+_GrassLay.y));
+    return cross(normalWS, float3(windNoise.x, 0, windNoise.y)+float3(_GrassLay.x, 0, _GrassLay.y));
 }
 
 float2 GetDisplacementSample(float3 positionWS){
@@ -103,8 +103,8 @@ float3x3 FigureTransformationForHeight(float v, float3x3 twistMatrix, float3x3 T
     float3x3 bendMatrix = AngleAxis3x3(maxBend * pow(v, _BladeCurvature), float3(1,0,0));
     float3x3 windMatrix = AngleAxis3x3(_WindAmplitude * v, windAxis);
 
-    float3 displacement = normalize(float3(dispSample.x, dispSample.y, 0));
-    float3x3 dispMatrix = AngleAxis3x3(float2(_WindDynamicFactor * abs(dispSample.x + dispSample.y), 0), displacement);
+    float3 displacement = normalize(float3(dispSample.x, 0, dispSample.y));
+    float3x3 dispMatrix = AngleAxis3x3(_WindDynamicFactor * abs(dispSample.x + dispSample.y), displacement);
 
     return mul(windMatrix, mul(dispMatrix, mul(TsToWs, mul(twistMatrix, bendMatrix))));
 }
