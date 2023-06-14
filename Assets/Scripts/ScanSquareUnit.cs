@@ -7,7 +7,8 @@ public class ScanSquareUnit : MonoBehaviour
     private enum SQUARE_STATE{Pending, Scanning, Error, Scanned}
     [SerializeField, ShowOnly] private SQUARE_STATE state = SQUARE_STATE.Pending;
     [SerializeField] private Projector m_projector;
-    public bool Scanned{get{return state == SQUARE_STATE.Scanned;}}
+    public bool IsScanning{get{return state == SQUARE_STATE.Scanning;}}
+    public bool IsPending{get{return state == SQUARE_STATE.Pending;}}
     private DetectSeedMiniGame seedMiniGame;
     private Material projector_mat;
     public void Init(Material m_mat, DetectSeedMiniGame miniGame){
@@ -81,9 +82,9 @@ public class ScanSquareUnit : MonoBehaviour
         Color targetColor = seedMiniGame.ErrorColor;
         Color initColor = targetColor;
         initColor.a = 0f;
-        float duration = 0.75f;
+        float duration = 0.35f;
         for(float t=0; t<1; t+=Time.deltaTime/duration){
-            projector_mat.color = Color.Lerp(initColor, targetColor, 0.5f+0.5f*Mathf.Sin(t*Mathf.PI*10f));
+            projector_mat.color = Color.Lerp(initColor, targetColor, 0.5f+0.5f*Mathf.Sin(t*Mathf.PI*5f));
             yield return null;
         }
         projector_mat.color = initColor;

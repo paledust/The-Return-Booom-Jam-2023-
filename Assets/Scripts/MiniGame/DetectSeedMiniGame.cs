@@ -30,7 +30,7 @@ public class DetectSeedMiniGame : MiniGameBasic
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
     private Vector2Int pressedCoordinate;
-    private bool acceptNewScan = true;
+    private ScanSquareUnit processingUnit;
     protected override void Initialize(){
         base.Initialize();
         scannedUnit = new List<ScanSquareUnit>();
@@ -49,33 +49,29 @@ public class DetectSeedMiniGame : MiniGameBasic
         StartCoroutine(coroutineTurnOffAllScan());
     }
     protected override void OnKeyPressed(Key keyPressed){
-        if(acceptNewScan){
-        //Get the coordinate by the key
-            Vector2Int coordinate = keyMatrix.GetCoordinateFromKey(keyPressed);
-        //if scanned already then don't do anything
-            if(scanUnitMatrix[coordinate.x, coordinate.y].Scanned) return;
-        //Press the key
-            sfx_audio.PlayOneShot(scanningClip);
-            pressedCoordinate = coordinate;
-            scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].StartScan();
-            acceptNewScan = false;
+    //Get the coordinate by the key
+        Vector2Int coordinate = keyMatrix.GetCoordinateFromKey(keyPressed);
+    //if scanned already then don't do anything
+        if(!scanUnitMatrix[coordinate.x, coordinate.y].IsPending) return;
+    //Press the key
+        if(processingUnit!=null && processingUnit!=scanUnitMatrix[coordinate.x, coordinate.y]){
+            processingUnit.AbortScan();
         }
-        else{
-            sfx_audio.Stop();
-            sfx_audio.PlayOneShot(errorClip);
-            scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].AbortScan();
-            acceptNewScan = true;
-        }
+        sfx_audio.Stop();
+        sfx_audio.PlayOneShot(scanningClip);
+        pressedCoordinate = coordinate;
+        processingUnit = scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y];
+        scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].StartScan();
     }
     protected override void OnKeyReleased(Key keyReleased){
-        if(!acceptNewScan){
-            scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].AbortScan();
-            sfx_audio.Stop();
-            sfx_audio.PlayOneShot(errorClip);
-            acceptNewScan = true;
+        Vector2Int coordinate = keyMatrix.GetCoordinateFromKey(keyReleased);
+        if(scanUnitMatrix[coordinate.x, coordinate.y].IsScanning){
+            scanUnitMatrix[coordinate.x, coordinate.y].AbortScan();
         }
     }
-    public void RefreshScan(){acceptNewScan = true;}
+    public void RefreshScan(){
+        processingUnit = null;
+    }
     public bool GetResult(ScanSquareUnit scanUnit){
         scannedUnit.Add(scanUnit);
         for(int y=0; y<ROLL; y++){
