@@ -35,6 +35,7 @@ public class DetectSeedMiniGame : MiniGameBasic
         base.Initialize();
         scannedUnit = new List<ScanSquareUnit>();
         scanUnitMatrix = new ScanSquareUnit[LINE, ROLL];
+        pressedCoordinate = new Vector2Int(-1,-1);
 
         for(int y=0; y<ROLL; y++){
             for(int x=0; x<LINE; x++){
@@ -63,7 +64,7 @@ public class DetectSeedMiniGame : MiniGameBasic
             sfx_audio.Stop();
             sfx_audio.PlayOneShot(errorClip);
             scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].AbortScan();
-            acceptNewScan = true;       
+            acceptNewScan = true;
         }
     }
     protected override void OnKeyReleased(Key keyReleased){

@@ -201,7 +201,7 @@ public bool m_DisablePixelLights = true;
 		{
 			if( m_ReflectionTexture )
 				DestroyImmediate( m_ReflectionTexture );
-			m_ReflectionTexture = new RenderTexture( m_TextureSize, m_TextureSize, 16 );
+			m_ReflectionTexture = new RenderTexture( m_TextureSize, m_TextureSize, 16, RenderTextureFormat.DefaultHDR);
 
 			m_ReflectionTexture.name = "__MirrorReflection" + GetInstanceID();
 			m_ReflectionTexture.isPowerOfTwo = true;

@@ -142,7 +142,7 @@ Material:
     - _wobbleSpeed: 0.6
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepColor: {r: 0.028969374, g: 0.057316184, b: 0.066037714, a: 1}
+    - _DeepColor: {r: 0.028969372, g: 0.057316154, b: 0.06603769, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RadiationColor: {r: 0.5943396, g: 0.5303382, b: 0.19904771, a: 1}
     - _RadiationColor1: {r: 0.5943396, g: 0.54787964, b: 0.2214756, a: 1}
