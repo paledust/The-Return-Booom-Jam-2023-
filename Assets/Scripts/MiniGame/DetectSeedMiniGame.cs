@@ -78,6 +78,7 @@ public class DetectSeedMiniGame : MiniGameBasic
             for(int x=0; x<LINE; x++){
                 if(scanUnit == scanUnitMatrix[x,y]){
                     if(x == targetUnit.x && y == targetUnit.y){
+                        scanUnit.StopSFX();
                         scanUnit.PlaySFX(bingoClip);
                         EventHandler.Call_OnEndMiniGame(this);
                     }
