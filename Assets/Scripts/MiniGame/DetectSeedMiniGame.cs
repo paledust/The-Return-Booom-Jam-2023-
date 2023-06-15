@@ -17,7 +17,7 @@ public class DetectSeedMiniGame : MiniGameBasic
 [Header("Audio")]
     [SerializeField] private AudioSource sfx_audio;
     [SerializeField] private AudioClip scanningClip;
-    [SerializeField] private AudioClip errorClip;
+    [SerializeField] private AudioClip abortClip;
     [SerializeField] private AudioClip scannedClip;
     [SerializeField] private AudioClip bingoClip;
 [Space(10)]
@@ -29,13 +29,11 @@ public class DetectSeedMiniGame : MiniGameBasic
     private ScanSquareUnit[,] scanUnitMatrix;
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
-    private Vector2Int pressedCoordinate;
     private ScanSquareUnit processingUnit;
     protected override void Initialize(){
         base.Initialize();
         scannedUnit = new List<ScanSquareUnit>();
         scanUnitMatrix = new ScanSquareUnit[LINE, ROLL];
-        pressedCoordinate = new Vector2Int(-1,-1);
 
         for(int y=0; y<ROLL; y++){
             for(int x=0; x<LINE; x++){
@@ -52,37 +50,40 @@ public class DetectSeedMiniGame : MiniGameBasic
     //Get the coordinate by the key
         Vector2Int coordinate = keyMatrix.GetCoordinateFromKey(keyPressed);
     //if scanned already then don't do anything
-        if(!scanUnitMatrix[coordinate.x, coordinate.y].IsPending) return;
+        if(scanUnitMatrix[coordinate.x, coordinate.y].IsScanned||scanUnitMatrix[coordinate.x, coordinate.y].IsScanning) return;
     //Press the key
         if(processingUnit!=null && processingUnit!=scanUnitMatrix[coordinate.x, coordinate.y]){
             processingUnit.AbortScan();
+            processingUnit.StopSFX();
+            processingUnit.PlaySFX(abortClip);
         }
-        sfx_audio.Stop();
-        sfx_audio.PlayOneShot(scanningClip);
-        pressedCoordinate = coordinate;
-        processingUnit = scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y];
-        scanUnitMatrix[pressedCoordinate.x, pressedCoordinate.y].StartScan();
+        processingUnit = scanUnitMatrix[coordinate.x, coordinate.y];
+        processingUnit.StartScan();
+        processingUnit.PlaySFX(scanningClip);
     }
     protected override void OnKeyReleased(Key keyReleased){
         Vector2Int coordinate = keyMatrix.GetCoordinateFromKey(keyReleased);
-        if(scanUnitMatrix[coordinate.x, coordinate.y].IsScanning){
-            scanUnitMatrix[coordinate.x, coordinate.y].AbortScan();
+        ScanSquareUnit unit = scanUnitMatrix[coordinate.x, coordinate.y];
+        if(unit.IsScanning){
+            unit.AbortScan();
+            unit.StopSFX();
+            unit.PlaySFX(abortClip);
         }
+        if(processingUnit==unit) {processingUnit = null;}
     }
-    public void RefreshScan(){
-        processingUnit = null;
-    }
+    public void RefreshScan()=>processingUnit = null;
     public bool GetResult(ScanSquareUnit scanUnit){
         scannedUnit.Add(scanUnit);
         for(int y=0; y<ROLL; y++){
             for(int x=0; x<LINE; x++){
                 if(scanUnit == scanUnitMatrix[x,y]){
                     if(x == targetUnit.x && y == targetUnit.y){
-                        sfx_audio.PlayOneShot(bingoClip);
+                        scanUnit.PlaySFX(bingoClip);
                         EventHandler.Call_OnEndMiniGame(this);
                     }
                     else{
-                        sfx_audio.PlayOneShot(scannedClip);
+                        scanUnit.StopSFX();
+                        scanUnit.PlaySFX(scannedClip);
                     }
                     return x == targetUnit.x && y == targetUnit.y;
                 }
@@ -95,7 +96,7 @@ public class DetectSeedMiniGame : MiniGameBasic
         yield return new WaitForSeconds(2.5f);
         for(int i=0; i<scannedUnit.Count-1; i++){
             scannedUnit[i].TurnOffScan();
-            yield return new WaitForSeconds(Random.Range(.4f,.6f));
+            yield return new WaitForSeconds(Random.Range(.3f,.5f));
         }
         yield return new WaitForSeconds(2f);
         scannedUnit[scannedUnit.Count-1].TurnOffScan();

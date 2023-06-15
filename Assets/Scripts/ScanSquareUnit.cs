@@ -7,10 +7,13 @@ public class ScanSquareUnit : MonoBehaviour
     private enum SQUARE_STATE{Pending, Scanning, Error, Scanned}
     [SerializeField, ShowOnly] private SQUARE_STATE state = SQUARE_STATE.Pending;
     [SerializeField] private Projector m_projector;
+    private AudioSource m_audio;
+    public bool IsScanned{get{return state == SQUARE_STATE.Scanned;}}
     public bool IsScanning{get{return state == SQUARE_STATE.Scanning;}}
     public bool IsPending{get{return state == SQUARE_STATE.Pending;}}
     private DetectSeedMiniGame seedMiniGame;
     private Material projector_mat;
+    void Awake()=>m_audio = GetComponent<AudioSource>();
     public void Init(Material m_mat, DetectSeedMiniGame miniGame){
         seedMiniGame = miniGame;
 
@@ -24,7 +27,6 @@ public class ScanSquareUnit : MonoBehaviour
         if(projector_mat!=null) Destroy(projector_mat);
     }
     public void StartScan(){
-        if(state != SQUARE_STATE.Pending) return;
         m_projector.enabled = true;
         StopAllCoroutines();
         StartCoroutine(coroutineStartScan());
@@ -33,9 +35,12 @@ public class ScanSquareUnit : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(coroutineAbortScan());
     }
-    public void TurnOffScan(){
-        StartCoroutine(coroutineTurnOffScan());
+    public void TurnOffScan()=>StartCoroutine(coroutineTurnOffScan());
+    public void PlaySFX(AudioClip clip){
+        m_audio.pitch = Random.Range(0.98f,1.02f);
+        m_audio.PlayOneShot(clip);
     }
+    public void StopSFX()=>m_audio.Stop();
     IEnumerator coroutineTurnOffScan(){
         Color initColor, targetColor;
         initColor = targetColor = m_projector.material.color;
@@ -54,9 +59,9 @@ public class ScanSquareUnit : MonoBehaviour
         Color targetColor = seedMiniGame.BlinkColor;
         Color initColor = targetColor;
         initColor.a = 0f;
-        float duration = 1.2f;
+        float duration = 0.75f;
         for(float t=0; t<1; t+=Time.deltaTime/duration){
-            float freq = Mathf.Lerp(10f, 25f, EasingFunc.Easing.QuadEaseIn(t));
+            float freq = Mathf.Lerp(6.25f, 12.5f, EasingFunc.Easing.QuadEaseOut(t));
             projector_mat.color = Color.Lerp(initColor, targetColor, 0.5f+0.5f*Mathf.Sin(t*Mathf.PI*freq));
             yield return null;
         }
@@ -80,14 +85,14 @@ public class ScanSquareUnit : MonoBehaviour
     IEnumerator coroutineAbortScan(){
         state = SQUARE_STATE.Error;
         Color targetColor = seedMiniGame.ErrorColor;
-        Color initColor = targetColor;
-        initColor.a = 0f;
-        float duration = 0.35f;
+        Color initColor = seedMiniGame.ErrorColor;
+        targetColor.a = 0;
+        float duration = 0.5f;
         for(float t=0; t<1; t+=Time.deltaTime/duration){
-            projector_mat.color = Color.Lerp(initColor, targetColor, 0.5f+0.5f*Mathf.Sin(t*Mathf.PI*5f));
+            projector_mat.color = Color.Lerp(initColor, targetColor, EasingFunc.Easing.QuadEaseOut(t));
             yield return null;
         }
-        projector_mat.color = initColor;
+        projector_mat.color = targetColor;
         m_projector.enabled = false;
         state = SQUARE_STATE.Pending;
     }
