@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 174376951}
   - component: {fileID: 174376950}
   - component: {fileID: 174376953}
+  - component: {fileID: 174376954}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -460,6 +461,19 @@ MonoBehaviour:
   m_AfterStackBundles:
   - assemblyQualifiedName: PaintBlur, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &174376954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174376949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bab4a8b0bc062044af55d697d644260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReferenceRatio: {x: 20, y: 9}
 --- !u!1 &297930995
 GameObject:
   m_ObjectHideFlags: 0
