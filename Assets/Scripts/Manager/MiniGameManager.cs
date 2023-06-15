@@ -14,7 +14,7 @@ public class MiniGameManager : MonoBehaviour
         }
     }
     void OnEnable(){
-    #if UNITY_EDITOR
+    #if UNITY_EDITOR || DEVELOPMENT_BUILD
         currentIndex = startMiniGame;
         miniGames[startMiniGame].EnterMiniGame();
     #else
