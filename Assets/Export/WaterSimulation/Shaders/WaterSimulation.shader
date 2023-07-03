@@ -7,7 +7,7 @@
     	_Atten("Attenuation", Range(0.0, 1.0)) = 0.999
     	_DeltaUV("Delta UV", Float) = 3
 		_Force("Force", Float) = 0
-		_FlowOpacity("Flow Opacity", Float) = 0.1
+		_FlowSpeed("Flow Opacity", Float) = 0.1
 		_FlowNoise("Flow Noise", Range(0,1)) = 0
 		_DynamicTex("DynamicTexture", 2D) = "Black"
 	}
@@ -21,11 +21,14 @@
 		uniform float _Atten;
 		uniform float _DeltaUV;
 		uniform float _Force;
-		uniform float _FlowOpacity;
+		uniform float _FlowSpeed;
 		uniform float _FlowNoise;
 
 		uniform sampler2D _DynamicTex;
 
+		float flow(float2 _uv, float2 st){
+			return tex2D(_SelfTexture2D, _uv-st).a*_FlowSpeed;
+		}
 		float random (float2 st) {
 			return frac(sin(dot(st.xy,
 								float2(12.9898,78.233)))*
@@ -55,6 +58,8 @@
 			float _dh = tex2D(_DynamicTex, uv).r*_Force;
 			height += _dh;
 
+			c.a += flow(uv, duv.zy) + flow(uv, -duv.zy) + flow(uv, duv.xz) + flow(uv, -duv.xz);
+			c.a += tex2D(_DynamicTex, uv).r * 0.005;
 			c.a = saturate(c.a);
 
 			return float4(height, c.r, height - c.r, c.a);
