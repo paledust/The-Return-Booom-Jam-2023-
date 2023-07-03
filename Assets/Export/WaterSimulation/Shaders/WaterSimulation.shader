@@ -58,8 +58,7 @@
 			float _dh = tex2D(_DynamicTex, uv).r*_Force;
 			height += _dh;
 
-			c.a += flow(uv, duv.zy) + flow(uv, -duv.zy) + flow(uv, duv.xz) + flow(uv, -duv.xz);
-			c.a += tex2D(_DynamicTex, uv).r * 0.005;
+			c.a += sqrt(height*height)*0.1;
 			c.a = saturate(c.a);
 
 			return float4(height, c.r, height - c.r, c.a);
