@@ -170,7 +170,7 @@ Shader "AmplifyShaders/WaterPlane_Interactable"
 			#ifdef UNITY_PASS_FORWARDADD//464
 			surfResult464 -= s464.Emission;
 			#endif//464
-			float smoothstepResult457 = smoothstep( 0.4 , 1.0 , tex2DNode405.a);
+			float smoothstepResult457 = smoothstep( 0.0 , 1.0 , tex2DNode405.a);
 			float darkMask447 = saturate( ( smoothstepResult457 + _DarkControl ) );
 			float4 lerpResult465 = lerp( refl308 , float4( surfResult464 , 0.0 ) , darkMask447);
 			c.rgb = lerpResult465.rgb;
@@ -282,7 +282,6 @@ Node;AmplifyShaderEditor.SamplerNode;405;-1807.068,784.1385;Inherit;True;Propert
 Node;AmplifyShaderEditor.RegisterLocalVarNode;406;-579.3577,818.4346;Float;False;RippleNormal;-1;True;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;245;-3363.535,38.07006;Float;False;waterDepth;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;204;-909.3122,307.9843;Float;False;Property;_OverAllOpacity;OverAllOpacity;0;0;Create;True;0;0;0;False;0;False;0;1;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.SmoothstepOpNode;457;-1673.666,1099.863;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0.4;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;459;-1648.396,1235.123;Inherit;False;Property;_DarkControl;DarkControl;19;0;Create;True;0;0;0;False;0;False;1;0;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;460;-1443.781,1098.471;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;461;-1286.781,1097.471;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
@@ -297,6 +296,7 @@ Node;AmplifyShaderEditor.GetLocalVarNode;310;-1275.081,-571.3168;Inherit;False;3
 Node;AmplifyShaderEditor.GetLocalVarNode;467;-502.8535,-367.7737;Inherit;False;308;refl;1;0;OBJECT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.GetLocalVarNode;448;-498.55,13.08918;Inherit;False;447;darkMask;1;0;OBJECT;;False;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;465;-198.2867,-216.2967;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SmoothstepOpNode;457;-1673.666,1099.863;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 WireConnection;389;0;155;0
 WireConnection;381;0;389;0
 WireConnection;392;1;381;0
@@ -378,7 +378,6 @@ WireConnection;439;0;434;0
 WireConnection;439;1;440;0
 WireConnection;406;0;416;0
 WireConnection;245;0;177;0
-WireConnection;457;0;405;4
 WireConnection;460;0;457;0
 WireConnection;460;1;459;0
 WireConnection;461;0;460;0
@@ -393,5 +392,6 @@ WireConnection;308;0;287;0
 WireConnection;465;0;467;0
 WireConnection;465;1;464;0
 WireConnection;465;2;448;0
+WireConnection;457;0;405;4
 ASEEND*/
-//CHKSM=779C908246637B20AEF5CF25FB37CA4AF5501675
+//CHKSM=415A61C86296641FB362C91B10A9D1D00411D08C

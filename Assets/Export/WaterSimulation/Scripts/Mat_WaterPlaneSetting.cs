@@ -32,22 +32,24 @@ public bool m_DisablePixelLights = true;
 	private RenderTexture m_ReflectionTexture = null;
 	private int m_OldReflectionTextureSize = 0;
 	private static bool s_InsideRendering = false;
+	private int ScrWidth;
 	protected void UpdateTextureScale(){
+		ScrWidth = Screen.width;
 		switch(_renderScale){
 			case RenderScale.Equal:
-				m_TextureSize = Screen.width;
+				m_TextureSize = ScrWidth;
 				break;
 			case RenderScale.Half:
-				m_TextureSize = Screen.width / 2;
+				m_TextureSize = ScrWidth / 2;
 				break;
 			case RenderScale.Tri:
-				m_TextureSize = Screen.width / 3;
+				m_TextureSize = ScrWidth / 3;
 				break;
 			case RenderScale.Quater:
-				m_TextureSize = Screen.width / 4;
+				m_TextureSize = ScrWidth / 4;
 				break;
 			case RenderScale.Low:
-				m_TextureSize = Screen.width / 16;
+				m_TextureSize = ScrWidth / 16;
 				break;
 		}
 	}
@@ -58,7 +60,7 @@ public bool m_DisablePixelLights = true;
 	// camera will just work!
 	public void OnWillRenderObject()
 	{
-		if(_renderScale != m_renderScale){
+		if(_renderScale != m_renderScale || ScrWidth != Screen.width){
 			_renderScale = m_renderScale;
 			UpdateTextureScale();
 		}

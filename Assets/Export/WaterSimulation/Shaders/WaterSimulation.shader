@@ -26,9 +26,6 @@
 
 		uniform sampler2D _DynamicTex;
 
-		float flow(float2 _uv, float2 st){
-			return tex2D(_SelfTexture2D, _uv-st).a*_FlowSpeed;
-		}
 		float random (float2 st) {
 			return frac(sin(dot(st.xy,
 								float2(12.9898,78.233)))*
@@ -37,7 +34,24 @@
 		float randomTime(float2 st) {
 			return frac(sin(dot(st.xy, float2(12.9898,78.233)) + random(float2(_Time.xx))*_FlowNoise)*43758.5453123);
 		}
+		float2 GradientNoiseDir( float2 x )
+		{
+			const float2 k = float2( 0.3183099, 0.3678794 );
+			x = x * k + k.yx;
+			return -1.0 + 2.0 * frac( 16.0 * k * frac( x.x * x.y * ( x.x + x.y ) ) );
+		}
 		
+		float GradientNoise( float2 UV, float Scale )
+		{
+			float2 p = UV * Scale;
+			float2 i = floor( p );
+			float2 f = frac( p );
+			float2 u = f * f * ( 3.0 - 2.0 * f );
+			return lerp( lerp( dot( GradientNoiseDir( i + float2( 0.0, 0.0 ) ), f - float2( 0.0, 0.0 ) ),
+					dot( GradientNoiseDir( i + float2( 1.0, 0.0 ) ), f - float2( 1.0, 0.0 ) ), u.x ),
+					lerp( dot( GradientNoiseDir( i + float2( 0.0, 1.0 ) ), f - float2( 0.0, 1.0 ) ),
+					dot( GradientNoiseDir( i + float2( 1.0, 1.0 ) ), f - float2( 1.0, 1.0 ) ), u.x ), u.y );
+		}
 		fixed4 frag (v2f_customrendertexture i) : SV_Target
 		{
 			float2 uv = i.globalTexcoord;
@@ -58,10 +72,17 @@
 			float _dh = tex2D(_DynamicTex, uv).r*_Force;
 			height += _dh;
 
-			c.a += sqrt(height*height)*0.1;
-			c.a = saturate(c.a);
+			float noise = saturate(GradientNoise(uv+float2(0.255123,_Time.x*_DeltaUV),100));
+			float flow = c.a;
+			flow += _dh*2.5;
+			flow += lerp(_FlowSpeed, _FlowSpeed*0.0, noise)*(tex2D(_SelfTexture2D, uv - duv.zy).a +
+        				 tex2D(_SelfTexture2D, uv + duv.zy).a +
+        				 tex2D(_SelfTexture2D, uv - duv.xz).a +
+        				 tex2D(_SelfTexture2D, uv + duv.xz).a-4*c.a)*0.25;
 
-			return float4(height, c.r, height - c.r, c.a);
+			flow = max(c.a,flow);
+
+			return float4(height, c.r, c.a, flow);
 		}
 
 		float4 frag_left_click(v2f_customrendertexture i) : SV_Target
