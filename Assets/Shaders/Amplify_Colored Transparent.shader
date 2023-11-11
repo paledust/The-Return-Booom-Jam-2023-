@@ -134,7 +134,7 @@ Node;AmplifyShaderEditor.RangedFloatNode;13;-2043.99,227.0602;Inherit;False;Prop
 Node;AmplifyShaderEditor.RangedFloatNode;14;-2038.034,310.4536;Inherit;False;Property;_FadeMax;FadeMax;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;9;-2179.676,69.16914;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.OneMinusNode;15;-1881.596,141.6849;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;-690.0556,-20.754;Float;False;True;-1;2;ASEMaterialInspector;100;5;AmplifyShaders/Colored Transparent;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;True;2;5;False;;10;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;True;True;False;0;True;_Reference;255;False;;255;False;;0;True;_Comparison;0;True;_Operation;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;True;True;2;False;;True;7;False;;True;True;0;False;;0;False;;True;3;RenderType=Transparent=RenderType;Queue=Overlay=Queue=0;IgnoreProjector=True;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;0;1;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;-690.0556,-20.754;Float;False;True;-1;2;ASEMaterialInspector;100;5;AmplifyShaders/Colored Transparent;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;True;2;5;False;;10;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;True;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;True;True;False;0;True;_Reference;255;False;;255;False;;0;True;_Comparison;0;True;_Operation;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;True;True;2;False;;True;7;False;;True;True;0;False;;0;False;;True;3;RenderType=Transparent=RenderType;Queue=Overlay=Queue=0;IgnoreProjector=True;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;0;1;True;False;;False;0
 WireConnection;10;0;6;1
 WireConnection;10;1;6;2
 WireConnection;10;2;6;3
@@ -147,4 +147,4 @@ WireConnection;12;2;14;0
 WireConnection;15;0;9;2
 WireConnection;1;0;10;0
 ASEEND*/
-//CHKSM=781FBF65DAC265765FEDF00EAC08ED5E00640D5A
+//CHKSM=65E90A6B5A578B0A2DF69F06A410D477CE530D8D

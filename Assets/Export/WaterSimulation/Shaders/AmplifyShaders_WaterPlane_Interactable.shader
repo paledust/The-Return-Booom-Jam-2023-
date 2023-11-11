@@ -17,7 +17,7 @@ Shader "AmplifyShaders/WaterPlane_Interactable"
 		_WaterDepth("Water Depth", Float) = 0
 		_WaterFallOff("WaterFallOff", Float) = 0
 		_WaterFalloffPower("WaterFalloffPower", Float) = 0
-		[HideInInspector]_ReflectionTex("ReflectionTex", 2D) = "white" {}
+		_ReflectionTex("ReflectionTex", 2D) = "white" {}
 		_ReflectionIntensity("ReflectionIntensity", Range( 0 , 1)) = 0
 		_ReflectionDistortion("ReflectionDistortion", Range( 0 , 1)) = 0
 		_DarkControl("DarkControl", Range( 0 , 1)) = 1
@@ -255,7 +255,6 @@ Node;AmplifyShaderEditor.ColorNode;171;-3606.264,-165.206;Float;False;Property;_
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;187;-2319.111,-1136.316;Inherit;False;3;3;0;FLOAT3;1,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.ComponentMaskNode;188;-2392.658,-1241.824;Inherit;False;True;True;False;False;1;0;FLOAT4;0,0,0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SimpleDivideOpNode;307;-3960.786,2750.361;Inherit;False;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.TexturePropertyNode;266;-4180.154,2222.348;Float;True;Property;_ReflectionTex;ReflectionTex;16;1;[HideInInspector];Create;True;0;0;0;False;0;False;None;None;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.SimpleAddOpNode;191;-2166.012,-1203.216;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.SamplerNode;287;-3825.82,2365.74;Inherit;True;Property;_TextureSample1;Texture Sample 1;23;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.WireNode;192;-3094.766,72.56043;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
@@ -297,6 +296,7 @@ Node;AmplifyShaderEditor.GetLocalVarNode;467;-502.8535,-367.7737;Inherit;False;3
 Node;AmplifyShaderEditor.GetLocalVarNode;448;-498.55,13.08918;Inherit;False;447;darkMask;1;0;OBJECT;;False;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;465;-198.2867,-216.2967;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SmoothstepOpNode;457;-1673.666,1099.863;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.TexturePropertyNode;266;-4180.154,2222.348;Float;True;Property;_ReflectionTex;ReflectionTex;16;0;Create;True;0;0;0;False;0;False;None;None;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 WireConnection;389;0;155;0
 WireConnection;381;0;389;0
 WireConnection;392;1;381;0
@@ -394,4 +394,4 @@ WireConnection;465;1;464;0
 WireConnection;465;2;448;0
 WireConnection;457;0;405;4
 ASEEND*/
-//CHKSM=415A61C86296641FB362C91B10A9D1D00411D08C
+//CHKSM=E46854415A8A1D5AB5FAAC62D75F72489336A078
