@@ -1,0 +1,18 @@
+#pragma kernel CSMain
+
+Texture2D<float4> image;
+RWTexture2D<float4> Result;
+RWStructuredBuffer<uint> calculateBuffer;
+
+[numthreads(64, 1, 1)]
+void CSInt(uint3 id: SV_DispatchThreadID)
+{
+    calculateBuffer[id.x] = 0.0;
+}
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    float fill = image[id.xy].x;
+    // interlockedAdd(calculateBuffer[0], fill);
+}

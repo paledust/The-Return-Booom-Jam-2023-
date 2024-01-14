@@ -79,7 +79,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _WaterNormal:
         m_Texture: {fileID: 2800000, guid: c288925dd7aaca24d87b165291e64070, type: 3}
-        m_Scale: {x: 0.5, y: 0.25}
+        m_Scale: {x: 0.8, y: 1.6}
         m_Offset: {x: 0, y: 0}
     - _WobbleTexture:
         m_Texture: {fileID: 2800000, guid: 9d920f33ed13b3042b210e8febc41bdf, type: 3}
@@ -97,7 +97,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _Displacement: 0
     - _DistortIntensity: 0.1
-    - _Distortion: 0
+    - _Distortion: 1
     - _DstBlend: 0
     - _DynamicDisplacement: 0
     - _FadeMinDistance: 6.52
@@ -110,7 +110,7 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _NormalPanSpeed: 0.4
+    - _NormalPanSpeed: 1
     - _NormalScale: 0
     - _OcclusionStrength: 1
     - _OverAllOpacity: 1
@@ -146,6 +146,7 @@ Material:
     - _DeepColor: {r: 0.028969372, g: 0.057316154, b: 0.06603769, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _NormalPanVelocity: {r: -0.1, g: 0.02, b: -0.05, a: -0.05}
     - _RadiationColor: {r: 0.5943396, g: 0.5303382, b: 0.19904771, a: 1}
     - _RadiationColor1: {r: 0.5943396, g: 0.54787964, b: 0.2214756, a: 1}
     - _RadiationColor2: {r: 0.6509434, g: 0.5172165, b: 0.48759344, a: 1}

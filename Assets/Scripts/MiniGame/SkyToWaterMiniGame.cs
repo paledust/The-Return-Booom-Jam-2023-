@@ -11,6 +11,9 @@ public class SkyToWaterMiniGame : MiniGameBasic
     [SerializeField] private Rect fishRect;
     [SerializeField] private ParticleSystem fishParticles;
     [SerializeField] private ParticleSystem rippleParticles;
+[Header("End")]
+    [SerializeField] private MeshRenderer skyRenderer;
+    [SerializeField] private float fadeOutDuration = 5;
     private Vector2[] spawnPos;
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
@@ -44,6 +47,22 @@ public class SkyToWaterMiniGame : MiniGameBasic
         location.y = rippleParticles.transform.position.y;
         rippleParticles.transform.position = location;
         rippleParticles.Play(true);
+    }
+    protected override void CleanUp()
+    {
+        base.CleanUp();
+
+        StartCoroutine(coroutineFadeOutSky(fadeOutDuration));
+    }
+    IEnumerator coroutineFadeOutSky(float duration){
+        Color initCol = skyRenderer.material.color;
+        Color targetCol = initCol;
+        targetCol.a = 0;
+
+        yield return new WaitForLoop(duration, (t)=>{
+            skyRenderer.material.color = Color.Lerp(initCol, targetCol, EasingFunc.Easing.SmoothInOut(t));
+        });
+        skyRenderer.gameObject.SetActive(false);
     }
     void OnDrawGizmosSelected(){
         Gizmos.matrix = transform.localToWorldMatrix;
