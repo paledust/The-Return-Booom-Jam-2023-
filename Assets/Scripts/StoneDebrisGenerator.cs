@@ -17,7 +17,7 @@ public class StoneDebrisGenerator : MonoBehaviour
         stoneDebris = new List<ConstantForce>();
         for(int i=0;i<maxStoneCount;i++){
             int index = i%stonePrefabs.Length;
-            var stone = GameObject.Instantiate(stonePrefabs[index]);
+            var stone = GameObject.Instantiate(stonePrefabs[index], transform.parent);
             stoneDebris.Add(stone.GetComponent<ConstantForce>());
             stone.hideFlags = HideFlags.HideInInspector;
             stone.transform.position = transform.position + transform.right * Random.Range(-spawnZone.width/2f, spawnZone.width/2f);
