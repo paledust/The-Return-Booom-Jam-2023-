@@ -55,36 +55,7 @@ namespace SimpleAudioSystem{
                 current_ambience_name = audio_name;
             }            
         }
-        public void PlayAmbience(string audio_name, bool startOver, float volume=1){
-        //If no audio name, fade out the ambience
-            if(audio_name == string.Empty){
-                FadeAudio(ambience_loop, 0, 0.5f, true);
-                current_ambience_name = string.Empty;
-            }
-        //If the audio name is the same, only fade the volume to the target value
-            if(current_ambience_name==audio_name){
-                FadeAudio(ambience_loop, volume, 0.5f);
-            }
-            else{
-                if(current_ambience_name == string.Empty || !ambience_loop.isPlaying){
-                    ambience_loop.clip = audioInfo.GetAMBClipByName(audio_name);
-                    if(ambience_loop.clip==null){
-                        Debug.LogWarning("No clip found, nothing will be done for ambient");
-                        return;
-                    }
-                    ambience_loop.volume = volume;
-                    ambience_loop.Play();
-                }
-                else{
-                    if(ambience_loop.clip==null){
-                        Debug.LogWarning("No clip found, nothing will be done for ambient");
-                        return;
-                    }
-                    CrossFadeAmbience(audio_name, volume, startOver, 0.5f);
-                }
-                current_ambience_name = audio_name;
-            }
-        }
+        public void PlayAmbience(string audio_name, bool startOver, float volume=1)=>PlayAmbience(audio_name, startOver, 0.5f, volume);
         public AudioClip PlaySoundEffect(AudioSource targetSource, string clip_name, float volumeScale){
             AudioClip clip = GetSFXClip(clip_name);
             if(clip!=null)
