@@ -7,6 +7,7 @@ using UnityEngine.Playables;
 public class DetectSeedMiniGame : MiniGameBasic
 {
     [SerializeField] private KeyMatrix_SO keyMatrix;
+    [SerializeField] private GameObject scanUnitGroup;
 [Space(10)]
 [Header("Scan Unit Visual")]
     [ColorUsage(true, true)] public Color BlinkColor;
@@ -32,6 +33,8 @@ public class DetectSeedMiniGame : MiniGameBasic
     private ScanSquareUnit processingUnit;
     protected override void Initialize(){
         base.Initialize();
+        scanUnitGroup.gameObject.SetActive(true);
+        
         scannedUnit = new List<ScanSquareUnit>();
         scanUnitMatrix = new ScanSquareUnit[LINE, ROLL];
 
