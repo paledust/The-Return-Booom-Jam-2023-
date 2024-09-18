@@ -20,6 +20,13 @@ public class CommandManager<T> : MonoBehaviour where T:MonoBehaviour
             }
         }
     }
+    public void ActivateAutoPilot(){
+        this.enabled = true;
+    }
+    public void DeactivateAutoPilot(){
+        this.enabled = false;
+        AbortCommands();
+    }
     public void AbortCommands(){
         for(int i=commandList.Count-1; i>=0; i--){
             commandList[i].SetStatus(CommandStatus.Aborted);

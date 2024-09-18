@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using SimpleSaveSystem;
+
 //Please make sure "GameManager" is excuted before every custom script
 public class GameManager : Singleton<GameManager>
 {
@@ -26,33 +28,34 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         Application.targetFrameRate = targetFrameRate;
 
+        SaveManager.Initialize();
+
     #if UNITY_EDITOR
-        if(loadInitSceneFromGameManager){StartCoroutine(SwitchSceneCoroutine(string.Empty, InitScene));}
+        if(loadInitSceneFromGameManager) StartCoroutine(SwitchSceneCoroutine(string.Empty, InitScene, false));
     #else
-        StartCoroutine(SwitchSceneCoroutine(string.Empty, InitScene));
+        StartCoroutine(SwitchSceneCoroutine(string.Empty, InitScene, false));
     #endif
-    
+
+    #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["restart"].performed += Debug_RestartLevel;
+        debugActions["save"].performed += Debug_Save;
+        debugActions["load"].performed += Debug_Load;
 
         if(isTesting) debugActions.Enable();
+    #endif
     }
     protected override void OnDestroy(){
         base.OnDestroy();
 
+    #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["restart"].performed -= Debug_RestartLevel;
+        debugActions["save"].performed -= Debug_Save;
+        debugActions["load"].performed -= Debug_Load;
 
         if(debugActions.enabled)debugActions.Disable();
+    #endif
     }
-    public void SwitchingScene(string from, string to){
-        if(!isSwitchingScene){
-            StartCoroutine(SwitchSceneCoroutine(from, to));
-        }
-    }
-    public void SwitchingScene(string to){
-        if(!isSwitchingScene){
-            StartCoroutine(SwitchSceneCoroutine(to));
-        }
-    }
+
 #region Game Pause
     public void PauseTheGame(){
         if(isPaused) return;
@@ -71,7 +74,8 @@ public class GameManager : Singleton<GameManager>
 #endregion
 
     public void EndGame(){
-        if(isDemo) {demoText.gameObject.SetActive(true);}
+        if(isDemo) demoText.gameObject.SetActive(true);
+
         string currentLevel = SceneManager.GetActiveScene().name;
         StartCoroutine(EndGameCoroutine(currentLevel));
     }
@@ -79,22 +83,28 @@ public class GameManager : Singleton<GameManager>
         string currentLevel = SceneManager.GetActiveScene().name;
         StartCoroutine(RestartLevel(currentLevel));
     }
-    public void RestartLevel_DEBUG(){
-        string currentLevel = SceneManager.GetActiveScene().name;
-        StartCoroutine(RestartLevel(currentLevel, true));
-    }
 
 #region Scene Transition
+    public void SwitchingScene(string from, string to, bool resume = false){
+        if(!isSwitchingScene){
+            StartCoroutine(SwitchSceneCoroutine(from, to, resume));
+        }
+    }
+    public void SwitchingScene(string to, bool resume){
+        string from = SceneManager.GetActiveScene().name;
+        SwitchingScene(from, to, resume);
+    }
     IEnumerator EndGameCoroutine(string level){
         yield return FadeInScreen(3f);
-        //TO DO:Save Game before unload the scene
+
+        EventHandler.Call_BeforeUnloadScene();
         yield return SceneManager.UnloadSceneAsync(level);
         yield return new WaitForSeconds(1f);
         Debug.Log("EndGame");
         Application.Quit();
     }
-    IEnumerator RestartLevel(string level, bool isDebug = false){
-        if(isDebug) yield return FadeInScreen(3f);
+    IEnumerator RestartLevel(string level){
+        yield return FadeInScreen(3f);
         isSwitchingScene = true;
 
         //TO DO: do something before the last scene is unloaded. e.g: call event of saving 
@@ -108,39 +118,39 @@ public class GameManager : Singleton<GameManager>
 
         isSwitchingScene = false;
     }
-    /// <summary>
-    /// This method is good for load scene in an additive way, having a persistance scene
-    /// </summary>
-    /// <param name="from"></param>
-    /// <param name="to"></param>
-    /// <returns></returns>
-    IEnumerator SwitchSceneCoroutine(string from, string to){
+    IEnumerator RestartLevelImmediatley(string level){
+        isSwitchingScene = true;
+
+        EventHandler.Call_BeforeUnloadScene();
+
+        yield return SceneManager.UnloadSceneAsync(level);
+        yield return null;
+
+        yield return SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(level));
+
+        EventHandler.Call_AfterLoadScene();
+
+        isSwitchingScene = false;        
+    }
+    IEnumerator SwitchSceneCoroutine(string from, string to, bool resume){
         isSwitchingScene = true;
 
         if(from != string.Empty){
             //TO DO: do something before the last scene is unloaded. e.g: call event of saving 
+            EventHandler.Call_BeforeUnloadScene();
             yield return FadeInScreen(transitionDuration);
             yield return SceneManager.UnloadSceneAsync(from);
         }
         //TO DO: do something after the last scene is unloaded.
         yield return SceneManager.LoadSceneAsync(to, LoadSceneMode.Additive);
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(to));
+
         //TO DO: do something after the next scene is loaded. e.g: call event of loading
+        EventHandler.Call_AfterLoadScene();
+        if(resume) SaveManager.LoadGameState();
+
         yield return FadeOutScreen(transitionDuration);
-
-        isSwitchingScene = false;
-    }
-    /// <summary>
-    /// This method is good for load one scene each time, no persistance scene
-    /// </summary>
-    /// <param name="to"></param>
-    /// <returns></returns>
-    IEnumerator SwitchSceneCoroutine(string to){
-        isSwitchingScene = true;
-
-        //TO DO: do something before the next scene is loaded. e.g: call event of saving 
-        yield return SceneManager.LoadSceneAsync(to);
-        //TO DO: do something after the next scene is loaded. e.g: call event of loading
 
         isSwitchingScene = false;
     }
@@ -166,5 +176,7 @@ public class GameManager : Singleton<GameManager>
             RestartLevel();
         }
     }
+    void Debug_Save(InputAction.CallbackContext callback)=>SaveManager.SaveGameState();
+    void Debug_Load(InputAction.CallbackContext callback)=>SaveManager.LoadGameState();
 #endregion
 }

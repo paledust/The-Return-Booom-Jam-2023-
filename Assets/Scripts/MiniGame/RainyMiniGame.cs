@@ -55,17 +55,17 @@ public class RainyMiniGame : MiniGameBasic
             minimalRain_amount = SMALL_LEVEL;
             m_rain_loop.Play(true);
             emission.rateOverTimeMultiplier = 10;
-            AudioManager.Instance.CrossFadeAmbience(amb_rain_small_name, .03f, 4f);
+            AudioManager.Instance.PlayAmbience(amb_rain_small_name, true, 4f, .03f);
         }
         if(rain_amount>=MID_LEVEL && rain_amount<HEAVY_LEVEL && minimalRain_amount!=MID_LEVEL){
             minimalRain_amount = MID_LEVEL;
             emission.rateOverTimeMultiplier = 100;
-            AudioManager.Instance.CrossFadeAmbience(amb_rain_mid_name, .06f, 3f);
+            AudioManager.Instance.PlayAmbience(amb_rain_mid_name, true, 3f, .06f);
         }
         if(rain_amount>HEAVY_LEVEL && rain_amount<1 && minimalRain_amount!=HEAVY_LEVEL){
             minimalRain_amount = HEAVY_LEVEL;
             emission.rateOverTimeMultiplier = 200;
-            AudioManager.Instance.CrossFadeAmbience(amb_rain_heavy_name, .2f, 4f);
+            AudioManager.Instance.PlayAmbience(amb_rain_heavy_name, true, 4f, .2f);
         }
         if(rain_amount >= 1){
             minimalRain_amount = 1;

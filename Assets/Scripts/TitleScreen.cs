@@ -35,7 +35,7 @@ public class TitleScreen : MonoBehaviour
     }
     IEnumerator coroutineStartGame(){
         titleAnime.Play("TitleScreen_Out");
-        SimpleAudioSystem.AudioManager.Instance.CrossFadeAmbience("desert", 0.5f, 3);
+        SimpleAudioSystem.AudioManager.Instance.PlayAmbience("desert", true, 3, 0.5f);
         yield return new WaitForSeconds(5f);
         GameManager.Instance.SwitchingScene("Title","Main");
     }

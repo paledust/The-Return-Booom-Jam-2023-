@@ -7,6 +7,7 @@ using UnityEngine;
 //A basic C# Event System
 public static class EventHandler
 {
+#region Input
     public static Action<Key> OnKeyPressed;
     public static void Call_OnKeyPressed(Key key){OnKeyPressed?.Invoke(key);}
     public static Action<Key> OnKeyReleased;
@@ -15,10 +16,21 @@ public static class EventHandler
     public static void Call_OnAnyKeyPressed(){OnAnyKeyPressed?.Invoke();}
     public static Action OnNoKeyPressed;
     public static void Call_OnNoKeyPressed(){OnNoKeyPressed?.Invoke();}
+#endregion
+
+#region Mini Game
     public static Action<MiniGameBasic> OnEndMiniGame;
     public static void Call_OnEndMiniGame(MiniGameBasic miniGame){OnEndMiniGame?.Invoke(miniGame);}
     public static Action OnNextMiniGame;
     public static void Call_OnNextMiniGame(){OnNextMiniGame?.Invoke();}
+#endregion
+
+#region Game Basic
+    public static Action E_BeforeUnloadScene;
+    public static void Call_BeforeUnloadScene()=>E_BeforeUnloadScene?.Invoke();
+    public static Action E_AfterLoadScene;
+    public static void Call_AfterLoadScene()=>E_AfterLoadScene?.Invoke();
+#endregion
 }
 
 //A More Strict Event System

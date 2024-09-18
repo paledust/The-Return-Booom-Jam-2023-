@@ -6,7 +6,8 @@ using EasingFunc;
 using TMPro;
 
 public static class CommonCoroutine{
-    public static IEnumerator coroutineFadeSprite(SpriteRenderer m_sprite, float targetAlpha, float duration){
+    public static IEnumerator coroutineFadeSprite(SpriteRenderer m_sprite, float targetAlpha, float duration, float delay = 0){
+        yield return new WaitForSeconds(delay);
         if(targetAlpha == 1) m_sprite.enabled = true;
 
         Color initColor = m_sprite.color;
@@ -14,7 +15,22 @@ public static class CommonCoroutine{
         targetColor.a = targetAlpha;
 
         yield return new WaitForLoop(duration, (t)=>{
-            m_sprite.color = Color.Lerp(initColor, targetColor, EasingFunc.Easing.SmoothInOut(t));
+            m_sprite.color = Color.Lerp(initColor, targetColor, Easing.SmoothInOut(t));
+        });
+
+        if(targetAlpha == 0) m_sprite.enabled = false;
+    }
+    public static IEnumerator coroutineFadeSprite(SpriteRenderer m_sprite, float targetAlpha, float duration, Easing.FunctionType functionType, float delay = 0){
+        yield return new WaitForSeconds(delay);
+        if(targetAlpha == 1) m_sprite.enabled = true;
+
+        Color initColor = m_sprite.color;
+        Color targetColor = initColor;
+        targetColor.a = targetAlpha;
+
+        var func = Easing.GetFunctionWithTypeEnum(functionType);
+        yield return new WaitForLoop(duration, (t)=>{
+            m_sprite.color = Color.Lerp(initColor, targetColor, Easing.SmoothInOut(t));
         });
 
         if(targetAlpha == 0) m_sprite.enabled = false;
@@ -23,14 +39,14 @@ public static class CommonCoroutine{
         Color initColor = m_sprite.color;
 
         yield return new WaitForLoop(duration, (t)=>{
-            m_sprite.color = Color.Lerp(initColor, targetColor, EasingFunc.Easing.SmoothInOut(t));
+            m_sprite.color = Color.Lerp(initColor, targetColor, Easing.SmoothInOut(t));
         });
     }
     public static IEnumerator CoroutineSpriteGlow(SpriteRenderer m_sprite, float targetGlow, float duration){
         string spriteOutlineName = "_Outline";
         float initGlow = m_sprite.material.GetFloat(spriteOutlineName);
         yield return new WaitForLoop(duration, (t)=>{
-            m_sprite.material.SetFloat(spriteOutlineName, Mathf.Lerp(initGlow, targetGlow, EasingFunc.Easing.SmoothInOut(t)));
+            m_sprite.material.SetFloat(spriteOutlineName, Mathf.Lerp(initGlow, targetGlow, Easing.SmoothInOut(t)));
         });
     }
     public static IEnumerator CoroutineFadeCharacter(TMP_CharacterInfo c, float targetAlpha, float duration, Easing.FunctionType easeType=Easing.FunctionType.QuadEaseOut){

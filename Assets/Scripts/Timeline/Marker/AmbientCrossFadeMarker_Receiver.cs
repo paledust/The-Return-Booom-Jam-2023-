@@ -10,6 +10,6 @@ public class AmbientCrossFadeMarker_Receiver : MonoBehaviour, INotificationRecei
         var mark = notification as AmbientCrossFadeMarker;
         if (mark == null)
             return;
-        AudioManager.Instance.CrossFadeAmbience(mark.ambientName, mark.volume, mark.transitionTime);
+        AudioManager.Instance.PlayAmbience(mark.ambientName, true, mark.transitionTime, mark.volume);
     }
 }
