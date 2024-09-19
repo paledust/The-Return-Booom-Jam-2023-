@@ -35,7 +35,7 @@ public class Main_Initiator : MonoBehaviour
     }
 #if UNITY_EDITOR
     [ContextMenu("Match Scene To Start Index")]
-    public void MatchSceneToStartGameIndex(){
+    public void Editor_MatchSceneToStartGameIndex(){
         for(int i=0; i<sharingSets.Length; i++){
             Undo.RecordObject(sharingSets[i].GameSets, "Change Activation");
             if(sharingSets[i].MatchIndex(StartGameIndex))
@@ -45,6 +45,7 @@ public class Main_Initiator : MonoBehaviour
             EditorUtility.SetDirty(sharingSets[i].GameSets);
         }
     //Tell Mini Game Manager to prepare the mini game to match the start up scene
+        miniGameManager.Editor_MatchSceneToStartGameIndex(StartGameIndex);
     }
 #endif
 }

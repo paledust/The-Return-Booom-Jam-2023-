@@ -22,6 +22,7 @@ public class StoneBlowMiniGame : MiniGameBasic
     [SerializeField] private ParticleSystem sandParticles;
     [SerializeField] private float directorStartDelay;
     [SerializeField] private PlayableDirector director;
+    private List<ConstantForce> touchedStoneDebris;
     private float totalCount;
     private float targetVolume = 0;
     private int audioIndex = 0;
@@ -34,6 +35,7 @@ public class StoneBlowMiniGame : MiniGameBasic
         heli_loop.volume = 0;
         heli_loop.Play();
         totalCount = stoneDebris.Count;
+        touchedStoneDebris = new List<ConstantForce>();
     }
     protected override void CleanUp()
     {
@@ -53,6 +55,7 @@ public class StoneBlowMiniGame : MiniGameBasic
         int index = Random.Range(0, stoneDebris.Count);
         ConstantForce debri = stoneDebris[index];
 
+        touchedStoneDebris.Add(stoneDebris[index]);
         stoneDebris.RemoveAt(index);
         StartCoroutine(coroutineForceOnRock(debri, Mathf.Lerp(timeRange.x, timeRange.y, debrisProgress)));
 
@@ -60,7 +63,7 @@ public class StoneBlowMiniGame : MiniGameBasic
         audioIndex++;
         if(audioIndex>=rockClips.Length){
             audioIndex=0;
-            Service.Shuffle<AudioClip>(ref rockClips);
+            Service.Shuffle(ref rockClips);
         }
 
         if(stoneDebris.Count == 0){

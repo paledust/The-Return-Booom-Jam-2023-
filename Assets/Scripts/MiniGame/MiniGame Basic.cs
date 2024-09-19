@@ -4,20 +4,28 @@ using UnityEngine;
 
 public abstract class MiniGameBasic : MonoBehaviour
 {
-    [SerializeField] private bool autoControlGameAsset = true;
+    [SerializeField] private bool autoActivateGameAsset = true;
     [SerializeField] private GameObject miniGameAssetGroup;
     public bool IsPlaying{get{return isPlaying;}}
     private bool isPlaying = false;
     void Awake(){
         if(miniGameAssetGroup!=null)miniGameAssetGroup.SetActive(false);
     }
+#if UNITY_EDITOR
+    public void Editor_PrepareMiniGame(bool isOn){
+        if(miniGameAssetGroup!=null){
+            if(isOn) miniGameAssetGroup.SetActive(true);
+            else miniGameAssetGroup.SetActive(false);
+        }
+    }
+#endif
     public void EnterMiniGame(){
         isPlaying = true;
         EventHandler.OnKeyPressed    += OnKeyPressed;
         EventHandler.OnKeyReleased   += OnKeyReleased;
         EventHandler.OnAnyKeyPressed += OnAnyKeyPress;
         EventHandler.OnNoKeyPressed  += OnNoKeyPress;
-        if(autoControlGameAsset && miniGameAssetGroup!=null) miniGameAssetGroup.SetActive(true);
+        if(autoActivateGameAsset && miniGameAssetGroup!=null) miniGameAssetGroup.SetActive(true);
         Initialize();
     }
     public void ExitMiniGame(){
