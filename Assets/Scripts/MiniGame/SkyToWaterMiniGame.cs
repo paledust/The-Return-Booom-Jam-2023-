@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class SkyToWaterMiniGame : MiniGameBasic
 {
-    [SerializeField] private GameObject skyObject;
 [Header("Control")]
     [SerializeField] private KeyMatrix_SO keyMatrix;
     [SerializeField] private Rect fishRect;
@@ -30,7 +29,6 @@ public class SkyToWaterMiniGame : MiniGameBasic
         spawnPos = new Vector2[ROLL*LINE];
         triggerArray = new bool[ROLL*LINE];
         
-        skyObject.SetActive(true);
         for(int y=0; y<ROLL; y++){
             for(int x=0;x<LINE;x++){
                 triggerArray[y*LINE+x] = false;
