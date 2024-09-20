@@ -5242,7 +5242,6 @@ MonoBehaviour:
   - {fileID: 741970483}
   - {fileID: 1299489713}
   - {fileID: 223916407}
-  - {fileID: 1707333698}
 --- !u!1 &61477996
 GameObject:
   m_ObjectHideFlags: 0
@@ -20569,8 +20568,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 870792550}
-  m_RootOrder: 6
+  m_Father: {fileID: 959501938}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!215 &731430309
 ReflectionProbe:
@@ -20597,7 +20596,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 2
   m_BlendDistance: 1
   m_HDR: 1
   m_BoxProjection: 1
@@ -22003,7 +22002,6 @@ Transform:
   - {fileID: 126636277}
   - {fileID: 937227070}
   - {fileID: 764802147}
-  - {fileID: 731430308}
   m_Father: {fileID: 1019453214}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22666,6 +22664,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 731430308}
   - {fileID: 2044078516}
   - {fileID: 2085019935}
   - {fileID: 1716468014}
@@ -24832,8 +24831,8 @@ MonoBehaviour:
   - spriteRener: {fileID: 1919253674}
     targetColor: {r: 0.45490196, g: 0.31764707, b: 0.49803922, a: 0.015686275}
   skyRenderer: {fileID: 561384065}
-  skyTargetColor: {r: 0.050980393, g: 0.039215688, b: 0.05490196, a: 0.9019608}
-  brightStarAmount: 280
+  skyTargetColor: {r: 0.050980393, g: 0.039215688, b: 0.05490196, a: 1}
+  brightStarAmount: 250
   progressLerpSpeed: 5
   starParticles: {fileID: 1433630748}
   keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
@@ -36143,7 +36142,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 501
+  m_TextureSize: 823
   m_ClipPlaneOffset: 0.07
   m_ReflectLayers:
     serializedVersion: 2
@@ -38187,7 +38186,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 959501938}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &1716468015
 ParticleSystemRenderer:
@@ -44714,7 +44713,7 @@ Transform:
   m_Children:
   - {fileID: 857533830}
   m_Father: {fileID: 959501938}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!114 &1902600802
 MonoBehaviour:
@@ -46047,7 +46046,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 959501938}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &2044078517
 SpriteRenderer:
@@ -46448,7 +46447,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 959501938}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 216.763}
 --- !u!212 &2085019936
 SpriteRenderer:
@@ -46492,7 +46491,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b098b1a264df8434ca04d52a8b90d179, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5058824}
+  m_Color: {r: 1, g: 0.8627451, b: 0.8627451, a: 0.5058824}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0

@@ -25,7 +25,7 @@ Shader "AmplifyShaders/Colored Transparent"
 		Cull Back
 		ColorMask RGBA
 		ZWrite Off
-		ZTest LEqual
+		ZTest Always
 		Offset 0 , 0
 		
 		
@@ -134,7 +134,7 @@ Node;AmplifyShaderEditor.ColorNode;6;-1509.014,-46.33362;Inherit;False;Property;
 Node;AmplifyShaderEditor.SmoothstepOpNode;12;-1585.96,219.1267;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0.6;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;11;-1248.516,157.6433;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.DynamicAppendNode;10;-1022.6,-19.65734;Inherit;True;FLOAT4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;-690.0556,-20.754;Float;False;True;-1;2;ASEMaterialInspector;100;5;AmplifyShaders/Colored Transparent;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;True;2;5;False;;10;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;True;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;True;True;False;0;True;_Reference;255;False;;255;False;;0;True;_Comparison;0;True;_Operation;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;True;True;2;False;;True;0;False;;True;True;0;False;;0;False;;True;3;RenderType=Transparent=RenderType;Queue=Overlay=Queue=0;IgnoreProjector=True;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;0;1;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;-690.0556,-20.754;Float;False;True;-1;2;ASEMaterialInspector;100;5;AmplifyShaders/Colored Transparent;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;True;2;5;False;;10;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;True;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;True;True;False;0;True;_Reference;255;False;;255;False;;0;True;_Comparison;0;True;_Operation;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;True;True;2;False;;True;7;False;;True;True;0;False;;0;False;;True;3;RenderType=Transparent=RenderType;Queue=Overlay=Queue=0;IgnoreProjector=True;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;0;1;True;False;;False;0
 WireConnection;15;0;9;2
 WireConnection;12;0;15;0
 WireConnection;12;1;13;0
@@ -147,4 +147,4 @@ WireConnection;10;2;6;3
 WireConnection;10;3;11;0
 WireConnection;1;0;10;0
 ASEEND*/
-//CHKSM=6E29D5F993FA71BD1B74E211EA1AE46B4D59F62D
+//CHKSM=81D3D321DA56487532BDCB3B7E98FE4CF6844C4C
