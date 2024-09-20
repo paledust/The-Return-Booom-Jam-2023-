@@ -7,8 +7,7 @@ public class SkyToWaterMiniGame : MiniGameBasic
 {
 [Header("Control")]
     [SerializeField] private KeyMatrix_SO keyMatrix;
-    [SerializeField] private Rect fishRect;
-    [SerializeField] private ParticleSystem fishParticles;
+    [SerializeField] private Rect rippleRect;
     [SerializeField] private ParticleSystem rippleParticles;
 [Header("End")]
     [SerializeField, Range(0, 1)] private float TriggerPercentage = 0.5f;
@@ -32,7 +31,7 @@ public class SkyToWaterMiniGame : MiniGameBasic
         for(int y=0; y<ROLL; y++){
             for(int x=0;x<LINE;x++){
                 triggerArray[y*LINE+x] = false;
-                spawnPos[y*LINE+x] = new Vector2(x/(LINE-1.0f)*fishRect.width, -y/(ROLL-1.0f)*fishRect.height)+new Vector2(-0.5f*fishRect.width,0.5f*fishRect.height);
+                spawnPos[y*LINE+x] = new Vector2(x/(LINE-1.0f)*rippleRect.width, -y/(ROLL-1.0f)*rippleRect.height)+new Vector2(-0.5f*rippleRect.width,0.5f*rippleRect.height);
             }
         }
     }
@@ -47,12 +46,6 @@ public class SkyToWaterMiniGame : MiniGameBasic
 
         location = spawnPos[index];
         location.z = location.y;
-        location.y = fishParticles.transform.position.y;
-
-        fishParticles.transform.position = location;
-        fishParticles.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-        fishParticles.Play(true);
-
         location.y = rippleParticles.transform.position.y;
         rippleParticles.transform.position = location;
         rippleParticles.Play(true);
@@ -85,8 +78,8 @@ public class SkyToWaterMiniGame : MiniGameBasic
     void OnDrawGizmosSelected(){
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color  = new Color(0,1,0,0.2f);
-        Vector3 center= new Vector3(fishRect.xMin, 0, fishRect.yMin);
-        Vector3 size= new Vector3(fishRect.size.x, 0, fishRect.size.y);
+        Vector3 center= new Vector3(rippleRect.xMin, 0, rippleRect.yMin);
+        Vector3 size= new Vector3(rippleRect.size.x, 0, rippleRect.size.y);
         Gizmos.DrawCube(center, size);
     }
 }

@@ -79,7 +79,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _WaterNormal:
         m_Texture: {fileID: 2800000, guid: c288925dd7aaca24d87b165291e64070, type: 3}
-        m_Scale: {x: 0.8, y: 1.6}
+        m_Scale: {x: 1, y: 0.8}
         m_Offset: {x: 0, y: 0}
     - _WobbleTexture:
         m_Texture: {fileID: 2800000, guid: 9d920f33ed13b3042b210e8febc41bdf, type: 3}
@@ -116,7 +116,7 @@ Material:
     - _OverAllOpacity: 1
     - _Parallax: 0.02
     - _ReflectionDistortion: 0.391
-    - _ReflectionIntensity: 1
+    - _ReflectionIntensity: 0.3
     - _RippleScale: -0.8
     - _Smoothness: 0.818
     - _SmoothnessTextureChannel: 0
@@ -127,8 +127,8 @@ Material:
     - _UseRippleNormal: 1
     - _UseWaterDynamic: 0
     - _WaterDepth: 1
-    - _WaterFallOff: 2
-    - _WaterFalloffPower: 0.1
+    - _WaterFallOff: 3
+    - _WaterFalloffPower: 0.5
     - _WaveIntensity1: 1.12
     - _WaveIntensity2: 1
     - _WaveSpeed1: 0.84
@@ -150,5 +150,5 @@ Material:
     - _RadiationColor: {r: 0.5943396, g: 0.5303382, b: 0.19904771, a: 1}
     - _RadiationColor1: {r: 0.5943396, g: 0.54787964, b: 0.2214756, a: 1}
     - _RadiationColor2: {r: 0.6509434, g: 0.5172165, b: 0.48759344, a: 1}
-    - _ShalowColor: {r: 0.52910286, g: 0.7735849, b: 0.7735849, a: 1}
+    - _ShalowColor: {r: 0.27015626, g: 0.3933855, b: 0.455, a: 1}
   m_BuildTextureStacks: []
