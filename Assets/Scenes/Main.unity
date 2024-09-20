@@ -5028,7 +5028,7 @@ GameObject:
   - component: {fileID: 45571970}
   - component: {fileID: 45571971}
   m_Layer: 0
-  m_Name: Part I SpaceShipComes
+  m_Name: Part 1 SpaceShipComes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6215,7 +6215,7 @@ GameObject:
   - component: {fileID: 191584510}
   - component: {fileID: 191584509}
   m_Layer: 6
-  m_Name: VFX_GrassParticles
+  m_Name: P GrassParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11401,7 +11401,7 @@ GameObject:
   - component: {fileID: 221715804}
   - component: {fileID: 221715806}
   m_Layer: 0
-  m_Name: Part II GridBuilding
+  m_Name: Part 2 GridBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11530,6 +11530,7 @@ MonoBehaviour:
   rippleParticles: {fileID: 1333184777}
   TriggerPercentage: 0.5
   skyRenderer: {fileID: 561384065}
+  waterRenderer: {fileID: 1504337783}
   fadeOutDuration: 5
 --- !u!1001 &233562135
 PrefabInstance:
@@ -13916,7 +13917,7 @@ GameObject:
   - component: {fileID: 504978382}
   - component: {fileID: 504978381}
   m_Layer: 0
-  m_Name: VFX_FireFly
+  m_Name: P FireFly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21163,7 +21164,7 @@ GameObject:
   - component: {fileID: 754505108}
   - component: {fileID: 754505109}
   m_Layer: 0
-  m_Name: Part IX WaterToSky
+  m_Name: Part 8 SkyToWater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22964,7 +22965,7 @@ GameObject:
   - component: {fileID: 951420489}
   - component: {fileID: 951420491}
   m_Layer: 0
-  m_Name: Part V RainTillNight
+  m_Name: Part 5 RainTillNight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25278,7 +25279,7 @@ MonoBehaviour:
     targetColor: {r: 0.45490196, g: 0.31764707, b: 0.49803922, a: 0.015686275}
   skyRenderer: {fileID: 561384065}
   skyTargetColor: {r: 0.050980393, g: 0.039215688, b: 0.05490196, a: 1}
-  brightStarAmount: 250
+  brightStarAmount: 200
   progressLerpSpeed: 5
   starParticles: {fileID: 1433630748}
   keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
@@ -30396,7 +30397,7 @@ GameObject:
   - component: {fileID: 1345231007}
   - component: {fileID: 1345231008}
   m_Layer: 0
-  m_Name: Part VII HouseLights
+  m_Name: Part 7 HouseLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30468,6 +30469,8 @@ PlayableDirector:
     value: {fileID: 669595964}
   - key: {fileID: -3919541334586840942, guid: 89008678dc0d5514fa2ef30438bb6770, type: 2}
     value: {fileID: 1937161667}
+  - key: {fileID: -953071539765425871, guid: 89008678dc0d5514fa2ef30438bb6770, type: 2}
+    value: {fileID: 289012372}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1345231005
@@ -31985,7 +31988,7 @@ ParticleSystem:
       repeatInterval: 0.01
       probability: 0.5
   SizeModule:
-    enabled: 1
+    enabled: 0
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -32661,15 +32664,15 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: -0.036584854
-          inSlope: 16.055813
-          outSlope: 16.055813
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.25753075
+          outWeight: 1
         - serializedVersion: 3
-          time: 0.14097825
+          time: 0.107469946
           value: 1
           inSlope: 0
           outSlope: 0
@@ -32678,31 +32681,22 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.3073497
-          value: 0
-          inSlope: 0
-          outSlope: 0
+          time: 0.29245877
+          value: -0.39490417
+          inSlope: -2.7830765
+          outSlope: -2.7830765
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.8096824
-          value: -0.09004156
-          inSlope: -0.45863768
-          outSlope: -0.45863768
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0.44326204
+          outWeight: 0.22965826
         - serializedVersion: 3
           time: 1
-          value: -0.28089893
-          inSlope: 0
-          outSlope: 0
+          value: -1
+          inSlope: 0.06926408
+          outSlope: 0.06926408
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.25993785
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -41562,7 +41556,7 @@ GameObject:
   - component: {fileID: 1504337786}
   - component: {fileID: 1504337785}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Water Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41663,7 +41657,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 1024
+  m_TextureSize: 843
   m_ClipPlaneOffset: 0.07
   m_ReflectLayers:
     serializedVersion: 2
@@ -44958,7 +44952,7 @@ GameObject:
   - component: {fileID: 1891464461}
   - component: {fileID: 1891464462}
   m_Layer: 0
-  m_Name: Part XI Sun rise
+  m_Name: End Sun rise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46419,7 +46413,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9f470159f6d5da14fa69f01830042c22, type: 3}
-  m_Color: {r: 0.901, g: 0.96134883, b: 1, a: 0.14901961}
+  m_Color: {r: 0.901, g: 0.96134883, b: 1, a: 0.7254902}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -46999,7 +46993,7 @@ GameObject:
   - component: {fileID: 2113796385}
   - component: {fileID: 2113796386}
   m_Layer: 0
-  m_Name: Part VI LigthsBroken
+  m_Name: Part 6 LigthsBroken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47261,7 +47255,7 @@ GameObject:
   - component: {fileID: 2126115189}
   - component: {fileID: 2126115192}
   m_Layer: 0
-  m_Name: Part III DetectionOver
+  m_Name: Part 3 DetectionOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -51,7 +51,6 @@ public class StarsAppearMiniGame : MiniGameBasic
     protected override void CleanUp()
     {
         base.CleanUp();
-
         this.enabled = false;
     }
     void Update(){

@@ -12,13 +12,16 @@ public class SkyToWaterMiniGame : MiniGameBasic
 [Header("End")]
     [SerializeField, Range(0, 1)] private float TriggerPercentage = 0.5f;
     [SerializeField] private MeshRenderer skyRenderer;
+    [SerializeField] private MeshRenderer waterRenderer;
     [SerializeField] private float fadeOutDuration = 5;
     private Vector2[] spawnPos;
     private bool[] triggerArray;
     private int counter=0;
+    private bool disturbed = false;
 
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
+    private const string NormalScaleName = "_NormalScale";
 
     protected override void Initialize()
     {
@@ -33,6 +36,13 @@ public class SkyToWaterMiniGame : MiniGameBasic
                 triggerArray[y*LINE+x] = false;
                 spawnPos[y*LINE+x] = new Vector2(x/(LINE-1.0f)*rippleRect.width, -y/(ROLL-1.0f)*rippleRect.height)+new Vector2(-0.5f*rippleRect.width,0.5f*rippleRect.height);
             }
+        }
+    }
+    protected override void OnAnyKeyPress()
+    {
+        if(!disturbed){
+            disturbed = true;
+            StartCoroutine(coroutineFadeWaterFlow(1f));
         }
     }
     protected override void OnKeyPressed(Key keyPressed)
@@ -74,6 +84,11 @@ public class SkyToWaterMiniGame : MiniGameBasic
             skyRenderer.material.color = Color.Lerp(initCol, targetCol, EasingFunc.Easing.SmoothInOut(t));
         });
         skyRenderer.gameObject.SetActive(false);
+    }
+    IEnumerator coroutineFadeWaterFlow(float duration){
+        yield return new WaitForLoop(duration, (t)=>
+            waterRenderer.material.SetFloat(NormalScaleName, Mathf.Lerp(0, 0.01f, EasingFunc.Easing.SmoothInOut(t)))
+        );
     }
     void OnDrawGizmosSelected(){
         Gizmos.matrix = transform.localToWorldMatrix;

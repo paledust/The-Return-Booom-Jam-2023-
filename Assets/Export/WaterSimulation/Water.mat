@@ -143,12 +143,12 @@ Material:
     - _wobbleSpeed: 0.6
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepColor: {r: 0.028969372, g: 0.057316154, b: 0.06603769, a: 1}
+    - _DeepColor: {r: 0.028969372, g: 0.057316132, b: 0.06603767, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlowColor: {r: 0, g: 0, b: 0, a: 1}
     - _NormalPanVelocity: {r: -0.1, g: 0.02, b: -0.05, a: -0.05}
     - _RadiationColor: {r: 0.5943396, g: 0.5303382, b: 0.19904771, a: 1}
     - _RadiationColor1: {r: 0.5943396, g: 0.54787964, b: 0.2214756, a: 1}
     - _RadiationColor2: {r: 0.6509434, g: 0.5172165, b: 0.48759344, a: 1}
-    - _ShalowColor: {r: 0.27015626, g: 0.3933855, b: 0.455, a: 1}
+    - _ShalowColor: {r: 0.27015623, g: 0.39338544, b: 0.45499992, a: 1}
   m_BuildTextureStacks: []
