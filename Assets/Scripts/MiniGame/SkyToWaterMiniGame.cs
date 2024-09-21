@@ -53,7 +53,6 @@ public class SkyToWaterMiniGame : MiniGameBasic
         Vector3 location;
         int index = coordinate.y*LINE + coordinate.x;
 
-
         location = spawnPos[index];
         location.z = location.y;
         location.y = rippleParticles.transform.position.y;
