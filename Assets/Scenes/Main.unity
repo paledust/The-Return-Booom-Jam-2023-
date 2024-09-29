@@ -12119,19 +12119,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 292625049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1e75716e9d3efa49be1fd2b0849ddb8, type: 3}
+  m_Script: {fileID: 11500000, guid: a7de740989ecafc4096e460fa2290f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   autoActivateGameAsset: 1
-  miniGameAssetGroup: {fileID: 850771236}
+  miniGameAssetGroup: {fileID: 473256966}
   keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
-  fishRect:
+  touchRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 5
     height: 2
-  fishParticles: {fileID: 1421141146}
   rippleParticles: {fileID: 1333184777}
 --- !u!1001 &293795671
 PrefabInstance:
@@ -41600,7 +41599,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 560
+  m_TextureSize: 477
   m_ClipPlaneOffset: 0.07
   m_ReflectLayers:
     serializedVersion: 2
