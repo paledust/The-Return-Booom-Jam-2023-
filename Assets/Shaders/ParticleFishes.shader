@@ -5,6 +5,7 @@ Shader "Custom/PFishes"
 	Properties
 	{
 		_MainTex("MainTex", 2D) = "white" {}
+		[HDR]_Emission("Emission", Color) = (1,1,1,1)
 		_AnimationSpeed("Animation Speed", Float) = 1
 		_Yaw("Yaw", Float) = 0
 		_YawAngle("YawAngle", Float) = 12
@@ -45,6 +46,7 @@ Shader "Custom/PFishes"
 			float4 vertexColor;
 		};
 
+		uniform fixed4 _Emission;
 		uniform float _FadeScale;
 		uniform float _AnimationSpeed;
 		uniform float _FadeOffset;
@@ -99,7 +101,9 @@ Shader "Custom/PFishes"
 
 		void surf(Input i , inout SurfaceOutputStandard o )
 		{
-			o.Albedo = i.vertexColor.rgb*tex2D(_MainTex, i.uv_MainTex);
+			float4 tex = tex2D(_MainTex, i.uv_MainTex);
+			o.Albedo = i.vertexColor.rgb*tex;
+			o.Emission = _Emission.rgb*lerp(float3(1,1,1),tex.rgb,0.7);
 			o.Metallic = 0.0;
 			o.Smoothness = 1.0;
 			o.Alpha = 1;
