@@ -23,6 +23,9 @@ public class Main_Initiator : MonoBehaviour
     [SerializeField] private MiniGameManager miniGameManager;
 [Header("Sharing Sets")]
     [SerializeField] private SharingSets[] sharingSets;
+[Header("Special Sets")]
+    [SerializeField] private PerRendererWater perRendererWater;
+    [SerializeField] private MiniGameBasic[] FishMiniGames;
     void Start()
     {
         for(int i=0; i<sharingSets.Length; i++){
@@ -31,7 +34,21 @@ public class Main_Initiator : MonoBehaviour
             else
                 sharingSets[i].GameSets.SetActive(false);
         }
+
         miniGameManager.StartGame(StartGameIndex);
+        perRendererWater_Initiation();
+    }
+    void perRendererWater_Initiation(){
+        foreach(var miniGame in FishMiniGames){
+            if(miniGame == miniGameManager.GetGame(StartGameIndex)){
+                perRendererWater.darkControl = 1;
+                perRendererWater.normalScale = 0.01f;
+
+                return;
+            }
+        }
+        perRendererWater.darkControl = 0;
+        perRendererWater.normalScale = 0;
     }
 #if UNITY_EDITOR
     [ContextMenu("Match Scene To Start Index")]
@@ -46,6 +63,9 @@ public class Main_Initiator : MonoBehaviour
         }
     //Tell Mini Game Manager to prepare the mini game to match the start up scene
         miniGameManager.Editor_MatchSceneToStartGameIndex(StartGameIndex);
+    Undo.RecordObject(perRendererWater, "Adjust Water Settings");
+        perRendererWater_Initiation();
+    EditorUtility.SetDirty(perRendererWater);
     }
 #endif
 }

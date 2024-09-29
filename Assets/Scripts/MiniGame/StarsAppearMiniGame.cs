@@ -33,6 +33,7 @@ public class StarsAppearMiniGame : MiniGameBasic
         base.Initialize();
 
         waterGroup.SetActive(true);
+        skyRenderer.gameObject.SetActive(true);
 
         spawnPos = new Vector2[ROLL*LINE];
         for(int y=0; y<ROLL; y++){

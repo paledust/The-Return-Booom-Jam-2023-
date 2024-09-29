@@ -11496,9 +11496,10 @@ MonoBehaviour:
     width: 5
     height: 2
   rippleParticles: {fileID: 1333184777}
+  FireGroup: {fileID: 1950332664}
   TriggerPercentage: 0.5
   skyRenderer: {fileID: 561384065}
-  waterRenderer: {fileID: 1504337783}
+  perRendererWater: {fileID: 1504337787}
   fadeOutDuration: 5
 --- !u!1001 &233562135
 PrefabInstance:
@@ -12874,7 +12875,7 @@ Transform:
   - {fileID: 2044078516}
   - {fileID: 2085019935}
   m_Father: {fileID: 1825554249}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &355445034
 PrefabInstance:
@@ -13396,7 +13397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64be9d2404dfb04dbad49d32becf73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartGameIndex: 8
+  StartGameIndex: 10
   miniGameManager: {fileID: 52831613}
   sharingSets:
   - GameSets: {fileID: 1825554248}
@@ -13413,6 +13414,12 @@ MonoBehaviour:
     miniGameIndexArray: 08000000090000000a0000000b000000
   - GameSets: {fileID: 1950332664}
     miniGameIndexArray: 090000000a000000
+  - GameSets: {fileID: 561384063}
+    miniGameIndexArray: 0800000009000000
+  perRendererWater: {fileID: 1504337787}
+  FishMiniGames:
+  - {fileID: 722876628}
+  - {fileID: 292625051}
 --- !u!1 &436388961
 GameObject:
   m_ObjectHideFlags: 0
@@ -19073,7 +19080,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1825554249}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 216.763}
 --- !u!212 &518816196
 SpriteRenderer:
@@ -19415,7 +19422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &561384064
 Transform:
   m_ObjectHideFlags: 0
@@ -19428,8 +19435,8 @@ Transform:
   m_LocalScale: {x: 17.632948, y: 17.632948, z: 17.632948}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1514990255}
-  m_RootOrder: 2
+  m_Father: {fileID: 1825554249}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!23 &561384065
 MeshRenderer:
@@ -21028,7 +21035,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1825554249}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!215 &731430309
 ReflectionProbe:
@@ -22405,7 +22412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &850771237
 Transform:
   m_ObjectHideFlags: 0
@@ -25537,7 +25544,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1825554249}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &1333184776
 ParticleSystemRenderer:
@@ -36102,7 +36109,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1514990255}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &1433630747
 ParticleSystemRenderer:
@@ -41499,6 +41506,7 @@ GameObject:
   - component: {fileID: 1504337783}
   - component: {fileID: 1504337786}
   - component: {fileID: 1504337785}
+  - component: {fileID: 1504337787}
   m_Layer: 0
   m_Name: Water Plane
   m_TagString: Untagged
@@ -41601,7 +41609,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 477
+  m_TextureSize: 527
   m_ClipPlaneOffset: 0.07
   m_ReflectLayers:
     serializedVersion: 2
@@ -41609,6 +41617,22 @@ MonoBehaviour:
   BlurSize: 2
   BlurIteration: 1
   DownSample: 1
+--- !u!114 &1504337787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504337781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad42f676cf24464da01d86da891939d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdating: 1
+  meshRenderer: {fileID: 1504337783}
+  normalScale: 0.01
+  darkControl: 1
 --- !u!1001 &1504818322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41834,7 +41858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1514990255
 Transform:
   m_ObjectHideFlags: 0
@@ -41849,7 +41873,6 @@ Transform:
   m_Children:
   - {fileID: 1488812835}
   - {fileID: 1919253673}
-  - {fileID: 561384064}
   - {fileID: 1433630746}
   m_Father: {fileID: 1013055707}
   m_RootOrder: 8
@@ -41885,7 +41908,7 @@ Transform:
   - {fileID: 1187717728}
   - {fileID: 1504337782}
   m_Father: {fileID: 1825554249}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1529235672
 PrefabInstance:
@@ -43403,7 +43426,6 @@ GameObject:
   - component: {fileID: 1709176667}
   - component: {fileID: 1709176670}
   - component: {fileID: 1709176669}
-  - component: {fileID: 1709176668}
   m_Layer: 0
   m_Name: DepthCube
   m_TagString: Untagged
@@ -43426,19 +43448,6 @@ Transform:
   m_Father: {fileID: 1950332665}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.939}
---- !u!65 &1709176668
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709176666}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1709176669
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -44548,6 +44557,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 561384064}
   - {fileID: 731430308}
   - {fileID: 518816195}
   - {fileID: 1521084812}
@@ -46010,7 +46020,7 @@ Transform:
   - {fileID: 4288416963160899}
   - {fileID: 1709176667}
   m_Father: {fileID: 1825554249}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1958461206
 PrefabInstance:

@@ -34,6 +34,7 @@ public class MiniGameManager : MonoBehaviour
     public void EndGame(){
         GameManager.Instance.EndGame();
     }
+    public MiniGameBasic GetGame(int index){return miniGames[index];}
 #if UNITY_EDITOR
     public void Editor_MatchSceneToStartGameIndex(int startIndex){
         for(int i=0; i<miniGames.Length; i++){

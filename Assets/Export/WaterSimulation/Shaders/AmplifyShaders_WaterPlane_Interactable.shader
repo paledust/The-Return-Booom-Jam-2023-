@@ -1,3 +1,5 @@
+// Upgrade NOTE: upgraded instancing buffer 'AmplifyShadersWaterPlane_Interactable' to new syntax.
+
 // Made with Amplify Shader Editor v1.9.6.3
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "AmplifyShaders/WaterPlane_Interactable"
@@ -36,6 +38,7 @@ Shader "AmplifyShaders/WaterPlane_Interactable"
 		#include "UnityShaderVariables.cginc"
 		#include "UnityStandardUtils.cginc"
 		#pragma target 3.5
+		#pragma multi_compile_instancing
 		#if defined(UNITY_STEREO_INSTANCING_ENABLED) || defined(UNITY_STEREO_MULTIVIEW_ENABLED)
 		#define ASE_DECLARE_SCREENSPACE_TEXTURE(tex) UNITY_DECLARE_SCREENSPACE_TEXTURE(tex);
 		#else
@@ -70,9 +73,7 @@ Shader "AmplifyShaders/WaterPlane_Interactable"
 		uniform sampler2D _WaterNormal;
 		uniform float4 _NormalPanVelocity;
 		uniform float4 _WaterNormal_ST;
-		uniform float _NormalScale;
 		uniform sampler2D _RippleNormalTex;
-		uniform float4 _RippleNormalTex_ST;
 		uniform float _RippleScale;
 		uniform float _ReflectionDistortion;
 		ASE_DECLARE_SCREENSPACE_TEXTURE( _GrabTexture )
@@ -86,7 +87,15 @@ Shader "AmplifyShaders/WaterPlane_Interactable"
 		uniform float _WaterFalloffPower;
 		uniform float _ReflectionIntensity;
 		uniform float _Smoothness;
-		uniform float _DarkControl;
+
+		UNITY_INSTANCING_BUFFER_START(AmplifyShadersWaterPlane_Interactable)
+			UNITY_DEFINE_INSTANCED_PROP(float4, _RippleNormalTex_ST)
+#define _RippleNormalTex_ST_arr AmplifyShadersWaterPlane_Interactable
+			UNITY_DEFINE_INSTANCED_PROP(float, _NormalScale)
+#define _NormalScale_arr AmplifyShadersWaterPlane_Interactable
+			UNITY_DEFINE_INSTANCED_PROP(float, _DarkControl)
+#define _DarkControl_arr AmplifyShadersWaterPlane_Interactable
+		UNITY_INSTANCING_BUFFER_END(AmplifyShadersWaterPlane_Interactable)
 
 
 inline float4 ASE_ComputeGrabScreenPos( float4 pos )
@@ -127,14 +136,16 @@ inline float4 ASE_ComputeGrabScreenPos( float4 pos )
 			float2 panner381 = ( 0.0 * _Time.y * float2( 0.1,0.1 ) + ( uv_WaterNormal * float2( 0.5,0.5 ) ));
 			float2 temp_output_367_0 = ( uv_WaterNormal + ( (UnpackNormal( tex2D( _WaterNormal, panner381 ) )).xy * 0.01 ) );
 			float2 panner160 = ( _Time.y * appendResult469 + temp_output_367_0);
+			float _NormalScale_Instance = UNITY_ACCESS_INSTANCED_PROP(_NormalScale_arr, _NormalScale);
 			float2 appendResult470 = (float2(_NormalPanVelocity.z , _NormalPanVelocity.w));
 			float2 panner157 = ( _Time.y * appendResult470 + temp_output_367_0);
-			float2 uv_RippleNormalTex = i.uv_texcoord * _RippleNormalTex_ST.xy + _RippleNormalTex_ST.zw;
+			float4 _RippleNormalTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(_RippleNormalTex_ST_arr, _RippleNormalTex_ST);
+			float2 uv_RippleNormalTex = i.uv_texcoord * _RippleNormalTex_ST_Instance.xy + _RippleNormalTex_ST_Instance.zw;
 			float4 tex2DNode405 = tex2D( _RippleNormalTex, uv_RippleNormalTex );
 			float3 appendResult414 = (float3(( (tex2DNode405).rg * _RippleScale ) , 1.0));
 			float3 normalizeResult416 = normalize( appendResult414 );
 			float3 RippleNormal406 = normalizeResult416;
-			float3 normal235 = BlendNormals( BlendNormals( UnpackScaleNormal( tex2D( _WaterNormal, panner160 ), _NormalScale ) , UnpackScaleNormal( tex2D( _WaterNormal, panner157 ), _NormalScale ) ) , RippleNormal406 );
+			float3 normal235 = BlendNormals( BlendNormals( UnpackScaleNormal( tex2D( _WaterNormal, panner160 ), _NormalScale_Instance ) , UnpackScaleNormal( tex2D( _WaterNormal, panner157 ), _NormalScale_Instance ) ) , RippleNormal406 );
 			float4 refl308 = tex2D( _ReflectionTex, ( ( (computeScreenPos340).xy + ( (normal235).xy * _ReflectionDistortion ) ) / (computeScreenPos340).w ) );
 			SurfaceOutputStandard s464 = (SurfaceOutputStandard ) 0;
 			float4 ase_screenPos = float4( i.screenPos.xyz , i.screenPos.w + 0.00000000001 );
@@ -171,7 +182,8 @@ inline float4 ASE_ComputeGrabScreenPos( float4 pos )
 			surfResult464 -= s464.Emission;
 			#endif//464
 			float smoothstepResult457 = smoothstep( 0.0 , 1.0 , tex2DNode405.a);
-			float darkMask447 = saturate( ( smoothstepResult457 + _DarkControl ) );
+			float _DarkControl_Instance = UNITY_ACCESS_INSTANCED_PROP(_DarkControl_arr, _DarkControl);
+			float darkMask447 = saturate( ( smoothstepResult457 + _DarkControl_Instance ) );
 			float4 lerpResult465 = lerp( refl308 , float4( surfResult464 , 0.0 ) , darkMask447);
 			c.rgb = lerpResult465.rgb;
 			c.a = _OverAllOpacity;
@@ -214,9 +226,9 @@ Node;AmplifyShaderEditor.SimpleTimeNode;376;-5494.061,-1217.895;Inherit;False;1;
 Node;AmplifyShaderEditor.DynamicAppendNode;470;-5683.721,-1093.565;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.DynamicAppendNode;469;-5702.954,-1270.998;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.DynamicAppendNode;414;-885.6529,823.9456;Inherit;False;FLOAT3;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.RangedFloatNode;162;-5075.272,-1146.875;Float;False;Property;_NormalScale;Normal Scale;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.PannerNode;160;-5231.895,-1264.426;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;-0.03,0;False;1;FLOAT;1;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.PannerNode;157;-5207.024,-1044.981;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0.04,0.04;False;1;FLOAT;1;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RangedFloatNode;162;-5075.272,-1146.875;Float;False;InstancedProperty;_NormalScale;Normal Scale;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SamplerNode;165;-4875.675,-1295.865;Inherit;True;Property;_Normal2;Normal2;1;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;True;bump;Auto;True;Instance;163;Auto;Texture2D;8;0;SAMPLER2D;0,0;False;1;FLOAT2;0,0;False;2;FLOAT;1;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.NormalizeNode;416;-746.6177,824.5326;Inherit;False;False;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.SamplerNode;163;-4867.604,-1073.542;Inherit;True;Property;_WaterNormal;Water Normal;1;0;Create;True;0;0;0;False;0;False;-1;None;c288925dd7aaca24d87b165291e64070;True;0;False;white;Auto;True;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;0,0;False;1;FLOAT2;0,0;False;2;FLOAT;1;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
@@ -265,9 +277,9 @@ Node;AmplifyShaderEditor.SimpleAddOpNode;191;-2166.012,-1203.216;Inherit;False;2
 Node;AmplifyShaderEditor.WireNode;192;-3094.766,72.56043;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.WireNode;179;-3358.315,-203.0461;Inherit;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.WireNode;181;-3290.702,-78.39047;Inherit;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.RangedFloatNode;459;-1648.396,1235.123;Inherit;False;Property;_DarkControl;DarkControl;18;0;Create;True;0;0;0;False;0;False;1;0;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SmoothstepOpNode;457;-1673.666,1099.863;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;308;-3505.244,2368.886;Float;False;refl;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;459;-1648.396,1235.123;Inherit;False;InstancedProperty;_DarkControl;DarkControl;18;0;Create;True;0;0;0;False;0;False;1;0;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;185;-3122.796,-115.2352;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.ScreenColorNode;196;-1974.511,-1207.016;Float;False;Global;_WaterGrab;WaterGrab;-1;0;Create;True;0;0;0;False;0;False;Object;-1;False;False;False;False;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.WireNode;194;-1774.004,12.04325;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
@@ -400,4 +412,4 @@ WireConnection;465;2;448;0
 WireConnection;0;9;204;0
 WireConnection;0;13;465;0
 ASEEND*/
-//CHKSM=5BAC89C83657B2ACFCEA7459EE97E0C2F308B6BD
+//CHKSM=8B48FFE066613839A720F1CEC9ED59D25BF3E8CD
