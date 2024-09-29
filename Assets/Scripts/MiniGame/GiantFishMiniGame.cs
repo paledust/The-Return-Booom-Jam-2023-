@@ -9,6 +9,12 @@ public class GiantFishMiniGame : MiniGameBasic
     [SerializeField] private KeyMatrix_SO keyMatrix;
     [SerializeField] private Rect touchRect;
     [SerializeField] private ParticleSystem rippleParticles;
+[Header("Initiation")]
+    [SerializeField] private ParticleSystem fireBurst;
+    [SerializeField] private Transform fishStartPos;
+    [SerializeField] private Transform fishTargetPos;
+[Header("Fish")]
+    [SerializeField] private Transform fishTrans;
     private Vector2[] spawnPos;
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
@@ -23,6 +29,9 @@ public class GiantFishMiniGame : MiniGameBasic
                 spawnPos[y*LINE+x] = new Vector2(x/(LINE-1.0f)*touchRect.width, -y/(ROLL-1.0f)*touchRect.height)+new Vector2(-0.5f*touchRect.width,0.5f*touchRect.height);
             }
         }
+
+        fireBurst.Play();
+        fishTrans.position = fishStartPos.position;
     }
     protected override void OnKeyPressed(Key keyPressed)
     {
