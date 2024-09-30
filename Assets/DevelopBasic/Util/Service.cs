@@ -43,5 +43,9 @@ public static class Service{
         temp = temp*2-1;
         return temp;
     }
+    public static float SmoothToValue(float rawValue, float targetValue, float step, float allowance){
+        if(Mathf.Abs(rawValue-targetValue)<=allowance) return targetValue;
+        else return Mathf.Lerp(rawValue, targetValue, step);
+    }
 #endregion
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class GiantFishMiniGame : MiniGameBasic
 {
@@ -11,10 +12,10 @@ public class GiantFishMiniGame : MiniGameBasic
     [SerializeField] private ParticleSystem rippleParticles;
 [Header("Initiation")]
     [SerializeField] private ParticleSystem fireBurst;
-    [SerializeField] private Transform fishStartPos;
-    [SerializeField] private Transform fishTargetPos;
+    [SerializeField] private PlayableDirector startTimeline;
 [Header("Fish")]
     [SerializeField] private Transform fishTrans;
+
     private Vector2[] spawnPos;
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
@@ -31,7 +32,8 @@ public class GiantFishMiniGame : MiniGameBasic
         }
 
         fireBurst.Play();
-        fishTrans.position = fishStartPos.position;
+
+        startTimeline.Play();
     }
     protected override void OnKeyPressed(Key keyPressed)
     {
