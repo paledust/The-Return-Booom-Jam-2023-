@@ -13050,6 +13050,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 377790876}
+  - component: {fileID: 377790879}
   - component: {fileID: 377790877}
   - component: {fileID: 377790878}
   m_Layer: 0
@@ -13111,6 +13112,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &377790879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377790875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81291018f7a1844d8d1cd3586248740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &391293965
 GameObject:
   m_ObjectHideFlags: 0
@@ -13424,7 +13437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64be9d2404dfb04dbad49d32becf73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartGameIndex: 10
+  StartGameIndex: 11
   miniGameManager: {fileID: 52831613}
   sharingSets:
   - GameSets: {fileID: 1825554248}
@@ -13690,7 +13703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &473256967
 Transform:
   m_ObjectHideFlags: 0
@@ -27419,7 +27432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &850771237
 Transform:
   m_ObjectHideFlags: 0
@@ -55894,7 +55907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1950332665
 Transform:
   m_ObjectHideFlags: 0
