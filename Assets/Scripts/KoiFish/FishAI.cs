@@ -21,7 +21,7 @@ public class FishMovement{
 
     public void Init(Transform transform){
         this.transform = transform;
-        direction = transform.rotation * Vector3.right;
+        direction = transform.rotation * Vector3.forward;
     }   
     public void MoveUpdate(Vector3 moveTarget){
     //Get difference between position and Target in WORLD SPACE.
@@ -30,10 +30,10 @@ public class FishMovement{
         diff.y = 0;
     //Clamp Magnitude into for Maximum Speed.
         diff = Vector3.ClampMagnitude(diff, DeaccelarateRange);
-        if(diff.magnitude<StopRange)
-            diff = Vector3.zero;
         if(DeaccelarateRange>0) diff/=DeaccelarateRange;
         else diff = diff.normalized;
+        if(diff.magnitude<StopRange)
+            diff = Vector3.zero;
 
     //Slerp the direction to the clamped difference.
         if(direction==Vector3.zero&&diff!=Vector3.zero)

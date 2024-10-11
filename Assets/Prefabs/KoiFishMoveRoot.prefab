@@ -83,7 +83,7 @@ MonoBehaviour:
     rotateSpeed: 5
     maxSpeed: 2
     DeaccelarateRange: 2
-    StopRange: 0.3
+    StopRange: 0.1
   followTransform: 1
   targetTransform: {fileID: 0}
 --- !u!114 &8763879197067792536
