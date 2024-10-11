@@ -12,6 +12,6 @@ public class FishConstentRotation : MonoBehaviour
         seed = Random.value;
     }
     void Update(){
-        rotRoot.localEulerAngles = Vector3.up * (Mathf.Sin(Time.time * RotateFreq)) * RotateAngle * (1+0.4f*Mathf.PerlinNoise(seed, 0.1f));
+        rotRoot.localEulerAngles = Vector3.up * (90+Mathf.Sin(Time.time * RotateFreq) * RotateAngle * (1+0.4f*Mathf.PerlinNoise(seed, 0.1f)));
     }
 }
