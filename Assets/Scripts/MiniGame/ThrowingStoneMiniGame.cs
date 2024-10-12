@@ -2,13 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Timeline;
+using UnityEngine.Playables;
 
 public class ThrowingStoneMiniGame : MiniGameBasic
 {
+[Header("Intro")]
+    [SerializeField] private PlayableDirector introTimeline;
+    [SerializeField] private ParticleSystem P_fireBurst;
 [Header("Control")]
     [SerializeField] private KeyMatrix_SO keyMatrix;
     [SerializeField] private Rect stoneRect;
+[Header("Particles")]
+    [SerializeField] private ParticleSystem p_ripple;
+    [SerializeField] private ParticleSystem p_splash;
+[Header("Water Info")]
+    [SerializeField] private float waterHeight;
+    [SerializeField] private float minimumDriftAngularSpeed;
+    [SerializeField, Range(0, 1)] private float waterAngularFriction;
+    [SerializeField, Range(0, 1)] private float waterSpeedFriction;
+    [SerializeField, Range(0, 1)] private float kickUpFactor = 0.8f;
 [Header("Throw Stones")]
     [SerializeField] private GameObject stonePrefab;
     [SerializeField] private Transform throwStartPos;
@@ -20,9 +32,23 @@ public class ThrowingStoneMiniGame : MiniGameBasic
 
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
+
+    public static float WATER_ANGULAR_FRICTION;
+    public static float WATER_SPEED_FRICTION;
+    public static float WATER_HEIGHT = 2.19f;
+    public static float MINIMUM_DRIFTANGULAR_SPEED = 200f;
+    public static float KICK_UP_FACTOR = 0.8f;
     protected override void Initialize()
     {
         base.Initialize();
+        P_fireBurst.Play();
+        introTimeline.Play();
+
+        WATER_HEIGHT = waterHeight;
+        MINIMUM_DRIFTANGULAR_SPEED = minimumDriftAngularSpeed;
+        WATER_ANGULAR_FRICTION = waterAngularFriction;
+        WATER_SPEED_FRICTION = waterSpeedFriction;
+        KICK_UP_FACTOR =  kickUpFactor;
 
         throwPos = new Vector2[ROLL*LINE];
         
@@ -31,6 +57,30 @@ public class ThrowingStoneMiniGame : MiniGameBasic
                 throwPos[y*LINE+x] = new Vector2(x/(LINE-1.0f)*stoneRect.width, -y/(ROLL-1.0f)*stoneRect.height)+new Vector2(-0.5f*stoneRect.width,0.5f*stoneRect.height);
             }
         }
+
+        EventHandler.E_OnStoneTouchWater += StoneHitWater;
+    }
+    protected override void CleanUp()
+    {
+        EventHandler.E_OnStoneTouchWater -= StoneHitWater;
+    }
+#if UNITY_EDITOR
+    void OnValidate(){
+        WATER_HEIGHT = waterHeight;
+        MINIMUM_DRIFTANGULAR_SPEED = minimumDriftAngularSpeed;
+        WATER_ANGULAR_FRICTION = waterAngularFriction;
+        WATER_SPEED_FRICTION = waterSpeedFriction;
+        KICK_UP_FACTOR =  kickUpFactor;
+    }
+#endif
+    void StoneHitWater(Vector3 position){
+        position.y = p_splash.transform.position.y;
+        p_splash.transform.position = position;
+        p_splash.Play();
+
+        position.y = p_ripple.transform.position.y;
+        p_ripple.transform.position = position;
+        p_ripple.Play();
     }
     protected override void OnKeyPressed(Key keyPressed)
     {

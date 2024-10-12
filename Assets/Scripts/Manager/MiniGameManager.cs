@@ -12,12 +12,12 @@ public class MiniGameManager : MonoBehaviour
         }
     }
     void OnEnable(){
-        EventHandler.OnEndMiniGame  += EndMiniGame;
-        EventHandler.OnNextMiniGame += NextMiniGame;
+        EventHandler.E_OnEndMiniGame  += EndMiniGame;
+        EventHandler.E_OnNextMiniGame += NextMiniGame;
     }
     void OnDisable(){
-        EventHandler.OnEndMiniGame  -= EndMiniGame;
-        EventHandler.OnNextMiniGame -= NextMiniGame;
+        EventHandler.E_OnEndMiniGame  -= EndMiniGame;
+        EventHandler.E_OnNextMiniGame -= NextMiniGame;
     }
     void EndMiniGame(MiniGameBasic miniGame){
         miniGame.ExitMiniGame();

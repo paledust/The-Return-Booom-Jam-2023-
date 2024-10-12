@@ -8,21 +8,23 @@ using UnityEngine;
 public static class EventHandler
 {
 #region Input
-    public static Action<Key> OnKeyPressed;
-    public static void Call_OnKeyPressed(Key key){OnKeyPressed?.Invoke(key);}
-    public static Action<Key> OnKeyReleased;
-    public static void Call_OnKeyReleased(Key key){OnKeyReleased?.Invoke(key);}
-    public static Action OnAnyKeyPressed;
-    public static void Call_OnAnyKeyPressed(){OnAnyKeyPressed?.Invoke();}
-    public static Action OnNoKeyPressed;
-    public static void Call_OnNoKeyPressed(){OnNoKeyPressed?.Invoke();}
+    public static Action<Key> E_OnKeyPressed;
+    public static void Call_OnKeyPressed(Key key){E_OnKeyPressed?.Invoke(key);}
+    public static Action<Key> E_OnKeyReleased;
+    public static void Call_OnKeyReleased(Key key){E_OnKeyReleased?.Invoke(key);}
+    public static Action E_OnAnyKeyPressed;
+    public static void Call_OnAnyKeyPressed(){E_OnAnyKeyPressed?.Invoke();}
+    public static Action E_OnNoKeyPressed;
+    public static void Call_OnNoKeyPressed(){E_OnNoKeyPressed?.Invoke();}
 #endregion
 
 #region Mini Game
-    public static Action<MiniGameBasic> OnEndMiniGame;
-    public static void Call_OnEndMiniGame(MiniGameBasic miniGame){OnEndMiniGame?.Invoke(miniGame);}
-    public static Action OnNextMiniGame;
-    public static void Call_OnNextMiniGame(){OnNextMiniGame?.Invoke();}
+    public static Action<MiniGameBasic> E_OnEndMiniGame;
+    public static void Call_OnEndMiniGame(MiniGameBasic miniGame){E_OnEndMiniGame?.Invoke(miniGame);}
+    public static Action E_OnNextMiniGame;
+    public static void Call_OnNextMiniGame(){E_OnNextMiniGame?.Invoke();}
+    public static Action<Vector3> E_OnStoneTouchWater;
+    public static void Call_OnStoneTouchWater(Vector3 position)=>E_OnStoneTouchWater?.Invoke(position);
 #endregion
 
 #region Game Basic

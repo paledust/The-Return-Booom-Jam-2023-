@@ -21,19 +21,19 @@ public abstract class MiniGameBasic : MonoBehaviour
 #endif
     public void EnterMiniGame(){
         isPlaying = true;
-        EventHandler.OnKeyPressed    += OnKeyPressed;
-        EventHandler.OnKeyReleased   += OnKeyReleased;
-        EventHandler.OnAnyKeyPressed += OnAnyKeyPress;
-        EventHandler.OnNoKeyPressed  += OnNoKeyPress;
+        EventHandler.E_OnKeyPressed    += OnKeyPressed;
+        EventHandler.E_OnKeyReleased   += OnKeyReleased;
+        EventHandler.E_OnAnyKeyPressed += OnAnyKeyPress;
+        EventHandler.E_OnNoKeyPressed  += OnNoKeyPress;
         if(autoActivateGameAsset && miniGameAssetGroup!=null) miniGameAssetGroup.SetActive(true);
         Initialize();
     }
     public void ExitMiniGame(){
         CleanUp();
-        EventHandler.OnKeyPressed    -= OnKeyPressed;
-        EventHandler.OnKeyReleased   -= OnKeyReleased;
-        EventHandler.OnAnyKeyPressed -= OnAnyKeyPress;
-        EventHandler.OnNoKeyPressed  -= OnNoKeyPress;
+        EventHandler.E_OnKeyPressed    -= OnKeyPressed;
+        EventHandler.E_OnKeyReleased   -= OnKeyReleased;
+        EventHandler.E_OnAnyKeyPressed -= OnAnyKeyPress;
+        EventHandler.E_OnNoKeyPressed  -= OnNoKeyPress;
 
         isPlaying = false;
     }

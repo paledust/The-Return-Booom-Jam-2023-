@@ -68,8 +68,8 @@ public class SkyToWaterMiniGame : MiniGameBasic
         }
 
         if(counter >= TriggerPercentage*(LINE*ROLL)){
-            EventHandler.OnEndMiniGame(this);
-            EventHandler.OnNextMiniGame();
+            EventHandler.E_OnEndMiniGame(this);
+            EventHandler.E_OnNextMiniGame();
         }
     }
     protected override void CleanUp()
