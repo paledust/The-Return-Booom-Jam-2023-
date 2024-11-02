@@ -10,8 +10,11 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     [SerializeField] private Rect fishRect;
 [Header("Fish")]
     [SerializeField] private FishAI fish;
+    [SerializeField] private Vector2 fishSpeedRange;
+    [SerializeField] private Vector2 fishRotateSpeedRange;
 
     private Vector2[] guidePos;
+    private CoroutineExcuter fishReleaser;
 
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
@@ -26,6 +29,8 @@ public class ControlKoiFishMiniGame : MiniGameBasic
                 guidePos[y*LINE+x] = new Vector2(x/(LINE-1.0f)*fishRect.width, -y/(ROLL-1.0f)*fishRect.height)+new Vector2(-0.5f*fishRect.width,0.5f*fishRect.height);
             }
         }
+
+        fishReleaser = new CoroutineExcuter(this);
     }
     protected override void OnKeyPressed(Key keyPressed)
     {
@@ -38,11 +43,14 @@ public class ControlKoiFishMiniGame : MiniGameBasic
         target.y = 0;
 
         fish.AssignTarget(target);
+        fish.TransitionMovement(fishSpeedRange.y, fishRotateSpeedRange.y, 0.2f);
+        fishReleaser.Abort();
     }
     protected override void OnNoKeyPress()
     {
         base.OnNoKeyPress();
-        fish.FollowTransform(true);
+        fish.TransitionMovement(fishSpeedRange.x, fishRotateSpeedRange.x, 1f);
+        fishReleaser.Excute(CommonCoroutine.DelayAction(()=>fish.FollowTransform(true), 3f));
     }
     void OnDrawGizmosSelected(){
         Gizmos.matrix = transform.localToWorldMatrix;

@@ -81,9 +81,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishMovement:
     rotateSpeed: 5
-    maxSpeed: 2
+    maxSpeed: 1
     DeaccelarateRange: 2
     StopRange: 0.1
+    fishRotation: {fileID: 8763879197067792536}
+    rotateCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.045391057
+      - serializedVersion: 3
+        time: 0.14924385
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rotateFreqRange: {x: 5, y: 12}
+    rotateAngleRange: {x: 5, y: 10}
   followTransform: 1
   targetTransform: {fileID: 0}
 --- !u!114 &8763879197067792536
@@ -151,7 +187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af369bc2143e83c47880ba930cc3c2a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.18799998
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af369bc2143e83c47880ba930cc3c2a5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -234,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Root: {fileID: 5475885599431416087}
-  m_UpdateRate: 60
+  m_UpdateRate: 90
   m_UpdateMode: 0
   m_Damping: 0.3
   m_DampingDistrib:

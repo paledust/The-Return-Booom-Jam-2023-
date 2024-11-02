@@ -5,13 +5,20 @@ using UnityEngine;
 public class FishConstentRotation : MonoBehaviour
 {
     [SerializeField] private Transform rotRoot;
-    [SerializeField] private float RotateFreq;
-    [SerializeField] private float RotateAngle;
+    public float RotateFreq;
+    public float RotateAngle;
+
     private float seed;
+    private float timer;
+    private CoroutineExcuter transitioner;
+
     void Start(){
+        timer = 0;
         seed = Random.value;
+        transitioner = new CoroutineExcuter(this);
     }
     void Update(){
-        rotRoot.localEulerAngles = Vector3.up * (90+Mathf.Sin(Time.time * RotateFreq) * RotateAngle * (1+0.4f*Mathf.PerlinNoise(seed, 0.1f)));
+        timer += Time.deltaTime * RotateFreq;
+        rotRoot.localEulerAngles = Vector3.up * (90+Mathf.Sin(timer) * RotateAngle * (1+0.4f*Mathf.PerlinNoise(seed, 0.1f)));
     }
 }

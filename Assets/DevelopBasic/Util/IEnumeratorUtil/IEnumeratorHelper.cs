@@ -65,6 +65,10 @@ public static class CommonCoroutine{
             c.color = Color.Lerp(initColor, targetColor, easeFunc(t));
         });
     }
+    public static IEnumerator DelayAction(Action call, float delay){
+        yield return new WaitForSeconds(delay);
+        call?.Invoke();
+    }
     public static IEnumerator CoroutineDestroyDelay(float delay, GameObject gameObject){
         yield return new WaitForSeconds(delay);
         GameObject.Destroy(gameObject);

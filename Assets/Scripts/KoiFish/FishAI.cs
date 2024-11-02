@@ -5,13 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class FishMovement{
 [Header("Speed")]
-    [SerializeField] private float rotateSpeed;
+    public float rotateSpeed;
     public float maxSpeed;
 [Header("MoveRange")]
     [SerializeField, Min(0)] public float DeaccelarateRange = 0.5f;
     [SerializeField, Min(0)] public float StopRange = 0.2f;
 [Header("Visual")]
-
+    [SerializeField] private FishConstentRotation fishRotation;
+    [SerializeField] private AnimationCurve rotateCurve;
+    [SerializeField] private Vector2 rotateFreqRange;
+    [SerializeField] private Vector2 rotateAngleRange;
     private Transform transform;
     private Vector3 direction;
     private Vector3 velocity;
@@ -44,11 +47,14 @@ public class FishMovement{
         if((direction-diff).magnitude<=0.001f) direction = diff;
         velocity = direction * diff.magnitude * maxSpeed;
 
-    //Transfrom Direction from 2D-CORRECTED SPACE to WORLD SPACE to get the acctual velocity
         transform.position += velocity * Time.fixedDeltaTime;
-    //The Rotation is done in 2D-CORRECTED SPACE, so the direction is not transformed.
         if(direction!=Vector3.zero)
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+
+    //Update Rotation
+        float realSpeed = velocity.magnitude;
+        fishRotation.RotateAngle = Mathf.Lerp(rotateAngleRange.x, rotateAngleRange.y, rotateCurve.Evaluate(realSpeed/maxSpeed));
+        fishRotation.RotateFreq = Mathf.Lerp(rotateFreqRange.x, rotateFreqRange.y, rotateCurve.Evaluate(realSpeed/maxSpeed));
     }
     public void SetPose(Vector3 pos, Vector2 faceDir){
         transform.position = pos;
@@ -64,10 +70,14 @@ public class FishAI : MonoBehaviour
     [SerializeField] private Transform targetTransform;
 
     private Vector3 currentTarget;
+    private CoroutineExcuter speedChanger;
     
     void OnEnable(){
         currentTarget = transform.position;
         fishMovement.Init(transform);
+    }
+    void Start(){
+        speedChanger = new CoroutineExcuter(this);
     }
     void FixedUpdate(){
         if(followTransform && targetTransform!=null) currentTarget = targetTransform.position;
@@ -87,6 +97,18 @@ public class FishAI : MonoBehaviour
         if(auto_SwitchFollowMethod) FollowTransform(true);
     }
     public void FollowTransform(bool isFollowTransform)=>followTransform = isFollowTransform;
+    public void TransitionMovement(float targetSpeed, float targetRotateSpeed, float duration){
+        speedChanger.Excute(coroutineTransitionMovement(targetSpeed, targetRotateSpeed, duration));
+    }
+    IEnumerator coroutineTransitionMovement(float targetSpeed, float targetRotateSpeed, float duration){
+        float initSpeed = fishMovement.maxSpeed;
+        float initRotateSpeed = fishMovement.rotateSpeed;
+
+        yield return new WaitForLoop(duration, (t)=>{
+            fishMovement.maxSpeed = Mathf.Lerp(initSpeed, targetSpeed, t);
+            fishMovement.rotateSpeed = Mathf.Lerp(initRotateSpeed, targetRotateSpeed, t);
+        });
+    }
 #if UNITY_EDITOR
     void OnDrawGizmos(){
         Gizmos.color = Color.blue;
