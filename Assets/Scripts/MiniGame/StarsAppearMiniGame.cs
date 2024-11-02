@@ -68,9 +68,6 @@ public class StarsAppearMiniGame : MiniGameBasic
             EventHandler.Call_OnNextMiniGame();
         }
     }
-    void OnGUI(){
-        GUILayout.Label(progress.ToString());
-    }
     protected override void OnKeyPressed(Key keyPressed){
         base.OnKeyPressed(keyPressed);
 

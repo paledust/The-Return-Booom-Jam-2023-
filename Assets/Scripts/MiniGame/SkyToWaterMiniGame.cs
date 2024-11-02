@@ -90,7 +90,7 @@ public class SkyToWaterMiniGame : MiniGameBasic
     IEnumerator coroutineFadeWaterFlow(float duration){
         yield return new WaitForLoop(duration, (t)=>{
             perRendererWater.normalScale = Mathf.Lerp(0, 0.01f, EasingFunc.Easing.SmoothInOut(t));
-            perRendererWater.darkControl = Mathf.Lerp(0, 1f, EasingFunc.Easing.SmoothInOut(t));
+            // perRendererWater.darkControl = Mathf.Lerp(0, 1f, EasingFunc.Easing.SmoothInOut(t));
         });
     }
     void OnDrawGizmosSelected(){

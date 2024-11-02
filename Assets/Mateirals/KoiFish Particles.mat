@@ -62,7 +62,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AnimationSpeed: 2
+    - _AnimationSpeed: 4
     - _BlendOp: 0
     - _BumpScale: 1
     - _CameraFadingEnabled: 0
@@ -91,7 +91,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PivotOffset: -0.1
+    - _PivotOffset: 0.05
     - _Seed1: 0
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0

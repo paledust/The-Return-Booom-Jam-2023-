@@ -32,6 +32,7 @@ Shader "Custom/PFishes"
 			float3x4 transform;
 			uint color;
 			float rnd;
+			float speed;
 		};
 
 		#define UNITY_PARTICLE_INSTANCE_DATA vertStreamData
@@ -83,20 +84,20 @@ Shader "Custom/PFishes"
 			vertInstancingUVs(v.texcoord, o.uv_MainTex);
 
 			float rnd = 0;
+			float speed = 0;
 		#if defined(UNITY_PARTICLE_INSTANCING_ENABLED)
 			UNITY_PARTICLE_INSTANCE_DATA data = unity_ParticleInstanceData[unity_InstanceID];
 			rnd = data.rnd;
+			speed = data.speed;
 		#endif
 
 			float3 pos = v.vertex.xyz;
 			float fade = saturate(pow( (pos.z*_FadeScale+_FadeOffset), _FadeSmooth));
 			float3 rotateOffset = float3(0.0 , 0.0 , _PivotOffset);
-			float3 fishRotate = RotateAroundAxis(rotateOffset, pos, float3(0,1,0), (sin(((pos.z + _Time.y*_AnimationSpeed + rnd)*_Yaw)) * radians(_YawAngle)));
+			float3 fishRotate = RotateAroundAxis(rotateOffset, pos, float3(0,1,0), sin(((pos.z + _Time.y*(_AnimationSpeed+speed) + rnd)*_Yaw)) * radians(_YawAngle));
 			float3 fishMovement = (fade * (fishRotate-pos));
 			v.vertex.xyz += fishMovement;
 			v.vertex.w = 1;
-
-
 		}
 
 		void surf(Input i , inout SurfaceOutputStandard o )

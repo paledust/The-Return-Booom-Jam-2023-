@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class KoiFishMiniGame : MiniGameBasic
 {
@@ -17,6 +18,9 @@ public class KoiFishMiniGame : MiniGameBasic
     [SerializeField] private AnimationCurve emitRate;
     [SerializeField] private AnimationCurve fireRadiusRange;
     [SerializeField] private AnimationCurve fireEmitRange;
+[Header("End")]
+    [SerializeField] private ParticleSystem P_fireBurst;
+    [SerializeField] private PlayableDirector tl_giantFishOut;
     private ParticleSystem.EmissionModule fireEmitModule;
     private ParticleSystem.ShapeModule fireShapeModule;
     private Vector2[] spawnPos;
@@ -54,8 +58,8 @@ public class KoiFishMiniGame : MiniGameBasic
 
         if(progress >= 0.99f){
             EventHandler.Call_OnEndMiniGame(this);
-            EventHandler.Call_OnNextMiniGame();
-
+            P_fireBurst.Play();
+            tl_giantFishOut.Play();
             fireParticles.Stop();
         }
     }

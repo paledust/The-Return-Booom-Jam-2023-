@@ -7,7 +7,6 @@ using UnityEngine.Playables;
 public class ThrowingStoneMiniGame : MiniGameBasic
 {
 [Header("Intro")]
-    [SerializeField] private PlayableDirector introTimeline;
     [SerializeField] private ParticleSystem P_fireBurst;
 [Header("Control")]
     [SerializeField] private KeyMatrix_SO keyMatrix;
@@ -41,8 +40,6 @@ public class ThrowingStoneMiniGame : MiniGameBasic
     protected override void Initialize()
     {
         base.Initialize();
-        P_fireBurst.Play();
-        introTimeline.Play();
 
         WATER_HEIGHT = waterHeight;
         MINIMUM_DRIFTANGULAR_SPEED = minimumDriftAngularSpeed;
