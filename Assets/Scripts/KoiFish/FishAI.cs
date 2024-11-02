@@ -80,12 +80,13 @@ public class FishAI : MonoBehaviour
     public void AssignTarget(Vector3 target, bool auto_SwitchFollowMethod = true){
         target.y = transform.position.y;
         currentTarget = target;
-        if(auto_SwitchFollowMethod) followTransform = false;
+        if(auto_SwitchFollowMethod) FollowTransform(false);
     }
     public void AssignTarget(Transform target, bool auto_SwitchFollowMethod = true){
         targetTransform = target;
-        if(auto_SwitchFollowMethod) followTransform = true;
+        if(auto_SwitchFollowMethod) FollowTransform(true);
     }
+    public void FollowTransform(bool isFollowTransform)=>followTransform = isFollowTransform;
 #if UNITY_EDITOR
     void OnDrawGizmos(){
         Gizmos.color = Color.blue;

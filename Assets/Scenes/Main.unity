@@ -5243,7 +5243,7 @@ MonoBehaviour:
   - {fileID: 1299489713}
   - {fileID: 223916407}
   - {fileID: 722876628}
-  - {fileID: 292625051}
+  - {fileID: 987071022}
 --- !u!1 &61477996
 GameObject:
   m_ObjectHideFlags: 0
@@ -12091,7 +12091,7 @@ GameObject:
   - component: {fileID: 292625050}
   - component: {fileID: 292625051}
   m_Layer: 0
-  m_Name: 11 ThrowStones
+  m_Name: UnSet ControlKoiFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12110,7 +12110,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2027002932}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &292625051
 MonoBehaviour:
@@ -12126,7 +12126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 473256966}
-  P_fireBurst: {fileID: 838285428}
   keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
   stoneRect:
     serializedVersion: 2
@@ -12146,6 +12145,7 @@ MonoBehaviour:
   throwStartOffset: 13.5
   throwSpeedRange: {x: 1.4, y: 2}
   angularSpeedRange: {x: 5000, y: 5000}
+  throwTimeStep: 2
 --- !u!1001 &293795671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13427,7 +13427,7 @@ MonoBehaviour:
   perRendererWater: {fileID: 1504337787}
   FishMiniGames:
   - {fileID: 722876628}
-  - {fileID: 292625051}
+  - {fileID: 987071022}
 --- !u!1 &436388961
 GameObject:
   m_ObjectHideFlags: 0
@@ -28101,6 +28101,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9e1e808c777424099b7c02cb6878dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &954058059 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8763879197067792538, guid: 7c6fcfc077295a04f8bdd16269cb3566, type: 3}
+  m_PrefabInstance: {fileID: 8763879196824826117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81291018f7a1844d8d1cd3586248740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &959501937
 GameObject:
   m_ObjectHideFlags: 0
@@ -28198,6 +28209,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7457456146042448973, guid: c2acd0963c443ca4eb5c3a88574259f9, type: 3}
   m_PrefabInstance: {fileID: 982738766}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &987071020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 987071021}
+  - component: {fileID: 987071022}
+  m_Layer: 0
+  m_Name: 11 ControlKoiFish
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &987071021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987071020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2027002932}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &987071022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987071020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b33228357dcd1c488e2754340e9d007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoActivateGameAsset: 1
+  miniGameAssetGroup: {fileID: 473256966}
+  keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
+  fishRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 6
+    height: 3
+  fish: {fileID: 954058059}
 --- !u!1 &987848713 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2358519744402589262, guid: a250e1b52dc428349a5bef1ccc1abfb9, type: 3}
@@ -51591,7 +51656,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 740
+  m_TextureSize: 803
   m_ClipPlaneOffset: 0.07
   m_ReflectLayers:
     serializedVersion: 2
@@ -56459,8 +56524,9 @@ Transform:
   - {fileID: 1299489712}
   - {fileID: 223916406}
   - {fileID: 722876626}
-  - {fileID: 292625050}
+  - {fileID: 987071021}
   - {fileID: 1707333697}
+  - {fileID: 292625050}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57795,6 +57861,8 @@ PlayableDirector:
     value: {fileID: 1504337788}
   - key: {fileID: -5256475977099989270, guid: e797f43e2ee8e7a4697a828aa8e20084, type: 2}
     value: {fileID: 1709176666}
+  - key: {fileID: -3167385914492686865, guid: e797f43e2ee8e7a4697a828aa8e20084, type: 2}
+    value: {fileID: 1634064890}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &2143389239

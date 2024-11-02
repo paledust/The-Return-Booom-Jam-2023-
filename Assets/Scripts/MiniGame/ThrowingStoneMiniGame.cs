@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Playables;
 
 public class ThrowingStoneMiniGame : MiniGameBasic
 {
-[Header("Intro")]
-    [SerializeField] private ParticleSystem P_fireBurst;
 [Header("Control")]
     [SerializeField] private KeyMatrix_SO keyMatrix;
     [SerializeField] private Rect stoneRect;
@@ -26,8 +23,10 @@ public class ThrowingStoneMiniGame : MiniGameBasic
     [SerializeField] private float throwStartOffset;
     [SerializeField] private Vector2 throwSpeedRange;
     [SerializeField] private Vector2 angularSpeedRange;
+    [SerializeField] private float throwTimeStep;
 
     private Vector2[] throwPos;
+    private float throwTime;
 
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
@@ -54,6 +53,8 @@ public class ThrowingStoneMiniGame : MiniGameBasic
                 throwPos[y*LINE+x] = new Vector2(x/(LINE-1.0f)*stoneRect.width, -y/(ROLL-1.0f)*stoneRect.height)+new Vector2(-0.5f*stoneRect.width,0.5f*stoneRect.height);
             }
         }
+
+        throwTime = 0;
 
         EventHandler.E_OnStoneTouchWater += StoneHitWater;
     }
@@ -82,6 +83,10 @@ public class ThrowingStoneMiniGame : MiniGameBasic
     protected override void OnKeyPressed(Key keyPressed)
     {
         base.OnKeyPressed(keyPressed);
+
+        if((Time.time - throwTime)<throwTimeStep) return;
+
+        throwTime = Time.time;
 
         Vector2Int coordinate = keyMatrix.GetCoordinateFromKey(keyPressed);
         Vector3 target;
