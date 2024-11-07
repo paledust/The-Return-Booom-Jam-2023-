@@ -20,7 +20,7 @@ public class MovingCloud : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
         currentDist += velocity.magnitude*Time.deltaTime;
         if(currentDist>=moveDist){
-            EventHandler.Call_OnCloudOutOfBoundry(this);
+            CloudManager.Call_OnThisRecycle(this);
             gameObject.SetActive(false);
         }
     }
