@@ -45,7 +45,7 @@ public class FishMovement{
         direction = Vector3.Slerp(direction, diff, Time.fixedDeltaTime * rotateSpeed);
         direction.y = 0;
         if((direction-diff).magnitude<=0.001f) direction = diff;
-        velocity = direction * diff.magnitude * maxSpeed;
+        velocity = direction.normalized * diff.sqrMagnitude * maxSpeed;
 
         transform.position += velocity * Time.fixedDeltaTime;
         if(direction!=Vector3.zero)
@@ -99,6 +99,10 @@ public class FishAI : MonoBehaviour
     public void FollowTransform(bool isFollowTransform)=>followTransform = isFollowTransform;
     public void TransitionMovement(float targetSpeed, float targetRotateSpeed, float duration){
         speedChanger.Excute(coroutineTransitionMovement(targetSpeed, targetRotateSpeed, duration));
+    }
+    public void ClampTargetPos(){
+        Vector3 diff = currentTarget - transform.position;
+        currentTarget = transform.position + Vector3.ClampMagnitude(diff, fishMovement.DeaccelarateRange);
     }
     IEnumerator coroutineTransitionMovement(float targetSpeed, float targetRotateSpeed, float duration){
         float initSpeed = fishMovement.maxSpeed;

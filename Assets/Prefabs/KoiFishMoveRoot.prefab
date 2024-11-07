@@ -82,7 +82,7 @@ MonoBehaviour:
   fishMovement:
     rotateSpeed: 5
     maxSpeed: 1
-    DeaccelarateRange: 2
+    DeaccelarateRange: 1
     StopRange: 0.1
     fishRotation: {fileID: 8763879197067792536}
     rotateCurve:

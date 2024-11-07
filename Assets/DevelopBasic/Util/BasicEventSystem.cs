@@ -25,6 +25,8 @@ public static class EventHandler
     public static void Call_OnNextMiniGame(){E_OnNextMiniGame?.Invoke();}
     public static Action<Vector3> E_OnStoneTouchWater;
     public static void Call_OnStoneTouchWater(Vector3 position)=>E_OnStoneTouchWater?.Invoke(position);
+    public static Action<MovingCloud> E_OnCloudOutOfBoundry;
+    public static void Call_OnCloudOutOfBoundry(MovingCloud cloud)=>E_OnCloudOutOfBoundry?.Invoke(cloud);
 #endregion
 
 #region Game Basic

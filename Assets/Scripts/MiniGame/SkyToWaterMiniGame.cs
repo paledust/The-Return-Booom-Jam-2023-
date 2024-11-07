@@ -84,13 +84,13 @@ public class SkyToWaterMiniGame : MiniGameBasic
 
         yield return new WaitForLoop(duration, (t)=>{
             skyRenderer.material.color = Color.Lerp(initCol, targetCol, EasingFunc.Easing.SmoothInOut(t));
+            perRendererWater.darkControl = Mathf.Lerp(0, 1f, EasingFunc.Easing.SmoothInOut(t));
         });
         skyRenderer.gameObject.SetActive(false);
     }
     IEnumerator coroutineFadeWaterFlow(float duration){
         yield return new WaitForLoop(duration, (t)=>{
-            perRendererWater.normalScale = Mathf.Lerp(0, 0.01f, EasingFunc.Easing.SmoothInOut(t));
-            // perRendererWater.darkControl = Mathf.Lerp(0, 1f, EasingFunc.Easing.SmoothInOut(t));
+            perRendererWater.normalScale = Mathf.Lerp(0, 0.02f, EasingFunc.Easing.SmoothInOut(t));
         });
     }
     void OnDrawGizmosSelected(){

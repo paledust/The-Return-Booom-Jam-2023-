@@ -42,7 +42,7 @@ public class Main_Initiator : MonoBehaviour
         foreach(var miniGame in FishMiniGames){
             if(miniGame == miniGameManager.GetGame(StartGameIndex)){
                 perRendererWater.darkControl = 1;
-                perRendererWater.normalScale = 0.01f;
+                perRendererWater.normalScale = 0.02f;
 
                 return;
             }

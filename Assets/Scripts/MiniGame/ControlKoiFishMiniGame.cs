@@ -12,6 +12,9 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     [SerializeField] private FishAI fish;
     [SerializeField] private Vector2 fishSpeedRange;
     [SerializeField] private Vector2 fishRotateSpeedRange;
+[Header("VFX")]
+    [SerializeField] private ParticleSystem p_ripple;
+    [SerializeField] private float particleOffset = 0.7f;
 
     private Vector2[] guidePos;
     private CoroutineExcuter fishReleaser;
@@ -44,13 +47,22 @@ public class ControlKoiFishMiniGame : MiniGameBasic
 
         fish.AssignTarget(target);
         fish.TransitionMovement(fishSpeedRange.y, fishRotateSpeedRange.y, 0.2f);
+
+        target.y = p_ripple.transform.position.y;
+        target.x *= particleOffset;
+        target.z *= particleOffset;
+        p_ripple.transform.position = target;
+        p_ripple.Play();
+
         fishReleaser.Abort();
     }
     protected override void OnNoKeyPress()
     {
         base.OnNoKeyPress();
         fish.TransitionMovement(fishSpeedRange.x, fishRotateSpeedRange.x, 1f);
+        fish.ClampTargetPos();
         fishReleaser.Excute(CommonCoroutine.DelayAction(()=>fish.FollowTransform(true), 3f));
+        p_ripple.Stop();
     }
     void OnDrawGizmosSelected(){
         Gizmos.matrix = transform.localToWorldMatrix;
