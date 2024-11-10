@@ -1,9 +1,10 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class FloatingFlower : MonoBehaviour
 {
+    [SerializeField] private Transform lotusTrans;
+    [SerializeField] private Vector2 lotusScaleRange;
     [SerializeField] private ParticleSystem p_plate;
     [SerializeField] private Animation floatAnimation;
 
@@ -14,6 +15,8 @@ public class FloatingFlower : MonoBehaviour
     void OnEnable(){
         p_plate.GetComponent<ParticleSeedMatch>().MatchSeed();
         p_plate.Play(true);
+
+        lotusTrans.localScale = Vector3.one * lotusScaleRange.GetRndValueInVector2Range();
     }
     public void Bloom(){
         p_plate.Stop(true);
@@ -34,9 +37,9 @@ public class FloatingFlower : MonoBehaviour
         this.moveDist = moveDist;
         this.velocity = velocity;
     }
-    IEnumerator coroutineStopFlower(Action OnStopCallback){
+    IEnumerator coroutineStopFlower(System.Action OnStopCallback){
         Vector3 initVel = velocity;
-        yield return new WaitForLoop(0.5f, t=>{
+        yield return new WaitForLoop(1f, t=>{
             velocity = Vector3.Lerp(initVel, Vector3.zero, t);
         });
         p_plate.Stop(true);

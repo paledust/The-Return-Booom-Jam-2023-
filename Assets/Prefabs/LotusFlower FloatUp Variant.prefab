@@ -44,7 +44,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.35
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2595675911586400916
 MonoBehaviour:
@@ -187,41 +187,37 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8586517255389554596, guid: 295311c9315fbe445b655410e9636110, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
+    - target: {fileID: 5161343348157620801, guid: 295311c9315fbe445b655410e9636110, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
+    - target: {fileID: 5161343348157620801, guid: 295311c9315fbe445b655410e9636110, type: 3}
       propertyPath: m_LocalScale.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
+    - target: {fileID: 5161343348157620801, guid: 295311c9315fbe445b655410e9636110, type: 3}
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
+    - target: {fileID: 5161343348157620801, guid: 295311c9315fbe445b655410e9636110, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7
+      value: -0.4058366
       objectReference: {fileID: 0}
-    - target: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
+    - target: {fileID: 5161343348157620801, guid: 295311c9315fbe445b655410e9636110, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
+    - target: {fileID: 5161343348157620801, guid: 295311c9315fbe445b655410e9636110, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
+    - target: {fileID: 5161343348157620801, guid: 295311c9315fbe445b655410e9636110, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586517255389554596, guid: 295311c9315fbe445b655410e9636110, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -315,11 +311,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6537b4f9d9171d84cbc0d60688c58841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lotusTrans: {fileID: 7975792528472380699}
+  lotusScaleRange: {x: 0.7, y: 1.3}
   p_plate: {fileID: 8580172255433704055}
   floatAnimation: {fileID: 1988823539}
 --- !u!4 &7576475629469529360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9206566857301304098, guid: 295311c9315fbe445b655410e9636110, type: 3}
+  m_PrefabInstance: {fileID: 1648677787042272818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7975792528472380699 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
   m_PrefabInstance: {fileID: 1648677787042272818}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5155095958455421090

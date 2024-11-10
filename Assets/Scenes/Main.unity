@@ -29542,7 +29542,7 @@ MonoBehaviour:
   endTrans: {fileID: 1331323174}
   spawnCycle: {x: 10, y: 13}
   cycleOffset: 8
-  flowerSpeed: 0.6
+  flowerSpeed: 0.45
 --- !u!1 &987848713 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2358519744402589262, guid: a250e1b52dc428349a5bef1ccc1abfb9, type: 3}
@@ -52967,7 +52967,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 893
+  m_TextureSize: 1173
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
