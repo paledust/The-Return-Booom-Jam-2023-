@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,9 +15,11 @@ public class FloatingFlower : MonoBehaviour
         p_plate.GetComponent<ParticleSeedMatch>().MatchSeed();
         p_plate.Play(true);
     }
-    public void CaughtByFish(){
+    public void Bloom(){
         p_plate.Stop(true);
-        StartCoroutine(coroutineAfterCaught());
+        StartCoroutine(coroutineStopFlower(()=>{
+            floatAnimation.Play();
+        }));
     }
     void Update(){
         transform.position += velocity * Time.deltaTime;
@@ -31,11 +34,13 @@ public class FloatingFlower : MonoBehaviour
         this.moveDist = moveDist;
         this.velocity = velocity;
     }
-    IEnumerator coroutineAfterCaught(){
+    IEnumerator coroutineStopFlower(Action OnStopCallback){
         Vector3 initVel = velocity;
         yield return new WaitForLoop(0.5f, t=>{
             velocity = Vector3.Lerp(initVel, Vector3.zero, t);
         });
         p_plate.Stop(true);
+
+        OnStopCallback?.Invoke();
     }
 }
