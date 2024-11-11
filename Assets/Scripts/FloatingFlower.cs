@@ -7,6 +7,10 @@ public class FloatingFlower : MonoBehaviour
     [SerializeField] private Vector2 lotusScaleRange;
     [SerializeField] private ParticleSystem p_plate;
     [SerializeField] private Animation floatAnimation;
+[Header("Leaf Growing")]
+    [SerializeField] private GameObject leafPrefab;
+    [SerializeField] private Vector2 spawnRange;
+    [SerializeField] private Vector2Int amountRange;
 
     private Vector3 velocity;
     private float moveDist;
@@ -21,7 +25,18 @@ public class FloatingFlower : MonoBehaviour
     public void Bloom(){
         p_plate.Stop(true);
         StartCoroutine(coroutineStopFlower(()=>{
-            floatAnimation.Play();
+            int amount = amountRange.GetRndValueInVector2Range();
+            for(int i=0; i<amount; i++){
+                var leaf = Instantiate(leafPrefab, transform);
+                Vector3 spawnPos = Random.insideUnitCircle;
+                spawnPos.z = spawnPos.y;
+                spawnPos.y = 0;
+                spawnPos = spawnPos.normalized*spawnRange.GetRndValueInVector2Range();
+                leaf.transform.localPosition = spawnPos + Vector3.up*0.02f;
+                leaf.transform.localRotation = Quaternion.Euler(90,0,0);
+                leaf.transform.parent = null;
+                leaf.SetActive(true);
+            }
         }));
     }
     void Update(){
@@ -43,6 +58,9 @@ public class FloatingFlower : MonoBehaviour
             velocity = Vector3.Lerp(initVel, Vector3.zero, t);
         });
         p_plate.Stop(true);
+
+        floatAnimation.Play();
+        yield return new WaitForSeconds(floatAnimation.clip.length*0.75f);
 
         OnStopCallback?.Invoke();
     }
