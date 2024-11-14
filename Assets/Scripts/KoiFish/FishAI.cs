@@ -40,7 +40,7 @@ public class FishMovement{
 
     //Slerp the direction to the clamped difference.
         if(direction==Vector3.zero&&diff!=Vector3.zero)
-            direction = transform.rotation * Vector3.right * 0.001f;
+            direction = transform.rotation * Vector3.forward * 0.001f;
 
         direction = Vector3.Slerp(direction, diff, Time.fixedDeltaTime * rotateSpeed);
         direction.y = 0;

@@ -10,6 +10,7 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     [SerializeField] private Rect fishRect;
 [Header("Fish")]
     [SerializeField] private FishAI fish;
+    [SerializeField] private Collider fishTrigger;
     [SerializeField] private Vector2 fishSpeedRange;
     [SerializeField] private Vector2 fishRotateSpeedRange;
 [Header("VFX")]
@@ -53,7 +54,8 @@ public class ControlKoiFishMiniGame : MiniGameBasic
         target.z *= particleOffset;
         p_ripple.transform.position = target;
         p_ripple.Play();
-
+        fishTrigger.enabled = true;
+        
         fishReleaser.Abort();
     }
     protected override void OnNoKeyPress()
@@ -61,6 +63,7 @@ public class ControlKoiFishMiniGame : MiniGameBasic
         base.OnNoKeyPress();
         fish.TransitionMovement(fishSpeedRange.x, fishRotateSpeedRange.x, 1f);
         fish.ClampTargetPos();
+        fishTrigger.enabled = false;
         fishReleaser.Excute(CommonCoroutine.DelayAction(()=>fish.FollowTransform(true), 3f));
         p_ripple.Stop();
     }
