@@ -8,7 +8,7 @@ public class BirdManager : MonoBehaviour
     [SerializeField] private Transform headTarget;
     [SerializeField] private float spreadAngle;
     [SerializeField] private float spreadDist;
-
+    [SerializeField] private float alignmentFactor = 10;
     private Vector3[] birdTargets;
 
     void Start()
@@ -32,7 +32,8 @@ public class BirdManager : MonoBehaviour
                 int headIndex = Mathf.Max(0,i-2);
                 birdTargets[i] = birds[headIndex].transform.position - Quaternion.Euler(0,((i%2==0)?1:-1)*spreadAngle,0)*birds[headIndex].transform.forward*spreadDist;
             }
-            birds[i].AssignTarget(birdTargets[i]);
+            birds[i].UpdateTarget(birdTargets[i]);
+            if(i!=0) birds[i].UpdateAlignment(birds[0].transform.forward*alignmentFactor);
         }    
     }
     

@@ -5066,8 +5066,9 @@ MonoBehaviour:
   - {fileID: 2010049108}
   - {fileID: 1770012927}
   headTarget: {fileID: 1060039516}
-  spreadAngle: 60
-  spreadDist: 0.35
+  spreadAngle: 40
+  spreadDist: 0.5
+  alignmentFactor: 1
 --- !u!1 &45571965
 GameObject:
   m_ObjectHideFlags: 0
@@ -53961,7 +53962,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 1920
+  m_TextureSize: 771
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
@@ -75376,7 +75377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 954124325776777788, guid: d9d509bc5fcd6314998e4177b04383c1, type: 3}
       propertyPath: maxSpeed
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2573653192177271350, guid: d9d509bc5fcd6314998e4177b04383c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

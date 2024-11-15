@@ -485,8 +485,8 @@ MonoBehaviour:
   followTransform: 0
   targetTransform: {fileID: 0}
   rotateSpeed: 5
-  minSpeed: 0.6
-  maxSpeed: 2.7
+  minSpeed: 2
+  maxSpeed: 6.5
   DeaccelarateRange: 2
 --- !u!1 &6642073374279994434
 GameObject:

@@ -16,9 +16,12 @@ public class BirdAI : MonoBehaviour
     private Vector3 currentTarget;
     private Vector3 direction;
     private Vector3 velocity;
+    private Vector3 alignment;
     private CoroutineExcuter speedChanger;
+    private float seed;
     
     void OnEnable(){
+        seed = Random.value;
         currentTarget = transform.position;
         direction = transform.rotation * Vector3.forward;
         velocity = Vector3.zero;
@@ -32,9 +35,11 @@ public class BirdAI : MonoBehaviour
         Vector3 diff = currentTarget - transform.position;
     //Ignore Y Axis
         diff.y = 0;
-        diff = Vector3.ClampMagnitude(diff, DeaccelarateRange);
-        if(DeaccelarateRange>0) diff/=DeaccelarateRange;
-        else diff = diff.normalized;
+
+        DeaccelarateRange = (DeaccelarateRange<=0)?1:DeaccelarateRange;
+        diff += alignment;
+        diff = Vector3.ClampMagnitude(diff, DeaccelarateRange)/DeaccelarateRange;
+
     //Slerp the direction to the clamped difference.
         if(direction==Vector3.zero&&diff!=Vector3.zero)
             direction = transform.rotation * Vector3.forward * 0.001f;
@@ -42,20 +47,23 @@ public class BirdAI : MonoBehaviour
         direction = Vector3.Slerp(direction, diff, Time.fixedDeltaTime * rotateSpeed);
         direction.y = 0;
         if((direction-diff).magnitude<=0.001f) direction = diff;
-        velocity = direction.normalized * Mathf.Lerp(minSpeed, maxSpeed, diff.magnitude) * maxSpeed;
+        velocity = direction.normalized * Mathf.Lerp(minSpeed, maxSpeed, direction.magnitude) * Mathf.Lerp(0.6f, 1f, Mathf.PerlinNoise(0.298135f, seed+Time.time));
 
         transform.position += velocity * Time.fixedDeltaTime;
         if(direction!=Vector3.zero)
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
     }
-    public void AssignTarget(Vector3 target, bool auto_SwitchFollowMethod = true){
+    public void UpdateTarget(Vector3 target, bool auto_SwitchFollowMethod = true){
         target.y = transform.position.y;
         currentTarget = target;
         if(auto_SwitchFollowMethod) FollowTransform(false);
     }
-    public void AssignTarget(Transform target, bool auto_SwitchFollowMethod = true){
+    public void UpdateTarget(Transform target, bool auto_SwitchFollowMethod = true){
         targetTransform = target;
         if(auto_SwitchFollowMethod) FollowTransform(true);
+    }
+    public void UpdateAlignment(Vector3 alignment){
+        this.alignment = alignment;
     }
     public void FollowTransform(bool isFollowTransform)=>followTransform = isFollowTransform;
     public void TransitionMovement(float targetSpeed, float targetRotateSpeed, float duration){
