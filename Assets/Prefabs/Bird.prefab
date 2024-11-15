@@ -484,10 +484,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followTransform: 0
   targetTransform: {fileID: 0}
-  rotateSpeed: 3
+  rotateSpeed: 5
   minSpeed: 0.6
-  maxSpeed: 1.8
-  DeaccelarateRange: 1
+  maxSpeed: 2.7
+  DeaccelarateRange: 2
 --- !u!1 &6642073374279994434
 GameObject:
   m_ObjectHideFlags: 0

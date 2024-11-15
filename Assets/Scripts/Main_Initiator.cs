@@ -37,6 +37,8 @@ public class Main_Initiator : MonoBehaviour
 
         miniGameManager.StartGame(StartGameIndex);
         perRendererWater_Initiation();
+    //Debug
+        EventHandler.Call_OnNextMiniGame();
     }
     void perRendererWater_Initiation(){
         foreach(var miniGame in FishMiniGames){

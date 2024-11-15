@@ -5299,6 +5299,7 @@ MonoBehaviour:
   - {fileID: 223916407}
   - {fileID: 722876628}
   - {fileID: 987071022}
+  - {fileID: 1810854961}
 --- !u!1 &61477996
 GameObject:
   m_ObjectHideFlags: 0
@@ -53960,7 +53961,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 749
+  m_TextureSize: 1920
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
@@ -56807,16 +56808,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410e6bcece4158b449754ada383e226a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyMatrix: {fileID: 0}
+  autoActivateGameAsset: 1
+  miniGameAssetGroup: {fileID: 361353522}
+  keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
   birdRect:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0
-    height: 0
-  birdTarget: {fileID: 0}
-  birdManager: {fileID: 0}
-  p_birdCloud: {fileID: 0}
+    width: 20
+    height: 8
+  birdTarget: {fileID: 1060039516}
+  birdManager: {fileID: 28267906}
+  p_birdCloud: {fileID: 8623136266523989686}
 --- !u!1001 &1814846279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75373,7 +75376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 954124325776777788, guid: d9d509bc5fcd6314998e4177b04383c1, type: 3}
       propertyPath: maxSpeed
-      value: 1.4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2573653192177271350, guid: d9d509bc5fcd6314998e4177b04383c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

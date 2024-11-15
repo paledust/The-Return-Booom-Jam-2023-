@@ -47,5 +47,10 @@ public static class Service{
         if(Mathf.Abs(rawValue-targetValue)<=allowance) return targetValue;
         else return Mathf.Lerp(rawValue, targetValue, step);
     }
+    public static void Swap(ref float a, ref float b){
+        a = a+b;
+        b = a-b;
+        a = a-b;
+    }
 #endregion
 }
