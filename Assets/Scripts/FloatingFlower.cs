@@ -37,6 +37,7 @@ public class FloatingFlower : MonoBehaviour
                 leaf.transform.parent = null;
                 leaf.SetActive(true);
             }
+            EventHandler.Call_OnFloatingFlowerBloom(this);
         }));
     }
     void Update(){

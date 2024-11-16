@@ -16,7 +16,13 @@ public class ControlKoiFishMiniGame : MiniGameBasic
 [Header("VFX")]
     [SerializeField] private ParticleSystem p_ripple;
     [SerializeField] private float particleOffset = 0.7f;
+[Header("Other")]
+    [SerializeField] private int triggerFlowerAmount = 4;
+    [SerializeField] private CloudManager cloudManager;
+    [SerializeField] private LotusManager lotusManager;
 
+    private int bloomedAmount = 0;
+    private bool isBirdOut = false;
     private Vector2[] guidePos;
     private CoroutineExcuter fishReleaser;
 
@@ -35,6 +41,22 @@ public class ControlKoiFishMiniGame : MiniGameBasic
         }
 
         fishReleaser = new CoroutineExcuter(this);
+        fishTrigger.enabled = false;
+
+        bloomedAmount = 0;
+        EventHandler.E_OnFloatingFlowerBloom += FloatingFlowerBloomHandler;
+    }
+    protected override void CleanUp()
+    {
+        base.CleanUp();
+        EventHandler.E_OnFloatingFlowerBloom -= FloatingFlowerBloomHandler;
+    }
+    void FloatingFlowerBloomHandler(FloatingFlower flower){
+        bloomedAmount ++;
+        if(bloomedAmount>=triggerFlowerAmount && !isBirdOut){
+            isBirdOut = true;
+            EventHandler.E_OnNextMiniGame();
+        }
     }
     protected override void OnKeyPressed(Key keyPressed)
     {

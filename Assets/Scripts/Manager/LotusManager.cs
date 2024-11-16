@@ -11,6 +11,7 @@ public class LotusManager : Basic_ObjectPool<FloatingFlower>
     [SerializeField] private float cycleOffset = 2;
     [SerializeField] private float flowerSpeed = 1;
 
+    private int bloomedAmount = 0;
     private float spawnTimer;
     private float nextCycle;
 

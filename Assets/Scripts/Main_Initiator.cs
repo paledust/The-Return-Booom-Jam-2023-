@@ -36,11 +36,9 @@ public class Main_Initiator : MonoBehaviour
         }
 
         miniGameManager.StartGame(StartGameIndex);
-        perRendererWater_Initiation();
-    //Debug
-        EventHandler.Call_OnNextMiniGame();
+        PerRendererWater_Initiation();
     }
-    void perRendererWater_Initiation(){
+    void PerRendererWater_Initiation(){
         foreach(var miniGame in FishMiniGames){
             if(miniGame == miniGameManager.GetGame(StartGameIndex)){
                 perRendererWater.darkControl = 1;
@@ -66,7 +64,7 @@ public class Main_Initiator : MonoBehaviour
     //Tell Mini Game Manager to prepare the mini game to match the start up scene
         miniGameManager.Editor_MatchSceneToStartGameIndex(StartGameIndex);
     Undo.RecordObject(perRendererWater, "Adjust Water Settings");
-        perRendererWater_Initiation();
+        PerRendererWater_Initiation();
     EditorUtility.SetDirty(perRendererWater);
     }
 #endif

@@ -11,8 +11,6 @@ public class ControlBirdMiniGame : MiniGameBasic
     [SerializeField] private Transform birdTarget;
 [Header("Bird")]
     [SerializeField] private BirdManager birdManager;
-[Header("VFX")]
-    [SerializeField] private ParticleSystem p_birdCloud;
 
     private Vector2[] targetPos;
 
@@ -41,6 +39,5 @@ public class ControlBirdMiniGame : MiniGameBasic
         target.y = 0;
 
         birdTarget.position = target;
-        if(p_birdCloud.isPlaying) p_birdCloud.Stop();
     }
 }
