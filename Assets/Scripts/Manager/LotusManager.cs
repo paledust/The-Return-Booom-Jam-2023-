@@ -11,7 +11,6 @@ public class LotusManager : Basic_ObjectPool<FloatingFlower>
     [SerializeField] private float cycleOffset = 2;
     [SerializeField] private float flowerSpeed = 1;
 
-    private int bloomedAmount = 0;
     private float spawnTimer;
     private float nextCycle;
 
@@ -30,6 +29,11 @@ public class LotusManager : Basic_ObjectPool<FloatingFlower>
 
             spawnTimer = 0;
             nextCycle = spawnCycle.GetRndValueInVector2Range();
+        }
+    }
+    public void FreeLotus(){
+        for(int i=0; i<pools.Count; i++){
+            pools[i].ReleaseFlower(Vector3.left*Random.Range(0.5f,0.8f)*flowerSpeed);
         }
     }
     protected override void PrepareTarget(FloatingFlower flower)

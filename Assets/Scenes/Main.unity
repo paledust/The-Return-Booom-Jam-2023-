@@ -12322,72 +12322,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7457456146042448973, guid: c2acd0963c443ca4eb5c3a88574259f9, type: 3}
   m_PrefabInstance: {fileID: 289557243}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &292625049
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 292625050}
-  - component: {fileID: 292625051}
-  m_Layer: 0
-  m_Name: UnSet ControlKoiFish
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &292625050
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292625049}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2027002932}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &292625051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292625049}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fea9efeeb77e50b45943f293d14dcb91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
-  miniGameAssetGroup: {fileID: 473256966}
-  keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
-  stoneRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 4
-    height: 1.5
-  p_ripple: {fileID: 1333184777}
-  p_splash: {fileID: 7930755970146274036}
-  waterHeight: 2.19
-  minimumDriftAngularSpeed: 1200
-  waterAngularFriction: 0.6
-  waterSpeedFriction: 0.75
-  kickUpFactor: 0.75
-  stonePrefab: {fileID: 2735289318789448949, guid: 511e6f8f10dc6c04390711a322c93350, type: 3}
-  throwStartPos: {fileID: 366030443}
-  throwStartOffset: 13.5
-  throwSpeedRange: {x: 1.4, y: 2}
-  angularSpeedRange: {x: 5000, y: 5000}
-  throwTimeStep: 2
 --- !u!1001 &293795671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13211,7 +13145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &361353523
 Transform:
   m_ObjectHideFlags: 0
@@ -29783,7 +29717,9 @@ MonoBehaviour:
   fishRotateSpeedRange: {x: 3.5, y: 5}
   p_ripple: {fileID: 1988365670}
   particleOffset: 0.7
-  triggerFlowerAmount: 3
+  triggerBirdFlowerAmount: 2
+  stopCloudFlowerAmount: 3
+  interactionEndFlowerAmount: 4
   cloudManager: {fileID: 987071023}
   lotusManager: {fileID: 987071024}
 --- !u!114 &987071023
@@ -54024,7 +53960,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 1832
+  m_TextureSize: 543
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
@@ -64114,7 +64050,6 @@ Transform:
   - {fileID: 987071021}
   - {fileID: 1810854960}
   - {fileID: 1707333697}
-  - {fileID: 292625050}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

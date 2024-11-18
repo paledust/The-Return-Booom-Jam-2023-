@@ -278,6 +278,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2824706516163238679, guid: 295311c9315fbe445b655410e9636110, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 295311c9315fbe445b655410e9636110, type: 3}
+--- !u!114 &7045925893922550166 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8586517255389554596, guid: 295311c9315fbe445b655410e9636110, type: 3}
+  m_PrefabInstance: {fileID: 1648677787042272818}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7576475629469529359}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77458040672a149448c3e244dff2850c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7576475629469529359 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9206566857301304125, guid: 295311c9315fbe445b655410e9636110, type: 3}
@@ -311,11 +322,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6537b4f9d9171d84cbc0d60688c58841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatidle: {fileID: 7045925893922550166}
   lotusTrans: {fileID: 7975792528472380699}
   lotusScaleRange: {x: 0.7, y: 1.3}
   p_plate: {fileID: 8580172255433704055}
   floatAnimation: {fileID: 1988823539}
   leafPrefab: {fileID: 3159559580383720269, guid: f9974c79829588248a782a07a19870b6, type: 3}
+  releaseForceRange: {x: 50, y: 80}
   spawnRange: {x: 0.2, y: 0.4}
   amountRange: {x: 2, y: 5}
 --- !u!4 &7576475629469529360 stripped

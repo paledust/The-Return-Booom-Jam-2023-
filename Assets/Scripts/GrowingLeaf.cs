@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class GrowingLeaf : MonoBehaviour
 {
-    private readonly static Vector2 growingRange = new Vector2(0.1f, 0.4f);
+    [SerializeField] private float speedDamp = 0.05f;
+    public float gravityFactor = 0;
+    private Vector3 velocity = Vector3.zero;
+
+    private readonly static Vector2 growingRange = new Vector2(0.05f, 0.2f);
     private readonly static Vector2 durationRange = new Vector2(0.6f, 1.2f);
     void Start()
     {
         StartCoroutine(coroutineGrowing(growingRange.GetRndValueInVector2Range(), durationRange.GetRndValueInVector2Range()));
+    }
+    void FixedUpdate(){
+        transform.position += velocity * Time.fixedDeltaTime;
+
+        velocity += Vector3.down*gravityFactor*Time.fixedDeltaTime;
+        if(velocity!=Vector3.zero) velocity *= 1f-speedDamp;
+        if(velocity.sqrMagnitude<=0.00001f) velocity = Vector3.zero;
+    }
+    public void AddForce(Vector3 force){
+        velocity += force;
     }
     IEnumerator coroutineGrowing(float targetScale, float duration){
         float initScale = transform.localScale.x;

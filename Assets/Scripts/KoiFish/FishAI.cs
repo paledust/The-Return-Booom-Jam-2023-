@@ -29,8 +29,6 @@ public class FishMovement{
     public void MoveUpdate(Vector3 moveTarget){
     //Get difference between position and Target in WORLD SPACE.
         Vector3 diff = moveTarget - transform.position;
-    //Ignore Y Axis
-        diff.y = 0;
     //Clamp Magnitude into for Maximum Speed.
         diff = Vector3.ClampMagnitude(diff, DeaccelarateRange);
         if(DeaccelarateRange>0) diff/=DeaccelarateRange;
@@ -43,7 +41,6 @@ public class FishMovement{
             direction = transform.rotation * Vector3.forward * 0.001f;
 
         direction = Vector3.Slerp(direction, diff, Time.fixedDeltaTime * rotateSpeed);
-        direction.y = 0;
         if((direction-diff).magnitude<=0.001f) direction = diff;
         velocity = direction.normalized * diff.sqrMagnitude * maxSpeed;
 
@@ -88,7 +85,6 @@ public class FishAI : MonoBehaviour
         currentTarget = transform.position;
     }
     public void AssignTarget(Vector3 target, bool auto_SwitchFollowMethod = true){
-        target.y = transform.position.y;
         currentTarget = target;
         if(auto_SwitchFollowMethod) FollowTransform(false);
     }
@@ -103,6 +99,11 @@ public class FishAI : MonoBehaviour
     public void ClampTargetPos(){
         Vector3 diff = currentTarget - transform.position;
         currentTarget = transform.position + Vector3.ClampMagnitude(diff, fishMovement.DeaccelarateRange);
+    }
+    public void DiveIntoWater(float diveDepth){
+        Vector3 target = transform.position + fishMovement.m_velocity * 2f;
+        target.y += diveDepth;
+        AssignTarget(target);
     }
     IEnumerator coroutineTransitionMovement(float targetSpeed, float targetRotateSpeed, float duration){
         float initSpeed = fishMovement.maxSpeed;

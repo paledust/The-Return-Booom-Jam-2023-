@@ -17,12 +17,15 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     [SerializeField] private ParticleSystem p_ripple;
     [SerializeField] private float particleOffset = 0.7f;
 [Header("Other")]
-    [SerializeField] private int triggerFlowerAmount = 4;
+    [SerializeField] private int triggerBirdFlowerAmount = 2;
+    [SerializeField] private int stopCloudFlowerAmount = 3;
+    [SerializeField] private int interactionEndFlowerAmount = 4;
     [SerializeField] private CloudManager cloudManager;
     [SerializeField] private LotusManager lotusManager;
 
     private int bloomedAmount = 0;
     private bool isBirdOut = false;
+    private bool isDone = false;
     private Vector2[] guidePos;
     private CoroutineExcuter fishReleaser;
 
@@ -53,9 +56,24 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     }
     void FloatingFlowerBloomHandler(FloatingFlower flower){
         bloomedAmount ++;
-        if(bloomedAmount>=triggerFlowerAmount && !isBirdOut){
+        if(bloomedAmount>=triggerBirdFlowerAmount && !isBirdOut){
             isBirdOut = true;
             EventHandler.E_OnNextMiniGame();
+        }
+        if(bloomedAmount>=stopCloudFlowerAmount && cloudManager.enabled){
+            cloudManager.enabled = false;
+        }
+        if(bloomedAmount>=interactionEndFlowerAmount && !isDone){
+            isDone = true;
+            StartCoroutine(CommonCoroutine.DelayAction(()=>{
+                lotusManager.FreeLotus();
+                lotusManager.enabled = false;
+            }, 1f));
+            fishReleaser.Abort();
+            FishAutopilot();
+            fish.DiveIntoWater(-1);
+
+            EventHandler.Call_OnEndMiniGame(this);
         }
     }
     protected override void OnKeyPressed(Key keyPressed)
@@ -66,7 +84,7 @@ public class ControlKoiFishMiniGame : MiniGameBasic
         Vector3 target;
         target = guidePos[coordinate.y*LINE + coordinate.x];
         target.z = target.y;
-        target.y = 0;
+        target.y = fish.transform.position.y;
 
         fish.AssignTarget(target);
         fish.TransitionMovement(fishSpeedRange.y, fishRotateSpeedRange.y, 0.2f);
@@ -83,10 +101,13 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     protected override void OnNoKeyPress()
     {
         base.OnNoKeyPress();
+        FishAutopilot();
+        fishReleaser.Excute(CommonCoroutine.DelayAction(()=>fish.FollowTransform(true), 3f));
+    }
+    void FishAutopilot(){
+        fishTrigger.enabled = false;
         fish.TransitionMovement(fishSpeedRange.x, fishRotateSpeedRange.x, 1f);
         fish.ClampTargetPos();
-        fishTrigger.enabled = false;
-        fishReleaser.Excute(CommonCoroutine.DelayAction(()=>fish.FollowTransform(true), 3f));
         p_ripple.Stop();
     }
     void OnDrawGizmosSelected(){
