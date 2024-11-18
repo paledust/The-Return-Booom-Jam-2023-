@@ -29717,6 +29717,7 @@ MonoBehaviour:
   fishRotateSpeedRange: {x: 3.5, y: 5}
   p_ripple: {fileID: 1988365670}
   particleOffset: 0.7
+  waterRender: {fileID: 1504337787}
   triggerBirdFlowerAmount: 2
   stopCloudFlowerAmount: 3
   interactionEndFlowerAmount: 4
@@ -53960,7 +53961,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 543
+  m_TextureSize: 499
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2

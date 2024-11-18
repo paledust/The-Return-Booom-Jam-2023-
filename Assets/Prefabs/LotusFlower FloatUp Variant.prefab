@@ -328,7 +328,7 @@ MonoBehaviour:
   p_plate: {fileID: 8580172255433704055}
   floatAnimation: {fileID: 1988823539}
   leafPrefab: {fileID: 3159559580383720269, guid: f9974c79829588248a782a07a19870b6, type: 3}
-  releaseForceRange: {x: 50, y: 80}
+  releaseForceRange: {x: 0.5, y: 1}
   spawnRange: {x: 0.2, y: 0.4}
   amountRange: {x: 2, y: 5}
 --- !u!4 &7576475629469529360 stripped

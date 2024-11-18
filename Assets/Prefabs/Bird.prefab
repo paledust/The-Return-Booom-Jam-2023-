@@ -500,7 +500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followTransform: 0
   targetTransform: {fileID: 0}
-  rotateSpeed: 5
+  rotateSpeed: 4
   minSpeed: 3
   maxSpeed: 7
   DeaccelarateRange: 2

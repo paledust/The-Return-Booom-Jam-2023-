@@ -17,6 +17,7 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     [SerializeField] private ParticleSystem p_ripple;
     [SerializeField] private float particleOffset = 0.7f;
 [Header("Other")]
+    [SerializeField] private PerRendererWater waterRender;
     [SerializeField] private int triggerBirdFlowerAmount = 2;
     [SerializeField] private int stopCloudFlowerAmount = 3;
     [SerializeField] private int interactionEndFlowerAmount = 4;
@@ -69,6 +70,7 @@ public class ControlKoiFishMiniGame : MiniGameBasic
                 lotusManager.FreeLotus();
                 lotusManager.enabled = false;
             }, 1f));
+            StartCoroutine(coroutineWaterToSky(10));
             fishReleaser.Abort();
             FishAutopilot();
             fish.DiveIntoWater(-1);
@@ -109,6 +111,12 @@ public class ControlKoiFishMiniGame : MiniGameBasic
         fish.TransitionMovement(fishSpeedRange.x, fishRotateSpeedRange.x, 1f);
         fish.ClampTargetPos();
         p_ripple.Stop();
+    }
+    IEnumerator coroutineWaterToSky(float duration){
+        float initScale = waterRender.normalScale;
+        yield return new WaitForLoop(duration, (t)=>{
+            waterRender.normalScale = Mathf.Lerp(initScale, 0, EasingFunc.Easing.QuadEaseOut(t));
+        });
     }
     void OnDrawGizmosSelected(){
         Gizmos.matrix = transform.localToWorldMatrix;

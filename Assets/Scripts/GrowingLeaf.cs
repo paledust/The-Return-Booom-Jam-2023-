@@ -17,7 +17,7 @@ public class GrowingLeaf : MonoBehaviour
     void FixedUpdate(){
         transform.position += velocity * Time.fixedDeltaTime;
 
-        velocity += Vector3.down*gravityFactor*Time.fixedDeltaTime;
+        velocity += 0.47f*Vector3.down*gravityFactor*Time.fixedDeltaTime;
         if(velocity!=Vector3.zero) velocity *= 1f-speedDamp;
         if(velocity.sqrMagnitude<=0.00001f) velocity = Vector3.zero;
     }
