@@ -31,9 +31,9 @@ public class LotusManager : Basic_ObjectPool<FloatingFlower>
             nextCycle = spawnCycle.GetRndValueInVector2Range();
         }
     }
-    public void FreeLotus(){
+    public void PrepareToFreeLotus(){
         for(int i=0; i<pools.Count; i++){
-            pools[i].ReleaseFlower(Vector3.left*Random.Range(0.5f,0.8f)*flowerSpeed);
+            pools[i].PrepareToReleaseFlower();
         }
     }
     protected override void PrepareTarget(FloatingFlower flower)

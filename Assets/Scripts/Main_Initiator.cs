@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,6 +10,14 @@ using UnityEditor;
 
 public class Main_Initiator : MonoBehaviour
 {
+    [System.Serializable]
+    public struct FishSetting{
+        public Renderer fishRenderer;
+        [ColorUsage(false, true)] public Color fishColor;
+        public void ApplySettings(){
+            fishRenderer.material.SetColor("_EmissionColor", fishColor);
+        }
+    }
     [System.Serializable]
     public class SharingSets{
         public GameObject GameSets;
@@ -25,7 +35,9 @@ public class Main_Initiator : MonoBehaviour
     [SerializeField] private SharingSets[] sharingSets;
 [Header("Special Sets")]
     [SerializeField] private PerRendererWater perRendererWater;
+    [SerializeField] private FishSetting fishSetting;
     [SerializeField] private MiniGameBasic[] FishMiniGames;
+    [SerializeField] private MiniGameBasic fishBirdGame;
     void Start()
     {
         for(int i=0; i<sharingSets.Length; i++){
@@ -39,6 +51,10 @@ public class Main_Initiator : MonoBehaviour
         PerRendererWater_Initiation();
     }
     void PerRendererWater_Initiation(){
+        if(fishBirdGame == miniGameManager.GetGame(StartGameIndex)){
+            perRendererWater.fallOffPower = 1;
+            fishSetting.ApplySettings();
+        }
         foreach(var miniGame in FishMiniGames){
             if(miniGame == miniGameManager.GetGame(StartGameIndex)){
                 perRendererWater.darkControl = 1;

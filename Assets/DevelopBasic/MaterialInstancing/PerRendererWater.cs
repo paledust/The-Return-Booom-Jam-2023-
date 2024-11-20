@@ -6,6 +6,8 @@ public class PerRendererWater : PerRendererBehavior
 {
     public float normalScale = 0;
     public float darkControl = 0;
+    public float fallOffPower = 0.05f;
+    private readonly int FallOffPowerID = Shader.PropertyToID("_WaterFalloffPower");
     private readonly int NormalScaleID = Shader.PropertyToID("_NormalScale");
     private readonly int DarkControlID = Shader.PropertyToID("_DarkControl");
     protected override void UpdateProperties()
@@ -14,5 +16,6 @@ public class PerRendererWater : PerRendererBehavior
 
         mpb.SetFloat(NormalScaleID, normalScale);
         mpb.SetFloat(DarkControlID, darkControl);
+        mpb.SetFloat(FallOffPowerID, fallOffPower);
     }
 }

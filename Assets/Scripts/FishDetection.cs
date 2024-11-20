@@ -8,7 +8,7 @@ public class FishDetection : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if(other.tag == Service.PLAYER_TAG){
             GetComponent<Collider>().enabled = false;
-            floatingFlower.Bloom();
+            floatingFlower.DetectKoiFish(other.GetComponent<FishAI>());
         }
     }
 }

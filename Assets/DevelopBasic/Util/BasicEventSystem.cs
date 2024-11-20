@@ -27,6 +27,8 @@ public static class EventHandler
     public static void Call_OnStoneTouchWater(Vector3 position)=>E_OnStoneTouchWater?.Invoke(position);
     public static Action<FloatingFlower> E_OnFloatingFlowerBloom;
     public static void Call_OnFloatingFlowerBloom(FloatingFlower flower)=>E_OnFloatingFlowerBloom?.Invoke(flower);
+    public static Action E_OnFlowerFlow;
+    public static void Call_OnFlowerFlow()=>E_OnFlowerFlow?.Invoke();
 #endregion
 
 #region Game Basic

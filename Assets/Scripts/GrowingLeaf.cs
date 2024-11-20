@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrowingLeaf : MonoBehaviour
 {
     [SerializeField] private float speedDamp = 0.05f;
+    [SerializeField] private Animation sinkAnimation;
     public float gravityFactor = 0;
     private Vector3 velocity = Vector3.zero;
 
@@ -24,6 +25,7 @@ public class GrowingLeaf : MonoBehaviour
     public void AddForce(Vector3 force){
         velocity += force;
     }
+    public void PlaySinkAnimation()=>sinkAnimation.Play();
     IEnumerator coroutineGrowing(float targetScale, float duration){
         float initScale = transform.localScale.x;
         yield return new WaitForLoop(duration, (t)=>{

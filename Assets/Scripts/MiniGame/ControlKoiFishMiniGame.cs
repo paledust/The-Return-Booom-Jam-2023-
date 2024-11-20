@@ -20,11 +20,12 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     [SerializeField] private PerRendererWater waterRender;
     [SerializeField] private int triggerBirdFlowerAmount = 2;
     [SerializeField] private int stopCloudFlowerAmount = 3;
-    [SerializeField] private int interactionEndFlowerAmount = 4;
+    [SerializeField] private int flowerReleaseAmount = 4;
     [SerializeField] private CloudManager cloudManager;
     [SerializeField] private LotusManager lotusManager;
 
-    private int bloomedAmount = 0;
+    private int flowerBloomAmount = 0;
+    private int flowerFlowAmount = 0;
     private bool isBirdOut = false;
     private bool isDone = false;
     private Vector2[] guidePos;
@@ -47,35 +48,42 @@ public class ControlKoiFishMiniGame : MiniGameBasic
         fishReleaser = new CoroutineExcuter(this);
         fishTrigger.enabled = false;
 
-        bloomedAmount = 0;
+        flowerBloomAmount = 0;
         EventHandler.E_OnFloatingFlowerBloom += FloatingFlowerBloomHandler;
+        EventHandler.E_OnFlowerFlow += FlowerFlowHandler;
     }
     protected override void CleanUp()
     {
         base.CleanUp();
         EventHandler.E_OnFloatingFlowerBloom -= FloatingFlowerBloomHandler;
+        EventHandler.E_OnFlowerFlow -= FlowerFlowHandler;
     }
-    void FloatingFlowerBloomHandler(FloatingFlower flower){
-        bloomedAmount ++;
-        if(bloomedAmount>=triggerBirdFlowerAmount && !isBirdOut){
-            isBirdOut = true;
-            EventHandler.E_OnNextMiniGame();
-        }
-        if(bloomedAmount>=stopCloudFlowerAmount && cloudManager.enabled){
-            cloudManager.enabled = false;
-        }
-        if(bloomedAmount>=interactionEndFlowerAmount && !isDone){
+    void FlowerFlowHandler(){
+        flowerFlowAmount ++;
+        if(flowerFlowAmount>=flowerBloomAmount && !isDone){
             isDone = true;
-            StartCoroutine(CommonCoroutine.DelayAction(()=>{
-                lotusManager.FreeLotus();
-                lotusManager.enabled = false;
-            }, 1f));
             StartCoroutine(coroutineWaterToSky(10));
             fishReleaser.Abort();
             FishAutopilot();
             fish.DiveIntoWater(-1);
 
             EventHandler.Call_OnEndMiniGame(this);
+        }
+    }
+    void FloatingFlowerBloomHandler(FloatingFlower flower){
+        flowerBloomAmount ++;
+        if(flowerBloomAmount>=triggerBirdFlowerAmount && !isBirdOut){
+            isBirdOut = true;
+            EventHandler.E_OnNextMiniGame();
+        }
+        if(flowerBloomAmount>=stopCloudFlowerAmount && cloudManager.enabled){
+            cloudManager.enabled = false;
+        }
+        if(flowerBloomAmount>=flowerReleaseAmount && lotusManager.enabled){
+            lotusManager.enabled = false;
+            StartCoroutine(CommonCoroutine.DelayAction(()=>{
+                lotusManager.PrepareToFreeLotus();
+            }, 1f));
         }
     }
     protected override void OnKeyPressed(Key keyPressed)

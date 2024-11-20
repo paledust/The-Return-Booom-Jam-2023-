@@ -13900,6 +13900,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8763879197067792539, guid: 7c6fcfc077295a04f8bdd16269cb3566, type: 3}
   m_PrefabInstance: {fileID: 8763879196824826117}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &384606011 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8877386185376866543, guid: 7c6fcfc077295a04f8bdd16269cb3566, type: 3}
+  m_PrefabInstance: {fileID: 8763879196824826117}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &391293965
 GameObject:
   m_ObjectHideFlags: 0
@@ -14779,9 +14784,13 @@ MonoBehaviour:
   - GameSets: {fileID: 561384063}
     miniGameIndexArray: 0800000009000000
   perRendererWater: {fileID: 1504337787}
+  fishSetting:
+    fishRenderer: {fileID: 384606011}
+    fishColor: {r: 4.237096, g: 2.6620493, b: 1.552862, a: 0}
   FishMiniGames:
   - {fileID: 722876628}
   - {fileID: 987071022}
+  fishBirdGame: {fileID: 987071022}
 --- !u!1 &436388961
 GameObject:
   m_ObjectHideFlags: 0
@@ -29720,7 +29729,7 @@ MonoBehaviour:
   waterRender: {fileID: 1504337787}
   triggerBirdFlowerAmount: 2
   stopCloudFlowerAmount: 3
-  interactionEndFlowerAmount: 4
+  flowerReleaseAmount: 4
   cloudManager: {fileID: 987071023}
   lotusManager: {fileID: 987071024}
 --- !u!114 &987071023
@@ -53961,7 +53970,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 499
+  m_TextureSize: 389
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
@@ -53985,6 +53994,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 1504337783}
   normalScale: 0.025
   darkControl: 1
+  fallOffPower: 0.05
 --- !u!95 &1504337788
 Animator:
   serializedVersion: 5

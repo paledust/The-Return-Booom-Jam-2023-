@@ -101,9 +101,16 @@ public class FishAI : MonoBehaviour
         currentTarget = transform.position + Vector3.ClampMagnitude(diff, fishMovement.DeaccelarateRange);
     }
     public void DiveIntoWater(float diveDepth){
-        Vector3 target = transform.position + fishMovement.m_velocity * 2f;
-        target.y += diveDepth;
-        AssignTarget(target);
+        StartCoroutine(coroutineSinkTarget(diveDepth, 1.5f));
+    }
+    IEnumerator coroutineSinkTarget(float diveDepth, float duration){
+        Vector3 initTarget = transform.position + fishMovement.m_velocity * duration * 2;
+        Vector3 finalTarget = initTarget + Vector3.up * diveDepth;
+        Vector3 target = initTarget;
+        yield return new WaitForLoop(duration, (t)=>{
+            target = Vector3.Lerp(initTarget, finalTarget, EasingFunc.Easing.SmoothInOut(t));
+            AssignTarget(target);
+        });
     }
     IEnumerator coroutineTransitionMovement(float targetSpeed, float targetRotateSpeed, float duration){
         float initSpeed = fishMovement.maxSpeed;

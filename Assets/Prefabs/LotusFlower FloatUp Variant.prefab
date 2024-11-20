@@ -327,6 +327,7 @@ MonoBehaviour:
   lotusScaleRange: {x: 0.7, y: 1.3}
   p_plate: {fileID: 8580172255433704055}
   floatAnimation: {fileID: 1988823539}
+  fishDetectTrigger: {fileID: 5447564247845888390}
   leafPrefab: {fileID: 3159559580383720269, guid: f9974c79829588248a782a07a19870b6, type: 3}
   releaseForceRange: {x: 0.5, y: 1}
   spawnRange: {x: 0.2, y: 0.4}

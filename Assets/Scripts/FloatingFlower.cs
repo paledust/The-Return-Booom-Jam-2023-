@@ -8,6 +8,7 @@ public class FloatingFlower : MonoBehaviour
     [SerializeField] private Vector2 lotusScaleRange;
     [SerializeField] private ParticleSystem p_plate;
     [SerializeField] private Animation floatAnimation;
+    [SerializeField] private Collider fishDetectTrigger;
 [Header("Leaf Growing")]
     [SerializeField] private GameObject leafPrefab;
     [SerializeField] private Vector2 releaseForceRange;
@@ -16,6 +17,7 @@ public class FloatingFlower : MonoBehaviour
 
     private GrowingLeaf[] leaves;
     private Vector3 velocity;
+    private bool bloomed;
     private float moveDist;
     private float currentDist;
 
@@ -25,9 +27,20 @@ public class FloatingFlower : MonoBehaviour
 
         lotusTrans.localScale = Vector3.one * lotusScaleRange.GetRndValueInVector2Range();
     }
-    public void Bloom(){
+    void Update(){
+        transform.position += velocity * Time.deltaTime;
+        currentDist += velocity.magnitude*Time.deltaTime;
+        if(currentDist >= moveDist){
+            LotusManager.Call_OnThisRecycle(this);
+            gameObject.SetActive(false);
+        }
+    }
+    public void DetectKoiFish(FishAI fish){
+        if(!bloomed) Bloom();
+        else ReleaseFlower(fish.transform.rotation * Vector3.forward*Random.Range(0.5f,0.8f));
+    }
+    void Bloom(){
         p_plate.Stop(true);
-
         StartCoroutine(coroutineStopFlower(()=>{
             int amount = amountRange.GetRndValueInVector2Range();
             leaves = new GrowingLeaf[amount];
@@ -49,25 +62,21 @@ public class FloatingFlower : MonoBehaviour
                 main.gravityModifier = 0.05f;
             }
             EventHandler.Call_OnFloatingFlowerBloom(this);
+            bloomed = true;
         }));
     }
-    public void ReleaseFlower(Vector3 releaseVelocity){
+    void ReleaseFlower(Vector3 releaseVelocity){
         floatidle.enabled = false;
         StartCoroutine(coroutineFlowerFloat(releaseVelocity));
         for(int i=0; i<leaves.Length; i++){
-            Vector3 pushDir = leaves[i].transform.position - transform.position;
+            Vector3 pushDir = leaves[i].transform.position - transform.position + releaseVelocity;
             leaves[i].AddForce(pushDir.normalized * releaseForceRange.GetRndValueInVector2Range());
-            leaves[i].gravityFactor = 1;
+            leaves[i].PlaySinkAnimation();
+            leaves[i].gravityFactor = 1f;
         }
+        EventHandler.Call_OnFlowerFlow();
     }
-    void Update(){
-        transform.position += velocity * Time.deltaTime;
-        currentDist += velocity.magnitude*Time.deltaTime;
-        if(currentDist >= moveDist){
-            LotusManager.Call_OnThisRecycle(this);
-            gameObject.SetActive(false);
-        }
-    }
+    public void PrepareToReleaseFlower()=>fishDetectTrigger.enabled = true;
     public void InitMovement(Vector3 velocity, float moveDist){
         currentDist = 0;
         this.moveDist = moveDist;
@@ -86,11 +95,10 @@ public class FloatingFlower : MonoBehaviour
         OnStopCallback?.Invoke();
     }
     IEnumerator coroutineFlowerFloat(Vector3 floatVel){
-        yield return new WaitForSeconds(Random.Range(0, 0.5f));
         Vector3 initVel = velocity;
-        float duration = Random.Range(2f, 5f);
+        float duration = Random.Range(0.1f, 0.5f);
         yield return new WaitForLoop(duration, t=>{
-            velocity = Vector3.Lerp(initVel, floatVel, EasingFunc.Easing.SmoothInOut(t));
+            velocity = Vector3.Lerp(initVel, floatVel, EasingFunc.Easing.QuadEaseOut(t));
         });        
     }
 }
