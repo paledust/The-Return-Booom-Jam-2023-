@@ -25,7 +25,7 @@ public sealed class BlurRenderer: PostProcessEffectRenderer<Blur>{
 
     //There might be better way to get temporary RT for using built-in postprocess effect
     // context.command.DrawRenderer()
-        var tempTex = RenderTexture.GetTemporary(context.width, context.height);
+        var tempTex = RenderTexture.GetTemporary(context.width, context.height, 1, RenderTextureFormat.DefaultHDR);
         context.command.BlitFullscreenTriangle(context.source, tempTex, sheet, 0);
         context.command.BlitFullscreenTriangle(tempTex, context.destination, sheet, 1);
         RenderTexture.ReleaseTemporary(tempTex);
