@@ -36,10 +36,14 @@ public class MiniGameManager : MonoBehaviour
     }
     public MiniGameBasic GetGame(int index){return miniGames[index];}
 #if UNITY_EDITOR
+    public void Editor_ClearAllGame(){
+        for(int i=0; i<miniGames.Length; i++){
+            miniGames[i].Editor_PrepareMiniGame(false);
+        }
+    }
     public void Editor_MatchSceneToStartGameIndex(int startIndex){
         for(int i=0; i<miniGames.Length; i++){
             if(startIndex == i) miniGames[i].Editor_PrepareMiniGame(true);
-            else miniGames[i].Editor_PrepareMiniGame(false);
         }
     }
 #endif

@@ -47,6 +47,8 @@ public class ControlKoiFishMiniGame : MiniGameBasic
 
         fishReleaser = new CoroutineExcuter(this);
         fishTrigger.enabled = false;
+        cloudManager.enabled = true;
+        lotusManager.enabled = true;
 
         flowerBloomAmount = 0;
         EventHandler.E_OnFloatingFlowerBloom += FloatingFlowerBloomHandler;

@@ -19,7 +19,6 @@ public class CloudManager : Basic_ObjectPool<MovingCloud>
     void OnEnable(){
         spawnTimer = cycleOffset;
     }
-
     void Update(){
         spawnTimer += Time.deltaTime;
         
@@ -29,6 +28,13 @@ public class CloudManager : Basic_ObjectPool<MovingCloud>
             spawnTimer = 0;
             nextCycle = spawnCycle.GetRndValueInVector2Range();
         }
+    }
+    public void SpawnOnPos(Vector2 spawnPos){
+        var cloud = GetObjFromPool(x=>!x.gameObject.activeSelf);
+        Vector3 realpos = cloud.transform.position;
+        realpos.x = spawnPos.x;
+        realpos.z = spawnPos.y;
+        cloud.transform.position = realpos;
     }
     protected override void PrepareTarget(MovingCloud cloud){
         cloud.transform.position = startTrans.position+Vector3.forward*Random.Range(-3,3);

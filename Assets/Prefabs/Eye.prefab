@@ -100,9 +100,9 @@ MonoBehaviour:
   minEyeAngle: -20
   upperEye: {fileID: 4220309215344328429}
   lowerEye: {fileID: 4220309215625658227}
-  eyeCloseTime: 0.045
+  eyeCloseTime: 0.1
   eyeBlinkDarkTime: 0.02
-  eyeReopenTime: 0.3
+  eyeReopenTime: 0.6
   blinkPP: {fileID: 4403172032031483169}
 --- !u!1001 &4403172032348543128
 PrefabInstance:
