@@ -14,6 +14,7 @@
         int _Radius;
         int _Sample;
 
+        half _MaskStrength;
         half _BlurSize;
         half _BrushSize;
         half _BrushAngle;
@@ -28,7 +29,7 @@
             float4 col = 0;
 
             float mask = tex2D(_PaintBlurMaskTex, i.texcoord).r;
-            mask = lerp(1, 0, mask);
+            mask = lerp(1, mask, _MaskStrength);
 
             for(float index = 0; index < _Sample; index++){
                 float2 uv = i.texcoord + float2(0, (index/(_Sample-1) - 0.5) * _BlurSize * mask);
@@ -42,7 +43,7 @@
             float4 col = 0;
 
             float mask = tex2D(_PaintBlurMaskTex, i.texcoord).r;
-            mask = lerp(1, 0, mask);
+            mask = lerp(1, mask, _MaskStrength);
 
             for(float index = 0; index < _Sample; index++){
                 float2 uv = i.texcoord + float2((index/(_Sample-1) - 0.5) * _BlurSize * invAspect * mask, 0);
@@ -54,7 +55,7 @@
         float4 FragKuwaharaFilter(VaryingsDefault i) : SV_Target{
             float2 uv = i.texcoord;
             float mask = tex2D(_PaintBlurMaskTex, uv).r;
-            mask = lerp(1, 0, mask);
+            mask = lerp(1, mask, _MaskStrength);
 
             float3 mean[4]  = {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}};
             float3 sigma[4] = {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}};
@@ -76,6 +77,7 @@
 
             float n = (_Radius+1)*(_Radius+1);
             float4 color = tex2D(_MainTex, uv);
+            float4 origColor = color;
             float min = 1;
             
             for(int i=0; i<4; i++){
@@ -89,7 +91,7 @@
                 }
             }
 
-            return color;
+            return lerp(origColor, color, mask);
         }
     ENDHLSL
     SubShader

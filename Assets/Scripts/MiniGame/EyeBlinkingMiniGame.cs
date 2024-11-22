@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class EyeBlinkingMiniGame : MiniGameBasic
 {
@@ -15,7 +16,13 @@ public class EyeBlinkingMiniGame : MiniGameBasic
     [SerializeField] private Vector2 blinkDurationRange;
     [SerializeField] private float blinkIntersect = 0.7f;
     [SerializeField] private float minBlinkStep;
+[Header("Blur")]
+    [SerializeField] private ParticleSystem p_blurCloud;
+[Header("End")]
+    [SerializeField] private int totalCount = 7;
+    [SerializeField] private PlayableDirector dreamEndTimeline;
 
+    private HashSet<Key> pressedKey;
     private Vector2[] cloudPos;
 
     private const int ROLL = Service.ROLL;
@@ -44,11 +51,27 @@ public class EyeBlinkingMiniGame : MiniGameBasic
         if(Time.time - blinkTime > minBlinkStep){
             blinkTime = Time.time;
             StartCoroutine(coroutineBlink(pos));
+
+            pressedKey.Add(keyPressed);
+            if(pressedKey.Count>=totalCount){
+                EventHandler.Call_OnEndMiniGame(this);
+                dreamEndTimeline.Play();
+            }
         }
+
     }
     IEnumerator coroutineBlink(Vector2 cloudSpawnPos){
         float blinkDuration = blinkDurationRange.GetRndValueInVector2Range();
-        eyeControl.BlinkEye(blinkDuration, ()=>cloudManager.SpawnOnPos(cloudSpawnPos), null);
+        eyeControl.BlinkEye(blinkDuration, ()=>{
+            cloudManager.SpawnOnPos(cloudSpawnPos);
+            
+            Vector3 blurPos = cloudSpawnPos;
+            blurPos.z = blurPos.y;
+            blurPos.y = p_blurCloud.transform.position.y;
+            blurPos.x *= 2;
+            p_blurCloud.transform.position = blurPos;
+            p_blurCloud.Emit(Random.Range(3,6));
+        }, null);
 
         int blinkCount = blinkTimeRange.GetRndValueInVector2Range();
         for(int i=1; i<blinkCount; i++){

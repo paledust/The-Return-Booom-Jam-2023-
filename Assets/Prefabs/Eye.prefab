@@ -48,7 +48,7 @@ MonoBehaviour:
   isGlobal: 1
   blendDistance: 0
   weight: 0
-  priority: 1
+  priority: 2
 --- !u!1 &4403172032428435426
 GameObject:
   m_ObjectHideFlags: 0

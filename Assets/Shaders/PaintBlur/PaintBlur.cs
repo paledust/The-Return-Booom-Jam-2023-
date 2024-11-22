@@ -19,11 +19,15 @@ public class PaintBlur : PostProcessEffectSettings
     public FloatParameter blurAmount = new FloatParameter{value = 0f};
     [Range(15,100)]
     public IntParameter sampleAmount = new IntParameter{value = 15};
+    [Range(0, 1)]
+    public FloatParameter maskStrength = new FloatParameter{value = 0f};
+    public TextureParameter mask = new TextureParameter(){}; 
     public override bool IsEnabledAndSupported(PostProcessRenderContext context){
         return enabled.value;
     }
 }
 public sealed class PaintBlurRenderer: PostProcessEffectRenderer<PaintBlur>{
+    Texture maskTex;
     public override void Render(PostProcessRenderContext context)
     {
         var sheet = context.propertySheets.Get(Shader.Find("Hidden/Custom/PaintBlur"));
@@ -33,6 +37,12 @@ public sealed class PaintBlurRenderer: PostProcessEffectRenderer<PaintBlur>{
         sheet.properties.SetFloat("_BlurSize", settings.blurAmount);
         sheet.properties.SetFloat("_BrushSize", settings.brushSize);
         sheet.properties.SetFloat("_Darken", settings.darken);
+
+        sheet.properties.SetFloat("_MaskStrength", settings.maskStrength);
+        if(settings.maskStrength > 0 && maskTex != settings.mask){
+            maskTex = settings.mask;
+            sheet.properties.SetTexture("_PaintBlurMaskTex", settings.mask);
+        }
 
         var tempTex  = RenderTexture.GetTemporary(context.width, context.height);
         var tempTex2 = RenderTexture.GetTemporary(context.width, context.height);

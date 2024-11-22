@@ -32,7 +32,14 @@ MonoBehaviour:
     value: 1
   blurAmount:
     overrideState: 1
-    value: 0.025
+    value: 0.05
   sampleAmount:
     overrideState: 1
     value: 15
+  maskStrength:
+    overrideState: 1
+    value: 0
+  mask:
+    overrideState: 0
+    value: {fileID: 2800000, guid: 37e6f91f3efb0954cbdce254638862ea, type: 3}
+    defaultState: 1
