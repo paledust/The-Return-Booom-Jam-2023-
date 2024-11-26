@@ -11,15 +11,31 @@ namespace SimpleAudioSystem{
         public List<AudioInfo> sfx_info_list;
         public List<AudioGroupInfo> sfx_group_info_list;
         public AudioClip GetBGMClipByName(string audio_name){
+            if(audio_name==string.Empty) {
+                Debug.LogWarning("Empty audio name, NULL Returned.");
+                return null;
+            }
             return bgm_info_list.Find(x=>x.audio_name == audio_name).audio_clip;
         }
         public AudioClip GetAMBClipByName(string audio_name){
+            if(audio_name==string.Empty) {
+                Debug.LogWarning("Empty audio name, NULL Returned.");
+                return null;
+            }
             return amb_info_list.Find(x=>x.audio_name == audio_name).audio_clip;
         }
         public AudioClip GetSFXClipByName(string audio_name){
+            if(audio_name==string.Empty) {
+                Debug.LogWarning("Empty audio name, NULL Returned.");
+                return null;
+            }
             return sfx_info_list.Find(x=>x.audio_name == audio_name).audio_clip;
         }
         public AudioClip GetSFXClipFromGroupByName(string audio_group_name){
+            if(audio_group_name==string.Empty) {
+                Debug.LogWarning("Empty audio name, NULL Returned.");
+                return null;
+            }
             var clipGroup = sfx_group_info_list.Find(x=>x.audio_group_name == audio_group_name);
             if(clipGroup!=null) return clipGroup.GetAudioClip();
             else return null;

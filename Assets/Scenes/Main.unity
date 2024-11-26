@@ -5252,6 +5252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 52831612}
+  - component: {fileID: 52831614}
   - component: {fileID: 52831613}
   m_Layer: 0
   m_Name: MiniGameManager
@@ -5303,6 +5304,48 @@ MonoBehaviour:
   - {fileID: 1810854961}
   - {fileID: 750214929}
   - {fileID: 1707333698}
+--- !u!114 &52831614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52831611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64be9d2404dfb04dbad49d32becf73b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartGameIndex: 0
+  miniGameManager: {fileID: 52831613}
+  sharingSets:
+  - GameSets: {fileID: 1825554248}
+    miniGameIndexArray: 08000000090000000a0000000b0000000c0000000d000000
+  - GameSets: {fileID: 1937161667}
+    miniGameIndexArray: 0000000001000000020000000300000004000000
+  - GameSets: {fileID: 669595964}
+    miniGameIndexArray: 0600000007000000
+  - GameSets: {fileID: 1010639510}
+    miniGameIndexArray: 00000000010000000200000003000000
+  - GameSets: {fileID: 731430307}
+    miniGameIndexArray: 08000000090000000a0000000b0000000c0000000d000000
+  - GameSets: {fileID: 289012372}
+    miniGameIndexArray: 08000000090000000a0000000b0000000c0000000d000000
+  - GameSets: {fileID: 1950332664}
+    miniGameIndexArray: 090000000a000000
+  - GameSets: {fileID: 561384063}
+    miniGameIndexArray: 0800000009000000
+  perRendererWater: {fileID: 1504337787}
+  fishSetting:
+    fishRenderer: {fileID: 8763879196824826118}
+    fishColor: {r: 4.237096, g: 2.6620493, b: 1.552862, a: 0}
+  FishMiniGames:
+  - {fileID: 722876628}
+  - {fileID: 987071022}
+  SkyMiniGames:
+  - {fileID: 1810854961}
+  - {fileID: 750214929}
+  controlFishGame: {fileID: 987071022}
 --- !u!1 &61477996
 GameObject:
   m_ObjectHideFlags: 0
@@ -5911,7 +5954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &126636277
 Transform:
   m_ObjectHideFlags: 0
@@ -5925,7 +5968,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 870792550}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!215 &126636278
 ReflectionProbe:
@@ -6287,7 +6330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000012882023006, guid: 5ca4c580b3888314581688fa46fb142d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4000010002477438, guid: 5ca4c580b3888314581688fa46fb142d, type: 3}
       propertyPath: m_RootOrder
@@ -12159,7 +12202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &289012373
 Transform:
   m_ObjectHideFlags: 0
@@ -12173,7 +12216,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 870792550}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 5.364085, y: 1.237764, z: 358.3798}
 --- !u!95 &289012374
 Animator:
@@ -13147,7 +13190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &361353523
 Transform:
   m_ObjectHideFlags: 0
@@ -14717,81 +14760,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2358519744402589262, guid: a250e1b52dc428349a5bef1ccc1abfb9, type: 3}
   m_PrefabInstance: {fileID: 272686620}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &429588678
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 429588679}
-  - component: {fileID: 429588680}
-  m_Layer: 0
-  m_Name: Main Initiator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &429588679
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 429588678}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &429588680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 429588678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a64be9d2404dfb04dbad49d32becf73b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartGameIndex: 13
-  includeLast: 1
-  miniGameManager: {fileID: 52831613}
-  sharingSets:
-  - GameSets: {fileID: 1825554248}
-    miniGameIndexArray: 08000000090000000a0000000b0000000c0000000d000000
-  - GameSets: {fileID: 1937161667}
-    miniGameIndexArray: 0000000001000000020000000300000004000000
-  - GameSets: {fileID: 669595964}
-    miniGameIndexArray: 0600000007000000
-  - GameSets: {fileID: 1010639510}
-    miniGameIndexArray: 00000000010000000200000003000000
-  - GameSets: {fileID: 731430307}
-    miniGameIndexArray: 08000000090000000a0000000b0000000c0000000d000000
-  - GameSets: {fileID: 289012372}
-    miniGameIndexArray: 08000000090000000a0000000b0000000c0000000d000000
-  - GameSets: {fileID: 1950332664}
-    miniGameIndexArray: 090000000a000000
-  - GameSets: {fileID: 561384063}
-    miniGameIndexArray: 0800000009000000
-  perRendererWater: {fileID: 1504337787}
-  fishSetting:
-    fishRenderer: {fileID: 8763879196824826118}
-    fishColor: {r: 4.237096, g: 2.6620493, b: 1.552862, a: 0}
-  FishMiniGames:
-  - {fileID: 722876628}
-  - {fileID: 987071022}
-  SkyMiniGames:
-  - {fileID: 1810854961}
-  - {fileID: 750214929}
-  controlFishGame: {fileID: 987071022}
 --- !u!1 &436388961
 GameObject:
   m_ObjectHideFlags: 0
@@ -21737,7 +21705,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 870792550}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 5.364085, y: 1.237764, z: 358.3798}
 --- !u!95 &669595966
 Animator:
@@ -22548,7 +22516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &731430308
 Transform:
   m_ObjectHideFlags: 0
@@ -22918,7 +22886,7 @@ MonoBehaviour:
   minBlinkStep: 1.2
   p_blurCloud: {fileID: 8623136266718214028}
   totalCount: 7
-  dreamEndTimeline: {fileID: 0}
+  dreamEndTimeline: {fileID: 981659739}
 --- !u!114 &750214930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28967,10 +28935,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1937161669}
+  - {fileID: 126636277}
   - {fileID: 669595965}
   - {fileID: 289012373}
   - {fileID: 1274447176}
-  - {fileID: 126636277}
   - {fileID: 937227070}
   - {fileID: 764802147}
   m_Father: {fileID: 1019453214}
@@ -29724,6 +29692,7 @@ GameObject:
   - component: {fileID: 981659738}
   - component: {fileID: 981659739}
   - component: {fileID: 981659740}
+  - component: {fileID: 981659741}
   m_Layer: 0
   m_Name: Part 13 DreamEnd
   m_TagString: Untagged
@@ -29760,7 +29729,33 @@ PlayableDirector:
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
-  m_SceneBindings: []
+  m_SceneBindings:
+  - key: {fileID: -3778969190844467732, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 506440250}
+  - key: {fileID: 5119856122587612862, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 1330282840}
+  - key: {fileID: 3230009151085579894, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 779279440}
+  - key: {fileID: 1319478243156941947, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 289012372}
+  - key: {fileID: -2938079356772001843, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 1937161667}
+  - key: {fileID: -1448023261705785354, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 1825554248}
+  - key: {fileID: 6504120747278345240, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 1937161670}
+  - key: {fileID: -4354671491396623467, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 1279438015}
+  - key: {fileID: -571416563977914801, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 1241793487}
+  - key: {fileID: -652052783021192536, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 1010639510}
+  - key: {fileID: -1943274992597023225, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 126636276}
+  - key: {fileID: -4287273477958168405, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 1947682895}
+  - key: {fileID: 7802574446941997252, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 1392924047}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &981659740
@@ -29776,6 +29771,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   previewKeyWord: preview
+--- !u!114 &981659741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981659737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b9e1e808c777424099b7c02cb6878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &982738766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37056,7 +37063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1258822727
 Transform:
   m_ObjectHideFlags: 0
@@ -37272,7 +37279,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 870792550}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 138.424, y: -17.785004, z: -28.20398}
 --- !u!108 &1274447177
 Light:
@@ -54240,7 +54247,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 1908
+  m_TextureSize: 1906
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
@@ -54263,7 +54270,7 @@ MonoBehaviour:
   isUpdating: 1
   meshRenderer: {fileID: 1504337783}
   normalScale: 0
-  darkControl: 1
+  darkControl: 0
   fallOffPower: 0.05
 --- !u!95 &1504337788
 Animator:
@@ -57531,7 +57538,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1825554249
 Transform:
   m_ObjectHideFlags: 0
@@ -58086,6 +58093,8 @@ PlayableDirector:
     value: {fileID: 1392924047}
   - key: {fileID: -2931548140835301875, guid: 4f1a3bb0c4bbfc045bb5074fd5e01279, type: 2}
     value: {fileID: 779279440}
+  - key: {fileID: 4914585738511524748, guid: 4f1a3bb0c4bbfc045bb5074fd5e01279, type: 2}
+    value: {fileID: 1937161667}
   m_ExposedReferences:
     m_References:
     - 44a4cada34b08ac4b8d01ca7c098dc52: {fileID: 450064713}
@@ -58623,7 +58632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1937161668
 Light:
   m_ObjectHideFlags: 0
@@ -58635,7 +58644,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 0.96289307, b: 0.7773585, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
@@ -58700,7 +58709,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 870792550}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 5.364085, y: 1.237764, z: 358.3798}
+  m_LocalEulerAnglesHint: {x: 33.54827, y: 178.0416, z: 169.0907}
 --- !u!95 &1937161670
 Animator:
   serializedVersion: 5
@@ -59033,7 +59042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1947682896
 Transform:
   m_ObjectHideFlags: 0
@@ -65672,6 +65681,7 @@ GameObject:
   - component: {fileID: 2143389237}
   - component: {fileID: 2143389238}
   - component: {fileID: 2143389239}
+  - component: {fileID: 2143389240}
   m_Layer: 0
   m_Name: Part 11 GiantFishOut
   m_TagString: Untagged
@@ -65734,6 +65744,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   previewKeyWord: preview
+--- !u!114 &2143389240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143389236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b9e1e808c777424099b7c02cb6878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1956198338200947
 GameObject:
   m_ObjectHideFlags: 0

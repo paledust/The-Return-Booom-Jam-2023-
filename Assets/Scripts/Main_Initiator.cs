@@ -30,7 +30,6 @@ public class Main_Initiator : MonoBehaviour
         }
     }
     [SerializeField] private int StartGameIndex = 0;
-    [SerializeField] private bool includeLast;
     [SerializeField] private MiniGameManager miniGameManager;
 [Header("Sharing Sets")]
     [SerializeField] private SharingSets[] sharingSets;
@@ -50,7 +49,6 @@ public class Main_Initiator : MonoBehaviour
         }
 
         miniGameManager.StartGame(StartGameIndex);
-        if(includeLast) miniGameManager.StartGame(StartGameIndex-1);
         PerRendererWater_Initiation();
     }
     void PerRendererWater_Initiation(){
@@ -94,7 +92,6 @@ public class Main_Initiator : MonoBehaviour
     //Tell Mini Game Manager to prepare the mini game to match the start up scene
         miniGameManager.Editor_ClearAllGame();
         miniGameManager.Editor_MatchSceneToStartGameIndex(StartGameIndex);
-        if(includeLast) miniGameManager.Editor_MatchSceneToStartGameIndex(StartGameIndex - 1);
     Undo.RecordObject(perRendererWater, "Adjust Water Settings");
         PerRendererWater_Initiation();
     EditorUtility.SetDirty(perRendererWater);

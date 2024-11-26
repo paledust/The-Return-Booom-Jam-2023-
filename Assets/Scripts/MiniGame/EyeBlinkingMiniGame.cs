@@ -34,6 +34,7 @@ public class EyeBlinkingMiniGame : MiniGameBasic
     {
         base.Initialize();
         cloudPos = new Vector2[ROLL*LINE];
+        pressedKey = new HashSet<Key>();
         
         for(int y=0; y<ROLL; y++){
             for(int x=0;x<LINE;x++){
