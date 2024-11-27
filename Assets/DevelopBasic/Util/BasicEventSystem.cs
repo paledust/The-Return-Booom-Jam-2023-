@@ -23,8 +23,6 @@ public static class EventHandler
     public static void Call_OnEndMiniGame(MiniGameBasic miniGame){E_OnEndMiniGame?.Invoke(miniGame);}
     public static Action E_OnNextMiniGame;
     public static void Call_OnNextMiniGame(){E_OnNextMiniGame?.Invoke();}
-    public static Action<Vector3> E_OnStoneTouchWater;
-    public static void Call_OnStoneTouchWater(Vector3 position)=>E_OnStoneTouchWater?.Invoke(position);
     public static Action<FloatingFlower> E_OnFloatingFlowerBloom;
     public static void Call_OnFloatingFlowerBloom(FloatingFlower flower)=>E_OnFloatingFlowerBloom?.Invoke(flower);
     public static Action E_OnFlowerFlow;

@@ -14,7 +14,6 @@ public class DestroyOnInvisible : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(m_renderer.isVisible);
         if(!m_renderer.isVisible){
             if(Time.time-timer > maxAllowSec) Destroy(gameObject, 1);
         }

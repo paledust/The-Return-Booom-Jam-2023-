@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_Name: AmbientFade Marker
   m_EditorClassIdentifier: 
   m_Time: 10
-  ambientName: 0
+  ambientName: 
   volume: 0
   transitionTime: 3
   retroactive: 0

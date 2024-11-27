@@ -70,13 +70,14 @@ public class ControlKoiFishMiniGame : MiniGameBasic
             fish.DiveIntoWater(-1);
 
             EventHandler.Call_OnEndMiniGame(this);
+            StartCoroutine(CommonCoroutine.DelayAction(()=>EventHandler.Call_OnNextMiniGame(), 5f));
         }
     }
     void FloatingFlowerBloomHandler(FloatingFlower flower){
         flowerBloomAmount ++;
         if(flowerBloomAmount>=triggerBirdFlowerAmount && !isBirdOut){
             isBirdOut = true;
-            EventHandler.E_OnNextMiniGame();
+            EventHandler.Call_OnNextMiniGame();
         }
         if(flowerBloomAmount>=stopCloudFlowerAmount && cloudManager.enabled){
             cloudManager.enabled = false;
