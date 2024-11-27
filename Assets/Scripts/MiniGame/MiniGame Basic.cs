@@ -4,12 +4,11 @@ using UnityEngine;
 
 public abstract class MiniGameBasic : MonoBehaviour
 {
-    [SerializeField] private bool autoActivateGameAsset = true;
     [SerializeField] private GameObject miniGameAssetGroup;
     public bool IsPlaying{get{return isPlaying;}}
     private bool isPlaying = false;
     void Awake(){
-        if(miniGameAssetGroup!=null)miniGameAssetGroup.SetActive(false);
+        if(miniGameAssetGroup!=null) miniGameAssetGroup.SetActive(false);
     }
 #if UNITY_EDITOR
     public void Editor_PrepareMiniGame(bool isOn){
@@ -25,7 +24,7 @@ public abstract class MiniGameBasic : MonoBehaviour
         EventHandler.E_OnKeyReleased   += OnKeyReleased;
         EventHandler.E_OnAnyKeyPressed += OnAnyKeyPress;
         EventHandler.E_OnNoKeyPressed  += OnNoKeyPress;
-        if(autoActivateGameAsset && miniGameAssetGroup!=null) miniGameAssetGroup.SetActive(true);
+        if(miniGameAssetGroup!=null) miniGameAssetGroup.SetActive(true);
         Initialize();
     }
     public void ExitMiniGame(){
@@ -37,6 +36,11 @@ public abstract class MiniGameBasic : MonoBehaviour
 
         isPlaying = false;
     }
+    public void UnloadMiniGame(){
+        if(miniGameAssetGroup!=null) miniGameAssetGroup.SetActive(false);
+        UnloadAssets();
+    }
+    protected virtual void UnloadAssets(){}
     protected virtual void OnKeyPressed(UnityEngine.InputSystem.Key keyPressed){}
     protected virtual void OnKeyReleased(UnityEngine.InputSystem.Key keyReleased){}
     protected virtual void OnAnyKeyPress(){}

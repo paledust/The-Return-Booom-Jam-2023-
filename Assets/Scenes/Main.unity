@@ -20,10 +20,10 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.25882354, g: 0.21796642, b: 0.21176471, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.25
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -5589,7 +5589,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e442657e0d40c9945821e8b1a534f80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 461287780}
   grassObject: {fileID: 1204405696}
   keyMatrix_SO: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
@@ -5946,8 +5945,9 @@ GameObject:
   m_Component:
   - component: {fileID: 126636277}
   - component: {fileID: 126636278}
+  - component: {fileID: 126636279}
   m_Layer: 0
-  m_Name: Reflection Probe
+  m_Name: Reflection Probe (Day)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6001,6 +6001,27 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 8900000, guid: 5f27965ce5736fd48a003a34a1e56534, type: 3}
+--- !u!95 &126636279
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126636276}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &133303977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11714,6 +11735,8 @@ PlayableDirector:
     value: {fileID: 61477996}
   - key: {fileID: -822255861117841285, guid: 86a413f95a2759742a2ac25d20090336, type: 2}
     value: {fileID: 779279440}
+  - key: {fileID: 5747210645898157958, guid: 86a413f95a2759742a2ac25d20090336, type: 2}
+    value: {fileID: 594815806}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &221715806
@@ -11772,7 +11795,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e15d6dc88af6dd43ab9012e5c406dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 959501937}
   keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
   rippleRect:
@@ -20487,7 +20509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50cd8b4ad89e294c958f02edc2bec3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 1651726811}
   fireExplodeTime: {x: 5, y: 6}
   fireCoolDown: 3
@@ -21636,7 +21657,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77996adf26798248933cca720093ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 594815806}
   gridDelay: 2
   typingWindow: 0.2
@@ -22326,7 +22346,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e75716e9d3efa49be1fd2b0849ddb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 850771236}
   keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
   fishRect:
@@ -22612,7 +22631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421bb94b02f6b8e428893c373741cbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 916541442}
   firefly_particle: {fileID: 504978382}
   grass_particle: {fileID: 191584510}
@@ -22867,7 +22885,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212c64a3ad0fe764dbe1b4500039f612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 1947682895}
   cloudManager: {fileID: 750214930}
   keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
@@ -29485,6 +29502,7 @@ GameObject:
   - component: {fileID: 951420490}
   - component: {fileID: 951420489}
   - component: {fileID: 951420491}
+  - component: {fileID: 951420492}
   m_Layer: 0
   m_Name: Part 5 RainTillNight
   m_TagString: Untagged
@@ -29608,6 +29626,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9e1e808c777424099b7c02cb6878dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &951420492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951420486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75e869acde18c54b899a623d7442189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previewKeyWord: preview
 --- !u!114 &954058059 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8763879197067792538, guid: 7c6fcfc077295a04f8bdd16269cb3566, type: 3}
@@ -29756,6 +29787,8 @@ PlayableDirector:
     value: {fileID: 1947682895}
   - key: {fileID: 7802574446941997252, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
     value: {fileID: 1392924047}
+  - key: {fileID: -3340792769974014172, guid: 2dc7d394e0287944ebfee89c4398daf3, type: 2}
+    value: {fileID: 126636279}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &981659740
@@ -29895,7 +29928,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b33228357dcd1c488e2754340e9d007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 473256966}
   keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
   fishRect:
@@ -30320,7 +30352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a98e45a1a6293d439413e5e01abb423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 1731575596}
   keyMatrix_SO: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
   guitarSource: {fileID: 1535485387}
@@ -37532,7 +37563,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18cea8716826b18469fb9fe63c22fa27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 1514990254}
   waterGroup: {fileID: 1825554248}
   clouds:
@@ -53465,7 +53495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 554d9c4f0d6ef1541a5e2f874861a1f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 1258822726}
   stoneDebris:
   - {fileID: 2358519745515007856}
@@ -54246,7 +54275,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 1207
+  m_TextureSize: 499
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
@@ -56161,7 +56190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7975e57d65072b84c8e9510e7cd6bf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 0}
   fog_particle: {fileID: 570982631}
   vc_cam: {fileID: 450064713}
@@ -57143,7 +57171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410e6bcece4158b449754ada383e226a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 361353522}
   keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
   birdRect:
@@ -58094,6 +58121,10 @@ PlayableDirector:
     value: {fileID: 779279440}
   - key: {fileID: 4914585738511524748, guid: 4f1a3bb0c4bbfc045bb5074fd5e01279, type: 2}
     value: {fileID: 1937161667}
+  - key: {fileID: 2372165846438063481, guid: 4f1a3bb0c4bbfc045bb5074fd5e01279, type: 2}
+    value: {fileID: 126636276}
+  - key: {fileID: -5126837446744583089, guid: 4f1a3bb0c4bbfc045bb5074fd5e01279, type: 2}
+    value: {fileID: 126636279}
   m_ExposedReferences:
     m_References:
     - 44a4cada34b08ac4b8d01ca7c098dc52: {fileID: 450064713}
@@ -64793,7 +64824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28858c81c54399746801c810d21aec27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 219772862}
   keyMatrix_Data: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
   m_rt_cam: {fileID: 1631643970}
@@ -65118,7 +65148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da6a70f448f8cb447b1aab5823d75249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateGameAsset: 1
   miniGameAssetGroup: {fileID: 687512015}
   keyMatrix: {fileID: 11400000, guid: d4cac70fdbf450b46a22ae285e7e2b54, type: 2}
   scanUnitGroup: {fileID: 535597524}
@@ -65274,6 +65303,8 @@ PlayableDirector:
     value: {fileID: 1173196308}
   - key: {fileID: -1525670182113892730, guid: d669977b69dc25c4c8c5f314e8fe98e7, type: 2}
     value: {fileID: 779279440}
+  - key: {fileID: 964330386305443035, guid: d669977b69dc25c4c8c5f314e8fe98e7, type: 2}
+    value: {fileID: 594815806}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &2126115192
