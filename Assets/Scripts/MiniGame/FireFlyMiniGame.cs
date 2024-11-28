@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using UnityEngine.Pool;
 
 public class FireFlyMiniGame : MiniGameBasic
 {
@@ -11,15 +12,19 @@ public class FireFlyMiniGame : MiniGameBasic
     [SerializeField] private ParticleSystem grass_particle;
     [SerializeField] private KeyMatrix_SO keyMatrix_SO;
     [SerializeField] private Rect windArea;
+    [SerializeField] private LightPools lightPools;
 [Header("Audio")]
     [SerializeField] private AudioSource sfxAudio;
     [SerializeField] private AudioClip[] grassClips;
 [Header("Camera Render")]
     [SerializeField] private Camera RT_Camera;
+
+    private int grassClipIndex = 0;
     private Vector2[] spawnPos;
+
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
-    private int grassClipIndex = 0;
+
     protected override void Initialize()
     {
         base.Initialize();
@@ -52,13 +57,15 @@ public class FireFlyMiniGame : MiniGameBasic
         firefly_particle.transform.position = location;
         firefly_particle.Play();
 
+        lightPools.SpawnOnPos(location+Vector3.up*1f);
+
         grass_particle.transform.position = location;
         grass_particle.Play();
 
         sfxAudio.PlayOneShot(grassClips[grassClipIndex],0.1f);
         grassClipIndex ++;
         if(grassClipIndex>=grassClips.Length){
-            Service.Shuffle<AudioClip>(ref grassClips);
+            Service.Shuffle(ref grassClips);
             grassClipIndex = 0;
         }
     }
