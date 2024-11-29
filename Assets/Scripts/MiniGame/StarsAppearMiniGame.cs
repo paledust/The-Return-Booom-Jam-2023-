@@ -16,6 +16,7 @@ public class StarsAppearMiniGame : MiniGameBasic
     [SerializeField] private cloud_group[] clouds;
     [SerializeField] private MeshRenderer skyRenderer;
     [SerializeField] private Color skyTargetColor;
+    [SerializeField] private float skyTargetValueMin = 0.15f;
 [Header("Control")]
     [SerializeField] private int brightStarAmount = 200;
     [SerializeField] private float progressLerpSpeed = 5;
@@ -44,7 +45,8 @@ public class StarsAppearMiniGame : MiniGameBasic
         for(int i=0; i<clouds.Length; i++){
             clouds[i].spriteRener.color = Color.clear;
         }
-        skyRenderer.material.color = Color.black;
+        skyRenderer.material.color = skyTargetColor;
+        skyRenderer.material.SetFloat("_ValueMin", 0.6f);
         progress = 0;
 
         this.enabled = true;
@@ -59,7 +61,7 @@ public class StarsAppearMiniGame : MiniGameBasic
         targetProgress = Mathf.Clamp01(targetProgress);
         progress = Mathf.Lerp(progress, targetProgress, Time.deltaTime * progressLerpSpeed);
 
-        skyRenderer.material.color = Color.Lerp(Color.black, skyTargetColor, progress);
+        skyRenderer.material.SetFloat("_ValueMin", Mathf.Lerp(0.6f, skyTargetValueMin, progress));
         for(int i=0; i<clouds.Length; i++){
             clouds[i].LerpColor(progress);
         }
