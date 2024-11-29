@@ -76,7 +76,7 @@ Material:
     - _FlowAmount: 70
     - _FlowNoise: 1
     - _FlowOpacity: 0.01
-    - _FlowSpeed: 0.15
+    - _FlowSpeed: 0.16
     - _Force: 0.05
     - _GlossMapScale: 1
     - _Glossiness: 0.5
