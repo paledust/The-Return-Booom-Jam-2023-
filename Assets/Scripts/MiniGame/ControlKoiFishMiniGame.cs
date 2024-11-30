@@ -13,6 +13,10 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     [SerializeField] private Collider fishTrigger;
     [SerializeField] private Vector2 fishSpeedRange;
     [SerializeField] private Vector2 fishRotateSpeedRange;
+[Header("Color")]
+    [SerializeField] private PerRendererFish fishRenderer;
+    [SerializeField, ColorUsage(false, true)] private Color normalColor;
+    [SerializeField, ColorUsage(false, true)] private Color controlColor;
 [Header("VFX")]
     [SerializeField] private ParticleSystem p_ripple;
     [SerializeField] private float particleOffset = 0.7f;
@@ -30,6 +34,7 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     private bool isDone = false;
     private Vector2[] guidePos;
     private CoroutineExcuter fishReleaser;
+    private CoroutineExcuter fishColorer;
 
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;
@@ -44,8 +49,8 @@ public class ControlKoiFishMiniGame : MiniGameBasic
                 guidePos[y*LINE+x] = new Vector2(x/(LINE-1.0f)*fishRect.width, -y/(ROLL-1.0f)*fishRect.height)+new Vector2(-0.5f*fishRect.width,0.5f*fishRect.height);
             }
         }
-
         fishReleaser = new CoroutineExcuter(this);
+        fishColorer = new CoroutineExcuter(this);
         fishTrigger.enabled = false;
         cloudManager.enabled = true;
         lotusManager.enabled = true;
@@ -59,6 +64,8 @@ public class ControlKoiFishMiniGame : MiniGameBasic
         base.CleanUp();
         EventHandler.E_OnFloatingFlowerBloom -= FloatingFlowerBloomHandler;
         EventHandler.E_OnFlowerFlow -= FlowerFlowHandler;
+
+        fishColorer.Excute(coroutineFishColor(normalColor, 1f));
     }
     void FlowerFlowHandler(){
         flowerFlowAmount ++;
@@ -111,17 +118,29 @@ public class ControlKoiFishMiniGame : MiniGameBasic
         
         fishReleaser.Abort();
     }
+    protected override void OnAnyKeyPress()
+    {
+        base.OnAnyKeyPress();
+        fishColorer.Excute(coroutineFishColor(controlColor, 0.2f));
+    }
     protected override void OnNoKeyPress()
     {
         base.OnNoKeyPress();
         FishAutopilot();
         fishReleaser.Excute(CommonCoroutine.DelayAction(()=>fish.FollowTransform(true), 3f));
+        fishColorer.Excute(coroutineFishColor(normalColor, 1f));
     }
     void FishAutopilot(){
         fishTrigger.enabled = false;
         fish.TransitionMovement(fishSpeedRange.x, fishRotateSpeedRange.x, 1f);
         fish.ClampTargetPos();
         p_ripple.Stop();
+    }
+    IEnumerator coroutineFishColor(Color targetColor, float duration){
+        Color initColor = fishRenderer.EmissionColor;
+        yield return new WaitForLoop(duration, (t)=>{
+            fishRenderer.EmissionColor = Color.Lerp(initColor, targetColor, EasingFunc.Easing.SmoothInOut(t));
+        });
     }
     IEnumerator coroutineWaterToSky(float duration){
         float initScale = waterRender.normalScale;

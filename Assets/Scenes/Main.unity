@@ -5316,7 +5316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64be9d2404dfb04dbad49d32becf73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartGameIndex: 6
+  StartGameIndex: 11
   miniGameManager: {fileID: 52831613}
   sharingSets:
   - GameSets: {fileID: 1825554248}
@@ -17244,7 +17244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &289012373
 Transform:
   m_ObjectHideFlags: 0
@@ -20013,7 +20013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &461287781
 Transform:
   m_ObjectHideFlags: 0
@@ -20046,7 +20046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &473256967
 Transform:
   m_ObjectHideFlags: 0
@@ -26076,7 +26076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &615582020
 Transform:
   m_ObjectHideFlags: 0
@@ -26753,7 +26753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &669595965
 Transform:
   m_ObjectHideFlags: 0
@@ -49739,6 +49739,9 @@ MonoBehaviour:
   fishTrigger: {fileID: 1835735925}
   fishSpeedRange: {x: 1.2, y: 1.7}
   fishRotateSpeedRange: {x: 3.5, y: 5}
+  fishRenderer: {fileID: 8763879196824826118}
+  normalColor: {r: 4.237095, g: 2.6842327, b: 1.552862, a: 0}
+  controlColor: {r: 11.984314, g: 7.592157, b: 4.392157, a: 0}
   p_ripple: {fileID: 1988365670}
   particleOffset: 0.7
   waterRender: {fileID: 1504337787}
@@ -50432,7 +50435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1054596150
 Transform:
   m_ObjectHideFlags: 0
@@ -74296,7 +74299,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 1155
+  m_TextureSize: 1904
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
@@ -74318,9 +74321,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpdating: 1
   meshRenderer: {fileID: 1504337783}
-  normalScale: 0
-  darkControl: 0
-  fallOffPower: 0.05
+  normalScale: 0.02
+  darkControl: 1
+  fallOffPower: 1
 --- !u!95 &1504337788
 Animator:
   serializedVersion: 5
@@ -77586,7 +77589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1825554249
 Transform:
   m_ObjectHideFlags: 0
