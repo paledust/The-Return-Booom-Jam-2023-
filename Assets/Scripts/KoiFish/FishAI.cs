@@ -111,6 +111,8 @@ public class FishAI : MonoBehaviour
             target = Vector3.Lerp(initTarget, finalTarget, EasingFunc.Easing.SmoothInOut(t));
             AssignTarget(target);
         });
+        yield return new WaitForSeconds(4f);
+        gameObject.SetActive(false);
     }
     IEnumerator coroutineTransitionMovement(float targetSpeed, float targetRotateSpeed, float duration){
         float initSpeed = fishMovement.maxSpeed;
