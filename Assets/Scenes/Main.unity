@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 11118547}
   - component: {fileID: 11118546}
   m_Layer: 6
-  m_Name: VFX_WindParticle
+  m_Name: VFX_WindParticle_RT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +227,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 461287781}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 267.288}
 --- !u!199 &11118546
 ParticleSystemRenderer:
@@ -5316,7 +5316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64be9d2404dfb04dbad49d32becf73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartGameIndex: 8
+  StartGameIndex: 6
   miniGameManager: {fileID: 52831613}
   sharingSets:
   - GameSets: {fileID: 1825554248}
@@ -5607,6 +5607,8 @@ MonoBehaviour:
   maxVolume: 1
   m_director: {fileID: 1345231004}
   startTimelineDuration: 7
+  p_wind: {fileID: 707627920}
+  spawnRate: 10
   RT_Camera: {fileID: 436388964}
   m_particle: {fileID: 11118547}
 --- !u!1001 &95202598
@@ -17242,7 +17244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &289012373
 Transform:
   m_ObjectHideFlags: 0
@@ -20011,7 +20013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &461287781
 Transform:
   m_ObjectHideFlags: 0
@@ -20024,6 +20026,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 707627919}
   - {fileID: 11118545}
   m_Father: {fileID: 1013055707}
   m_RootOrder: 6
@@ -25772,7 +25775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &561384064
 Transform:
   m_ObjectHideFlags: 0
@@ -26073,7 +26076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &615582020
 Transform:
   m_ObjectHideFlags: 0
@@ -26750,7 +26753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &669595965
 Transform:
   m_ObjectHideFlags: 0
@@ -27343,6 +27346,73 @@ MonoBehaviour:
     roll: 0
   - position: {x: 1.4047495, y: 0, z: -0.3539816}
     roll: 0
+--- !u!1001 &707627918
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 461287781}
+    m_Modifications:
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297468397928801573, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+      propertyPath: m_Name
+      value: P Wind
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+--- !u!4 &707627919 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 725346250451714476, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+  m_PrefabInstance: {fileID: 707627918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &707627920 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1611965198904688749, guid: 5c5f3ca16bb69984f8e5059680e7e3c4, type: 3}
+  m_PrefabInstance: {fileID: 707627918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &722876625
 GameObject:
   m_ObjectHideFlags: 0
@@ -50362,7 +50432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1054596150
 Transform:
   m_ObjectHideFlags: 0
@@ -74497,7 +74567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1514990255
 Transform:
   m_ObjectHideFlags: 0
@@ -77516,7 +77586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1825554249
 Transform:
   m_ObjectHideFlags: 0
@@ -84801,8 +84871,8 @@ MonoBehaviour:
   amb_rain_mid_name: rain_mid
   amb_rain_heavy_name: rain_heavy
   m_rain_loop: {fileID: 1269540468}
-  rain_chargeSpeed: 0.05
-  rain_dieSpeed: 0.025
+  rain_chargeSpeed: 0.075
+  rain_dieSpeed: 0.015
   director: {fileID: 951420488}
   timeline_delay: 5
   rain_amount: 0

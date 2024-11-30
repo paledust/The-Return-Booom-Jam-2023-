@@ -17,17 +17,23 @@ public class WindyGrassMiniGame : MiniGameBasic
 [Header("Interaction End")]
     [SerializeField] private PlayableDirector m_director;
     [SerializeField] private float startTimelineDuration = 3;
+[Header("Wind Particles")]
+    [SerializeField] private ParticleSystem p_wind;
+    [SerializeField] private float spawnRate = 5;
 [Header("Camera Render")]
     [SerializeField] private Camera RT_Camera;
     [SerializeField] private ParticleSystem m_particle;
+    private ParticleSystem.EmitParams emitParams;
     private Vector2[] spawnPos;
     private bool[] spawnTrigger;
-    private ParticleSystem.EmitParams emitParams;
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
     private bool startCounting = false;
     private bool timelinePlaying = false;
     private float interaction_timer = 0;
+    private float windtimer = 0;
+
+    private const int ROLL = Service.ROLL;
+    private const int LINE = Service.LINE;
+
     protected override void Initialize()
     {
         base.Initialize();
@@ -60,6 +66,7 @@ public class WindyGrassMiniGame : MiniGameBasic
         this.enabled = false;
         spawnPos = null;
         if(m_particle!=null)m_particle.Stop();
+        p_wind.Stop();
         StartCoroutine(coroutineFadeAudio(false));
     }
     void Update(){
@@ -73,13 +80,22 @@ public class WindyGrassMiniGame : MiniGameBasic
     void FixedUpdate(){
         Vector3 location;
         for(int i=0; i<ROLL*LINE; i++){
+            bool windSpanwed = false;
             if(spawnTrigger[i]){
                 location.x = spawnPos[i].x;
                 location.z = spawnPos[i].y;
                 location.y = m_particle.transform.position.y;
                 emitParams.position = location;
                 m_particle.Emit(emitParams, 1);
+
+                location.y = p_wind.transform.position.y;
+                emitParams.position = location;
+                if(Time.time>windtimer+1f/spawnRate){
+                    windSpanwed = true;
+                    p_wind.Emit(emitParams, 1);
+                }
             }
+            if(windSpanwed) windtimer = Time.time;
         }
     }
 

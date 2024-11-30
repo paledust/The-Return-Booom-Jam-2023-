@@ -60,8 +60,10 @@ public class ScanSquareUnit : MonoBehaviour
         Color initColor = targetColor;
         initColor.a = 0f;
         float duration = 0.75f;
+        
         for(float t=0; t<1; t+=Time.deltaTime/duration){
             float freq = Mathf.Lerp(6.25f, 12.5f, EasingFunc.Easing.QuadEaseOut(t));
+            m_projector.orthographicSize = Mathf.Lerp(0.1f, 0.5f, EasingFunc.Easing.Linear(t));
             projector_mat.color = Color.Lerp(initColor, targetColor, 0.5f+0.5f*Mathf.Sin(t*Mathf.PI*freq));
             yield return null;
         }
