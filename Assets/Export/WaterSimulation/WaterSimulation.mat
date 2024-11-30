@@ -73,10 +73,11 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FlowAir: 0.005
-    - _FlowAmount: 70
+    - _FlowAmount: 220
+    - _FlowDir: 1
     - _FlowNoise: 1
     - _FlowOpacity: 0.01
-    - _FlowSpeed: 0.16
+    - _FlowSpeed: 0.4
     - _Force: 0.05
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -86,7 +87,7 @@ Material:
     - _MinFlow: 0
     - _Mode: 0
     - _NoiseScale: 100
-    - _NoiseStrength: 1
+    - _NoiseStrength: 0.5
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _S2: 0.25

@@ -45,7 +45,7 @@ public class SkyToWaterMiniGame : MiniGameBasic
     {
         if(!disturbed){
             disturbed = true;
-            StartCoroutine(coroutineFadeWaterFlow(1f));
+            StartCoroutine(coroutineFadeWaterFlow(3f));
         }
     }
     protected override void OnKeyPressed(Key keyPressed)

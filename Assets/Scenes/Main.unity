@@ -6388,7 +6388,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.39607844, g: 0.39607844, b: 0.39607844, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.011764706}
+      maxColor: {r: 0.6313726, g: 0.6313726, b: 0.6313726, a: 0.011764706}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -16828,7 +16828,7 @@ MonoBehaviour:
   TriggerPercentage: 0.5
   skyRenderer: {fileID: 561384065}
   perRendererWater: {fileID: 1504337787}
-  fadeOutDuration: 5
+  fadeOutDuration: 3
 --- !u!1001 &233562135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27399,7 +27399,7 @@ MonoBehaviour:
   rippleParticles: {fileID: 1333184777}
   fireBurstParticles: {fileID: 1059122845}
   fireParticles: {fileID: 198679441118135261}
-  targetFishAmount: 60
+  targetFishAmount: 50
   emitRate:
     serializedVersion: 2
     m_Curve:
@@ -57409,7 +57409,7 @@ MonoBehaviour:
   - spriteRener: {fileID: 1919253674}
     targetColor: {r: 0.45490196, g: 0.31764707, b: 0.49803922, a: 0.015686275}
   skyRenderer: {fileID: 561384065}
-  skyTargetColor: {r: 0.748323, g: 0.734292, b: 0.753, a: 1}
+  skyTargetColor: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
   skyTargetValueMin: 0
   brightStarAmount: 200
   progressLerpSpeed: 5
@@ -74226,7 +74226,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 1156
+  m_TextureSize: 1155
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2

@@ -61,7 +61,7 @@ public class StarsAppearMiniGame : MiniGameBasic
         targetProgress = Mathf.Clamp01(targetProgress);
         progress = Mathf.Lerp(progress, targetProgress, Time.deltaTime * progressLerpSpeed);
 
-        skyRenderer.material.SetFloat("_ValueMin", Mathf.Lerp(0.6f, skyTargetValueMin, progress));
+        skyRenderer.material.SetFloat("_ValueMin", Mathf.Lerp(0.6f, skyTargetValueMin, EasingFunc.Easing.QuadEaseOut(targetProgress)));
         for(int i=0; i<clouds.Length; i++){
             clouds[i].LerpColor(progress);
         }

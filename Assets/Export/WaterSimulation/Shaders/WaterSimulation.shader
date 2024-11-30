@@ -7,6 +7,7 @@
     	_Atten("Attenuation", Range(0.0, 1.0)) = 0.999
     	_DeltaUV("Delta UV", Float) = 3
 		_Force("Force", Float) = 0
+		_FlowDir("Flow Direction", Float) = 1
 		_FlowAmount("Flow Amount", Float) = 50
 		_FlowSpeed("Flow Speed", Float) = 0.1
 		_FlowNoise("Flow Noise", Range(0,1)) = 0
@@ -29,6 +30,7 @@
 		uniform float _Force;
 		uniform float _FlowSpeed;
 		uniform float _FlowNoise;
+		uniform float _FlowDir;
 
 		uniform sampler2D _DynamicTex;
 
@@ -85,19 +87,20 @@
 			float flow = c.a;
 			flow += _dh*_FlowAmount;
 			float change = _FlowSpeed*(
-				(tex2D(_SelfTexture2D, uv - duv.zy).a-c.a) * lerp(1, 1+_NoiseStrength, _FlowNoise*(GradientNoise(uv - duv.zy + noisePan,_NoiseScale))) +
-        		(tex2D(_SelfTexture2D, uv + duv.zy).a-c.a) * lerp(1, 1+_NoiseStrength, _FlowNoise*(GradientNoise(uv + duv.zy + noisePan,_NoiseScale))) +
-        		(tex2D(_SelfTexture2D, uv - duv.xz).a-c.a) * lerp(1, 1+_NoiseStrength, _FlowNoise*(GradientNoise(uv - duv.xz + noisePan,_NoiseScale))) +
-        		(tex2D(_SelfTexture2D, uv + duv.xz).a-c.a) * lerp(1, 1+_NoiseStrength, _FlowNoise*(GradientNoise(uv + duv.xz + noisePan,_NoiseScale)))
+				(tex2D(_SelfTexture2D, uv - duv.zy).a-c.a) * lerp(1, 1-_NoiseStrength, _FlowNoise*(GradientNoise(uv - duv.zy + noisePan,_NoiseScale))) +
+        		(tex2D(_SelfTexture2D, uv + duv.zy).a-c.a) * lerp(1, 1-_NoiseStrength, _FlowNoise*(GradientNoise(uv + duv.zy + noisePan,_NoiseScale))) +
+        		(tex2D(_SelfTexture2D, uv - duv.xz).a-c.a) * lerp(1, 1-_NoiseStrength, _FlowNoise*(GradientNoise(uv - duv.xz + noisePan,_NoiseScale))) +
+        		(tex2D(_SelfTexture2D, uv + duv.xz).a-c.a) * lerp(1, 1-_NoiseStrength, _FlowNoise*(GradientNoise(uv + duv.xz + noisePan,_NoiseScale)))
 
-				// tex2D(_SelfTexture2D, uv - duv.zy).a * lerp(1, 2, _FlowNoise*(GradientNoise(uv - duv.zy + noisePan,_NoiseScale))) +
-        		// tex2D(_SelfTexture2D, uv + duv.zy).a * lerp(1, 2, _FlowNoise*(GradientNoise(uv + duv.zy + noisePan,_NoiseScale))) +
-        		// tex2D(_SelfTexture2D, uv - duv.xz).a * lerp(1, 2, _FlowNoise*(GradientNoise(uv - duv.xz + noisePan,_NoiseScale))) +
-        		// tex2D(_SelfTexture2D, uv + duv.xz).a * lerp(1, 2, _FlowNoise*(GradientNoise(uv + duv.xz + noisePan,_NoiseScale))) - c.a*4
+				// tex2D(_SelfTexture2D, uv - duv.zy).a * lerp(1, 1-_NoiseStrength, _FlowNoise*(GradientNoise(uv - duv.zy + noisePan,_NoiseScale))) +
+        		// tex2D(_SelfTexture2D, uv + duv.zy).a * lerp(1, 1-_NoiseStrength, _FlowNoise*(GradientNoise(uv + duv.zy + noisePan,_NoiseScale))) +
+        		// tex2D(_SelfTexture2D, uv - duv.xz).a * lerp(1, 1-_NoiseStrength, _FlowNoise*(GradientNoise(uv - duv.xz + noisePan,_NoiseScale))) +
+        		// tex2D(_SelfTexture2D, uv + duv.xz).a * lerp(1, 1-_NoiseStrength, _FlowNoise*(GradientNoise(uv + duv.xz + noisePan,_NoiseScale))) - c.a*4
 			);
 			
 			flow += change;
 			flow = max(0,flow);
+			flow = max(c.a, flow);
 
 			return float4(height, c.r, c.a, flow);
 		}
