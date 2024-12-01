@@ -49,25 +49,25 @@ public class FloatingFlower : MonoBehaviour
         flowerPusher.SetActive(true);
 
         StartCoroutine(coroutineStopFlower(()=>{
-            int amount = amountRange.GetRndValueInVector2Range();
-            leaves = new GrowingLeaf[amount];
-            for(int i=0; i<amount; i++){
-                var leaf = Instantiate(leafPrefab, transform);
-                Vector3 spawnPos = Random.insideUnitCircle;
-                spawnPos.z = spawnPos.y;
-                spawnPos.y = 0;
-                spawnPos = spawnPos.normalized*spawnRange.GetRndValueInVector2Range();
-                leaf.transform.localPosition = spawnPos + Vector3.up*0.02f;
-                leaf.transform.localRotation = Quaternion.Euler(90,0,0);
-                leaf.transform.parent = null;
-                leaf.SetActive(true);
-                leaves[i] = leaf.GetComponent<GrowingLeaf>();
+            // int amount = amountRange.GetRndValueInVector2Range();
+            // leaves = new GrowingLeaf[amount];
+            // for(int i=0; i<amount; i++){
+            //     var leaf = Instantiate(leafPrefab, transform);
+            //     Vector3 spawnPos = Random.insideUnitCircle;
+            //     spawnPos.z = spawnPos.y;
+            //     spawnPos.y = 0;
+            //     spawnPos = spawnPos.normalized*spawnRange.GetRndValueInVector2Range();
+            //     leaf.transform.localPosition = spawnPos + Vector3.up*0.02f;
+            //     leaf.transform.localRotation = Quaternion.Euler(90,0,0);
+            //     leaf.transform.parent = null;
+            //     leaf.SetActive(true);
+            //     leaves[i] = leaf.GetComponent<GrowingLeaf>();
 
-                var main = p_plate.main;
-                main.gravityModifier = 0.01f;
-                main = p_plate.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-                main.gravityModifier = 0.05f;
-            }
+            //     var main = p_plate.main;
+            //     main.gravityModifier = 0.01f;
+            //     main = p_plate.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            //     main.gravityModifier = 0.05f;
+            // }
             EventHandler.Call_OnFloatingFlowerBloom(this);
             bloomed = true;
         }));
@@ -82,6 +82,27 @@ public class FloatingFlower : MonoBehaviour
             leaves[i].gravityFactor = 1f;
         }
         EventHandler.Call_OnFlowerFlow();
+    }
+    public void AE_SpawnLeaves(){
+        int amount = amountRange.GetRndValueInVector2Range();
+        leaves = new GrowingLeaf[amount];
+        for(int i=0; i<amount; i++){
+            var leaf = Instantiate(leafPrefab, transform);
+            Vector3 spawnPos = Random.insideUnitCircle;
+            spawnPos.z = spawnPos.y;
+            spawnPos.y = 0;
+            spawnPos = spawnPos.normalized*spawnRange.GetRndValueInVector2Range();
+            leaf.transform.localPosition = spawnPos + Vector3.up*0.02f;
+            leaf.transform.localRotation = Quaternion.Euler(90,0,0);
+            leaf.transform.parent = null;
+            leaf.SetActive(true);
+            leaves[i] = leaf.GetComponent<GrowingLeaf>();
+            
+            var main = p_plate.main;
+            main.gravityModifier = 0.01f;
+            main = p_plate.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            main.gravityModifier = 0.05f;
+        }        
     }
     public void PrepareToReleaseFlower()=>fishDetectTrigger.enabled = true;
     public void InitMovement(Vector3 velocity, float moveDist){
@@ -98,7 +119,7 @@ public class FloatingFlower : MonoBehaviour
         p_plate.Stop(true);
 
         floatAnimation.Play();
-        yield return new WaitForSeconds(floatAnimation.clip.length*0.75f);
+        yield return new WaitForSeconds(floatAnimation.clip.length);
 
         OnStopCallback?.Invoke();
     }
