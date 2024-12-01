@@ -9,6 +9,8 @@ public class FloatingFlower : MonoBehaviour
     [SerializeField] private ParticleSystem p_plate;
     [SerializeField] private Animation floatAnimation;
     [SerializeField] private Collider fishDetectTrigger;
+    [SerializeField] private GameObject flowerPusher;
+    [SerializeField] private Collider pusherDetectTrigger;
 [Header("Leaf Growing")]
     [SerializeField] private GameObject leafPrefab;
     [SerializeField] private Vector2 releaseForceRange;
@@ -28,12 +30,14 @@ public class FloatingFlower : MonoBehaviour
         lotusTrans.localScale = Vector3.one * lotusScaleRange.GetRndValueInVector2Range();
     }
     void Update(){
-        transform.position += velocity * Time.deltaTime;
         currentDist += velocity.magnitude*Time.deltaTime;
         if(currentDist >= moveDist){
             LotusManager.Call_OnThisRecycle(this);
             gameObject.SetActive(false);
         }
+    }
+    void FixedUpdate(){
+        transform.position += velocity * Time.fixedDeltaTime;
     }
     public void DetectKoiFish(FishAI fish){
         if(!bloomed) Bloom();
@@ -41,6 +45,9 @@ public class FloatingFlower : MonoBehaviour
     }
     void Bloom(){
         p_plate.Stop(true);
+        pusherDetectTrigger.enabled = false;
+        flowerPusher.SetActive(true);
+
         StartCoroutine(coroutineStopFlower(()=>{
             int amount = amountRange.GetRndValueInVector2Range();
             leaves = new GrowingLeaf[amount];
@@ -82,6 +89,7 @@ public class FloatingFlower : MonoBehaviour
         this.moveDist = moveDist;
         this.velocity = velocity;
     }
+    public void MoveFlower(Vector3 moveVec)=>transform.position += moveVec;
     IEnumerator coroutineStopFlower(System.Action OnStopCallback){
         Vector3 initVel = velocity;
         yield return new WaitForLoop(1f, t=>{

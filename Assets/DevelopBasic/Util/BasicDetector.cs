@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BasicDetector<T> where T: MonoBehaviour
 {
-    [SerializeField] private Transform detectCenter;
-    [SerializeField, ShowOnly] private List<T> pendingTargerts;
+    [SerializeField] protected Transform detectCenter;
+    [SerializeField, ShowOnly] protected List<T> pendingTargerts;
 
-    private T currentTarget;
+    protected T currentTarget;
 
-    private bool isDetecting;
+    protected bool isDetecting;
     public void StopDetecting(){
         isDetecting = false;
         SwapTarget(null);
