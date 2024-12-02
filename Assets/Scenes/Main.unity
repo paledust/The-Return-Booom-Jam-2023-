@@ -16832,7 +16832,7 @@ MonoBehaviour:
   perRendererWater: {fileID: 1504337787}
   fadeOutDuration: 3
   sfx_audio: {fileID: 1627235852}
-  swishClips: group_swish
+  swishClips: group_drip
   waterAmbience: water
 --- !u!1001 &233562135
 PrefabInstance:
@@ -27550,7 +27550,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   sfx_audio: {fileID: 1627235852}
-  swishClips: group_swish
+  swishClips: group_drip
   P_fireBurst: {fileID: 838285428}
   tl_giantFishOut: {fileID: 2143389238}
 --- !u!1001 &725029689
@@ -49741,6 +49741,8 @@ MonoBehaviour:
   flowerReleaseAmount: 4
   cloudManager: {fileID: 987071023}
   lotusManager: {fileID: 987071024}
+  sfx_audio: {fileID: 1627235852}
+  swishClip: group_swish
 --- !u!114 &987071023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75418,7 +75420,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

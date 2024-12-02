@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,9 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     [SerializeField] private int flowerReleaseAmount = 4;
     [SerializeField] private CloudManager cloudManager;
     [SerializeField] private LotusManager lotusManager;
+[Header("Audio")]
+    [SerializeField] private AudioSource sfx_audio;
+    [SerializeField] private string swishClip;
 
     private int flowerBloomAmount = 0;
     private int flowerFlowAmount = 0;
@@ -112,6 +116,7 @@ public class ControlKoiFishMiniGame : MiniGameBasic
         p_ripple.transform.position = target;
         p_ripple.Play();
         fishTrigger.enabled = true;
+        AudioManager.Instance.PlaySoundEffect(sfx_audio, swishClip);
         
         fishReleaser.Abort();
     }
