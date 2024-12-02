@@ -5316,7 +5316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64be9d2404dfb04dbad49d32becf73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartGameIndex: 8
+  StartGameIndex: 10
   miniGameManager: {fileID: 52831613}
   sharingSets:
   - GameSets: {fileID: 1825554248}
@@ -25774,7 +25774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &561384064
 Transform:
   m_ObjectHideFlags: 0
@@ -27454,6 +27454,7 @@ MonoBehaviour:
     y: 0
     width: 5
     height: 2
+  fishPosScaler: 2
   fishParticles: {fileID: 1421141146}
   rippleParticles: {fileID: 1333184777}
   fireBurstParticles: {fileID: 1059122845}
@@ -38766,7 +38767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &850771237
 Transform:
   m_ObjectHideFlags: 0
@@ -74418,7 +74419,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 1156
+  m_TextureSize: 906
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
@@ -74440,8 +74441,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpdating: 1
   meshRenderer: {fileID: 1504337783}
-  normalScale: 0
-  darkControl: 0
+  normalScale: 0.02
+  darkControl: 1
   fallOffPower: 0.05
 --- !u!95 &1504337788
 Animator:
@@ -74689,7 +74690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1514990255
 Transform:
   m_ObjectHideFlags: 0
@@ -79371,7 +79372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1950332665
 Transform:
   m_ObjectHideFlags: 0
@@ -86020,6 +86021,8 @@ PlayableDirector:
     value: {fileID: 1634064890}
   - key: {fileID: 721753509494891955, guid: e797f43e2ee8e7a4697a828aa8e20084, type: 2}
     value: {fileID: 473256966}
+  - key: {fileID: 4903327977143370726, guid: e797f43e2ee8e7a4697a828aa8e20084, type: 2}
+    value: {fileID: 779279440}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &2143389239

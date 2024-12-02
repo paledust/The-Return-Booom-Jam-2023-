@@ -10,6 +10,7 @@ public class KoiFishMiniGame : MiniGameBasic
 [Header("Control")]
     [SerializeField] private KeyMatrix_SO keyMatrix;
     [SerializeField] private Rect fishRect;
+    [SerializeField] private float fishPosScaler = 1;
     [SerializeField] private ParticleSystem fishParticles;
     [SerializeField] private ParticleSystem rippleParticles;
     [SerializeField] private ParticleSystem fireBurstParticles;
@@ -89,6 +90,8 @@ public class KoiFishMiniGame : MiniGameBasic
             AudioManager.Instance.PlaySoundEffect(sfx_audio, swishClips, 1);
             
             location.y = fishParticles.transform.position.y;
+            location.x *= fishPosScaler;
+            location.z *= fishPosScaler;
             fishParticles.transform.position = location;
             fishParticles.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
             fishParticles.Play(true);

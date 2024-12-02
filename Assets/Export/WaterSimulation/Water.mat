@@ -93,7 +93,7 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _DarkControl: 0.247
+    - _DarkControl: 1
     - _DetailNormalMapScale: 1
     - _Displacement: 0
     - _DistortIntensity: 0.1

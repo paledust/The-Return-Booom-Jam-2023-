@@ -42,7 +42,7 @@ namespace SimpleAudioSystem{
                         Debug.LogWarning("No clip found, nothing will be done for ambient");
                         return;
                     }
-                    ambience_loop.volume = volume;
+                    FadeAudio(ambience_loop, volume, transitionTime);
                     ambience_loop.Play();
                 }
                 else{
@@ -129,7 +129,7 @@ namespace SimpleAudioSystem{
             finishCallback?.Invoke();
         }
         IEnumerator coroutineFadeAudio(AudioSource m_audio, float targetVolume, float transitionTime, bool StopOnFadeOut){
-            float initVolume = m_audio.volume;
+            float initVolume = m_audio.isPlaying?m_audio.volume:0;
             yield return new WaitForLoop(transitionTime, (t)=>{
                 m_audio.volume = Mathf.Lerp(initVolume, targetVolume, t);
             });

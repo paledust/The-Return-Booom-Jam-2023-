@@ -49,6 +49,7 @@ MonoBehaviour:
   audioInfo: {fileID: 11400000, guid: 631aa24ea4e64554ba244ec701ad6c0a, type: 2}
   ambience_loop: {fileID: 5275165435782480257}
   music_loop: {fileID: 5275165436332487226}
+  sfx_ethreal_default: {fileID: 0}
 --- !u!1 &5275165435782480259
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +94,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -221,7 +222,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
