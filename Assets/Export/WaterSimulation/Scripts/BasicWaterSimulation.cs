@@ -12,7 +12,7 @@ public class BasicWaterSimulation : MonoBehaviour {
         texture.Initialize();
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         texture.material.SetFloat(ForceID, ForceThreshold);
         texture.Update(iterationPerFrame);

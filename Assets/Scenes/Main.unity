@@ -74561,7 +74561,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 1842
+  m_TextureSize: 956
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
