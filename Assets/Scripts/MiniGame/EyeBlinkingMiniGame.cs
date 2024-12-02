@@ -18,6 +18,8 @@ public class EyeBlinkingMiniGame : MiniGameBasic
     [SerializeField] private float minBlinkStep;
 [Header("Blur")]
     [SerializeField] private ParticleSystem p_blurCloud;
+[Header("Audio")]
+    [SerializeField] private AudioSource swallowAudio;
 [Header("End")]
     [SerializeField] private int totalCount = 7;
     [SerializeField] private PlayableDirector dreamEndTimeline;
@@ -25,12 +27,18 @@ public class EyeBlinkingMiniGame : MiniGameBasic
     private HashSet<Key> pressedKey;
     private Vector2[] cloudPos;
     private float blinkTime;
+    private float targetVolume;
+    private float volumeStep;
+    private CoroutineExcuter volumeFader;
 
     protected override void Initialize()
     {
         base.Initialize();
         cloudPos = new Vector2[ROLL*LINE];
         pressedKey = new HashSet<Key>();
+        volumeFader = new CoroutineExcuter(this);
+        targetVolume = swallowAudio.volume;
+        volumeStep = targetVolume/(totalCount-1f);
         
         for(int y=0; y<ROLL; y++){
             for(int x=0;x<LINE;x++){
@@ -48,6 +56,8 @@ public class EyeBlinkingMiniGame : MiniGameBasic
         if(Time.time - blinkTime > minBlinkStep){
             blinkTime = Time.time;
             StartCoroutine(coroutineBlink(pos));
+            targetVolume -= volumeStep;
+            volumeFader.Excute(coroutineFadeAudio(targetVolume, 3));
 
             pressedKey.Add(keyPressed);
             if(pressedKey.Count>=totalCount){
@@ -55,7 +65,12 @@ public class EyeBlinkingMiniGame : MiniGameBasic
                 dreamEndTimeline.Play();
             }
         }
-
+    }
+    IEnumerator coroutineFadeAudio(float volume, float duration){
+        float initVolume = swallowAudio.volume;
+        yield return new WaitForLoop(duration, (t)=>{
+            swallowAudio.volume = Mathf.Lerp(initVolume, volume, EasingFunc.Easing.SmoothInOut(t));
+        });
     }
     IEnumerator coroutineBlink(Vector2 cloudSpawnPos){
         float blinkDuration = blinkDurationRange.GetRndValueInVector2Range();

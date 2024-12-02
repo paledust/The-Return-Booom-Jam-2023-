@@ -5316,7 +5316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64be9d2404dfb04dbad49d32becf73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartGameIndex: 10
+  StartGameIndex: 0
   miniGameManager: {fileID: 52831613}
   sharingSets:
   - GameSets: {fileID: 1825554248}
@@ -11371,7 +11371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000012882023006, guid: 5ca4c580b3888314581688fa46fb142d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4000010002477438, guid: 5ca4c580b3888314581688fa46fb142d, type: 3}
       propertyPath: m_RootOrder
@@ -17247,7 +17247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &289012373
 Transform:
   m_ObjectHideFlags: 0
@@ -32800,6 +32800,7 @@ MonoBehaviour:
   blinkIntersect: 0.25
   minBlinkStep: 1.2
   p_blurCloud: {fileID: 8623136266718214028}
+  swallowAudio: {fileID: 1386699899}
   totalCount: 7
   dreamEndTimeline: {fileID: 981659739}
 --- !u!114 &750214930
@@ -33436,7 +33437,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1717393720}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &779279440
 AudioSource:
@@ -38767,7 +38768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &850771237
 Transform:
   m_ObjectHideFlags: 0
@@ -49511,6 +49512,7 @@ GameObject:
   - component: {fileID: 981659739}
   - component: {fileID: 981659740}
   - component: {fileID: 981659741}
+  - component: {fileID: 981659742}
   m_Layer: 0
   m_Name: Part 13 DreamEnd
   m_TagString: Untagged
@@ -49605,6 +49607,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b9e1e808c777424099b7c02cb6878dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &981659742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981659737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa9faefa55e06943ba59cf6a41cbf2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &982738766
@@ -57126,7 +57140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1258822727
 Transform:
   m_ObjectHideFlags: 0
@@ -63290,6 +63304,134 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19222a265b2dde4989a1de90a43d69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1386699897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386699898}
+  - component: {fileID: 1386699899}
+  m_Layer: 0
+  m_Name: SFX Swallow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1386699898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386699897}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1717393720}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1386699899
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386699897}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1389935413
 GameObject:
   m_ObjectHideFlags: 0
@@ -74419,7 +74561,7 @@ MonoBehaviour:
   m_DisablePixelLights: 1
   m_renderScale: 0
   CopyClearFlag: 1
-  m_TextureSize: 906
+  m_TextureSize: 1842
   m_ClipPlaneOffset: 0
   m_ReflectLayers:
     serializedVersion: 2
@@ -74441,8 +74583,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpdating: 1
   meshRenderer: {fileID: 1504337783}
-  normalScale: 0.02
-  darkControl: 1
+  normalScale: 0
+  darkControl: 0
   fallOffPower: 0.05
 --- !u!95 &1504337788
 Animator:
@@ -76666,6 +76808,7 @@ Transform:
   - {fileID: 391293966}
   - {fileID: 1134909144}
   - {fileID: 1627235851}
+  - {fileID: 1386699898}
   - {fileID: 779279439}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -77446,7 +77589,8 @@ MonoBehaviour:
     width: 20
     height: 8
   birdTarget: {fileID: 1060039516}
-  birdManager: {fileID: 28267906}
+  sfx_swallow: {fileID: 1386699899}
+  swallowClip: sfx_swallow_loop
 --- !u!1001 &1814846279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77830,7 +77974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1825554249
 Transform:
   m_ObjectHideFlags: 0
@@ -78928,7 +79072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1937161668
 Light:
   m_ObjectHideFlags: 0
@@ -79372,7 +79516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1950332665
 Transform:
   m_ObjectHideFlags: 0
@@ -85297,6 +85441,8 @@ PlayableDirector:
     value: {fileID: 669595964}
   - key: {fileID: -54517270465234533, guid: a8e7fd8aca9cb644f95cc5f48e4d15a1, type: 2}
     value: {fileID: 1937161667}
+  - key: {fileID: -7457936781065703539, guid: a8e7fd8aca9cb644f95cc5f48e4d15a1, type: 2}
+    value: {fileID: 1010639510}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &2113796383

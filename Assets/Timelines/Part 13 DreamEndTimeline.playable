@@ -2547,6 +2547,7 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: -8431340908615055929}
+    - {fileID: 8387001913079951612}
 --- !u!114 &7802574446941997252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2652,3 +2653,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
   m_Name: ActivationPlayableAsset
   m_EditorClassIdentifier: 
+--- !u!114 &8387001913079951612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ca0797398925214da0fe550963943ae, type: 3}
+  m_Name: AmbientFade Marker
+  m_EditorClassIdentifier: 
+  m_Time: 0
+  ambientName: desert
+  volume: 0.5
+  transitionTime: 6
+  retroactive: 0
+  emitOnce: 0

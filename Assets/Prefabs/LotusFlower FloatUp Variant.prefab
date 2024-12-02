@@ -44,7 +44,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8782381745399079214
 MonoBehaviour:
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78af7493c5cd3d4890e196d81174e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceScale: 2.5
+  forceScale: 2
   forceCurve:
     serializedVersion: 2
     m_Curve:
@@ -301,6 +301,14 @@ PrefabInstance:
     - target: {fileID: 8586517255389554596, guid: 295311c9315fbe445b655410e9636110, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586517255389554596, guid: 295311c9315fbe445b655410e9636110, type: 3}
+      propertyPath: softEnter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586517255389554596, guid: 295311c9315fbe445b655410e9636110, type: 3}
+      propertyPath: softDuration
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8669133214896669481, guid: 295311c9315fbe445b655410e9636110, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
