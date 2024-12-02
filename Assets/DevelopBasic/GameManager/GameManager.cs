@@ -57,6 +57,9 @@ public class GameManager : Singleton<GameManager>
     #endif
     }
 
+    void OnApplicationFocus(bool isFocus){
+        if(isFocus) Cursor.visible = false;
+    }
 #region Game Pause
     public void PauseTheGame(){
         if(isPaused) return;
