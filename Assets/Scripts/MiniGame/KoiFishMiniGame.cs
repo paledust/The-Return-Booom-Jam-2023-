@@ -28,8 +28,6 @@ public class KoiFishMiniGame : MiniGameBasic
     private int spawnedFishAmount = 0;
     private float emitStep = 0.01f;
     private float lastEmitTime = 0;
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
 
     protected override void Initialize()
     {

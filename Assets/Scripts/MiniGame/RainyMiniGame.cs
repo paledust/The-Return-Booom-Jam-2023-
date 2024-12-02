@@ -37,8 +37,6 @@ public class RainyMiniGame : MiniGameBasic
     [SerializeField, ShowOnly] private float rain_amount = 0;
     private float minimalRain_amount = 0;
     private bool isRaining = false;
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
     private const float SMALL_LEVEL = 0.25f;
     private const float MID_LEVEL = 0.5f;
     private const float HEAVY_LEVEL = 0.75f;

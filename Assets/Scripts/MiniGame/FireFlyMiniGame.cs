@@ -22,9 +22,6 @@ public class FireFlyMiniGame : MiniGameBasic
 
     private Vector2[] spawnPos;
 
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
-
     protected override void Initialize()
     {
         base.Initialize();

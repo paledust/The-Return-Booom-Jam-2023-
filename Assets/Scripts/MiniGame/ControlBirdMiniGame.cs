@@ -14,9 +14,6 @@ public class ControlBirdMiniGame : MiniGameBasic
 
     private Vector2[] targetPos;
 
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
-
     protected override void Initialize()
     {
         base.Initialize();

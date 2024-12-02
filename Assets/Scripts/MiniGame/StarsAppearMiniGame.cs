@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,9 +29,7 @@ public class StarsAppearMiniGame : MiniGameBasic
 [Header("Audio")]
     [SerializeField] private AudioSource sfx_star;
     [SerializeField] private string starClip;
-
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
+    [SerializeField] private float audioStep = 0.2f;
 
     protected override void Initialize()
     {
@@ -84,6 +83,7 @@ public class StarsAppearMiniGame : MiniGameBasic
 
         starParticles.transform.position = location;
         starParticles.Play(true);
+        AudioManager.Instance.PlaySoundEffect(sfx_star, starClip);
     }
     void OnDrawGizmosSelected(){
         Gizmos.matrix = transform.localToWorldMatrix;

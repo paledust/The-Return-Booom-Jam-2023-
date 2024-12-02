@@ -36,9 +36,6 @@ public class ControlKoiFishMiniGame : MiniGameBasic
     private CoroutineExcuter fishReleaser;
     private CoroutineExcuter fishColorer;
 
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
-
     protected override void Initialize()
     {
         base.Initialize();

@@ -87,3 +87,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 71296edab3c886d4086d68ac9ccbd835, type: 3}
     - {fileID: 8300000, guid: d75f427e6d3fa3a44b24ebb402a01c7e, type: 3}
     - {fileID: 8300000, guid: 63b6737635200e44780ea4c868616697, type: 3}
+  - audio_group_name: group_star
+    audioClips:
+    - {fileID: 8300000, guid: cdd1030c1b9de3e40815473dee34d109, type: 3}
+    - {fileID: 8300000, guid: 6400ebd01699c804bb226e68fe45833c, type: 3}
+    - {fileID: 8300000, guid: 0a94257e858aa5f45ad763e3bd47d29c, type: 3}
+    - {fileID: 8300000, guid: 9e1df60588e392342ab77538378b22e6, type: 3}
+    - {fileID: 8300000, guid: 7328bec53e6049e4b853477868ba334b, type: 3}

@@ -27,8 +27,6 @@ public class DetectSeedMiniGame : MiniGameBasic
     [SerializeField] private PlayableDirector m_director;
     private List<ScanSquareUnit> scannedUnit;
     private ScanSquareUnit[,] scanUnitMatrix;
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
     private ScanSquareUnit processingUnit;
     protected override void Initialize(){
         base.Initialize();

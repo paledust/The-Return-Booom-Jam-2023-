@@ -5,8 +5,13 @@ using UnityEngine;
 public abstract class MiniGameBasic : MonoBehaviour
 {
     [SerializeField] private GameObject miniGameAssetGroup;
+
+
     public bool IsPlaying{get{return isPlaying;}}
-    private bool isPlaying = false;
+    
+    protected const int ROLL = Service.ROLL;
+    protected const int LINE = Service.LINE;
+    protected bool isPlaying = false;
     void Awake(){
         if(miniGameAssetGroup!=null) miniGameAssetGroup.SetActive(false);
     }

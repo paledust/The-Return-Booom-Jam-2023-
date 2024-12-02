@@ -20,8 +20,6 @@ public class SkyToWaterMiniGame : MiniGameBasic
     private int counter=0;
     private bool disturbed = false;
 
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
     private const string NormalScaleName = "_NormalScale";
 
     protected override void Initialize()

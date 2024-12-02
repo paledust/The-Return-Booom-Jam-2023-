@@ -39,8 +39,8 @@ public class BreathMiniGame : MiniGameBasic
     private float breathTimer = 0;
     private float camZoomSpeed = 0;
     private float ppFadeSpeed = 0;
-    private int breathIndex = 0;
     private bool isEnding = false;
+    
     void Update(){
         switch (interStage){
             case INTERACTION_STAGE.Blur:

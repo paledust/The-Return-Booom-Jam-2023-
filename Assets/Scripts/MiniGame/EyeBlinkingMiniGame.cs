@@ -24,10 +24,6 @@ public class EyeBlinkingMiniGame : MiniGameBasic
 
     private HashSet<Key> pressedKey;
     private Vector2[] cloudPos;
-
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
-
     private float blinkTime;
 
     protected override void Initialize()

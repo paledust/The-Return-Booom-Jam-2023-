@@ -31,9 +31,6 @@ public class WindyGrassMiniGame : MiniGameBasic
     private float interaction_timer = 0;
     private float windtimer = 0;
 
-    private const int ROLL = Service.ROLL;
-    private const int LINE = Service.LINE;
-
     protected override void Initialize()
     {
         base.Initialize();
