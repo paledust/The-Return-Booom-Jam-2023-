@@ -25,4 +25,22 @@ MonoBehaviour:
   - audio_name: grass
     audio_clip: {fileID: 8300000, guid: eb3acc406fd771b4a8083989b3ff95cf, type: 3}
   sfx_info_list: []
-  sfx_group_info_list: []
+  sfx_group_info_list:
+  - audio_group_name: group_rock
+    audioClips:
+    - {fileID: 8300000, guid: 947357fc28643df429c5431cde060462, type: 3}
+    - {fileID: 8300000, guid: 523f86ac01c14a846be9a5976dca6148, type: 3}
+    - {fileID: 8300000, guid: 4180d665121313d4d826b34a928b1c81, type: 3}
+    - {fileID: 8300000, guid: c469e62c3ff0ef84999c4d9f4b628571, type: 3}
+    - {fileID: 8300000, guid: 3f3181bb40c8e2f4dafe8e52a7a15c53, type: 3}
+  - audio_group_name: group_key
+    audioClips:
+    - {fileID: 8300000, guid: 2deea0732e7394c4492fa10452eee20b, type: 3}
+    - {fileID: 8300000, guid: 64ed161588b82cf489b062e5f23eddde, type: 3}
+    - {fileID: 8300000, guid: 0511009ecb63c924fbd8fe43f8ae7034, type: 3}
+    - {fileID: 8300000, guid: a05567ebfda5308499c0331331ba1e7a, type: 3}
+    - {fileID: 8300000, guid: 2d0f3b41abe29134289cdbb9a183153e, type: 3}
+    - {fileID: 8300000, guid: f351d947b09280f44a64a249f070c6d5, type: 3}
+    - {fileID: 8300000, guid: 7651f81775e5e9b4187affca78c238bb, type: 3}
+    - {fileID: 8300000, guid: eac83ee76682eef44a4723e6dfdbc0a3, type: 3}
+    - {fileID: 8300000, guid: 00ab5241e8e19334b8c46cb53730c513, type: 3}

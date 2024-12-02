@@ -25,6 +25,9 @@ public class StarsAppearMiniGame : MiniGameBasic
     [SerializeField] private Rect starRect;
     private Vector2[] spawnPos;
     private float progress;
+[Header("Audio")]
+    [SerializeField] private AudioSource sfx_star;
+    [SerializeField] private string starClip;
 
     private const int ROLL = Service.ROLL;
     private const int LINE = Service.LINE;

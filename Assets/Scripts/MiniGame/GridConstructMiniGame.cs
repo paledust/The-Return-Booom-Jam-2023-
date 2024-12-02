@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
@@ -12,21 +13,20 @@ public class GridConstructMiniGame : MiniGameBasic
     [SerializeField] private float typingWindow = 0.5f;
     [SerializeField] private Animation m_gridBuildAnime;
     [SerializeField] private ParticleSystem m_projectorParticles;
-    [SerializeField] private Projector m_projector;
 [Header("Audio Source")]
     [SerializeField] private AudioSource sfx_audio;
-    [SerializeField] private AudioClip[] keyClips;
+    [SerializeField] private string keyClips;
     [SerializeField] private AudioSource pc_loop;
     [SerializeField] private AudioSource scan_loop;
 [Header("End MiniGame")]
     [SerializeField] private PlayableDirector end_director;
-    private int keyClipPlayed = 0;
     private string clipName = string.Empty;
 [Header("Information")]
     [SerializeField, ShowOnly] private STAGE stage = STAGE.Charging;
     [SerializeField, ShowOnly] private float gridChargeTime = 0;
     [SerializeField, ShowOnly] private float typingTestTime = 0;
     [SerializeField, ShowOnly] private bool isTyping = false;
+    
     void Update(){
     //Typing Test
         if(isTyping){
@@ -108,13 +108,7 @@ public class GridConstructMiniGame : MiniGameBasic
     protected override void OnKeyPressed(Key keyPressed)
     {
         base.OnKeyPressed(keyPressed);
-        sfx_audio.PlayOneShot(keyClips[keyClipPlayed]);
-
-        keyClipPlayed ++;
-        if(keyClipPlayed>=keyClips.Length){
-            keyClipPlayed = 0;
-            Service.Shuffle<AudioClip>(ref keyClips);
-        }
+        AudioManager.Instance.PlaySoundEffect(sfx_audio, keyClips, 1);
 
         isTyping = true;
         typingTestTime = 0;
