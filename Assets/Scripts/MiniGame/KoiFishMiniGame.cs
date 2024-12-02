@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
@@ -18,6 +19,9 @@ public class KoiFishMiniGame : MiniGameBasic
     [SerializeField] private AnimationCurve emitRate;
     [SerializeField] private AnimationCurve fireRadiusRange;
     [SerializeField] private AnimationCurve fireEmitRange;
+[Header("Audio")]
+    [SerializeField] private AudioSource sfx_audio;
+    [SerializeField] private string swishClips;
 [Header("End")]
     [SerializeField] private ParticleSystem P_fireBurst;
     [SerializeField] private PlayableDirector tl_giantFishOut;
@@ -82,6 +86,8 @@ public class KoiFishMiniGame : MiniGameBasic
             emitFlag = false;
         }
         if(emitFlag){
+            AudioManager.Instance.PlaySoundEffect(sfx_audio, swishClips, 1);
+            
             location.y = fishParticles.transform.position.y;
             fishParticles.transform.position = location;
             fishParticles.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);

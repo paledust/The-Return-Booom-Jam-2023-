@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,10 @@ public class SkyToWaterMiniGame : MiniGameBasic
     [SerializeField] private MeshRenderer skyRenderer;
     [SerializeField] private PerRendererWater perRendererWater;
     [SerializeField] private float fadeOutDuration = 5;
+[Header("Audio")]
+    [SerializeField] private AudioSource sfx_audio;
+    [SerializeField] private string swishClips;
+    [SerializeField] private string waterAmbience;
     private Vector2[] spawnPos;
     private bool[] triggerArray;
     private int counter=0;
@@ -43,7 +48,8 @@ public class SkyToWaterMiniGame : MiniGameBasic
     {
         if(!disturbed){
             disturbed = true;
-            StartCoroutine(coroutineFadeWaterFlow(3f));
+            AudioManager.Instance.PlayAmbience(waterAmbience, true, 10, 1);
+            StartCoroutine(coroutineFadeWaterFlow(10f));
         }
     }
     protected override void OnKeyPressed(Key keyPressed)
@@ -59,6 +65,8 @@ public class SkyToWaterMiniGame : MiniGameBasic
         location.y = rippleParticles.transform.position.y;
         rippleParticles.transform.position = location;
         rippleParticles.Play(true);
+        
+        AudioManager.Instance.PlaySoundEffect(sfx_audio, swishClips, 1);
 
         if(!triggerArray[index]){
             triggerArray[index] = true;
