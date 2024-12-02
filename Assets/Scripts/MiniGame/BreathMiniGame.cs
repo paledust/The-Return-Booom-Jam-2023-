@@ -5,6 +5,7 @@ using Cinemachine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.Rendering.PostProcessing;
+using SimpleAudioSystem;
 
 public class BreathMiniGame : MiniGameBasic
 {
@@ -23,8 +24,8 @@ public class BreathMiniGame : MiniGameBasic
     [SerializeField] private float breathOutVolumeScale = 1f;
     [SerializeField] private AudioSource sfx_audio;
     [SerializeField] private AudioClip clockClip;
-    [SerializeField] private AudioClip[] breathInClips;
-    [SerializeField] private AudioClip[] breathOutClips;
+    [SerializeField] private string breathInClips;
+    [SerializeField] private string breathOutClips;
 [Header("Control")]
     [SerializeField] private float maxHoldTime = 2f;
 [Header("Info")]
@@ -83,7 +84,7 @@ public class BreathMiniGame : MiniGameBasic
     }
     void breathIn(){
         breathState = BREATH_STATE.BreathingIn;
-        sfx_audio.PlayOneShot(breathInClips[breathIndex], breathInVolumeScale);
+        AudioManager.Instance.PlaySoundEffect(sfx_audio, breathInClips, breathInVolumeScale);
         if(coroutineCam!=null) StopCoroutine(coroutineCam);
         StartCoroutine(coroutineCam = coroutineChangeCamAndPP(true));
     }
@@ -111,14 +112,7 @@ public class BreathMiniGame : MiniGameBasic
         if(breathState == BREATH_STATE.BreathingIn) breathOut();
     }
     IEnumerator coroutineBreathOut(){
-        AudioClip clip = breathOutClips[breathIndex];
-        sfx_audio.PlayOneShot(clip, breathOutVolumeScale);
-        breathIndex ++;
-        if(breathIndex == breathOutClips.Length){
-            breathIndex = 0;
-            Service.Shuffle<AudioClip>(ref breathOutClips);
-            Service.Shuffle<AudioClip>(ref breathInClips);
-        }
+        var clip = AudioManager.Instance.PlaySoundEffect(sfx_audio, breathOutClips, breathOutVolumeScale);
         yield return new WaitForSeconds(clip.length);
         breathState = BREATH_STATE.Idle;
     }

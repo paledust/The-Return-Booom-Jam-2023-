@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,11 +15,13 @@ public class ShootRainyPack : MiniGameBasic
     [SerializeField] private GameObject m_particle;
 [Header("Gun Audio")]
     [SerializeField] private AudioSource m_audio;
-    [SerializeField] private AudioClip[] sfx_shoots;
-    [SerializeField] private AudioClip sfx_reload;
-    [SerializeField] private AudioClip sfx_explode;
+    [SerializeField] private string shootClips;
+    [SerializeField] private string reloadClip;
+    [SerializeField] private string explodeClip;
+
     private int fireCount = 0;
     private float fireTime = 0;
+    
     protected override void Initialize()
     {
         base.Initialize();
@@ -34,8 +37,9 @@ public class ShootRainyPack : MiniGameBasic
             fireSmoke.Play();
 
             StartCoroutine(coroutineFireExplode());
-            m_audio.PlayOneShot(sfx_shoots[Random.Range(0, sfx_shoots.Length)]);
-            m_audio.PlayOneShot(sfx_reload);
+
+            AudioManager.Instance.PlaySoundEffect(m_audio, shootClips);
+            AudioManager.Instance.PlaySoundEffect(m_audio, reloadClip);
 
             if(fireCount>=maxFire){
                 EventHandler.Call_OnEndMiniGame(this);
@@ -45,6 +49,6 @@ public class ShootRainyPack : MiniGameBasic
     }
     IEnumerator coroutineFireExplode(){
         yield return new WaitForSeconds(Random.Range(fireExplodeTime.x, fireExplodeTime.y));
-        m_audio.PlayOneShot(sfx_explode);
+        AudioManager.Instance.PlaySoundEffect(m_audio, explodeClip);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
@@ -15,11 +16,10 @@ public class FireFlyMiniGame : MiniGameBasic
     [SerializeField] private LightPools lightPools;
 [Header("Audio")]
     [SerializeField] private AudioSource sfxAudio;
-    [SerializeField] private AudioClip[] grassClips;
+    [SerializeField] private string grassClips;
 [Header("Camera Render")]
     [SerializeField] private Camera RT_Camera;
 
-    private int grassClipIndex = 0;
     private Vector2[] spawnPos;
 
     private const int ROLL = Service.ROLL;
@@ -62,12 +62,7 @@ public class FireFlyMiniGame : MiniGameBasic
         grass_particle.transform.position = location;
         grass_particle.Play();
 
-        sfxAudio.PlayOneShot(grassClips[grassClipIndex],0.1f);
-        grassClipIndex ++;
-        if(grassClipIndex>=grassClips.Length){
-            Service.Shuffle(ref grassClips);
-            grassClipIndex = 0;
-        }
+        AudioManager.Instance.PlaySoundEffect(sfxAudio, grassClips, 0.1f);
     }
     public void EndFireflyMiniGame(){
         EventHandler.Call_OnEndMiniGame(this);

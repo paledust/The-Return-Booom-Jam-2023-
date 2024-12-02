@@ -20,7 +20,7 @@ public class RainyMiniGame : MiniGameBasic
 [Header("Audio")]
     [SerializeField] private AudioSource sfx_audio;
     [SerializeField] private float sfx_step = 1.1f;
-    [SerializeField] private AudioClip[] rainDropClips;
+    [SerializeField] private string rainDropClips;
     [SerializeField] private string amb_rain_small_name;
     [SerializeField] private string amb_rain_mid_name;
     [SerializeField] private string amb_rain_heavy_name;
@@ -43,7 +43,7 @@ public class RainyMiniGame : MiniGameBasic
     private const float MID_LEVEL = 0.5f;
     private const float HEAVY_LEVEL = 0.75f;
     private float sfx_time;
-    private int sfx_count = 0;
+
     void Update(){
         if(isRaining && rain_amount<1) rain_amount += rain_chargeSpeed * Time.deltaTime;
         if(!isRaining && rain_amount>minimalRain_amount) {
@@ -70,7 +70,7 @@ public class RainyMiniGame : MiniGameBasic
         if(rain_amount >= 1){
             minimalRain_amount = 1;
             emission.rateOverTimeMultiplier = 500;
-            StartCoroutine(CoroutineDelayTimeline());
+            StartCoroutine(CommonCoroutine.DelayAction(()=>director.Play(), timeline_delay));
             EventHandler.Call_OnEndMiniGame(this);
         }
     }
@@ -81,7 +81,6 @@ public class RainyMiniGame : MiniGameBasic
 
         m_rt_cam.enabled = true;
         sfx_time = -sfx_step;
-        Service.Shuffle<AudioClip>(ref rainDropClips);
 
         emission = m_rain_loop.emission;
         emission.rateOverTimeMultiplier = 0;
@@ -119,24 +118,12 @@ public class RainyMiniGame : MiniGameBasic
 
         if(Time.time > sfx_step+sfx_time){
             sfx_time = Time.time;
-            StartCoroutine(CoroutineDelayAudio(rainDropClips[sfx_count]));
-            sfx_count ++;
-            if(sfx_count==rainDropClips.Length){
-                sfx_count = 0;
-                Service.Shuffle<AudioClip>(ref rainDropClips);
-            }
+            StartCoroutine(CommonCoroutine.DelayAction(()=>AudioManager.Instance.PlaySoundEffect(sfx_audio, rainDropClips), 0.3f));
         }
         StartCoroutine(CoroutineBurstRainDrops(location));
     }
     public void DisableRT_Cam()=>m_rt_cam.enabled = false;
-    IEnumerator CoroutineDelayTimeline(){
-        yield return new WaitForSeconds(timeline_delay);
-        director.Play();
-    }
-    IEnumerator CoroutineDelayAudio(AudioClip clip){
-        yield return new WaitForSeconds(0.3f);
-        sfx_audio.PlayOneShot(clip);
-    }
+
     IEnumerator CoroutineBurstRainDrops(Vector3 pos){
         ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
 

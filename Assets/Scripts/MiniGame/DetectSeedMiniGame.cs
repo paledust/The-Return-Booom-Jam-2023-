@@ -16,11 +16,10 @@ public class DetectSeedMiniGame : MiniGameBasic
     [ColorUsage(true, true)] public Color BingoColor;
     [SerializeField] private Material scanMaterial;
 [Header("Audio")]
-    [SerializeField] private AudioSource sfx_audio;
-    [SerializeField] private AudioClip scanningClip;
-    [SerializeField] private AudioClip abortClip;
-    [SerializeField] private AudioClip scannedClip;
-    [SerializeField] private AudioClip bingoClip;
+    [SerializeField] private string scanningClip;
+    [SerializeField] private string abortClip;
+    [SerializeField] private string scannedClip;
+    [SerializeField] private string bingoClip;
 [Space(10)]
     [SerializeField] private Vector2Int targetUnit;
     [SerializeField] private ScanSquareUnit[] scanUnits;

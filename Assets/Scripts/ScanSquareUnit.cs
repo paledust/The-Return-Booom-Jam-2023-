@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class ScanSquareUnit : MonoBehaviour
@@ -39,6 +40,10 @@ public class ScanSquareUnit : MonoBehaviour
     public void PlaySFX(AudioClip clip){
         m_audio.pitch = Random.Range(0.98f,1.02f);
         m_audio.PlayOneShot(clip);
+    }
+    public void PlaySFX(string clip){
+        m_audio.pitch = Random.Range(0.98f, 1.02f);
+        AudioManager.Instance.PlaySoundEffect(m_audio, clip, 1);
     }
     public void StopSFX()=>m_audio.Stop();
     IEnumerator coroutineTurnOffScan(){

@@ -56,7 +56,7 @@ namespace SimpleAudioSystem{
             }            
         }
         public void PlayAmbience(string audio_name, bool startOver, float volume=1)=>PlayAmbience(audio_name, startOver, 0.5f, volume);
-        public AudioClip PlaySoundEffect(AudioSource targetSource, string clip_name, float volumeScale){
+        public AudioClip PlaySoundEffect(AudioSource targetSource, string clip_name, float volumeScale = 1){
             AudioClip clip = GetSFXClip(clip_name);
             if(clip!=null)
                 targetSource.PlayOneShot(clip, volumeScale);
