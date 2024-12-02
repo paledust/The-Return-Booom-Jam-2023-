@@ -57610,6 +57610,7 @@ MonoBehaviour:
     height: 3.2
   sfx_star: {fileID: 1134909145}
   starClip: group_star
+  audioStep: 0.75
 --- !u!1001 &1314440564
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -30,6 +30,7 @@ public class StarsAppearMiniGame : MiniGameBasic
     [SerializeField] private AudioSource sfx_star;
     [SerializeField] private string starClip;
     [SerializeField] private float audioStep = 0.2f;
+    private float audioTime = 0;
 
     protected override void Initialize()
     {
@@ -50,6 +51,7 @@ public class StarsAppearMiniGame : MiniGameBasic
         skyRenderer.material.color = skyTargetColor;
         skyRenderer.material.SetFloat("_ValueMin", 0.6f);
         progress = 0;
+        audioTime = Time.time - audioStep;
 
         this.enabled = true;
     }
@@ -83,7 +85,10 @@ public class StarsAppearMiniGame : MiniGameBasic
 
         starParticles.transform.position = location;
         starParticles.Play(true);
-        AudioManager.Instance.PlaySoundEffect(sfx_star, starClip);
+        if(Time.time-audioTime>audioStep){
+            AudioManager.Instance.PlaySoundEffect(sfx_star, starClip);
+            audioTime = Time.time;
+        }
     }
     void OnDrawGizmosSelected(){
         Gizmos.matrix = transform.localToWorldMatrix;
