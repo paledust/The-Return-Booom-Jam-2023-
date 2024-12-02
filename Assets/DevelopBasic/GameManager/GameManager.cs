@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using SimpleSaveSystem;
+using UnityEditor.Localization.Editor;
 
 //Please make sure "GameManager" is excuted before every custom script
 public class GameManager : Singleton<GameManager>
@@ -29,6 +30,7 @@ public class GameManager : Singleton<GameManager>
         Application.targetFrameRate = targetFrameRate;
 
         SaveManager.Initialize();
+        
 
     #if UNITY_EDITOR
         if(loadInitSceneFromGameManager) StartCoroutine(SwitchSceneCoroutine(string.Empty, InitScene, false));
